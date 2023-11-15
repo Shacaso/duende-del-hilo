@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap');
+@import "@/assets/css/index.css";
+@import "@/assets/scss/vars.scss";
+
+#root{
+    overflow: hidden;
+}
+body{
+    font-size: 20px;
+}
+a{
+    color: $primary;
+}
+
+p{
+    word-break: break-all;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+}
+.container{
+    padding: 1.2em;
+    min-height: 100vh;
+}
+
+.title{
+    font-size: 2.5em;
+    line-height: 1em;   
+    margin-bottom: .5em;
+}
+.title b{
+    display: block;
+}
+.btn {
+    &-second{
+        color: $primary;
+    }
+}
+table {
+    tr{
+        td:last-child, th:last-child{
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}
+
+.swal-modal{
+    width: 40rem;
+    padding-top: 1rem;
+    border-radius: 1.5rem;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
+input[type=file] { padding-left: 0; }
+
+[data-theme='projectDark']{
+    .btn {
+        &-second{
+            background-color: $primary;
+            color: $base100;
+
+            &:hover{
+                background-color: $primary-dark;
+            }
+        }
+    }
+    .table {
+        button{
+            svg{
+               path{
+                fill: rgba($color: $neutral-dark, $alpha: .7);
+               } 
+            }
+        }
+    }
+}
+
+.modal-user{
+    .panel-component{
+        max-width: 50rem;
+    }
+}
