@@ -27,6 +27,9 @@ const menuItems = [
     label: 'Clientes',
     Icon: UserIcon,
     href: '/provider',
+    subMenu: [
+      { label: 'Black list', href: '/provider' },
+      ],
   },
 {
   label: 'Facturas',

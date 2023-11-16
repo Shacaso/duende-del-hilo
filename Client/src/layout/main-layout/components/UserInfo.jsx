@@ -71,10 +71,10 @@ export function UserInfo() {
         })}
         >
             <h3>Mercado Pago</h3>
-        </li>
+        </li> */}
         <li className='border-t-2'>
           <button onClick={handlerLogout}>Cerrar sesion</button>
-        </li> */}
+        </li>
       </ul>
     </div>
   );
