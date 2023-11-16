@@ -1,0 +1,32 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend del proyecto duende-del-hilo",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch ./app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alejoaraya/duende-del-hilo.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "express",
+    "backend"
+  ],
+  "author": "Rodrigo Vargas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alejoaraya/duende-del-hilo/issues"
+  },
+  "homepage": "https://github.com/alejoaraya/duende-del-hilo#readme",
+  "dependencies": {
+    "cors": "2.8.5",
+    "express": "4.18.2",
+    "zod": "3.22.4"
+  }
+}

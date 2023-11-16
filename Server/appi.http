@@ -1,0 +1,30 @@
+### Recuperar todos los usuarios
+GET http://localhost:1234/users
+
+### Recuperar un usuario por id
+GET http://localhost:1234/users/2
+
+### Recuperar todos los usuarios por un filtro
+GET http://localhost:1234/users?filtro=valor
+
+### Crear un usuario con POST
+POST http://localhost:1234/users
+Content-Type: application/json
+
+{
+    "name": "Angel Vargas",
+    "telefono": 2615123123
+}
+
+### Borrar un usuario
+DELETE http://localhost:1234/users/527a85d4-c003-4eb6-bf40-b0d76707b1de
+
+### Actualizar un usuario
+PATCH http://localhost:1234/users/171334f6-asdasd64c2-499f-bb65-df6fdd8f8e53
+Content-Type: application/json
+
+{
+    "asdasd": "asdasd",
+    "name": "Enzo Vargas",
+    "telefono": 2615789789
+}
