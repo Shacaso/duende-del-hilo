@@ -5,12 +5,12 @@ async function allUsers() {
     try {
         const data = await fs.readFileSync('./dbs/users.json', 'utf-8')
 
-        if(data){
+        if (data) {
             const users = JSON.parse(data)
-        return users
+            return users
         } else {
             return []
-        }       
+        }
 
     } catch (error) {
         return { message: error.message }
@@ -22,7 +22,7 @@ async function saveAllUsers(data) {
         const jsonData = JSON.stringify(data, null, 2)
 
         await fs.writeFileSync('./dbs/users.json', jsonData, 'utf-8')
-        
+
     } catch (error) {
         return { message: error.message }
     }
@@ -50,13 +50,13 @@ export class UserModel {
         }
 
         const users = await allUsers()
-        
+
         if (users) {
             users.push(newUser)
         } else {
             users = [newUser]
         }
-        
+
 
         const bool = saveAllUsers(users)
         //if (bool) console.log("Guardado")
@@ -69,13 +69,13 @@ export class UserModel {
         const users = await allUsers()
 
         const userAEliminar = users.filter(user => user.id === id)
-        
-        if(userAEliminar.length===0) {
-            return {error: true, message:"Id no encontrado"}
+
+        if (userAEliminar.length === 0) {
+            return { error: true, message: "Id no encontrado" }
         } else {
             const newUsers = users.filter(user => user.id !== id)
             await saveAllUsers(newUsers)
-            return {error: false, message:userAEliminar}
+            return { error: false, message: userAEliminar[0] }
         }
     }
 
@@ -83,7 +83,7 @@ export class UserModel {
         const users = await allUsers()
 
         const userIndex = users.findIndex(user => user.id === id)
-        if (userIndex === -1) return {error: true, message:"Id no encontrado"}
+        if (userIndex === -1) return { error: true, message: "Id no encontrado" }
 
         users[userIndex] = {
             ...users[userIndex],
@@ -92,6 +92,6 @@ export class UserModel {
 
         await saveAllUsers(users)
 
-        return {error: false, message:users[userIndex]}
+        return { error: false, message: users[userIndex] }
     }
 }

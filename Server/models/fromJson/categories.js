@@ -9,6 +9,7 @@ async function allCategories() {
             const categories = JSON.parse(data)
             return categories
         } else {
+            
             return []
         }
 
@@ -75,7 +76,7 @@ export class CategoryModel {
         } else {
             const newCategories = categories.filter(category => category.id !== id)
             await saveAllCategories(newCategories)
-            return {error: false, message: categoryAEliminar}
+            return {error: false, message: categoryAEliminar[0]}
         }
     }
 

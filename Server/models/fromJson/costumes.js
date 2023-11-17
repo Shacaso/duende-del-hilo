@@ -75,7 +75,7 @@ export class CostumeModel {
         } else {
             const newCostumes = costumes.filter(costume => costume.id !== id)
             await saveAllCostumes(newCostumes)
-            return {error: false, message:costumeAEliminar}
+            return {error: false, message:costumeAEliminar[0]}
         }
     }
 

@@ -1,0 +1,30 @@
+### Recuperar todos los facturas
+GET http://localhost:1234/bills
+
+### Recuperar un categoria por id
+GET http://localhost:1234/bills/247f78f1-866d-4ec4-b3e0-78c2ee1a0eea
+
+### Recuperar todos los facturas por un filtro
+GET http://localhost:1234/bills?filtro=valor
+
+### Crear un categoria con POST
+POST http://localhost:1234/bills
+Content-Type: application/json
+
+{
+    "returned": false,
+    "amount": 2000,
+    "idUser": "dc569290-6003-4fd3-b499-749265f94c53",
+    "note": "Hola"
+}
+
+### Borrar un categoria
+DELETE http://localhost:1234/bills/5a576ed9-413a-445c-8d5d-1de8facfa52a
+
+### Actualizar un categoria
+PATCH http://localhost:1234/bills/71946871-09ef-4f22-87a8-63fe1f0233d7
+Content-Type: application/json
+
+{
+    "returned": "false"
+}

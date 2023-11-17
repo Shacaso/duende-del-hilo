@@ -1,6 +1,25 @@
 import z from 'zod'
+import fs from 'node:fs'
 
-const userSchema = z.object({
+const allDepartaments = async () => {
+    try {
+        const data = await fs.readFileSync('./dbs/departaments.json', {encoding: 'utf-8'})
+        if (data) {
+            const departaments = JSON.parse(data)
+            const nameDepartaments = departaments.map(departament => departament.name)
+            return [...nameDepartaments]
+        } else {
+            return []
+        }
+
+    } catch (error) {
+        return { message: error.message }
+    }
+}
+
+const departaments = await allDepartaments()
+
+export const userSchema = z.object({
 
     name: z.string({
         invalid_type_error: 'El nombre debe ser un string',
@@ -32,10 +51,7 @@ const userSchema = z.object({
         required_error: 'La direccion es requerido'
     }),
 
-    departament: z.string({
-        invalid_type_error: 'El departamento debe ser un string',
-        required_error: 'El departamento es requerido'
-    }),
+    departament: z.enum([...departaments]),
 
     postalCode: z.number({
         invalid_type_error: 'El codigo postal debe ser un numero de 10 digitos',

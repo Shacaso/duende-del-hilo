@@ -14,12 +14,12 @@ Content-Type: application/json
 {
     "name": "Ada",
     "price": 10000,
-    "category": "Magicos",
+    "category": "asd",
     "details": "asdasd"
 }
 
 ### Borrar un usuario
-DELETE http://localhost:1234/costumes/84b53193-f078-4ab1-af3c-d0700d97ddc7
+DELETE http://localhost:1234/costumes/0da923d6-d1bb-4a9c-b27a-69cc63ff8425
 
 ### Actualizar un usuario
 PATCH http://localhost:1234/costumes/247f78f1-866d-4ec4-b3e0-78c2ee1a0eea

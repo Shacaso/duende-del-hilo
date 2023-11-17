@@ -35,7 +35,7 @@ export class CostumeController {
         const {error, message} = await CostumeModel.delete({ id })
         
         if (error === true) {
-            return res.status(404).json({message})
+            return res.status(404).json({error: error, message: message})
         }
     
         return res.json(message)

@@ -1,37 +1,14 @@
 [
   {
-    "id": "25f8a786-6385-4fda-96bb-67faaa964646",
-    "name": "Rodrigo Vargas",
-    "telefono": 2615711981
-  },
-  {
-    "id": "cbb524d9-2ef4-49ec-b355-a12f579fcd1d",
-    "name": "Evelin Ortiz",
-    "telefono": 2616449353
-  },
-  {
-    "id": "171334f6-64c2-499f-bb65-df6fdd8f8e53",
-    "name": "Enzo Vargas",
-    "telefono": 2615789789
-  },
-  {
-    "id": "ee236a0f-98ee-477a-89b5-34968cfbc779",
-    "name": "Alejo Araya",
-    "telefono": 2615789789
-  },
-  {
-    "id": "c1f95021-dc4c-4d4e-9584-c3ac32c13f42",
-    "name": "Angel Vargas",
-    "telefono": 2615123123
-  },
-  {
-    "id": "7e3be5ac-7ed7-4c3e-bc6d-7e3d23500b63",
-    "name": "Angel Vargas",
-    "telefono": 2615123123
-  },
-  {
-    "id": "0a7ee9cc-348d-4752-aa14-b826e7a60628",
-    "name": "Angel Vargas",
-    "telefono": 2615123123
+    "id": "dc569290-6003-4fd3-b499-749265f94c53",
+    "name": "Enzo",
+    "surname": "Vargas",
+    "dni": 35123123,
+    "phoneNumber": 2615123123,
+    "email": "angelvargas@gmail.com",
+    "direction": "Calle falsa 123",
+    "departament": "Ciudad",
+    "postalCode": 5539,
+    "blacklist": false
   }
 ]
