@@ -12,19 +12,20 @@ POST http://localhost:1234/users
 Content-Type: application/json
 
 {
+    "asdasda": "asdasd",
     "name": "Angel Vargas",
     "telefono": 2615123123
 }
 
 ### Borrar un usuario
-DELETE http://localhost:1234/users/527a85d4-c003-4eb6-bf40-b0d76707b1de
+DELETE http://localhost:1234/users/33450485-6f0c-4a61-b570-fcc5399968d3
 
 ### Actualizar un usuario
-PATCH http://localhost:1234/users/171334f6-asdasd64c2-499f-bb65-df6fdd8f8e53
+PATCH http://localhost:1234/users/ee236a0fasdasd-98ee-477a-89b5-34968cfbc779
 Content-Type: application/json
 
 {
     "asdasd": "asdasd",
-    "name": "Enzo Vargas",
+    "name": "Alejo Araya",
     "telefono": 2615789789
 }

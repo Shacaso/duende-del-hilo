@@ -1,0 +1,30 @@
+[
+  {
+    "id": "4be27f66-e350-4ce4-9b6b-97b54970d29c",
+    "name": "Jason",
+    "price": 10000,
+    "category": "Halloween",
+    "details": "asdasd"
+  },
+  {
+    "id": "59a627da-7463-408b-8348-44100f7f366d",
+    "name": "Jason",
+    "price": 10000,
+    "category": "Halloween",
+    "details": "asdasd"
+  },
+  {
+    "id": "0a9b9c44-2c39-4823-98ea-4fc32c33e0c3",
+    "name": "Bombero",
+    "price": 10000,
+    "category": "Profesiones",
+    "details": "asdasd"
+  },
+  {
+    "id": "7541a4e7-6255-41b0-b225-5ae9b8f15419",
+    "name": "Ada",
+    "price": 10000,
+    "category": "Magicos",
+    "details": "asdasd"
+  }
+]

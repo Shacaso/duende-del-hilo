@@ -1,0 +1,32 @@
+### Recuperar todos los usuarios
+GET http://localhost:1234/costumes
+
+### Recuperar un usuario por id
+GET http://localhost:1234/costumes/247f78f1-866d-4ec4-b3e0-78c2ee1a0eea
+
+### Recuperar todos los usuarios por un filtro
+GET http://localhost:1234/costumes?filtro=valor
+
+### Crear un usuario con POST
+POST http://localhost:1234/costumes
+Content-Type: application/json
+
+{
+    "name": "Ada",
+    "price": 10000,
+    "category": "Magicos",
+    "details": "asdasd"
+}
+
+### Borrar un usuario
+DELETE http://localhost:1234/costumes/84b53193-f078-4ab1-af3c-d0700d97ddc7
+
+### Actualizar un usuario
+PATCH http://localhost:1234/costumes/247f78f1-866d-4ec4-b3e0-78c2ee1a0eea
+Content-Type: application/json
+
+{
+    "asdasd": "asdasd",
+    "name": "Bombero",
+    "precio": 10000
+}

@@ -1,38 +1,38 @@
-import { UserModel } from "../models/fromJson/users.js"
-import { validateUser, validateParcialUser } from '../schemas/userSchema.js'
+import { CostumeModel } from "../models/fromJson/costumes.js"
+import { validateCostume, validateParcialCostume } from '../schemas/costumeSchema.js'
 import { jsonProcess } from "../utils/funciones.js"
 
-export class UserController {
+export class CostumeController {
     static async getAll(req, res) {
-        const users = await UserModel.getAll()
-        res.json(users)
+        const costumes = await CostumeModel.getAll()
+        res.json(costumes)
     }
 
     static async getById (req, res) {
         const { id } = req.params
-        const user = await UserModel.getById({ id })
-        if (user) return res.json(user)
-        res.status(404).json({ message: "Usuario no encontrado" })
+        const costume = await CostumeModel.getById({ id })
+        if (costume) return res.json(costume)
+        res.status(404).json({ message: "Categoria no encontrado" })
     }
 
     static async create(req, res) {
 
-        const result = validateUser(req.body)
+        const result = validateCostume(req.body)
     
         if (!result.success) {
             const messageError = jsonProcess(JSON.parse(result.error.message))
             return res.status(422).json({ error: true, message: messageError})
         }
     
-        const newUser = await UserModel.create({ input: result.data })
+        const newCostume = await CostumeModel.create({ input: result.data })
     
-        res.status(201).json(newUser)
+        res.status(201).json(newCostume)
     }
 
     static async delete(req, res) {
         const { id } = req.params
     
-        const {error, message} = await UserModel.delete({ id })
+        const {error, message} = await CostumeModel.delete({ id })
         
         if (error === true) {
             return res.status(404).json({message})
@@ -42,7 +42,7 @@ export class UserController {
     }
 
     static async update(req, res)  {
-        const result = validateParcialUser(req.body)
+        const result = validateParcialCostume(req.body)
     
         if (!result.success) {
             const messageError = jsonProcess(JSON.parse(result.error.message))
@@ -51,7 +51,7 @@ export class UserController {
     
         const { id } = req.params
         
-        const {error, message} = await UserModel.update({ id, input: result.data })
+        const {error, message} = await CostumeModel.update({ id, input: result.data })
 
         if (error === true) {
             return res.status(404).json({ error: true, message: message})

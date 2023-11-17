@@ -5,8 +5,12 @@ async function allUsers() {
     try {
         const data = await fs.readFileSync('./dbs/users.json', 'utf-8')
 
-        const users = JSON.parse(data)
+        if(data){
+            const users = JSON.parse(data)
         return users
+        } else {
+            return []
+        }       
 
     } catch (error) {
         return { message: error.message }
@@ -46,8 +50,13 @@ export class UserModel {
         }
 
         const users = await allUsers()
-
-        users.push(newUser)
+        
+        if (users) {
+            users.push(newUser)
+        } else {
+            users = [newUser]
+        }
+        
 
         const bool = saveAllUsers(users)
         //if (bool) console.log("Guardado")
@@ -66,7 +75,7 @@ export class UserModel {
         } else {
             const newUsers = users.filter(user => user.id !== id)
             await saveAllUsers(newUsers)
-            return {error: false, message:"Usuario Eliminado"}
+            return {error: false, message:userAEliminar}
         }
     }
 

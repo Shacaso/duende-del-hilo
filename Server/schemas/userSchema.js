@@ -7,29 +7,46 @@ const userSchema = z.object({
         required_error: 'El nombre es requerido'
     }),
 
-    telefono: z.number({
+    surname: z.string({
+        invalid_type_error: 'El apellido debe ser un string',
+        required_error: 'El apellido es requerido'
+    }),
+
+    dni: z.number({
+        invalid_type_error: 'El dni debe ser un numero de 10 digitos',
+        required_error: 'El dni es requerido'
+    }).int().min(1000000).max(99999999),
+
+    phoneNumber: z.number({
         invalid_type_error: 'El telefono debe ser un numero de 10 digitos',
         required_error: 'El telefono es requerido'
-    }).int().min(1000000000).max(9999999999)
+    }).int().min(1000000000).max(9999999999),
 
-    /* title: z.string({
-        invalid_type_error: 'El titulo de la pelicula debe ser un string',
-        required_error: 'El titulo de la pelicula es requerido'
+    email: z.string().email({
+        invalid_type_error: 'El email debe tener el formato correcto',
+        required_error: 'El email es requerido'
     }),
-    year: z.number().int().min(1900).max(2024),
-    director: z.string(),
-    duration: z.number().int().positive(),
-    poster: z.string().url({
-        message: 'el poster deber ser una URL valida'
+
+    direction: z.string({
+        invalid_type_error: 'La direccion debe ser un string',
+        required_error: 'La direccion es requerido'
     }),
-    genre: z.array(
-        z.enum(['Action', 'Adventure', 'Crime', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Thriller','Sci-Fi']),
-        {
-            required_error: 'El genero es requerido',
-            invalid_type_error: 'El genero debe ser alguno de los valores del array de enums de genero'
-        }
-    ),
-    rate: z.number().min(0).max(10).default(5) */
+
+    departament: z.string({
+        invalid_type_error: 'El departamento debe ser un string',
+        required_error: 'El departamento es requerido'
+    }),
+
+    postalCode: z.number({
+        invalid_type_error: 'El codigo postal debe ser un numero de 10 digitos',
+        required_error: 'El codigo postal es requerido'
+    }).int().min(1000).max(99999),
+
+    blacklist: z.boolean({
+        invalid_type_error: 'El blacklist debe ser un boolean',
+        required_error: 'El blacklist es requerido'
+    })
+
 })
 
 export function validateUser(object){

@@ -1,0 +1,27 @@
+### Recuperar todos los categorias
+GET http://localhost:1234/categories
+
+### Recuperar un categoria por id
+GET http://localhost:1234/categories/247f78f1-866d-4ec4-b3e0-78c2ee1a0eea
+
+### Recuperar todos los categorias por un filtro
+GET http://localhost:1234/categories?filtro=valor
+
+### Crear un categoria con POST
+POST http://localhost:1234/categories
+Content-Type: application/json
+
+{
+    "name": "Magicos"
+}
+
+### Borrar un categoria
+DELETE http://localhost:1234/categories/8caad4f4-e871-4307-b82c-484b9e8d160a
+
+### Actualizar un categoria
+PATCH http://localhost:1234/categories/fe1ff4fe-5522-4ca4-bb18-973e2388d978
+Content-Type: application/json
+
+{
+    "name": "Profesiones"
+}
