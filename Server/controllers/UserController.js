@@ -8,16 +8,41 @@ export class UserController {
 
     getAll = async (req, res) => {
         const { error, message, codigo } = await this.userModel.getAll()
-        if (error === true) {
-            res.status(codigo).json({ error: error, message: message })
-        } else {
-            res.status(200).json(message)
+        if (error === true) res.status(codigo).json({ error: error, message: message })
+        
+        const { dni, name, surname, email } = req.query
+        let users = message
+        if(dni){
+            users = users.filter(
+                user => user.dni === parseInt(dni)
+            )
         }
+
+        if(name){
+            users = users.filter(
+                user => user.name.includes(name)
+            )
+        }
+
+        if(surname){
+            users = users.filter(
+                user => user.surname.includes(name)
+            )
+        }
+
+        if(email){
+            users = users.filter(
+                user => user.email.includes(email)
+            )
+        }
+
+        res.status(200).json(users)
+        
     }
 
     getById = async (req, res) => {
         const { id } = req.params
-        const { error, message, codigo } = await userModel.getById({ id })
+        const { error, message, codigo } = await this.userModel.getById({ id })
 
         if (error === true) {
             res.status(codigo).json({ error: error, message: message })
@@ -35,7 +60,7 @@ export class UserController {
             return res.status(422).json({ error: true, message: messageError })
         }
 
-        const { error, message, codigo } = await userModel.create({ input: result.data })
+        const { error, message, codigo } = await this.userModel.create({ input: result.data })
 
         if (error === true) res.status(codigo).json({ error: error, message: message })
 
@@ -45,7 +70,7 @@ export class UserController {
     delete = async (req, res) => {
         const { id } = req.params
 
-        const { error, message, codigo } = await userModel.delete({ id })
+        const { error, message, codigo } = await this.userModel.delete({ id })
 
         if (error === true) {
             return res.status(codigo).json({ error: error, message: message })
@@ -57,7 +82,7 @@ export class UserController {
     logicDelete = async (req, res) => {
         const { id } = req.params
 
-        const { error, message, codigo } = await userModel.logicDelete({ id })
+        const { error, message, codigo } = await this.userModel.logicDelete({ id })
 
         if (error === true) {
             return res.status(codigo).json({ error: error, message: message })
@@ -76,7 +101,7 @@ export class UserController {
 
         const { id } = req.params
 
-        const { error, message, codigo } = await userModel.update({ id, input: result.data })
+        const { error, message, codigo } = await this.userModel.update({ id, input: result.data })
 
         if (error === true) {
             return res.status(codigo).json({ error: true, message: message })

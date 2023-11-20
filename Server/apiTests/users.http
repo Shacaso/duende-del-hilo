@@ -5,7 +5,7 @@ GET http://localhost:1234/users
 GET http://localhost:1234/users/561ba514-3aa6-4979-a144-10ce8cfabf74
 
 ### Recuperar todos los usuarios por un filtro
-GET http://localhost:1234/users?filtro=valor
+GET http://localhost:1234/users?email=angelvargas@gmail.com
 
 ### Crear un usuario con POST
 POST http://localhost:1234/users
@@ -16,7 +16,7 @@ Content-Type: application/json
     "surname": "Vargas",
     "dni": 35123123,
     "phoneNumber": 2615123123,
-    "email": "angelvargas@gmail.com",
+    "email": "enzo@gmail.com",
     "direction": "Calle falsa 123",
     "departament": "Ciudad",
     "postalCode": 5539,
@@ -30,9 +30,9 @@ DELETE http://localhost:1234/users/dc569290-6003-4fd3-b499-749265f94c53
 DELETE http://localhost:1234/users/ld/cc20444d-f6e8-40ab-9d55-38042429fe11
 
 ### Actualizar un usuario
-PATCH http://localhost:1234/users/dc569290-6003-4fd3-b499-749265f94c53
+PATCH http://localhost:1234/users/cc20444d-f6e8-40ab-9d55-38042429fe11
 Content-Type: application/json
 
 {
-    "name": "Rodrigo"
+    "dischargeDate": ""
 }

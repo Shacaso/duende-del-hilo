@@ -8,11 +8,38 @@ export class CostumeController {
 
     getAll = async (req, res) => {
         const { error, message, codigo } = await this.costumeModel.getAll()
-        if (error === true) {
-            res.status(codigo).json({ error: error, message: message })
-        } else {
-            res.status(200).json(message)
+        if (error === true) res.status(codigo).json({ error: error, message: message })
+
+        const { category, name, min, max } = req.query
+        let costumes = message
+
+
+        if (category) {
+            costumes = costumes.filter(
+                costume => costume.category.toLowerCase() === category.toLowerCase()
+            )
         }
+
+        if (name) {
+            costumes = costumes.filter(
+                costume => costume.name.includes(name)
+            )
+        }
+
+        if (min) {
+            costumes = costumes.filter(
+                costume => costume.price >= parseInt(min)
+            )
+        }
+
+        if (max) {
+            costumes = costumes.filter(
+                costume => costume.price <= parseInt(max)
+            )
+        }
+
+        res.status(200).json(costumes)
+
     }
 
     getById = async (req, res) => {

@@ -2,17 +2,31 @@ import { validateBill, validateParcialBill } from '../schemas/billSchema.js'
 import { jsonProcess } from "../utils/funciones.js"
 
 export class BillController {
-    constructor ({ billModel }) {
+    constructor({ billModel }) {
         this.billModel = billModel
     }
-    
+
     getAll = async (req, res) => {
         const { error, message, codigo } = await this.billModel.getAll()
-        if (error === true) {
-            res.status(codigo).json({ error: error, message: message })
-        } else {
-            res.status(200).json(message)
+        if (error === true) res.status(codigo).json({ error: error, message: message })
+
+        let bills = message
+        const { billNumber, idUser } = req.query
+
+        if (billNumber){
+            bills = bills.filter(
+                bill => bill.billNumber === parseInt(billNumber)
+            )
         }
+
+        if(idUser) {
+            bills = bills.filter(
+                bill => bill.idUser.includes(idUser)
+            )
+        }
+
+        res.status(200).json(bills)
+
     }
 
     getById = async (req, res) => {

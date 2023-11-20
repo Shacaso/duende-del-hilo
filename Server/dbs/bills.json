@@ -17,5 +17,25 @@
     "idUser": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
     "note": "Hola",
     "dischargeDate": ""
+  },
+  {
+    "id": "934a4015-7ba1-48e7-b997-e9f2f0460bce",
+    "billNumber": 3,
+    "date": 1700523376154,
+    "returned": false,
+    "amount": 2000,
+    "idUser": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+    "note": "Hola",
+    "dischargeDate": ""
+  },
+  {
+    "id": "7d10940b-5a92-4c3f-b450-a2086087afcd",
+    "billNumber": 4,
+    "date": 1700523378644,
+    "returned": false,
+    "amount": 2000,
+    "idUser": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+    "note": "Hola",
+    "dischargeDate": ""
   }
 ]

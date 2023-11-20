@@ -5,16 +5,16 @@ GET http://localhost:1234/costumes
 GET http://localhost:1234/costumes/247f78f1-866d-4ec4-b3e0-78c2ee1a0eea
 
 ### Recuperar todos los usuarios por un filtro
-GET http://localhost:1234/costumes?filtro=valor
+GET http://localhost:1234/costumes?name=as&min=1000
 
 ### Crear un usuario con POST
 POST http://localhost:1234/costumes
 Content-Type: application/json
 
 {
-    "name": "Ada",
-    "price": 10000,
-    "category": "asd",
+    "name": "Doctor",
+    "price": 8500,
+    "category": "Profesiones",
     "details": "asdasd"
 }
 

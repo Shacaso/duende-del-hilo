@@ -8,11 +8,20 @@ export class CategoryController {
     
     getAll = async (req, res) => {
         const { error, message, codigo } = await this.categoryModel.getAll()
-        if (error === true) {
-            res.status(codigo).json({ error: error, message: message })
-        } else {
-            res.status(200).json(message)
+        if (error === true) res.status(codigo).json({ error: error, message: message })
+        
+        let categories = message
+
+        const { name } = req.query
+
+        if(name){
+            categories = categories.filter(
+                category => category.name.includes(name)
+            )
         }
+
+        res.status(200).json(categories)
+        
     }
 
     getById = async (req, res) => {

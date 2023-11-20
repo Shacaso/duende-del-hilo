@@ -2,17 +2,24 @@ import { validateDepartament, validateParcialDepartament } from '../schemas/depa
 import { jsonProcess } from "../utils/funciones.js"
 
 export class DepartamentController {
-    constructor ({ departamentModel }) {
+    constructor({ departamentModel }) {
         this.departamentModel = departamentModel
     }
 
     getAll = async (req, res) => {
         const { error, message, codigo } = await this.departamentModel.getAll()
-        if (error === true) {
-            res.status(codigo).json({ error: error, message: message })
-        } else {
-            res.status(200).json(message)
+        if (error === true) res.status(codigo).json({ error: error, message: message })
+
+        let departaments = message
+        const { name } = req.query
+        if(name){
+            departaments = departaments.filter(
+                departament => departament.name.includes(name)
+            )
         }
+
+        res.status(200).json(departaments)
+
     }
 
     getById = async (req, res) => {

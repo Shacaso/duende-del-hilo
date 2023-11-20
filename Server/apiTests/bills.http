@@ -5,7 +5,7 @@ GET http://localhost:1234/bills
 GET http://localhost:1234/bills/247f78f1-866d-4ec4-b3e0-78c2ee1a0eea
 
 ### Recuperar todos los facturas por un filtro
-GET http://localhost:1234/bills?filtro=valor
+GET http://localhost:1234/bills?idUser=8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2
 
 ### Crear un categoria con POST
 POST http://localhost:1234/bills
