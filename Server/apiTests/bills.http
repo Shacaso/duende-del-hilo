@@ -14,7 +14,7 @@ Content-Type: application/json
 {
     "returned": false,
     "amount": 2000,
-    "idUser": "dc569290-6003-4fd3-b499-749265f94c53",
+    "idUser": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
     "note": "Hola"
 }
 

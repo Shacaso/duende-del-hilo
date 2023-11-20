@@ -14,3 +14,4 @@ billsRouter.delete('/:id', BillController.delete)
 
 billsRouter.patch('/:id', BillController.update)
 
+billsRouter.delete('/ld/:id', BillController.logicDelete)

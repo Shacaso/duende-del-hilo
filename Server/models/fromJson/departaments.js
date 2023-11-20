@@ -1,47 +1,24 @@
 import { randomUUID } from 'node:crypto'
-import fs from 'node:fs'
+import { allEntities, saveAllEntities } from './funcionesGETSAVE.js'
 
-async function allDepartaments() {
-    try {
-        const data = await fs.readFileSync('./dbs/departaments.json', 'utf-8')
-
-        if(data){
-            const departaments = JSON.parse(data)
-            return departaments
-        } else {
-            return []
-        }
-
-    } catch (error) {
-        return { message: error.message }
-    }
-}
-
-async function saveAllDepartaments(data) {
-    try {
-        const jsonData = JSON.stringify(data, null, 2)
-
-        await fs.writeFileSync('./dbs/departaments.json', jsonData, 'utf-8')
-        
-        return { error: false, messageSave: null }
-    } catch (error) {
-        return { error: true, message: error.message }
-    }
-}
+const path = './dbs/departaments.json'
 
 export class DepartamentModel {
     static async getAll() {
-        const departaments = await allDepartaments()
-        return departaments
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        return { error: false, message: messageGet }
     }
 
     static async getById({ id }) {
-        const departaments = await allDepartaments()
+        const { errorGet, messageGet } = await allEntities(path)
 
+        if (errorGet) return { error: true, message: message, codigo: 500 }
+        const departaments = messageGet
         const departament = departaments.find(departament => departament.id == id)
         if (departament) return { error: false, message: departament }
 
-        return { error: true, message: 'Departamento no encontrado' }
+        return { error: true, message: 'Departamento no encontrado', codigo: 404 }
     }
 
     static async create({ input }) {
@@ -50,51 +27,79 @@ export class DepartamentModel {
             ...input
         }
 
-        const departaments = await allDepartaments()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: message, codigo: 500 }
+        const departaments = messageGet
 
-        if(departaments){
+        if (departaments) {
             departaments.push(newDepartament)
         } else {
             departaments = [newDepartament]
         }
 
-        const { error, messageSave } = saveAllDepartaments(departaments)
-        
-        if (error === true) return { error: true, message: messageSave }
+        const { errorSave, messageSave } = saveAllEntities(departaments)
+        if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: newDepartament }
 
     }
 
     static async delete({ id }) {
-        const departaments = await allDepartaments()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: message, codigo: 500 }
+        const departaments = messageGet
 
         const departamentAEliminar = departaments.filter(departament => departament.id === id)
-        
-        if(departamentAEliminar.length===0) {
-            return {error: true, message:"Id no encontrado"}
+
+        if (departamentAEliminar.length === 0) {
+            return { error: true, message: "Id no encontrado", codigo: 404 }
         } else {
             const newDepartaments = departaments.filter(departament => departament.id !== id)
-            const { error, messageSave } = await saveAllDepartaments(newDepartaments)
-            if (error === true) return { error: true, message: messageSave }
-            return {error: false, message: departamentAEliminar[0]}
+            const { errorSave, messageSave } = saveAllEntities(departaments)
+            if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+            return { error: false, message: departamentAEliminar[0] }
         }
     }
 
     static async update({ id, input }) {
-        const departaments = await allDepartaments()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: message, codigo: 500 }
+        const departaments = messageGet
 
         const departamentIndex = departaments.findIndex(departament => departament.id === id)
-        if (departamentIndex === -1) return {error: true, message:"Id no encontrado"}
+        if (departamentIndex === -1) return { error: true, message: "Id no encontrado", codigo: 404 }
 
         departaments[departamentIndex] = {
             ...departaments[departamentIndex],
             ...input
         }
 
-        const { error, messageSave } = await saveAllDepartaments(departaments)
-        if (error === true) return { error: true, message: messageSave }
+        const { errorSave, messageSave } = saveAllEntities(departaments)
+        if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
-        return {error: false, message: departaments[departamentIndex]}
+        return { error: false, message: departaments[departamentIndex] }
+    }
+
+    static async logicDelete({ id }) {
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const departaments = messageGet
+
+        const departamentIndex = departaments.findIndex(departament => departament.id === id)
+        if (departamentIndex === -1) return { error: true, message: "Id no encontrado", codigo: 404 }
+
+        const dischargeDate = {
+            dischargeDate: new Date().toISOString()
+        }
+
+        departaments[departamentIndex] = {
+            ...departaments[departamentIndex],
+            ...dischargeDate
+        }
+
+        const { errorSave, messageSave } = await saveAllEntities(departaments, path)
+        if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+
+        return { error: false, message: departaments[departamentIndex] }
     }
 }

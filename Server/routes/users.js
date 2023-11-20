@@ -14,3 +14,5 @@ usersRouter.delete('/:id', UserController.delete)
 
 usersRouter.patch('/:id', UserController.update)
 
+usersRouter.delete('/ld/:id', UserController.logicDelete)
+

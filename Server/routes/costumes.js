@@ -14,3 +14,4 @@ costumesRouter.delete('/:id', CostumeController.delete)
 
 costumesRouter.patch('/:id', CostumeController.update)
 
+costumesRouter.delete('/ld/:id', CostumeController.logicDelete)

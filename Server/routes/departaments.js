@@ -14,3 +14,4 @@ departamentsRouter.delete('/:id', DepartamentController.delete)
 
 departamentsRouter.patch('/:id', DepartamentController.update)
 
+departamentsRouter.delete('/ld/:id', DepartamentController.logicDelete)

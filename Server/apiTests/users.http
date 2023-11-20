@@ -2,7 +2,7 @@
 GET http://localhost:1234/users
 
 ### Recuperar un usuario por id
-GET http://localhost:1234/users/2
+GET http://localhost:1234/users/561ba514-3aa6-4979-a144-10ce8cfabf74
 
 ### Recuperar todos los usuarios por un filtro
 GET http://localhost:1234/users?filtro=valor
@@ -12,7 +12,7 @@ POST http://localhost:1234/users
 Content-Type: application/json
 
 {
-    "name": "Angel",
+    "name": "Enzo",
     "surname": "Vargas",
     "dni": 35123123,
     "phoneNumber": 2615123123,
@@ -24,12 +24,15 @@ Content-Type: application/json
 }
 
 ### Borrar un usuario
-DELETE http://localhost:1234/users/cbb524d9-2ef4-49ec-b355-a12f579fcd1d
+DELETE http://localhost:1234/users/dc569290-6003-4fd3-b499-749265f94c53
+
+### Borrado logico del usuario
+DELETE http://localhost:1234/users/ld/cc20444d-f6e8-40ab-9d55-38042429fe11
 
 ### Actualizar un usuario
 PATCH http://localhost:1234/users/dc569290-6003-4fd3-b499-749265f94c53
 Content-Type: application/json
 
 {
-    "name": "Enzo"
+    "name": "Rodrigo"
 }

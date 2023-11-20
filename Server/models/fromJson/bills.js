@@ -1,52 +1,31 @@
 import { randomUUID } from 'node:crypto'
-import fs from 'node:fs'
+import { allEntities, saveAllEntities } from './funcionesGETSAVE.js'
 
-async function allBills() {
-    try {
-        const data = await fs.readFileSync('./dbs/bills.json', 'utf-8')
-
-        if (data) {
-            const bills = JSON.parse(data)
-            return bills
-        } else {
-            return []
-        }
-
-    } catch (error) {
-        return { message: error.message }
-    }
-}
-
-async function saveAllBills(data) {
-    try {
-        const jsonData = JSON.stringify(data, null, 2)
-
-        await fs.writeFileSync('./dbs/bills.json', jsonData, 'utf-8')
-
-        return { error: false, messageSave: null }
-    } catch (error) {
-        return { error: true, messageSave: error.message }
-    }
-}
+const path = './dbs/bills.json'
 
 export class BillModel {
     static async getAll() {
-        const bills = await allBills()
-        return bills
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        return { error: false, message: messageGet }
     }
 
     static async getById({ id }) {
-        const bills = await allBills()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const bills = messageGet
 
         const bill = bills.find(bill => bill.id == id)
         if (bill) return { error: false, message: bill }
 
-        return { error: true, message: 'Factura no encontrado' }
+        return { error: true, message: 'Factura no encontrado', codigo: 404 }
 
     }
 
     static async create({ input }) {
-        const bills = await allBills()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const bills = messageGet
 
         let lastBill = 1
 
@@ -67,42 +46,68 @@ export class BillModel {
             bills = [newBill]
         }
 
-        const { error, messageSave } = await saveAllBills(bills)
-
-        if (error === true) return { error: true, message: messageSave }
+        const { errorSave, messageSave } = await saveAllEntities(bills, path)
+        if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: newBill }
 
     }
 
     static async delete({ id }) {
-        const bills = await allBills()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const bills = messageGet
 
         const billAEliminar = bills.filter(bill => bill.id === id)
 
         if (billAEliminar.length === 0) {
-            return { error: true, message: "Id no encontrado" }
+            return { error: true, message: "Id no encontrado", codigo: 404 }
         } else {
             const newBills = bills.filter(bill => bill.id !== id)
-            const { error, messageSave } = await saveAllBills(newBills)
-            if (error === true) return { error: true, message: messageSave }
+            const { errorSave, messageSave } = await saveAllEntities(newBills, path)
+            if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
             return { error: false, message: billAEliminar[0] }
         }
     }
 
     static async update({ id, input }) {
-        const bills = await allBills()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const bills = messageGet
 
         const billIndex = bills.findIndex(bill => bill.id === id)
-        if (billIndex === -1) return { error: true, message: "Id no encontrado" }
+        if (billIndex === -1) return { error: true, message: "Id no encontrado", codigo: 404 }
 
         bills[billIndex] = {
             ...bills[billIndex],
             ...input
         }
 
-        const { error, messageSave } = await saveAllBills(bills)
-        if (error === true) return { error: true, message: messageSave }
+        const { errorSave, messageSave } = await saveAllEntities(bills, path)
+        if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+
+        return { error: false, message: bills[billIndex] }
+    }
+
+    static async logicDelete({ id }) {
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const bills = messageGet
+
+        const billIndex = bills.findIndex(bill => bill.id === id)
+        if (billIndex === -1) return { error: true, message: "Id no encontrado", codigo: 404 }
+
+        const dischargeDate = {
+            dischargeDate: new Date().toISOString()
+        }
+
+        bills[billIndex] = {
+            ...bills[billIndex],
+            ...dischargeDate
+        }
+
+        const { errorSave, messageSave } = await saveAllEntities(bills, path)
+        if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: bills[billIndex] }
     }

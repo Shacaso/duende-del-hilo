@@ -3,7 +3,7 @@ import fs from 'node:fs'
 
 const allDepartaments = async () => {
     try {
-        const data = await fs.readFileSync('./dbs/departaments.json', {encoding: 'utf-8'})
+        const data = await fs.readFileSync('./dbs/departaments.json', { encoding: 'utf-8' })
         if (data) {
             const departaments = JSON.parse(data)
             const nameDepartaments = departaments.map(departament => departament.name)
@@ -51,7 +51,11 @@ export const userSchema = z.object({
         required_error: 'La direccion es requerido'
     }),
 
-    departament: z.enum([...departaments]),
+    departament: z
+        .string()
+        .refine(value => [...departaments].includes(value), {
+            message: 'No se encuenta el departamento en la base de datos',
+        }),
 
     postalCode: z.number({
         invalid_type_error: 'El codigo postal debe ser un numero de 10 digitos',
@@ -61,14 +65,15 @@ export const userSchema = z.object({
     blacklist: z.boolean({
         invalid_type_error: 'El blacklist debe ser un boolean',
         required_error: 'El blacklist es requerido'
-    })
+    }),
 
+    dischargeDate: z.string().default("")
 })
 
-export function validateUser(object){
+export function validateUser(object) {
     return userSchema.safeParse(object)
 }
 
-export function validateParcialUser(object){
+export function validateParcialUser(object) {
     return userSchema.partial().safeParse(object)
 }

@@ -1,6 +1,6 @@
 [
   {
-    "id": "dc569290-6003-4fd3-b499-749265f94c53",
+    "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
     "name": "Enzo",
     "surname": "Vargas",
     "dni": 35123123,
@@ -10,5 +10,18 @@
     "departament": "Ciudad",
     "postalCode": 5539,
     "blacklist": false
+  },
+  {
+    "id": "cc20444d-f6e8-40ab-9d55-38042429fe11",
+    "name": "Enzo",
+    "surname": "Vargas",
+    "dni": 35123123,
+    "phoneNumber": 2615123123,
+    "email": "angelvargas@gmail.com",
+    "direction": "Calle falsa 123",
+    "departament": "Ciudad",
+    "postalCode": 5539,
+    "blacklist": false,
+    "dischargeDate": "2023-11-20T19:47:41.830Z"
   }
 ]

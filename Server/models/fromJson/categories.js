@@ -1,47 +1,24 @@
 import { randomUUID } from 'node:crypto'
-import fs from 'node:fs'
+import { allEntities, saveAllEntities } from './funcionesGETSAVE.js'
 
-async function allCategories() {
-    try {
-        const data = await fs.readFileSync('./dbs/categories.json', 'utf-8')
-
-        if(data){
-            const categories = JSON.parse(data)
-            return categories
-        } else {
-            return []
-        }
-
-    } catch (error) {
-        return { message: error.message }
-    }
-}
-
-async function saveAllCategories(data) {
-    try {
-        const jsonData = JSON.stringify(data, null, 2)
-
-        await fs.writeFileSync('./dbs/categories.json', jsonData, 'utf-8')
-
-        return { error: false, messageSave: null }        
-    } catch (error) {
-        return { error: true, message: error.message }
-    }
-}
+const path = './dbs/categories.json'
 
 export class CategoryModel {
     static async getAll() {
-        const categories = await allCategories()
-        return categories
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        return { error: false, message: messageGet }
     }
 
     static async getById({ id }) {
-        const categories = await allCategories()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const categories = messageGet
 
         const category = categories.find(category => category.id == id)
         if (category) return { error: false, message: category }
 
-        return { error: true, message: 'Categoria no encontrado' }
+        return { error: true, message: 'Categoria no encontrado', codigo: 404 }
     }
 
     static async create({ input }) {
@@ -50,52 +27,79 @@ export class CategoryModel {
             ...input
         }
 
-        const categories = await allCategories()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const categories = messageGet
 
-        if(categories){
+        if (categories) {
             categories.push(newCategory)
         } else {
             categories = [newCategory]
         }
 
-
-        const { error, messageSave } = saveAllCategories(categories)
-
-        if (error === true) return { error: true, message: messageSave }
+        const { errorSave, messageSave } = await saveAllEntities(categories, path)
+        if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: newCategory }
 
     }
 
     static async delete({ id }) {
-        const categories = await allCategories()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const categories = messageGet
 
         const categoryAEliminar = categories.filter(category => category.id === id)
-        
-        if(categoryAEliminar.length===0) {
-            return {error: true, message:"Id no encontrado"}
+
+        if (categoryAEliminar.length === 0) {
+            return { error: true, message: "Id no encontrado", codigo: 404 }
         } else {
             const newCategories = categories.filter(category => category.id !== id)
-            const { error, messageSave } = await saveAllCategories(newCategories)
-            if (error === true) return { error: true, message: messageSave }
-            return {error: false, message: categoryAEliminar[0]}
+            const { errorSave, messageSave } = await saveAllEntities(newCategories, path)
+            if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+            return { error: false, message: categoryAEliminar[0] }
         }
     }
 
     static async update({ id, input }) {
-        const categories = await allCategories()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const categories = messageGet
 
         const categoryIndex = categories.findIndex(category => category.id === id)
-        if (categoryIndex === -1) return {error: true, message:"Id no encontrado"}
+        if (categoryIndex === -1) return { error: true, message: "Id no encontrado", codigo: 404 }
 
         categories[categoryIndex] = {
             ...categories[categoryIndex],
             ...input
         }
 
-        const { error, messageSave } = await saveAllCategories(categories)
-        if (error === true) return { error: true, message: messageSave }
-        
-        return {error: false, message:categories[categoryIndex]}
+        const { errorSave, messageSave } = await saveAllEntities(categories, path)
+        if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+
+        return { error: false, message: categories[categoryIndex] }
+    }
+
+    static async logicDelete({ id }) {
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const categories = messageGet
+
+        const categoryIndex = categories.findIndex(category => category.id === id)
+        if (categoryIndex === -1) return { error: true, message: "Id no encontrado", codigo: 404 }
+
+        const dischargeDate = {
+            dischargeDate: new Date().toISOString()
+        }
+
+        categories[categoryIndex] = {
+            ...categories[categoryIndex],
+            ...dischargeDate
+        }
+
+        const { errorSave, messageSave } = await saveAllEntities(categories, path)
+        if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+
+        return { error: false, message: categories[categoryIndex] }
     }
 }

@@ -1,47 +1,24 @@
 import { randomUUID } from 'node:crypto'
-import fs from 'node:fs'
+import { allEntities, saveAllEntities } from './funcionesGETSAVE.js'
 
-async function allUsers() {
-    try {
-        const data = await fs.readFileSync('./dbs/users.json', 'utf-8')
-
-        if (data) {
-            const users = JSON.parse(data)
-            return users
-        } else {
-            return []
-        }
-
-    } catch (error) {
-        return { message: error.message }
-    }
-}
-
-async function saveAllUsers(data) {
-    try {
-        const jsonData = JSON.stringify(data, null, 2)
-
-        await fs.writeFileSync('./dbs/users.json', jsonData, 'utf-8')
-
-        return { error: false, messageSave: null }
-    } catch (error) {
-        return { error: true, message: error.message }
-    }
-}
+const path = './dbs/users.json'
 
 export class UserModel {
     static async getAll() {
-        const users = await allUsers()
-        return users
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        return { error: false, message: messageGet }
     }
 
     static async getById({ id }) {
-        const users = await allUsers()
+        const { errorGet, messageGet } = await allEntities(path)
 
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const users = messageGet
         const user = users.find(user => user.id == id)
-        if (user) return { error: false, message: user}
+        if (user) return { error: false, message: user }
 
-        return { error: true, message: 'Usuario no encontrado' }
+        return { error: true, message: 'Usuario no encontrado', codigo: 404 }
     }
 
     static async create({ input }) {
@@ -50,7 +27,9 @@ export class UserModel {
             ...input
         }
 
-        const users = await allUsers()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const users = messageGet
 
         if (users) {
             users.push(newUser)
@@ -59,42 +38,69 @@ export class UserModel {
         }
 
 
-        const { error, messageSave } = saveAllUsers(users)
-        if (error === true) return { error: true, message: messageSave }
+        const { errorSave, messageSave } = saveAllEntities(users, path)
+        if (errorSave === true) return { error: true, message: messageSave }
 
-        return { error: false, message: newUser}
+        return { error: false, message: newUser }
 
-    }
-
-    static async delete({ id }) {
-        const users = await allUsers()
-
-        const userAEliminar = users.filter(user => user.id === id)
-
-        if (userAEliminar.length === 0) {
-            return { error: true, message: "Id no encontrado" }
-        } else {
-            const newUsers = users.filter(user => user.id !== id)
-            const { error, messageSave } = await saveAllUsers(newUsers)
-            if (error === true) return { error: true, message: messageSave }
-            return { error: false, message: userAEliminar[0] }
-        }
     }
 
     static async update({ id, input }) {
-        const users = await allUsers()
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const users = messageGet
 
         const userIndex = users.findIndex(user => user.id === id)
-        if (userIndex === -1) return { error: true, message: "Id no encontrado" }
+        if (userIndex === -1) return { error: true, message: "Id no encontrado", codigo: 404 }
 
         users[userIndex] = {
             ...users[userIndex],
             ...input
         }
 
-        const { error, messageSave } = await saveAllUsers(users)
-        if (error === true) return { error: true, message: messageSave }
-        
+        const { errorSave, messageSave } = await saveAllEntities(users, path)
+        if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+
+        return { error: false, message: users[userIndex] }
+    }
+
+    static async delete({ id }) {
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const users = messageGet
+
+        const userAEliminar = users.filter(user => user.id === id)
+
+        if (userAEliminar.length === 0) {
+            return { error: true, message: "Id no encontrado", codigo: 404 }
+        } else {
+            const newUsers = users.filter(user => user.id !== id)
+            const { errorSave, messageSave } = await saveAllEntities(newUsers, path)
+            if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+            return { error: false, message: userAEliminar[0] }
+        }
+    }
+
+    static async logicDelete({ id }) {
+        const { errorGet, messageGet } = await allEntities(path)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const users = messageGet
+
+        const userIndex = users.findIndex(user => user.id === id)
+        if (userIndex === -1) return { error: true, message: "Id no encontrado", codigo: 404 }
+
+        const dischargeDate = {
+            dischargeDate: new Date().toISOString()
+        }
+
+        users[userIndex] = {
+            ...users[userIndex],
+            ...dischargeDate
+        }
+
+        const { errorSave, messageSave } = await saveAllEntities(users, path)
+        if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+
         return { error: false, message: users[userIndex] }
     }
 }

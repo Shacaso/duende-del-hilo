@@ -14,3 +14,4 @@ categoriesRouter.delete('/:id', CategoryController.delete)
 
 categoriesRouter.patch('/:id', CategoryController.update)
 
+categoriesRouter.delete('/ld/:id', CategoryController.logicDelete)
