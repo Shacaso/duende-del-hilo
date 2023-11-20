@@ -23,8 +23,9 @@ async function saveAllUsers(data) {
 
         await fs.writeFileSync('./dbs/users.json', jsonData, 'utf-8')
 
+        return { error: false, messageSave: null }
     } catch (error) {
-        return { message: error.message }
+        return { error: true, message: error.message }
     }
 }
 
@@ -38,9 +39,9 @@ export class UserModel {
         const users = await allUsers()
 
         const user = users.find(user => user.id == id)
-        if (user) return user
+        if (user) return { error: false, message: user}
 
-        return { message: 'Usuario no encontrado' }
+        return { error: true, message: 'Usuario no encontrado' }
     }
 
     static async create({ input }) {
@@ -58,10 +59,10 @@ export class UserModel {
         }
 
 
-        const bool = saveAllUsers(users)
-        //if (bool) console.log("Guardado")
+        const { error, messageSave } = saveAllUsers(users)
+        if (error === true) return { error: true, message: messageSave }
 
-        return newUser
+        return { error: false, message: newUser}
 
     }
 
@@ -74,7 +75,8 @@ export class UserModel {
             return { error: true, message: "Id no encontrado" }
         } else {
             const newUsers = users.filter(user => user.id !== id)
-            await saveAllUsers(newUsers)
+            const { error, messageSave } = await saveAllUsers(newUsers)
+            if (error === true) return { error: true, message: messageSave }
             return { error: false, message: userAEliminar[0] }
         }
     }
@@ -90,8 +92,9 @@ export class UserModel {
             ...input
         }
 
-        await saveAllUsers(users)
-
+        const { error, messageSave } = await saveAllUsers(users)
+        if (error === true) return { error: true, message: messageSave }
+        
         return { error: false, message: users[userIndex] }
     }
 }

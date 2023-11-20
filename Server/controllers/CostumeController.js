@@ -10,9 +10,13 @@ export class CostumeController {
 
     static async getById (req, res) {
         const { id } = req.params
-        const costume = await CostumeModel.getById({ id })
-        if (costume) return res.json(costume)
-        res.status(404).json({ message: "Categoria no encontrado" })
+        const { error, message } = await CostumeModel.getById({ id })
+        
+        if (error === true) {
+            res.status(500).json({ error: error, message: message })
+        } else {
+            res.status(200).json(message)
+        }
     }
 
     static async create(req, res) {
@@ -24,9 +28,11 @@ export class CostumeController {
             return res.status(422).json({ error: true, message: messageError})
         }
     
-        const newCostume = await CostumeModel.create({ input: result.data })
+        const { error, message } = await CostumeModel.create({ input: result.data })
     
-        res.status(201).json(newCostume)
+        if (error === true) res.status(404).json({ error: error, message: message })
+
+        res.status(201).json(message)
     }
 
     static async delete(req, res) {

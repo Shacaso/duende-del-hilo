@@ -9,7 +9,6 @@ async function allCategories() {
             const categories = JSON.parse(data)
             return categories
         } else {
-            
             return []
         }
 
@@ -23,9 +22,10 @@ async function saveAllCategories(data) {
         const jsonData = JSON.stringify(data, null, 2)
 
         await fs.writeFileSync('./dbs/categories.json', jsonData, 'utf-8')
-        
+
+        return { error: false, messageSave: null }        
     } catch (error) {
-        return { message: error.message }
+        return { error: true, message: error.message }
     }
 }
 
@@ -39,9 +39,9 @@ export class CategoryModel {
         const categories = await allCategories()
 
         const category = categories.find(category => category.id == id)
-        if (category) return category
+        if (category) return { error: false, message: category }
 
-        return { message: 'Categoria no encontrado' }
+        return { error: true, message: 'Categoria no encontrado' }
     }
 
     static async create({ input }) {
@@ -59,10 +59,11 @@ export class CategoryModel {
         }
 
 
-        const bool = saveAllCategories(categories)
-        //if (bool) console.log("Guardado")
+        const { error, messageSave } = saveAllCategories(categories)
 
-        return newCategory
+        if (error === true) return { error: true, message: messageSave }
+
+        return { error: false, message: newCategory }
 
     }
 
@@ -75,7 +76,8 @@ export class CategoryModel {
             return {error: true, message:"Id no encontrado"}
         } else {
             const newCategories = categories.filter(category => category.id !== id)
-            await saveAllCategories(newCategories)
+            const { error, messageSave } = await saveAllCategories(newCategories)
+            if (error === true) return { error: true, message: messageSave }
             return {error: false, message: categoryAEliminar[0]}
         }
     }
@@ -91,8 +93,9 @@ export class CategoryModel {
             ...input
         }
 
-        await saveAllCategories(categories)
-
+        const { error, messageSave } = await saveAllCategories(categories)
+        if (error === true) return { error: true, message: messageSave }
+        
         return {error: false, message:categories[categoryIndex]}
     }
 }

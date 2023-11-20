@@ -23,8 +23,9 @@ async function saveAllCostumes(data) {
 
         await fs.writeFileSync('./dbs/costumes.json', jsonData, 'utf-8')
         
+        return { error: false, messageSave: null }
     } catch (error) {
-        return { message: error.message }
+        return { error: true, message: error.message }
     }
 }
 
@@ -38,9 +39,9 @@ export class CostumeModel {
         const costumes = await allCostumes()
 
         const costume = costumes.find(costume => costume.id == id)
-        if (costume) return costume
+        if (costume) return { error: false, message: costume}
 
-        return { message: 'Disfraz no encontrado' }
+        return { error: true, message: 'Disfraz no encontrado' }
     }
 
     static async create({ input }) {
@@ -58,10 +59,11 @@ export class CostumeModel {
         }
 
 
-        const bool = saveAllCostumes(costumes)
-        //if (bool) console.log("Guardado")
+        const { error, messageSave } = await saveAllCostumes(costumes)
 
-        return newCostume
+        if (error === true) return { error: true, message: messageSave }
+
+        return { error: false, message: newCostume }
 
     }
 
@@ -74,7 +76,8 @@ export class CostumeModel {
             return {error: true, message:"Id no encontrado"}
         } else {
             const newCostumes = costumes.filter(costume => costume.id !== id)
-            await saveAllCostumes(newCostumes)
+            const { error, messageSave } = await saveAllCostumes(newCostumes)
+            if (error === true) return { error: true, message: messageSave }
             return {error: false, message:costumeAEliminar[0]}
         }
     }
@@ -90,7 +93,8 @@ export class CostumeModel {
             ...input
         }
 
-        await saveAllCostumes(costumes)
+        const { error, messageSave } = await saveAllCostumes(costumes)
+        if (error === true) return { error: true, message: messageSave }
 
         return {error: false, message:costumes[costumeIndex]}
     }

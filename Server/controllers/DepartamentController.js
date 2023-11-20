@@ -10,9 +10,13 @@ export class DepartamentController {
 
     static async getById (req, res) {
         const { id } = req.params
-        const departament = await DepartamentModel.getById({ id })
-        if (departament) return res.json(departament)
-        res.status(404).json({ message: "Departamento no encontrado" })
+        const { error, message } = await DepartamentModel.getById({ id })
+        
+        if (error === true) {
+            res.status(500).json({ error: error, message: message })
+        } else {
+            res.status(200).json(message)
+        }
     }
 
     static async create(req, res) {
@@ -24,9 +28,11 @@ export class DepartamentController {
             return res.status(422).json({ error: true, message: messageError})
         }
     
-        const newDepartament = await DepartamentModel.create({ input: result.data })
+        const { error, message } = await DepartamentModel.create({ input: result.data })
     
-        res.status(201).json(newDepartament)
+        if (error === true) res.status(404).json({ error: error, message: message })
+
+        res.status(201).json(message)
     }
 
     static async delete(req, res) {

@@ -10,9 +10,13 @@ export class UserController {
 
     static async getById (req, res) {
         const { id } = req.params
-        const user = await UserModel.getById({ id })
-        if (user) return res.json(user)
-        res.status(404).json({ message: "Usuario no encontrado" })
+        const { error, message } = await UserModel.getById({ id })
+        
+        if (error === true) {
+            res.status(404).json({ error: error, message: message })
+        } else {
+            res.status(200).json(message)
+        }
     }
 
     static async create(req, res) {
@@ -24,9 +28,11 @@ export class UserController {
             return res.status(422).json({ error: true, message: messageError})
         }
     
-        const newUser = await UserModel.create({ input: result.data })
+        const { error, message } = await UserModel.create({ input: result.data })
     
-        res.status(201).json(newUser)
+        if (error === true) res.status(404).json({ error: error, message: message })
+
+        res.status(201).json(message)
     }
 
     static async delete(req, res) {

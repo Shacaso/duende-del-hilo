@@ -23,8 +23,9 @@ async function saveAllDepartaments(data) {
 
         await fs.writeFileSync('./dbs/departaments.json', jsonData, 'utf-8')
         
+        return { error: false, messageSave: null }
     } catch (error) {
-        return { message: error.message }
+        return { error: true, message: error.message }
     }
 }
 
@@ -38,9 +39,9 @@ export class DepartamentModel {
         const departaments = await allDepartaments()
 
         const departament = departaments.find(departament => departament.id == id)
-        if (departament) return departament 
+        if (departament) return { error: false, message: departament }
 
-        return { message: 'Departamento no encontrado' }
+        return { error: true, message: 'Departamento no encontrado' }
     }
 
     static async create({ input }) {
@@ -57,11 +58,11 @@ export class DepartamentModel {
             departaments = [newDepartament]
         }
 
+        const { error, messageSave } = saveAllDepartaments(departaments)
+        
+        if (error === true) return { error: true, message: messageSave }
 
-        const bool = saveAllDepartaments(departaments)
-        //if (bool) console.log("Guardado")
-
-        return newDepartament
+        return { error: false, message: newDepartament }
 
     }
 
@@ -74,7 +75,8 @@ export class DepartamentModel {
             return {error: true, message:"Id no encontrado"}
         } else {
             const newDepartaments = departaments.filter(departament => departament.id !== id)
-            await saveAllDepartaments(newDepartaments)
+            const { error, messageSave } = await saveAllDepartaments(newDepartaments)
+            if (error === true) return { error: true, message: messageSave }
             return {error: false, message: departamentAEliminar[0]}
         }
     }
@@ -90,8 +92,9 @@ export class DepartamentModel {
             ...input
         }
 
-        await saveAllDepartaments(departaments)
+        const { error, messageSave } = await saveAllDepartaments(departaments)
+        if (error === true) return { error: true, message: messageSave }
 
-        return {error: false, message:departaments[departamentIndex]}
+        return {error: false, message: departaments[departamentIndex]}
     }
 }

@@ -39,7 +39,6 @@ export class BillModel {
         const bills = await allBills()
 
         const bill = bills.find(bill => bill.id == id)
-
         if (bill) return { error: false, message: bill }
 
         return { error: true, message: 'Factura no encontrado' }
@@ -48,7 +47,7 @@ export class BillModel {
 
     static async create({ input }) {
         const bills = await allBills()
-        
+
         let lastBill = 1
 
         if (bills.length !== 0) {
