@@ -1,10 +1,13 @@
-import { CategoryModel } from "../models/fromJson/categories.js"
 import { validateCategory, validateParcialCategory } from '../schemas/categorySchema.js'
 import { jsonProcess } from "../utils/funciones.js"
 
 export class CategoryController {
-    static async getAll(req, res) {
-        const { error, message, codigo } = await CategoryModel.getAll()
+    constructor ({ categoryModel }) {
+        this.categoryModel = categoryModel
+    }
+    
+    getAll = async (req, res) => {
+        const { error, message, codigo } = await this.categoryModel.getAll()
         if (error === true) {
             res.status(codigo).json({ error: error, message: message })
         } else {
@@ -12,9 +15,9 @@ export class CategoryController {
         }
     }
 
-    static async getById(req, res) {
+    getById = async (req, res) => {
         const { id } = req.params
-        const { error, message, codigo } = await CategoryModel.getById({ id })
+        const { error, message, codigo } = await this.categoryModel.getById({ id })
 
         if (error === true) {
             res.status(codigo).json({ error: error, message: message })
@@ -23,7 +26,7 @@ export class CategoryController {
         }
     }
 
-    static async create(req, res) {
+    create = async (req, res) => {
 
         const result = validateCategory(req.body)
 
@@ -32,17 +35,17 @@ export class CategoryController {
             return res.status(422).json({ error: true, message: messageError })
         }
 
-        const { error, message, codigo } = await CategoryModel.create({ input: result.data })
+        const { error, message, codigo } = await this.categoryModel.create({ input: result.data })
 
         if (error === true) res.status(codigo).json({ error: error, message: message })
 
         res.status(201).json(message)
     }
 
-    static async delete(req, res) {
+    delete = async (req, res) => {
         const { id } = req.params
 
-        const { error, message, codigo } = await CategoryModel.delete({ id })
+        const { error, message, codigo } = await this.categoryModel.delete({ id })
 
         if (error === true) {
             return res.status(codigo).json({ error: error, message: message })
@@ -51,7 +54,7 @@ export class CategoryController {
         return res.json(message)
     }
 
-    static async update(req, res) {
+    update = async (req, res) => {
         const result = validateParcialCategory(req.body)
 
         if (!result.success) {
@@ -61,7 +64,7 @@ export class CategoryController {
 
         const { id } = req.params
 
-        const { error, message, codigo } = await CategoryModel.update({ id, input: result.data })
+        const { error, message, codigo } = await this.categoryModel.update({ id, input: result.data })
 
         if (error === true) {
             return res.status(codigo).json({ error: true, message: message })
@@ -70,10 +73,10 @@ export class CategoryController {
         return res.json(message)
     }
 
-    static async logicDelete(req, res) {
+    logicDelete = async (req, res) => {
         const { id } = req.params
 
-        const { error, message, codigo } = await CategoryModel.logicDelete({ id })
+        const { error, message, codigo } = await this.categoryModel.logicDelete({ id })
 
         if (error === true) {
             return res.status(codigo).json({ error: error, message: message })

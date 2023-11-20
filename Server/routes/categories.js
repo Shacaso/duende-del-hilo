@@ -2,16 +2,22 @@ import { Router } from 'express'
 
 import { CategoryController } from '../controllers/CategoryController.js'
 
-export const categoriesRouter = Router()
+export const createCategoryRouter = ({ categoryModel }) => {
+    const categoriesRouter = Router()
 
-categoriesRouter.get('/', CategoryController.getAll)
+    const categoryController = new CategoryController({ categoryModel })
+    
+    categoriesRouter.get('/', categoryController.getAll)
+    
+    categoriesRouter.get('/:id', categoryController.getById)
+    
+    categoriesRouter.post('/', categoryController.create)
+    
+    categoriesRouter.delete('/:id', categoryController.delete)
+    
+    categoriesRouter.patch('/:id', categoryController.update)
+    
+    categoriesRouter.delete('/ld/:id', categoryController.logicDelete)
 
-categoriesRouter.get('/:id', CategoryController.getById)
-
-categoriesRouter.post('/', CategoryController.create)
-
-categoriesRouter.delete('/:id', CategoryController.delete)
-
-categoriesRouter.patch('/:id', CategoryController.update)
-
-categoriesRouter.delete('/ld/:id', CategoryController.logicDelete)
+    return categoriesRouter
+}

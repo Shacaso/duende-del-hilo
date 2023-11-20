@@ -1,10 +1,13 @@
-import { BillModel } from "../models/fromJson/bills.js"
 import { validateBill, validateParcialBill } from '../schemas/billSchema.js'
 import { jsonProcess } from "../utils/funciones.js"
 
 export class BillController {
-    static async getAll(req, res) {
-        const { error, message, codigo } = await BillModel.getAll()
+    constructor ({ billModel }) {
+        this.billModel = billModel
+    }
+    
+    getAll = async (req, res) => {
+        const { error, message, codigo } = await this.billModel.getAll()
         if (error === true) {
             res.status(codigo).json({ error: error, message: message })
         } else {
@@ -12,9 +15,9 @@ export class BillController {
         }
     }
 
-    static async getById(req, res) {
+    getById = async (req, res) => {
         const { id } = req.params
-        const { error, message, codigo } = await BillModel.getById({ id })
+        const { error, message, codigo } = await this.billModel.getById({ id })
 
         if (error === true) {
             res.status(codigo).json({ error: error, message: message })
@@ -23,7 +26,7 @@ export class BillController {
         }
     }
 
-    static async create(req, res) {
+    create = async (req, res) => {
 
         const result = validateBill(req.body)
 
@@ -32,17 +35,17 @@ export class BillController {
             return res.status(422).json({ error: true, message: messageError })
         }
 
-        const { error, message, codigo } = await BillModel.create({ input: result.data })
+        const { error, message, codigo } = await this.billModel.create({ input: result.data })
 
         if (error === true) res.status(codigo).json({ error: error, message: message })
 
         res.status(201).json(message)
     }
 
-    static async delete(req, res) {
+    delete = async (req, res) => {
         const { id } = req.params
 
-        const { error, message, codigo } = await BillModel.delete({ id })
+        const { error, message, codigo } = await this.billModel.delete({ id })
 
         if (error === true) {
             return res.status(codigo).json({ error: error, message: message })
@@ -51,7 +54,7 @@ export class BillController {
         return res.json(message)
     }
 
-    static async update(req, res) {
+    update = async (req, res) => {
         const result = validateParcialBill(req.body)
 
         if (!result.success) {
@@ -61,7 +64,7 @@ export class BillController {
 
         const { id } = req.params
 
-        const { error, message, codigo } = await BillModel.update({ id, input: result.data })
+        const { error, message, codigo } = await this.billModel.update({ id, input: result.data })
 
         if (error === true) {
             return res.status(codigo).json({ error: true, message: message })
@@ -70,10 +73,10 @@ export class BillController {
         return res.json(message)
     }
 
-    static async logicDelete(req, res) {
+    logicDelete = async (req, res) => {
         const { id } = req.params
 
-        const { error, message, codigo } = await BillModel.logicDelete({ id })
+        const { error, message, codigo } = await this.billModel.logicDelete({ id })
 
         if (error === true) {
             return res.status(codigo).json({ error: error, message: message })

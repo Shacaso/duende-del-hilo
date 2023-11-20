@@ -1,10 +1,13 @@
-import { DepartamentModel } from "../models/fromJson/departaments.js"
 import { validateDepartament, validateParcialDepartament } from '../schemas/departamentSchema.js'
 import { jsonProcess } from "../utils/funciones.js"
 
 export class DepartamentController {
-    static async getAll(req, res) {
-        const { error, message, codigo } = await DepartamentModel.getAll()
+    constructor ({ departamentModel }) {
+        this.departamentModel = departamentModel
+    }
+
+    getAll = async (req, res) => {
+        const { error, message, codigo } = await this.departamentModel.getAll()
         if (error === true) {
             res.status(codigo).json({ error: error, message: message })
         } else {
@@ -12,9 +15,9 @@ export class DepartamentController {
         }
     }
 
-    static async getById(req, res) {
+    getById = async (req, res) => {
         const { id } = req.params
-        const { error, message, codigo } = await DepartamentModel.getById({ id })
+        const { error, message, codigo } = await this.departamentModel.getById({ id })
 
         if (error === true) {
             res.status(codigo).json({ error: error, message: message })
@@ -23,7 +26,7 @@ export class DepartamentController {
         }
     }
 
-    static async create(req, res) {
+    create = async (req, res) => {
 
         const result = validateDepartament(req.body)
 
@@ -32,17 +35,17 @@ export class DepartamentController {
             return res.status(422).json({ error: true, message: messageError })
         }
 
-        const { error, message, codigo } = await DepartamentModel.create({ input: result.data })
+        const { error, message, codigo } = await this.departamentModel.create({ input: result.data })
 
         if (error === true) res.status(codigo).json({ error: error, message: message })
 
         res.status(201).json(message)
     }
 
-    static async delete(req, res) {
+    delete = async (req, res) => {
         const { id } = req.params
 
-        const { error, message, codigo } = await DepartamentModel.delete({ id })
+        const { error, message, codigo } = await this.departamentModel.delete({ id })
 
         if (error === true) {
             return res.status(codigo).json({ error: error, message: message })
@@ -51,7 +54,7 @@ export class DepartamentController {
         return res.json(message)
     }
 
-    static async update(req, res) {
+    update = async (req, res) => {
         const result = validateParcialDepartament(req.body)
 
         if (!result.success) {
@@ -61,7 +64,7 @@ export class DepartamentController {
 
         const { id } = req.params
 
-        const { error, message, codigo } = await DepartamentModel.update({ id, input: result.data })
+        const { error, message, codigo } = await this.departamentModel.update({ id, input: result.data })
 
         if (error === true) {
             return res.status(codigo).json({ error: true, message: message })
@@ -70,10 +73,10 @@ export class DepartamentController {
         return res.json(message)
     }
 
-    static async logicDelete(req, res) {
+    logicDelete = async (req, res) => {
         const { id } = req.params
 
-        const { error, message, codigo } = await DepartamentModel.logicDelete({ id })
+        const { error, message, codigo } = await this.departamentModel.logicDelete({ id })
 
         if (error === true) {
             return res.status(codigo).json({ error: error, message: message })

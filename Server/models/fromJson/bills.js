@@ -1,17 +1,19 @@
 import { randomUUID } from 'node:crypto'
 import { allEntities, saveAllEntities } from './funcionesGETSAVE.js'
 
-const path = './dbs/bills.json'
-
 export class BillModel {
-    static async getAll() {
-        const { errorGet, messageGet } = await allEntities(path)
+    constructor ({ jsonPath }) {
+        this.jsonPath = jsonPath
+    }
+
+    getAll = async () => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         return { error: false, message: messageGet }
     }
 
-    static async getById({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    getById = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const bills = messageGet
 
@@ -22,8 +24,8 @@ export class BillModel {
 
     }
 
-    static async create({ input }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    create = async ({ input }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const bills = messageGet
 
@@ -46,15 +48,15 @@ export class BillModel {
             bills = [newBill]
         }
 
-        const { errorSave, messageSave } = await saveAllEntities(bills, path)
+        const { errorSave, messageSave } = await saveAllEntities(bills, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: newBill }
 
     }
 
-    static async delete({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    delete = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const bills = messageGet
 
@@ -64,14 +66,14 @@ export class BillModel {
             return { error: true, message: "Id no encontrado", codigo: 404 }
         } else {
             const newBills = bills.filter(bill => bill.id !== id)
-            const { errorSave, messageSave } = await saveAllEntities(newBills, path)
+            const { errorSave, messageSave } = await saveAllEntities(newBills, this.jsonPath)
             if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
             return { error: false, message: billAEliminar[0] }
         }
     }
 
-    static async update({ id, input }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    update = async ({ id, input }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const bills = messageGet
 
@@ -83,14 +85,14 @@ export class BillModel {
             ...input
         }
 
-        const { errorSave, messageSave } = await saveAllEntities(bills, path)
+        const { errorSave, messageSave } = await saveAllEntities(bills, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: bills[billIndex] }
     }
 
-    static async logicDelete({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    logicDelete = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const bills = messageGet
 
@@ -106,7 +108,7 @@ export class BillModel {
             ...dischargeDate
         }
 
-        const { errorSave, messageSave } = await saveAllEntities(bills, path)
+        const { errorSave, messageSave } = await saveAllEntities(bills, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: bills[billIndex] }

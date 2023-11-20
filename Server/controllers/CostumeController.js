@@ -1,10 +1,13 @@
-import { CostumeModel } from "../models/fromJson/costumes.js"
 import { validateCostume, validateParcialCostume } from '../schemas/costumeSchema.js'
 import { jsonProcess } from "../utils/funciones.js"
 
 export class CostumeController {
-    static async getAll(req, res) {
-        const { error, message, codigo } = await CostumeModel.getAll()
+    constructor({ costumeModel }) {
+        this.costumeModel = costumeModel
+    }
+
+    getAll = async (req, res) => {
+        const { error, message, codigo } = await this.costumeModel.getAll()
         if (error === true) {
             res.status(codigo).json({ error: error, message: message })
         } else {
@@ -12,9 +15,9 @@ export class CostumeController {
         }
     }
 
-    static async getById(req, res) {
+    getById = async (req, res) => {
         const { id } = req.params
-        const { error, message, codigo } = await CostumeModel.getById({ id })
+        const { error, message, codigo } = await this.costumeModel.getById({ id })
 
         if (error === true) {
             res.status(codigo).json({ error: error, message: message })
@@ -23,7 +26,7 @@ export class CostumeController {
         }
     }
 
-    static async create(req, res) {
+    create = async (req, res) => {
 
         const result = validateCostume(req.body)
 
@@ -32,17 +35,17 @@ export class CostumeController {
             return res.status(422).json({ error: true, message: messageError })
         }
 
-        const { error, message, codigo } = await CostumeModel.create({ input: result.data })
+        const { error, message, codigo } = await this.costumeModel.create({ input: result.data })
 
         if (error === true) res.status(codigo).json({ error: error, message: message })
 
         res.status(201).json(message)
     }
 
-    static async delete(req, res) {
+    delete = async (req, res) => {
         const { id } = req.params
 
-        const { error, message, codigo } = await CostumeModel.delete({ id })
+        const { error, message, codigo } = await this.costumeModel.delete({ id })
 
         if (error === true) {
             return res.status(codigo).json({ error: error, message: message })
@@ -51,7 +54,7 @@ export class CostumeController {
         return res.json(message)
     }
 
-    static async update(req, res) {
+    update = async (req, res) => {
         const result = validateParcialCostume(req.body)
 
         if (!result.success) {
@@ -61,7 +64,7 @@ export class CostumeController {
 
         const { id } = req.params
 
-        const { error, message, codigo } = await CostumeModel.update({ id, input: result.data })
+        const { error, message, codigo } = await this.costumeModel.update({ id, input: result.data })
 
         if (error === true) {
             return res.status(codigo).json({ error: true, message: message })
@@ -70,10 +73,10 @@ export class CostumeController {
         return res.json(message)
     }
 
-    static async logicDelete(req, res) {
+    logicDelete = async (req, res) => {
         const { id } = req.params
 
-        const { error, message, codigo } = await CostumeModel.logicDelete({ id })
+        const { error, message, codigo } = await this.costumeModel.logicDelete({ id })
 
         if (error === true) {
             return res.status(codigo).json({ error: error, message: message })

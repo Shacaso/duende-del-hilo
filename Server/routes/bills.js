@@ -1,17 +1,23 @@
 import { Router } from 'express'
-
 import { BillController } from '../controllers/BillController.js'
 
-export const billsRouter = Router()
+export const createBillRouter = ({ billModel }) => {
+    const billsRouter = Router()
 
-billsRouter.get('/', BillController.getAll)
+    const billController = new BillController({ billModel })
 
-billsRouter.get('/:id', BillController.getById)
+    billsRouter.get('/', billController.getAll)
 
-billsRouter.post('/', BillController.create)
+    billsRouter.get('/:id', billController.getById)
 
-billsRouter.delete('/:id', BillController.delete)
+    billsRouter.post('/', billController.create)
 
-billsRouter.patch('/:id', BillController.update)
+    billsRouter.delete('/:id', billController.delete)
 
-billsRouter.delete('/ld/:id', BillController.logicDelete)
+    billsRouter.patch('/:id', billController.update)
+
+    billsRouter.delete('/ld/:id', billController.logicDelete)
+
+    return billsRouter
+}
+

@@ -1,17 +1,19 @@
 import { randomUUID } from 'node:crypto'
 import { allEntities, saveAllEntities } from './funcionesGETSAVE.js'
 
-const path = './dbs/categories.json'
-
 export class CategoryModel {
-    static async getAll() {
-        const { errorGet, messageGet } = await allEntities(path)
+    constructor ({ jsonPath }) {
+        this.jsonPath = jsonPath
+    }
+
+    getAll = async () => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         return { error: false, message: messageGet }
     }
 
-    static async getById({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    getById = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const categories = messageGet
 
@@ -21,13 +23,13 @@ export class CategoryModel {
         return { error: true, message: 'Categoria no encontrado', codigo: 404 }
     }
 
-    static async create({ input }) {
+    create = async ({ input }) => {
         const newCategory = {
             id: randomUUID(),
             ...input
         }
 
-        const { errorGet, messageGet } = await allEntities(path)
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const categories = messageGet
 
@@ -37,32 +39,15 @@ export class CategoryModel {
             categories = [newCategory]
         }
 
-        const { errorSave, messageSave } = await saveAllEntities(categories, path)
+        const { errorSave, messageSave } = await saveAllEntities(categories, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: newCategory }
 
     }
 
-    static async delete({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
-        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
-        const categories = messageGet
-
-        const categoryAEliminar = categories.filter(category => category.id === id)
-
-        if (categoryAEliminar.length === 0) {
-            return { error: true, message: "Id no encontrado", codigo: 404 }
-        } else {
-            const newCategories = categories.filter(category => category.id !== id)
-            const { errorSave, messageSave } = await saveAllEntities(newCategories, path)
-            if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
-            return { error: false, message: categoryAEliminar[0] }
-        }
-    }
-
-    static async update({ id, input }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    update = async ({ id, input }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const categories = messageGet
 
@@ -74,14 +59,31 @@ export class CategoryModel {
             ...input
         }
 
-        const { errorSave, messageSave } = await saveAllEntities(categories, path)
+        const { errorSave, messageSave } = await saveAllEntities(categories, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: categories[categoryIndex] }
     }
 
-    static async logicDelete({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    delete = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
+        if (errorGet) return { error: true, message: messageGet, codigo: 500 }
+        const categories = messageGet
+
+        const categoryAEliminar = categories.filter(category => category.id === id)
+
+        if (categoryAEliminar.length === 0) {
+            return { error: true, message: "Id no encontrado", codigo: 404 }
+        } else {
+            const newCategories = categories.filter(category => category.id !== id)
+            const { errorSave, messageSave } = await saveAllEntities(newCategories, this.jsonPath)
+            if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+            return { error: false, message: categoryAEliminar[0] }
+        }
+    }
+
+    logicDelete = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const categories = messageGet
 
@@ -97,7 +99,7 @@ export class CategoryModel {
             ...dischargeDate
         }
 
-        const { errorSave, messageSave } = await saveAllEntities(categories, path)
+        const { errorSave, messageSave } = await saveAllEntities(categories, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: categories[categoryIndex] }

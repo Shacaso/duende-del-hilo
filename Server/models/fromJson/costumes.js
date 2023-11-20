@@ -1,17 +1,19 @@
 import { randomUUID } from 'node:crypto'
 import { allEntities, saveAllEntities } from './funcionesGETSAVE.js'
 
-const path = './dbs/costumes.json'
-
 export class CostumeModel {
-    static async getAll() {
-        const { errorGet, messageGet } = await allEntities(path)
+    constructor ({ jsonPath }) {
+        this.jsonPath = jsonPath
+    }
+
+    getAll = async () => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         return { error: false, message: messageGet }
     }
 
-    static async getById({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    getById = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: message, codigo: 500 }
         const costumes = messageGet
 
@@ -21,13 +23,13 @@ export class CostumeModel {
         return { error: true, message: 'Disfraz no encontrado', codigo: 404 }
     }
 
-    static async create({ input }) {
+    create = async ({ input }) => {
         const newCostume = {
             id: randomUUID(),
             ...input
         }
 
-        const { errorGet, messageGet } = await allEntities(path)
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: message, codigo: 500 }
         const costumes = messageGet
 
@@ -37,32 +39,15 @@ export class CostumeModel {
             costumes = [newCostume]
         }
 
-        const { errorSave, messageSave } = await saveAllEntities(costumes, path)
+        const { errorSave, messageSave } = await saveAllEntities(costumes, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: newCostume }
 
     }
-
-    static async delete({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
-        if (errorGet) return { error: true, message: message, codigo: 500 }
-        const costumes = messageGet
-
-        const costumeAEliminar = costumes.filter(costume => costume.id === id)
-
-        if (costumeAEliminar.length === 0) {
-            return { error: true, message: "Id no encontrado", codigo: 404 }
-        } else {
-            const newCostumes = costumes.filter(costume => costume.id !== id)
-            const { errorSave, messageSave } = await saveAllEntities(newCostumes, path)
-            if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
-            return { error: false, message: costumeAEliminar[0] }
-        }
-    }
-
-    static async update({ id, input }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    
+    update = async ({ id, input }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: message, codigo: 500 }
         const costumes = messageGet
 
@@ -74,14 +59,31 @@ export class CostumeModel {
             ...input
         }
 
-        const { errorSave, messageSave } = await saveAllEntities(costumes, path)
+        const { errorSave, messageSave } = await saveAllEntities(costumes, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: costumes[costumeIndex] }
     }
 
-    static async logicDelete({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    delete = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
+        if (errorGet) return { error: true, message: message, codigo: 500 }
+        const costumes = messageGet
+
+        const costumeAEliminar = costumes.filter(costume => costume.id === id)
+
+        if (costumeAEliminar.length === 0) {
+            return { error: true, message: "Id no encontrado", codigo: 404 }
+        } else {
+            const newCostumes = costumes.filter(costume => costume.id !== id)
+            const { errorSave, messageSave } = await saveAllEntities(newCostumes, this.jsonPath)
+            if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+            return { error: false, message: costumeAEliminar[0] }
+        }
+    }
+
+    logicDelete = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const costumes = messageGet
 
@@ -97,7 +99,7 @@ export class CostumeModel {
             ...dischargeDate
         }
 
-        const { errorSave, messageSave } = await saveAllEntities(costumes, path)
+        const { errorSave, messageSave } = await saveAllEntities(costumes, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: costumes[costumeIndex] }

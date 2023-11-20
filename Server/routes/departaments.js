@@ -1,17 +1,23 @@
 import { Router } from 'express'
-
 import { DepartamentController } from '../controllers/DepartamentController.js'
 
-export const departamentsRouter = Router()
+export const createDepartamentRouter = ({ departamentModel }) => {
+    const departamentsRouter = Router()
 
-departamentsRouter.get('/', DepartamentController.getAll)
+    const departamentController = new DepartamentController({ departamentModel })
 
-departamentsRouter.get('/:id', DepartamentController.getById)
+    departamentsRouter.get('/', departamentController.getAll)
 
-departamentsRouter.post('/', DepartamentController.create)
+    departamentsRouter.get('/:id', departamentController.getById)
 
-departamentsRouter.delete('/:id', DepartamentController.delete)
+    departamentsRouter.post('/', departamentController.create)
 
-departamentsRouter.patch('/:id', DepartamentController.update)
+    departamentsRouter.delete('/:id', departamentController.delete)
 
-departamentsRouter.delete('/ld/:id', DepartamentController.logicDelete)
+    departamentsRouter.patch('/:id', departamentController.update)
+
+    departamentsRouter.delete('/ld/:id', departamentController.logicDelete)
+
+    return departamentsRouter
+}
+

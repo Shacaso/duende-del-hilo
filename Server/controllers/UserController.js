@@ -1,10 +1,13 @@
-import { UserModel } from "../models/fromJson/users.js"
 import { validateUser, validateParcialUser } from '../schemas/userSchema.js'
 import { jsonProcess } from "../utils/funciones.js"
 
 export class UserController {
-    static async getAll(req, res) {
-        const { error, message, codigo } = await UserModel.getAll()
+    constructor ({ userModel }) {
+        this.userModel = userModel
+    }
+
+    getAll = async (req, res) => {
+        const { error, message, codigo } = await this.userModel.getAll()
         if (error === true) {
             res.status(codigo).json({ error: error, message: message })
         } else {
@@ -12,9 +15,9 @@ export class UserController {
         }
     }
 
-    static async getById(req, res) {
+    getById = async (req, res) => {
         const { id } = req.params
-        const { error, message, codigo } = await UserModel.getById({ id })
+        const { error, message, codigo } = await userModel.getById({ id })
 
         if (error === true) {
             res.status(codigo).json({ error: error, message: message })
@@ -23,7 +26,7 @@ export class UserController {
         }
     }
 
-    static async create(req, res) {
+    create = async (req, res) => {
 
         const result = validateUser(req.body)
 
@@ -32,17 +35,17 @@ export class UserController {
             return res.status(422).json({ error: true, message: messageError })
         }
 
-        const { error, message, codigo } = await UserModel.create({ input: result.data })
+        const { error, message, codigo } = await userModel.create({ input: result.data })
 
         if (error === true) res.status(codigo).json({ error: error, message: message })
 
         res.status(201).json(message)
     }
 
-    static async delete(req, res) {
+    delete = async (req, res) => {
         const { id } = req.params
 
-        const { error, message, codigo } = await UserModel.delete({ id })
+        const { error, message, codigo } = await userModel.delete({ id })
 
         if (error === true) {
             return res.status(codigo).json({ error: error, message: message })
@@ -51,10 +54,10 @@ export class UserController {
         return res.json(message)
     }
 
-    static async logicDelete(req, res) {
+    logicDelete = async (req, res) => {
         const { id } = req.params
 
-        const { error, message, codigo } = await UserModel.logicDelete({ id })
+        const { error, message, codigo } = await userModel.logicDelete({ id })
 
         if (error === true) {
             return res.status(codigo).json({ error: error, message: message })
@@ -63,7 +66,7 @@ export class UserController {
         return res.json(message)
     }
 
-    static async update(req, res) {
+    update = async (req, res) => {
         const result = validateParcialUser(req.body)
 
         if (!result.success) {
@@ -73,7 +76,7 @@ export class UserController {
 
         const { id } = req.params
 
-        const { error, message, codigo } = await UserModel.update({ id, input: result.data })
+        const { error, message, codigo } = await userModel.update({ id, input: result.data })
 
         if (error === true) {
             return res.status(codigo).json({ error: true, message: message })

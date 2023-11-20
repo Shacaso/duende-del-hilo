@@ -1,17 +1,19 @@
 import { randomUUID } from 'node:crypto'
 import { allEntities, saveAllEntities } from './funcionesGETSAVE.js'
 
-const path = './dbs/departaments.json'
-
 export class DepartamentModel {
-    static async getAll() {
-        const { errorGet, messageGet } = await allEntities(path)
+    constructor ({ jsonPath }) {
+        this.jsonPath = jsonPath
+    }
+
+    getAll = async () => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         return { error: false, message: messageGet }
     }
 
-    static async getById({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    getById = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
 
         if (errorGet) return { error: true, message: message, codigo: 500 }
         const departaments = messageGet
@@ -21,13 +23,13 @@ export class DepartamentModel {
         return { error: true, message: 'Departamento no encontrado', codigo: 404 }
     }
 
-    static async create({ input }) {
+    create = async ({ input }) => {
         const newDepartament = {
             id: randomUUID(),
             ...input
         }
 
-        const { errorGet, messageGet } = await allEntities(path)
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: message, codigo: 500 }
         const departaments = messageGet
 
@@ -37,15 +39,15 @@ export class DepartamentModel {
             departaments = [newDepartament]
         }
 
-        const { errorSave, messageSave } = saveAllEntities(departaments)
+        const { errorSave, messageSave } = saveAllEntities(departaments, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: newDepartament }
 
     }
 
-    static async delete({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    update = async ({ id, input }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: message, codigo: 500 }
         const departaments = messageGet
 
@@ -55,14 +57,14 @@ export class DepartamentModel {
             return { error: true, message: "Id no encontrado", codigo: 404 }
         } else {
             const newDepartaments = departaments.filter(departament => departament.id !== id)
-            const { errorSave, messageSave } = saveAllEntities(departaments)
+            const { errorSave, messageSave } = saveAllEntities(departaments, this.jsonPath)
             if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
             return { error: false, message: departamentAEliminar[0] }
         }
     }
 
-    static async update({ id, input }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    delete = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: message, codigo: 500 }
         const departaments = messageGet
 
@@ -74,14 +76,14 @@ export class DepartamentModel {
             ...input
         }
 
-        const { errorSave, messageSave } = saveAllEntities(departaments)
+        const { errorSave, messageSave } = saveAllEntities(departaments, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: departaments[departamentIndex] }
     }
 
-    static async logicDelete({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    logicDelete = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const departaments = messageGet
 
@@ -97,7 +99,7 @@ export class DepartamentModel {
             ...dischargeDate
         }
 
-        const { errorSave, messageSave } = await saveAllEntities(departaments, path)
+        const { errorSave, messageSave } = await saveAllEntities(departaments, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: departaments[departamentIndex] }

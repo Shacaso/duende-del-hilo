@@ -1,27 +1,26 @@
 import express, { json } from 'express'
-import { usersRouter } from './routes/users.js'
-import { costumesRouter } from './routes/costumes.js'
-import { categoriesRouter } from './routes/categories.js'
 import { corsMiddleware } from './middlewares/corsCustom.js'
-import { departamentsRouter } from './routes/departaments.js'
-import { billsRouter } from './routes/bills.js'
+import * as Routes from './routes/index.js'
 
-const app = express()
-app.use(json())
-app.disable('x-powered-by')
-app.use(corsMiddleware())
+export const createApp = ({ models }) => {
+    const app = express()
+    app.use(json())
+    app.disable('x-powered-by')
+    app.use(corsMiddleware())
+    
+    
+    app.use('/users', Routes.createUserRouter({ userModel: models.userModel }))
+    
+    app.use('/costumes', Routes.createCostumeRouter({ costumeModel: models.costumeModel }))
+    
+    app.use('/categories', Routes.createCategoryRouter({ categoryModel: models.categoryModel }))
+    
+    app.use('/departaments', Routes.createDepartamentRouter({ departamentModel: models.departamentModel }))
+    
+    app.use('/bills', Routes.createBillRouter({ billModel: models.billModel}))
+    
+    const port = process.env.PORT ?? 1234
+    
+    app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`))
+}
 
-
-app.use('/users', usersRouter)
-
-app.use('/costumes', costumesRouter)
-
-app.use('/categories', categoriesRouter)
-
-app.use('/departaments', departamentsRouter)
-
-app.use('/bills', billsRouter)
-
-const port = process.env.PORT ?? 1234
-
-app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`))

@@ -1,17 +1,19 @@
 import { randomUUID } from 'node:crypto'
 import { allEntities, saveAllEntities } from './funcionesGETSAVE.js'
 
-const path = './dbs/users.json'
-
 export class UserModel {
-    static async getAll() {
-        const { errorGet, messageGet } = await allEntities(path)
+    constructor ({ jsonPath }) {
+        this.jsonPath = jsonPath
+    }
+
+    getAll = async () => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         return { error: false, message: messageGet }
     }
 
-    static async getById({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    getById = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
 
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const users = messageGet
@@ -21,13 +23,13 @@ export class UserModel {
         return { error: true, message: 'Usuario no encontrado', codigo: 404 }
     }
 
-    static async create({ input }) {
+    create = async ({ input }) => {
         const newUser = {
             id: randomUUID(),
             ...input
         }
 
-        const { errorGet, messageGet } = await allEntities(path)
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const users = messageGet
 
@@ -38,15 +40,15 @@ export class UserModel {
         }
 
 
-        const { errorSave, messageSave } = saveAllEntities(users, path)
+        const { errorSave, messageSave } = saveAllEntities(users, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave }
 
         return { error: false, message: newUser }
 
     }
 
-    static async update({ id, input }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    update = async ({ id, input }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const users = messageGet
 
@@ -58,14 +60,14 @@ export class UserModel {
             ...input
         }
 
-        const { errorSave, messageSave } = await saveAllEntities(users, path)
+        const { errorSave, messageSave } = await saveAllEntities(users, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: users[userIndex] }
     }
 
-    static async delete({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    delete = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const users = messageGet
 
@@ -75,14 +77,14 @@ export class UserModel {
             return { error: true, message: "Id no encontrado", codigo: 404 }
         } else {
             const newUsers = users.filter(user => user.id !== id)
-            const { errorSave, messageSave } = await saveAllEntities(newUsers, path)
+            const { errorSave, messageSave } = await saveAllEntities(newUsers, this.jsonPath)
             if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
             return { error: false, message: userAEliminar[0] }
         }
     }
 
-    static async logicDelete({ id }) {
-        const { errorGet, messageGet } = await allEntities(path)
+    logicDelete = async ({ id }) => {
+        const { errorGet, messageGet } = await allEntities(this.jsonPath)
         if (errorGet) return { error: true, message: messageGet, codigo: 500 }
         const users = messageGet
 
@@ -98,7 +100,7 @@ export class UserModel {
             ...dischargeDate
         }
 
-        const { errorSave, messageSave } = await saveAllEntities(users, path)
+        const { errorSave, messageSave } = await saveAllEntities(users, this.jsonPath)
         if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
         return { error: false, message: users[userIndex] }
