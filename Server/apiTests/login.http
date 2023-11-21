@@ -1,0 +1,16 @@
+### Login
+POST http://localhost:1234/login
+Content-Type: application/json
+
+{
+    "user": "admin",
+    "password": "password"
+}
+
+### Change password
+PATCH http://localhost:1234/login/changePass
+Content-Type: application/json
+
+{
+    "password": "password"
+}

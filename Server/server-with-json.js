@@ -8,7 +8,8 @@ const models = {
     userModel: new Models.UserModel({ jsonPath: paths.users }),
     categoryModel: new Models.CategoryModel({ jsonPath: paths.categories }),
     costumeModel: new Models.CostumeModel({ jsonPath: paths.costumes }),
-    departamentModel: new Models.DepartamentModel({ jsonPath: paths.departaments })
+    departamentModel: new Models.DepartamentModel({ jsonPath: paths.departaments }),
+    loginModel: new Models.LoginModel({ jsonPath: paths.login })
 }
 
 createApp({ models: models })

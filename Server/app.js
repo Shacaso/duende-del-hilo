@@ -18,6 +18,8 @@ export const createApp = ({ models }) => {
     app.use('/departaments', Routes.createDepartamentRouter({ departamentModel: models.departamentModel }))
     
     app.use('/bills', Routes.createBillRouter({ billModel: models.billModel}))
+
+    app.use('/login', Routes.createLoginRouter({ loginModel: models.loginModel }))
     
     const port = process.env.PORT ?? 1234
     

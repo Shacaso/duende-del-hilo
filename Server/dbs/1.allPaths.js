@@ -5,4 +5,5 @@ export const paths = {
     costumes: "./dbs/costumes.json",
     departaments: "./dbs/departaments.json",
     users: "./dbs/users.json",
+    login: "./dbs/login.json"
 }
