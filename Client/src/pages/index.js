@@ -17,8 +17,11 @@ const Notification = lazy(() => import('./notification-page/Notification'));
 const AddProducts = lazy(() => import('./product-page/AddProducts'));
 const SubtractProducts = lazy(() => import('./product-page/SubtractProducts'));
 const ChangePassword = lazy(() => import('./change-password/ChangePassword'));
+const Test = lazy(() => import('./test-page/Test'));
+
 
 export {
+  Test,
   Dashboard,
   ServicePolicy,
   NoFound,

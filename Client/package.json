@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@mercadopago/sdk-react": "^0.0.15",
+    "@react-pdf/renderer": "^3.1.14",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.5.1",
     "cloudinary": "^1.41.0",

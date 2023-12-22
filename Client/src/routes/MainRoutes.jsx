@@ -19,6 +19,7 @@ import {
   AddProducts,
   SubtractProducts,
   ChangePassword,
+  Test,
 } from '@/pages';
 
 export function MainRoutes() {
@@ -40,6 +41,12 @@ export function MainRoutes() {
               <PublicRoutes>
                 <Register />
               </PublicRoutes>
+            }
+          />
+          <Route
+            path='test'
+            element={
+                <Test />
             }
           />
           <Route

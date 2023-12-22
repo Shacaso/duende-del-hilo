@@ -48,6 +48,11 @@ const menuItems = [
       { label: 'Accesorios', href: '/product/subtractProducts' },
     ],
   },
+  {
+    label: 'PDF',
+    Icon: BillsIcon,
+    href: '/test',
+  },
   // {
   //   label: 'Estadisticas',
   //   Icon: HistoricalIcon,
