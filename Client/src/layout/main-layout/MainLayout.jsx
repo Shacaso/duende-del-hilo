@@ -1,6 +1,6 @@
 import { Suspense, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Preload, Footer } from '@/components';
+import { Preload } from '@/components';
 import { Navbar } from './components/Navbar';
 import { useAuth } from '@/hooks';
 import './main-layout.scss';
@@ -14,8 +14,8 @@ export function MainLayout() {
   }, [isLogged]);
 
   return (
-    <section className={isLogged ? 'main-layout logged' : 'main-layout'}>
-      {isLogged && <Navbar />}
+    <section className={'main-layout logged'}>
+      <Navbar />
       <section className='main-layout-content'>
         <Suspense fallback={<Preload />}>
           <Outlet />

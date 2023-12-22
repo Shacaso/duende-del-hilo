@@ -5,22 +5,28 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useAuth } from '@/hooks';
 import './login-page.scss';
+import { serviceLogin } from '../../services/auth.services';
 
 export default function Login() {
-  const { authState, onLogin } = useAuth();
+  const { authState } = useAuth();
+
+  const login = user => {
+    serviceLogin(user);
+  };
 
   const { handleChange, handleSubmit, handleBlur, values, touched, errors } =
     useFormik({
       initialValues: {
-        userName: '',
+        user: '',
         password: '',
       },
       onSubmit: (values, { resetForm }) => {
-        onLogin(values);
+        login(values);
+        // console.log(authState);
         resetForm();
       },
       validationSchema: Yup.object({
-        userName: Yup.string()
+        user: Yup.string()
           .required('Este dato es requerido')
           .min(3, 'Debe tener más de 2 caracteres'),
         password: Yup.string()
@@ -40,11 +46,11 @@ export default function Login() {
               <Input
                 label='Nombre de usuario'
                 placeholder='Ingresa tu nombre de usuario'
-                name='userName'
+                name='user'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.userName}
-                errorMessage={touched.userName && errors.userName}
+                value={values.user}
+                errorMessage={touched.user && errors.user}
               />
               <Input
                 label='Contraseña'
@@ -62,9 +68,7 @@ export default function Login() {
             </form>
             <Link to='/forgot-password'>¿Olvidaste tu contraseña?</Link>
           </Panel>
-          <div>
-            ¿No tiene una cuenta? <Link to='/register'>Regístrese</Link>
-          </div>
+
           <Footer />
         </DoubleColumnLayout.Left>
         <DoubleColumnLayout.Right>
