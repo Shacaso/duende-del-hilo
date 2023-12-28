@@ -8,14 +8,14 @@ import { Filters } from "./components/Filters";
 import { useModal } from "@/modal";
 import { useEffect, useState } from "react";
 import { Costume } from "@/app/lib/definitions";
-import { getAllCostumes } from "@/app/lib/data/costumes";
+import { createCostume, getAllCostumes } from "@/app/lib/data/costumes";
 
 export default function CostumePage() {
   const { openModal } = useModal();
   const [costumes, setCostumes] = useState<Costume[]>([])
 
   const getCostumes = async () => {
-    const data = await getAllCostumes()
+    const data: Costume[] = await getAllCostumes()
     console.log(data)
     setCostumes(data)
   }
@@ -39,7 +39,8 @@ export default function CostumePage() {
               </div>
               <Button
                 className='gap-3 lg:w-52 btn btn-primary md:w-80'
-                onClick={() => openModal(<h1>Modal</h1>)}
+                /* onClick={() => openModal(<h1>Modal</h1>)} */
+                onClick={() => createCostume()}
               >
                 <div className='flex items-center gap-5'>
                   <PlusIcon />

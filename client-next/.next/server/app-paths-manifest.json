@@ -1,5 +1,3 @@
 {
-  "/(general)/home/page": "app/(general)/home/page.js",
-  "/(general)/costume/page": "app/(general)/costume/page.js",
-  "/(general)/client/page": "app/(general)/client/page.js"
+  "/(general)/costume/page": "app/(general)/costume/page.js"
 }

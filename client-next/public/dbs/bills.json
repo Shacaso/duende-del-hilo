@@ -1,0 +1,41 @@
+[
+  {
+    "id": "71946871-09ef-4f22-87a8-63fe1f0233d7",
+    "billNumber": 1,
+    "date": 1700264887702,
+    "returned": false,
+    "amount": 2000,
+    "idUser": "dc569290-6003-4fd3-b499-749265f94c53",
+    "note": "Hola"
+  },
+  {
+    "id": "68a2377b-22db-4f07-848f-45cf73786078",
+    "billNumber": 2,
+    "date": 1700508620809,
+    "returned": false,
+    "amount": 2000,
+    "idUser": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+    "note": "Hola",
+    "dischargeDate": ""
+  },
+  {
+    "id": "934a4015-7ba1-48e7-b997-e9f2f0460bce",
+    "billNumber": 3,
+    "date": 1700523376154,
+    "returned": false,
+    "amount": 2000,
+    "idUser": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+    "note": "Hola",
+    "dischargeDate": ""
+  },
+  {
+    "id": "7d10940b-5a92-4c3f-b450-a2086087afcd",
+    "billNumber": 4,
+    "date": 1700523378644,
+    "returned": false,
+    "amount": 2000,
+    "idUser": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+    "note": "Hola",
+    "dischargeDate": ""
+  }
+]
