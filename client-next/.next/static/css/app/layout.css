@@ -2055,6 +2055,9 @@ details.collapse summary::-webkit-details-marker {
 .h-6 {
   height: 1.5rem;
 }
+.h-7 {
+  height: 1.75rem;
+}
 .h-\[25rem\] {
   height: 25rem;
 }
@@ -2066,9 +2069,6 @@ details.collapse summary::-webkit-details-marker {
 }
 .h-screen {
   height: 100vh;
-}
-.h-7 {
-  height: 1.75rem;
 }
 .min-h-full {
   min-height: 100%;
@@ -2088,23 +2088,20 @@ details.collapse summary::-webkit-details-marker {
 .w-60 {
   width: 15rem;
 }
+.w-7 {
+  width: 1.75rem;
+}
 .w-\[5rem\] {
   width: 5rem;
 }
 .w-full {
   width: 100%;
 }
-.w-7 {
-  width: 1.75rem;
-}
-.w-screen {
-  width: 100vw;
+.min-w-\[26rem\] {
+  min-width: 26rem;
 }
 .min-w-\[303px\] {
   min-width: 303px;
-}
-.min-w-\[26rem\] {
-  min-width: 26rem;
 }
 .max-w-\[45rem\] {
   max-width: 45rem;
@@ -2195,6 +2192,10 @@ details.collapse summary::-webkit-details-marker {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -2202,10 +2203,6 @@ details.collapse summary::-webkit-details-marker {
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
-}
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 .pl-\[3rem\] {
   padding-left: 3rem;
@@ -2219,6 +2216,10 @@ details.collapse summary::-webkit-details-marker {
 .text-center {
   text-align: center;
 }
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
@@ -2231,26 +2232,22 @@ details.collapse summary::-webkit-details-marker {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 .font-bold {
   font-weight: 700;
 }
-.font-semibold {
-  font-weight: 600;
-}
 .font-medium {
   font-weight: 500;
+}
+.font-semibold {
+  font-weight: 600;
 }
 .capitalize {
   text-transform: capitalize;
@@ -2258,11 +2255,11 @@ details.collapse summary::-webkit-details-marker {
 .normal-case {
   text-transform: none;
 }
-.tracking-wider {
-  letter-spacing: 0.05em;
-}
 .tracking-wide {
   letter-spacing: 0.025em;
+}
+.tracking-wider {
+  letter-spacing: 0.05em;
 }
 .text-base-content {
   --tw-text-opacity: 1;

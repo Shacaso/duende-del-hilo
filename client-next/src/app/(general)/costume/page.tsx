@@ -6,16 +6,30 @@ import Button from "@/components/button-cmp/Button";
 import { Table } from "./components/Table";
 import { Filters } from "./components/Filters";
 import { useModal } from "@/modal";
+import { useEffect, useState } from "react";
+import { Costume } from "@/app/lib/definitions";
+import { getAllCostumes } from "@/app/lib/data/costumes";
 
 export default function CostumePage() {
   const { openModal } = useModal();
+  const [costumes, setCostumes] = useState<Costume[]>([])
+
+  const getCostumes = async () => {
+    const data = await getAllCostumes()
+    console.log(data)
+    setCostumes(data)
+  }
+
+  useEffect(() => {
+    getCostumes()
+  }, [])
 
   return (
     <div className='w-full px-5 mt-10'>
       <DataList
         title='Disfraz'
         // setViewMode={viewModeType.TABLE}
-        element={<Table data={[]} />}
+        element={<Table data={costumes} />}
       >
         <div>
           <DataList.Header>

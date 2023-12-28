@@ -1,4 +1,4 @@
-// File: C:\Users\Rulo\OneDrive\Desktop\React\client-next\src\app\(general)\costume\page.tsx
+// File: D:\Rodri Drive\Mis Proyectos\duende-del-hilo\client-next\src\app\(general)\costume\page.tsx
 import * as entry from '../../../../../src/app/(general)/costume/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
