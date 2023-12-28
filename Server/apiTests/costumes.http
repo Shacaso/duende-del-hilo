@@ -5,7 +5,7 @@ GET http://localhost:1234/costumes
 GET http://localhost:1234/costumes/247f78f1-866d-4ec4-b3e0-78c2ee1a0eea
 
 ### Recuperar todos los usuarios por un filtro
-GET http://localhost:1234/costumes?name=as&min=1000
+GET http://localhost:1234/costumes?category=Halloween
 
 ### Crear un usuario con POST
 POST http://localhost:1234/costumes
@@ -22,11 +22,14 @@ Content-Type: application/json
 DELETE http://localhost:1234/costumes/0da923d6-d1bb-4a9c-b27a-69cc63ff8425
 
 ### Actualizar un usuario
-PATCH http://localhost:1234/costumes/247f78f1-866d-4ec4-b3e0-78c2ee1a0eea
+PATCH http://localhost:1234/costumes/4be27f66-e350-4ce4-9b6b-97b54970d29c
 Content-Type: application/json
 
 {
-    "asdasd": "asdasd",
-    "name": "Bombero",
+    "id": "4be27f66-e350-4ce4-9b6b-97b54970d29c",
+    "category": "Halloween",
+    "details": "Asdasdasd",
+    "dischargeDate": "",
+    "name": "Jason 3",
     "precio": 10000
 }

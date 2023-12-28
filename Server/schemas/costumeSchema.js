@@ -28,7 +28,7 @@ const costumeSchema = z.object({
         required_error: 'El nombre es requerido'
     }),
 
-    price: z.number({
+    price: z.coerce.number({
         invalid_type_error: 'El precio debe ser un numero mayor que 0',
         required_error: 'El precio es requerido'
     }).positive({

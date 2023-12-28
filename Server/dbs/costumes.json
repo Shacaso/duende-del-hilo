@@ -2,16 +2,18 @@
   {
     "id": "4be27f66-e350-4ce4-9b6b-97b54970d29c",
     "name": "Jason",
-    "price": 2000,
+    "price": 5000,
     "category": "Halloween",
-    "details": "asdasd"
+    "details": "Asdasdasd",
+    "dischargeDate": ""
   },
   {
     "id": "59a627da-7463-408b-8348-44100f7f366d",
-    "name": "Fantasma",
+    "name": "Fantasmas",
     "price": 3000,
     "category": "Halloween",
-    "details": "asdasd"
+    "details": "asdasd",
+    "dischargeDate": ""
   },
   {
     "id": "0a9b9c44-2c39-4823-98ea-4fc32c33e0c3",
@@ -32,14 +34,6 @@
     "name": "Duende",
     "price": 6000,
     "category": "Magicos",
-    "details": "asdasd",
-    "dischargeDate": ""
-  },
-  {
-    "id": "fd7c95e8-7e33-4e16-a081-78cab1e4cf94",
-    "name": "Doctor",
-    "price": 8500,
-    "category": "Profesiones",
     "details": "asdasd",
     "dischargeDate": ""
   }
