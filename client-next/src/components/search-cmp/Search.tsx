@@ -3,31 +3,40 @@ import { SearchInputIcon } from "@/assets/svg";
 
 interface Props {
   placeholder?: string;
-  onNewValue?: Function;
+  onNewValue: Function;
+  onChange?: Function;
 }
 
-export function Search({ placeholder = "Buscar...", onNewValue }: Props) {
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.target);
-  //   const values = Object.fromEntries(formData);
-  //   onNewValue(values.search);
-  // };
+export function Search({
+  placeholder = "Buscar...",
+  onNewValue,
+  onChange,
+}: Props) {
+  /*  const handleSubmit = (e: {
+    preventDefault: () => void;
+    target: HTMLFormElement | undefined;
+  }) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const values = Object.fromEntries(formData);
+    onNewValue(values.search);
+  }; */
 
-  // const handleChange = (e) => {
-  //   const value = e.target.value;
-  //   onNewValue(value);
-  // };
+  const handleChange = (e: { target: { value: any } }) => {
+    const value = e.target.value;
+    onNewValue(value);
+  };
 
   return (
     <div className='flex items-center justify-between p-2 rounded-md  bg-base-200'>
-      <form /* onSubmit={handleSubmit} */ className='w-full'>
+      <form className='w-full'>
         <input
+          autoComplete='false'
           className='w-full flex-grow p-1 outline-none text-secondary bg-base-200 text-md'
           placeholder={placeholder}
           type='text'
           name='search'
-          /* onChange={handleChange} */
+          onChange={handleChange}
         />
       </form>
       <span>

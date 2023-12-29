@@ -1,4 +1,5 @@
 // import PropTypes from 'prop-types';
+import type { User } from "@/app/lib/definitions";
 import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
 // import { useProviders, useModal } from '@/hooks';
 // import { TableSkeleton } from '@/components';
@@ -6,7 +7,7 @@ import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
 // import { UpdateProvider } from './UpdateProvider';
 
 interface Props {
-  data: [];
+  data: User[];
 }
 
 const headers = [
@@ -66,40 +67,42 @@ export function Table({ data }: Props) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Ximena</td>
-            <td>Morales</td>
-            <td>34789234</td>
-            <td>2613456780</td>
-            <td>ximena@gmail.com</td>
-            <td>Ciudad</td>
-            <td className='flex gap-2'>
-              <button
-                className='btn btn-circle btn-ghost'
-                // onClick={() => deleteProviderAlert(provider.id)}
-              >
-                <TrashIcon />
-              </button>
-              <button
-                className='btn btn-circle btn-ghost'
-                // onClick={() =>
-                //   openModal(<UpdateProvider provider={provider} />)
-                // }
-              >
-                <PencilAltIcon />
-              </button>
-              <button
-                className='btn btn-circle btn-ghost'
-                // onClick={() =>
-                //   openModal(<ProductDetail product={provider} />, {
-                //     className: "modal-product",
-                //   })
-                // }
-              >
-                <ViewIcon />
-              </button>
-            </td>
-          </tr>
+          {data.map((client) => (
+            <tr key={client.id}>
+              <td>{client.name}</td>
+              <td>{client.surname}</td>
+              <td>{client.dni}</td>
+              <td>{client.phoneNumber}</td>
+              <td>{client.email}</td>
+              <td>{client.departament}</td>
+              <td className='flex gap-2'>
+                <button
+                  className='btn btn-circle btn-ghost'
+                  // onClick={() => deleteProviderAlert(provider.id)}
+                >
+                  <TrashIcon />
+                </button>
+                <button
+                  className='btn btn-circle btn-ghost'
+                  // onClick={() =>
+                  //   openModal(<UpdateProvider provider={provider} />)
+                  // }
+                >
+                  <PencilAltIcon />
+                </button>
+                <button
+                  className='btn btn-circle btn-ghost'
+                  // onClick={() =>
+                  //   openModal(<ProductDetail product={provider} />, {
+                  //     className: "modal-product",
+                  //   })
+                  // }
+                >
+                  <ViewIcon />
+                </button>
+              </td>
+            </tr>
+          ))}
           {/* {data.map(provider => (
               <tr key={provider.id}>
                 <td>{provider.name}</td>
