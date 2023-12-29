@@ -8,11 +8,11 @@ import { Filters } from "./components/Filters";
 import { useModal } from "@/modal";
 import { useEffect, useState } from "react";
 import { Costume } from "@/app/lib/definitions";
-import { createCostume, getAllCostumes } from "@/app/lib/data/costumes";
+
 
 export default function CostumePage() {
   const { openModal } = useModal();
-  const [costumes, setCostumes] = useState<Costume[]>([])
+  /* const [costumes, setCostumes] = useState<Costume[]>([])
 
   const getCostumes = async () => {
     const data: Costume[] = await getAllCostumes()
@@ -22,14 +22,14 @@ export default function CostumePage() {
 
   useEffect(() => {
     getCostumes()
-  }, [])
+  }, []) */
 
   return (
     <div className='w-full px-5 mt-10'>
       <DataList
         title='Disfraz'
         // setViewMode={viewModeType.TABLE}
-        element={<Table data={costumes} />}
+        //element={<Table data={costumes} />}
       >
         <div>
           <DataList.Header>
@@ -40,7 +40,7 @@ export default function CostumePage() {
               <Button
                 className='gap-3 lg:w-52 btn btn-primary md:w-80'
                 /* onClick={() => openModal(<h1>Modal</h1>)} */
-                onClick={() => createCostume()}
+                //onClick={() => createCostume()}
               >
                 <div className='flex items-center gap-5'>
                   <PlusIcon />
