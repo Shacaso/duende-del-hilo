@@ -1,4 +1,4 @@
-import { getById, logicDelete, update } from "@/app/lib/data/costumes";
+import { getById, logicDelete, update } from "@/app/lib/data/clients";
 
 export async function GET(req: Request, context: { params: any }) {
     const id = context.params.id

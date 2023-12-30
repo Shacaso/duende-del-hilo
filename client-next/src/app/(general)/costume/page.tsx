@@ -9,7 +9,7 @@ import { useModal } from "@/modal";
 import { useEffect, useState } from "react";
 
 import { Costume } from "@/app/lib/definitions";
-import { createCostume, getAllCostumes } from "@/app/lib/data/costumes";
+
 
 export default function CostumePage() {
   // const { openModal } = useModal();
@@ -24,8 +24,8 @@ export default function CostumePage() {
   };
 
   const getCostumes = async () => {
-    const data: Costume[] = await getAllCostumes();
-    setCostumes(data);
+    //const data: Costume[] = await getAllCostumes();
+    //setCostumes(data);
   };
 
   useEffect(() => {

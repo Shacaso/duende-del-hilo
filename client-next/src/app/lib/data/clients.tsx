@@ -1,47 +1,108 @@
-"use server";
-import fs from "fs/promises";
-import { User } from "../definitions";
+import { randomUUID } from "crypto"
+import { Client } from "../definitions"
+import { allEntities, saveAllEntities } from "./GetAndSaveJson"
+import { clientsPath } from "./paths"
 
-const url = "./public/dbs/users.json";
 
-let client: User = {
-  id: "",
-  name: "TEST",
-  surname: "TEST",
-  dni: 35123123,
-  phoneNumber: 2615123123,
-  email: "enzo@gmail.com",
-  address: "Calle falsa 123",
-  departament: "Ciudad",
-  postalCode: 5539,
-  blacklist: false,
-  dischargeDate: "",
-};
+export const getAll = async () => {
+    const response = await allEntities(clientsPath)
+    if (response.errorGet) return { error: true, message: response.messageGet, codigo: 500 }
+    return response
+}
 
-export const getAllClients = async () => {
-  const res = await fs.readFile(url, "utf-8");
-  const json = JSON.parse(res);
+export const getById = async (id: string) => {
+    const response = await allEntities(clientsPath)
+    if (response.errorGet) return { error: true, message: response.messageGet, codigo: 500 }
 
-  return json;
-};
+    const clients: Client[] = response
 
-export const createClient = async () => {
-  try {
-    console.log("entro a crear");
+    const client: Client | undefined = clients.find(client => client.id == id)
+    if (client) return client
 
-    let clients: User[] = await getAllClients();
+    return { error: true, message: 'Id no encontrado', codigo: 404 }
+}
+
+export const create = async (input: Client) => {
+    
+    const newClient: Client = {
+        id: randomUUID(),
+        ...input,
+        dischargeDate:'',
+    }
+    
+    const response = await allEntities(clientsPath)
+    if (response.errorGet) return { error: true, message: response.messageGet, codigo: 500 }
+    let clients: Client[] = response
 
     if (clients) {
-      clients.push(client);
+        clients.push(newClient)
     } else {
-      clients = [client];
+        clients = [newClient]
     }
-    const jsonData = JSON.stringify(clients, null, 2);
 
-    await fs.writeFile(url, jsonData, "utf-8");
+    const { errorSave, messageSave } = await saveAllEntities(clients, clientsPath)
+    if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
 
-    console.log("client guardado");
-  } catch (error) {
-    return console.log(error);
-  }
-};
+    return newClient
+
+}
+
+export const update = async (id: string, input: Client) => {
+    const response = await allEntities(clientsPath)
+    if (response.errorGet) return { error: true, message: response.messageGet, codigo: 500 }
+    const clients: Client[] = response
+
+    const clientIndex = clients.findIndex(client => client.id === id)
+    if (clientIndex === -1) return { error: true, message: "Id no encontrado", codigo: 404 }
+
+    clients[clientIndex] = {
+        ...clients[clientIndex],
+        ...input
+    }
+
+    const { errorSave, messageSave } = await saveAllEntities(clients, clientsPath)
+    if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+
+    return clients[clientIndex]
+}
+
+export const hardDelete = async (id: string) => {
+    const response = await allEntities(clientsPath)
+    if (response.errorGet) return { error: true, message: response.message, codigo: 500 }
+    const clients: Client[] = response
+
+    const clientAEliminar = clients.filter(client => client.id === id)
+
+    if (clientAEliminar.length === 0) {
+        return { error: true, message: "Id no encontrado", codigo: 404 }
+    } else {
+        const newClients = clients.filter(client => client.id !== id)
+        const { errorSave, messageSave } = await saveAllEntities(newClients, clientsPath)
+        if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+        return clientAEliminar[0]
+    }
+}
+
+export const logicDelete = async (id: string) => {
+    const response = await allEntities(clientsPath)
+    if (response.errorGet) return { error: true, message: response.messageGet, codigo: 500 }
+    const clients: Client[] = response
+
+    const clientIndex = clients.findIndex(client => client.id === id)
+    if (clientIndex === -1) return { error: true, message: "Id no encontrado", codigo: 404 }
+
+    const dischargeDate = {
+        dischargeDate: new Date().toISOString()
+    }
+
+    clients[clientIndex] = {
+        ...clients[clientIndex],
+        ...dischargeDate
+    }
+
+    const { errorSave, messageSave } = await saveAllEntities(clients, clientsPath)
+    if (errorSave === true) return { error: true, message: messageSave, codigo: 500 }
+
+    return clients[clientIndex]
+}
+

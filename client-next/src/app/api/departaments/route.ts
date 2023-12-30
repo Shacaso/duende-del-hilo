@@ -1,4 +1,4 @@
-import { create, getAll } from "@/app/lib/data/costumes";
+import { create, getAll } from "@/app/lib/data/departaments";
 
 export async function GET(req: Request) {
   const response = await getAll()

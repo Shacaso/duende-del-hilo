@@ -38,11 +38,36 @@
     "dischargeDate": ""
   },
   {
-    "id": "",
-    "name": "prueba",
-    "price": 123,
-    "category": "123123",
-    "details": "string",
-    "discharge": ""
+    "id": "060f1ca0-04eb-497f-a524-316dcf97e4aa",
+    "name": "Doctor",
+    "price": 8500,
+    "category": "Profesiones",
+    "details": "asdasd",
+    "dischargeDate": "2023-12-30T00:08:34.011Z"
+  },
+  {
+    "id": "008d6db2-523d-4d10-a4af-d9fdadca76dd",
+    "discharge": "",
+    "name": "Doctor",
+    "price": 8500,
+    "category": "Profesiones",
+    "details": "asdasd",
+    "dischargeDate": "2023-12-30T00:09:49.913Z"
+  },
+  {
+    "id": "1da8c054-addc-48bb-a172-5327015a8707",
+    "dischargeDate": "",
+    "name": "Doctor",
+    "price": 8500,
+    "category": "Profesiones",
+    "details": "asdasd"
+  },
+  {
+    "id": "43cd1ff0-7aa5-4e08-8970-145cd4d99ac6",
+    "name": "Doctora",
+    "price": 8500,
+    "category": "Profesiones",
+    "details": "asdasd",
+    "dischargeDate": ""
   }
 ]

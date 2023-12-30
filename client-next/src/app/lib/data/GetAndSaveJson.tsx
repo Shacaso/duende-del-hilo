@@ -24,7 +24,7 @@ export async function saveAllEntities(data: any, path: string) {
 
         await fs.writeFile(path, jsonData, 'utf-8')
 
-        return { errorSave: false, messageSave: null }
+        return { errorSave: false, messageSave: 'ok' }
     } catch (error) {
         return { errorSave: true, message: error }
     }
