@@ -1,9 +1,10 @@
 // import PropTypes from 'prop-types';
+import { Bill } from "@/app/lib/definitions";
 import { PencilAltIcon, ViewIcon } from "@/assets/svg";
 // import swal from 'sweetalert';
 
 interface Props {
-  data: [];
+  data: Bill[];
 }
 
 export function Table({ data }: Props) {
@@ -21,39 +22,41 @@ export function Table({ data }: Props) {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>
-            <div className='badge badge-primary badge-lg'></div>
-          </td>
-          <td>0001</td>
-          <td>13/11/2023</td>
-          <td>Ximena Morales</td>
-          <td>$8000</td>
-          <td>3458764</td>
-          <td>
-            <button
-              className='btn btn-circle'
-              // onClick={() =>
-              //   openModal(<ProductDetail product={product} />, {
-              //     className: 'modal-product',
-              //   })
-              // }
-            >
-              <ViewIcon />
-            </button>
-            <button
-              className='btn btn-circle'
-              // onClick={() => {
-              //   swal({
-              //     text: "Agregar comentario, decir si se ha devulto",
-              //   });
-              // }
-              // }
-            >
-              <PencilAltIcon />
-            </button>
-          </td>
-        </tr>
+        {data.map((item) => (
+          <tr key={item.id}>
+            <td>
+              <div className='badge badge-primary badge-lg'></div>
+            </td>
+            <td> {item.id}</td>
+            <td>{item.date}</td>
+            <td>{item.idUser}</td>
+            <td>{item.amount}</td>
+            <td>{item.idUser}</td>
+            <td>
+              <button
+                className='btn btn-circle'
+                // onClick={() =>
+                //   openModal(<ProductDetail product={product} />, {
+                //     className: 'modal-product',
+                //   })
+                // }
+              >
+                <ViewIcon />
+              </button>
+              <button
+                className='btn btn-circle'
+                // onClick={() => {
+                //   swal({
+                //     text: "Agregar comentario, decir si se ha devulto",
+                //   });
+                // }
+                // }
+              >
+                <PencilAltIcon />
+              </button>
+            </td>
+          </tr>
+        ))}
         <tr>
           <td>
             <div className='badge badge-success badge-lg'></div>

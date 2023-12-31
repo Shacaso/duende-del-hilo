@@ -1,7 +1,12 @@
+"use client";
+
 import { DataList, Search } from "@/components";
 import Button from "@/components/button-cmp/Button";
 import { Table } from "./components/Table";
 import Filters from "./components/Filters";
+import { Bill } from "@/app/lib/definitions";
+import { useEffect, useState } from "react";
+import { fetchGetAll } from "@/app/lib/fetching";
 // import { viewModeType } from '@/components/datalist-cmp/constants';
 // import { Table, Filters } from './components';
 // import { useMovements } from '@/hooks';
@@ -10,6 +15,24 @@ import Filters from "./components/Filters";
 // import {Button} from '@/components'
 
 export default function History() {
+  const [bills, setBills] = useState<Bill[]>([]);
+  const [filters, setFilters] = useState<Bill[]>([]);
+
+  const handleFilters = (query: string) => {
+    const filtered = bills.filter((client) =>
+      client.idUser.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilters(filtered);
+  };
+
+  const getBills = async () => {
+    const data: Bill[] = await fetchGetAll("bills");
+    setBills(data);
+  };
+
+  useEffect(() => {
+    getBills();
+  }, []);
   //   const { movements, getAllMovements } = useMovements();
   //   const [searchQuery, setSearchQuery] = useState('');
   //   const [filterType, setFilterType] = useState('');
@@ -56,7 +79,7 @@ export default function History() {
       <DataList
         title='Facturas'
         //   setViewMode={viewModeType.TABLE}
-        element={<Table data={[]} />}
+        element={<Table data={filters} />}
       >
         <div>
           <Button
@@ -72,6 +95,7 @@ export default function History() {
           </Button>
           <DataList.Header>
             <Search
+              onNewValue={handleFilters}
               placeholder='Buscar Facturas' /* onNewValue={handleSearch} */
             />
           </DataList.Header>
