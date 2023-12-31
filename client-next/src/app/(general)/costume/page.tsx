@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { fetchGetAll } from "@/app/lib/fetching";
 import { Costume } from "@/app/lib/definitions";
 
-
 export default function CostumePage() {
   // const { openModal } = useModal();
   const [costumes, setCostumes] = useState<Costume[]>([]);
@@ -24,7 +23,7 @@ export default function CostumePage() {
   };
 
   const getCostumes = async () => {
-    const data: Costume[] = await fetchGetAll('costumes')
+    const data: Costume[] = await fetchGetAll("costumes");
     setCostumes(data);
   };
 

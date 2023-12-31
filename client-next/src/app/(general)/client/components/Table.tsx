@@ -1,5 +1,5 @@
 // import PropTypes from 'prop-types';
-import type { User } from "@/app/lib/definitions";
+import type { Client } from "@/app/lib/definitions";
 import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
 // import { useProviders, useModal } from '@/hooks';
 // import { TableSkeleton } from '@/components';
@@ -7,7 +7,7 @@ import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
 // import { UpdateProvider } from './UpdateProvider';
 
 interface Props {
-  data: User[];
+  data: Client[];
 }
 
 const headers = [
