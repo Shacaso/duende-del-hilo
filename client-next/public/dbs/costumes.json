@@ -20,7 +20,8 @@
     "name": "Bombero",
     "price": 4000,
     "category": "Profesiones",
-    "details": "asdasd"
+    "details": "asdasd",
+    "dischargeDate": "2023-12-30T21:04:40.884Z"
   },
   {
     "id": "7541a4e7-6255-41b0-b225-5ae9b8f15419",
@@ -43,30 +44,29 @@
     "price": 8500,
     "category": "Profesiones",
     "details": "asdasd",
-    "dischargeDate": "2023-12-30T00:08:34.011Z"
+    "dischargeDate": "2023-12-30 23:39:57"
   },
   {
-    "id": "008d6db2-523d-4d10-a4af-d9fdadca76dd",
-    "discharge": "",
+    "id": "f2feb561-c881-4240-b16e-ed32d9c0b674",
+    "name": "Doctora2",
+    "price": 12200,
+    "category": "Profesiones",
+    "details": "asdasd",
+    "dischargeDate": ""
+  },
+  {
+    "id": "9787c76f-d4c8-4796-886c-8b5850ffe7b7",
     "name": "Doctor",
     "price": 8500,
     "category": "Profesiones",
     "details": "asdasd",
-    "dischargeDate": "2023-12-30T00:09:49.913Z"
+    "dischargeDate": ""
   },
   {
-    "id": "1da8c054-addc-48bb-a172-5327015a8707",
-    "dischargeDate": "",
+    "id": "0ec7d96a-bd36-4ef1-8313-7e8bf1a56d28",
     "name": "Doctor",
     "price": 8500,
-    "category": "Profesiones",
-    "details": "asdasd"
-  },
-  {
-    "id": "43cd1ff0-7aa5-4e08-8970-145cd4d99ac6",
-    "name": "Doctora",
-    "price": 8500,
-    "category": "Profesiones",
+    "category": "Halloween",
     "details": "asdasd",
     "dischargeDate": ""
   }

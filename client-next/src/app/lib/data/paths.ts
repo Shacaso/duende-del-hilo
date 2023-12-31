@@ -9,3 +9,5 @@ export const categoriesPath = './public/dbs/categories.json'
 export const departamentsPath = './public/dbs/departaments.json'
 
 export const clientsPath = './public/dbs/users.json'
+
+export const loginPath = './public/dbs/login.json'

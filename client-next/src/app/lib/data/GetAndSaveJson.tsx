@@ -1,31 +1,36 @@
 'use server'
 import fs from 'fs/promises'
+import { CustomError, Entity, UserLogin } from '../definitions'
 
-export async function allEntities(path: string) {
+
+export async function allEntities<T extends Entity | UserLogin>(path: string) {
     try {
         const data = await fs.readFile(path, 'utf-8')
+        const jsonData = JSON.parse(data)
 
-        if (data) {
-            const entities = JSON.parse(data)
+        if (jsonData && jsonData.password) {
+            return jsonData
+        } else if (jsonData){
+            const entities: T[] = jsonData
             return entities
         } else {
-            const entities: any[] = []
+            const entities: T[] = []
             return entities
         }
 
-    } catch (error) {
-        return { errorGet: true, messageGet: error }
+    } catch (e: Error | any) {
+        return new CustomError(true, e.message, 500)
     }
 }
 
-export async function saveAllEntities(data: any, path: string) {
+export async function saveAllEntities<T extends Entity | UserLogin>(data: T[] | UserLogin, path: string) {
     try {
         const jsonData = JSON.stringify(data, null, 2)
 
         await fs.writeFile(path, jsonData, 'utf-8')
 
-        return { errorSave: false, messageSave: 'ok' }
-    } catch (error) {
-        return { errorSave: true, message: error }
+        return true
+    } catch (e: Error | any) {
+        return new CustomError(true, e.message, 500)
     }
 }

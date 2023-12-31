@@ -7,7 +7,7 @@ import { Table } from "./components/Table";
 import { Filters } from "./components/Filters";
 import { useModal } from "@/modal";
 import { useEffect, useState } from "react";
-
+import { fetchGetAll } from "@/app/lib/fetching";
 import { Costume } from "@/app/lib/definitions";
 
 
@@ -24,8 +24,8 @@ export default function CostumePage() {
   };
 
   const getCostumes = async () => {
-    //const data: Costume[] = await getAllCostumes();
-    //setCostumes(data);
+    const data: Costume[] = await fetchGetAll('costumes')
+    setCostumes(data);
   };
 
   useEffect(() => {
