@@ -5,12 +5,12 @@ import { DataList, Search } from "@/components";
 import Button from "@/components/button-cmp/Button";
 import { Table } from "./components/Table";
 import { useEffect, useState } from "react";
-import type { User } from "@/app/lib/definitions";
-import { getAllClients } from "@/app/lib/data/clients";
+import { Client } from "@/app/lib/definitions";
+import { fetchGetAll } from "@/app/lib/fetching";
 
 export default function ClientPage() {
-  const [clients, setClients] = useState<User[]>([]);
-  const [filters, setFilters] = useState<User[]>([]);
+  const [clients, setClients] = useState<Client[]>([]);
+  const [filters, setFilters] = useState<Client[]>([]);
 
   const handleFilters = (query: string) => {
     const filtered = clients.filter((client) =>
@@ -20,7 +20,7 @@ export default function ClientPage() {
   };
 
   const getClients = async () => {
-    const data: User[] = await getAllClients();
+    const data: Client[] = await fetchGetAll("clients");
     setClients(data);
   };
 
