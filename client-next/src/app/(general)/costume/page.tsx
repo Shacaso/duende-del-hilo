@@ -9,17 +9,20 @@ import { useModal } from "@/modal";
 import { useEffect, useState } from "react";
 import { fetchGetAll } from "@/app/lib/fetching";
 import { Costume } from "@/app/lib/definitions";
+import { SearchInputIcon } from "@/assets/svg";
 
 export default function CostumePage() {
-  // const { openModal } = useModal();
   const [costumes, setCostumes] = useState<Costume[]>([]);
-  const [filters, setFilters] = useState<Costume[]>([]);
+  const [search, setSearch] = useState("");
 
-  const handleFilters = (query: string) => {
-    const filtered = costumes.filter((costume) =>
-      costume.name.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilters(filtered);
+  const result = !costumes
+    ? costumes
+    : costumes.filter((costume) =>
+        costume.name.toLowerCase().includes(search.toLowerCase())
+      );
+
+  const handleChange = (e: { target: { value: any } }) => {
+    setSearch(e.target.value);
   };
 
   const getCostumes = async () => {
@@ -36,16 +39,28 @@ export default function CostumePage() {
       <DataList
         title='Disfraz'
         // setViewMode={viewModeType.TABLE}
-        element={<Table data={filters} />}
+        element={<Table data={result} />}
       >
         <div>
           <DataList.Header>
             <div className='flex gap-5 my-2'>
               <div className='flex-1'>
-                <Search
-                  placeholder='Buscar disfraz'
-                  onNewValue={handleFilters}
-                />
+                <div className='flex items-center justify-between p-2 rounded-md  bg-base-200'>
+                  <form className='w-full'>
+                    <input
+                      autoComplete='false'
+                      className='w-full flex-grow p-1 outline-none text-secondary bg-base-200 text-md'
+                      placeholder='Buscar disfraz'
+                      type='text'
+                      name='search'
+                      value={search}
+                      onChange={handleChange}
+                    />
+                  </form>
+                  <span>
+                    <SearchInputIcon className='w-6 h-6 cursor-pointer [&>path]:hover:stroke-primary-focus ' />
+                  </span>
+                </div>
               </div>
               <Button
                 className='gap-3 lg:w-52 btn btn-primary md:w-80'

@@ -13,16 +13,21 @@ import { fetchGetAll } from "@/app/lib/fetching";
 // import { useEffect, useState } from 'react';
 // import { FilterDate } from './components/FilterDate';
 // import {Button} from '@/components'
+import { SearchInputIcon } from "@/assets/svg";
 
 export default function History() {
   const [bills, setBills] = useState<Bill[]>([]);
-  const [filters, setFilters] = useState<Bill[]>([]);
 
-  const handleFilters = (query: string) => {
-    const filtered = bills.filter((client) =>
-      client.idUser.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilters(filtered);
+  const [search, setSearch] = useState("");
+
+  const result = !bills
+    ? bills
+    : bills.filter((client) =>
+        client.idUser.toLowerCase().includes(search.toLowerCase())
+      );
+
+  const handleChange = (e: { target: { value: any } }) => {
+    setSearch(e.target.value);
   };
 
   const getBills = async () => {
@@ -79,7 +84,7 @@ export default function History() {
       <DataList
         title='Facturas'
         //   setViewMode={viewModeType.TABLE}
-        element={<Table data={filters} />}
+        element={<Table data={result} />}
       >
         <div>
           <Button
@@ -94,10 +99,22 @@ export default function History() {
             <h1>Generar Reporte</h1>
           </Button>
           <DataList.Header>
-            <Search
-              onNewValue={handleFilters}
-              placeholder='Buscar Facturas' /* onNewValue={handleSearch} */
-            />
+            <div className='flex items-center justify-between p-2 rounded-md  bg-base-200'>
+              <form className='w-full'>
+                <input
+                  autoComplete='false'
+                  className='w-full flex-grow p-1 outline-none text-secondary bg-base-200 text-md'
+                  placeholder='Buscar factura'
+                  type='text'
+                  name='search'
+                  value={search}
+                  onChange={handleChange}
+                />
+              </form>
+              <span>
+                <SearchInputIcon className='w-6 h-6 cursor-pointer [&>path]:hover:stroke-primary-focus ' />
+              </span>
+            </div>
           </DataList.Header>
           <DataList.Filters>
             <div className=''>

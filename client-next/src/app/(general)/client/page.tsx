@@ -6,17 +6,21 @@ import Button from "@/components/button-cmp/Button";
 import { Table } from "./components/Table";
 import { useEffect, useState } from "react";
 import { Client } from "@/app/lib/definitions";
+import { SearchInputIcon } from "@/assets/svg";
 import { fetchGetAll } from "@/app/lib/fetching";
 
 export default function ClientPage() {
   const [clients, setClients] = useState<Client[]>([]);
-  const [filters, setFilters] = useState<Client[]>([]);
+  const [search, setSearch] = useState("");
 
-  const handleFilters = (query: string) => {
-    const filtered = clients.filter((client) =>
-      client.name.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilters(filtered);
+  const result = !clients
+    ? clients
+    : clients.filter((client) =>
+        client.name.toLowerCase().includes(search.toLowerCase())
+      );
+
+  const handleChange = (e: { target: { value: any } }) => {
+    setSearch(e.target.value);
   };
 
   const getClients = async () => {
@@ -33,16 +37,32 @@ export default function ClientPage() {
       <DataList
         title='Cliente'
         // setViewMode={viewModeType.TABLE}
-        element={<Table data={filters} />}
+        element={<Table data={result} />}
       >
         <div>
           <DataList.Header>
             <div className='flex gap-5 my-2'>
               <div className='flex-1'>
-                <Search
+                {/* <Search
                   placeholder='Buscar cliente'
                   onNewValue={handleFilters}
-                />
+                /> */}
+                <div className='flex items-center justify-between p-2 rounded-md  bg-base-200'>
+                  <form className='w-full'>
+                    <input
+                      autoComplete='false'
+                      className='w-full flex-grow p-1 outline-none text-secondary bg-base-200 text-md'
+                      placeholder='Buscar cliente'
+                      type='text'
+                      name='search'
+                      value={search}
+                      onChange={handleChange}
+                    />
+                  </form>
+                  <span>
+                    <SearchInputIcon className='w-6 h-6 cursor-pointer [&>path]:hover:stroke-primary-focus ' />
+                  </span>
+                </div>
               </div>
               <Button
                 className='gap-3 lg:w-52 btn btn-primary md:w-80'
