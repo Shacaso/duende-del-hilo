@@ -7,12 +7,12 @@ import { Table } from "./components/Table";
 import { Filters } from "./components/Filters";
 import { useModal } from "@/modal";
 import { useEffect, useState } from "react";
-import { fetchGetAllActives } from "@/app/lib/fetching";
+import { fetchGetAllNoActives } from "@/app/lib/fetching";
 import { Costume } from "@/app/lib/definitions";
 import { SearchInputIcon } from "@/assets/svg";
 import { deleteAction } from "@/app/lib/data/funciones";
 
-export default function CostumePage() {
+export default function CostumeNoActivesPage() {
   const [costumes, setCostumes] = useState<Costume[]>([]);
   const [search, setSearch] = useState("");
 
@@ -27,7 +27,7 @@ export default function CostumePage() {
   };
 
   const getCostumes = async () => {
-    const data: Costume[] = await fetchGetAllActives("costumes");
+    const data: Costume[] = await fetchGetAllNoActives("costumes");
     setCostumes(data);
   };
 

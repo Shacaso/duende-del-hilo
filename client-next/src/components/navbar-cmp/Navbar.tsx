@@ -29,7 +29,10 @@ const menuItems = [
     label: "Clientes",
     Icon: UserIcon,
     href: "/client",
-    subMenu: [{ label: "Black list", href: "/client" }],
+    subMenu: [
+      { label: "Black list", href: "/client/blacklist" },
+      { label: "No activos", href: "/client/noActives" }
+    ],
   },
   {
     label: "Facturas",
@@ -46,6 +49,7 @@ const menuItems = [
       { label: "Adultos", href: "/costume" },
       { label: "Nignos", href: "/costume" },
       { label: "Accesorios", href: "/costume" },
+      { label: "No Activos", href: "/costume/noActives" },
     ],
   },
   {

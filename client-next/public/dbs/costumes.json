@@ -5,7 +5,7 @@
     "price": 5000,
     "category": "Halloween",
     "details": "Asdasdasd",
-    "dischargeDate": ""
+    "dischargeDate": "2024-02-22 22:13:38"
   },
   {
     "id": "59a627da-7463-408b-8348-44100f7f366d",
@@ -21,14 +21,15 @@
     "price": 4000,
     "category": "Profesiones",
     "details": "asdasd",
-    "dischargeDate": "2023-12-30T21:04:40.884Z"
+    "dischargeDate": ""
   },
   {
     "id": "7541a4e7-6255-41b0-b225-5ae9b8f15419",
     "name": "Ada",
     "price": 5000,
     "category": "Magicos",
-    "details": "asdasd"
+    "details": "asdasd",
+    "dischargeDate": ""
   },
   {
     "id": "d2def12e-ca91-4dcc-8260-2d1a42d1b14d",
@@ -44,7 +45,7 @@
     "price": 8500,
     "category": "Profesiones",
     "details": "asdasd",
-    "dischargeDate": "2023-12-30 23:39:57"
+    "dischargeDate": ""
   },
   {
     "id": "f2feb561-c881-4240-b16e-ed32d9c0b674",

@@ -23,6 +23,48 @@ export async function fetchGetAll(path: string) {
     return response
 }
 
+export async function fetchGetAllActives(path: string) {
+    const response = await fetch(urlServer + path + '/actives', {
+        method: 'GET',
+        headers: {
+            'Content-type': "application/json",
+            'Access-Control-Allow-Origin': '*'
+        },
+        mode: 'cors'
+    }).then(res => {
+        if (!res.ok) {
+            throw new Error();
+        }
+        return res.json();
+    }).catch(e => {
+        console.log(e)
+        alert("Hubo un error en la API con la obtencion de los datos")
+    })
+
+    return response
+}
+
+export async function fetchGetAllNoActives(path: string) {
+    const response = await fetch(urlServer + path + '/noActives', {
+        method: 'GET',
+        headers: {
+            'Content-type': "application/json",
+            'Access-Control-Allow-Origin': '*'
+        },
+        mode: 'cors'
+    }).then(res => {
+        if (!res.ok) {
+            throw new Error();
+        }
+        return res.json();
+    }).catch(e => {
+        console.log(e)
+        alert("Hubo un error en la API con la obtencion de los datos")
+    })
+
+    return response
+}
+
 export async function fetchGetById(id: string, path: string) {
 
     const response = await fetch(urlServer + path + '/' + id, {
@@ -107,6 +149,48 @@ export async function fetchDeleteById(id: string, path: string) {
     }).catch(e => {
         console.log(e)
         alert("Hubo un error en la API con la eliminacion de los datos")
+    })
+
+    return response
+}
+
+export async function fetchGetAllBlacklist() {
+    const response = await fetch(urlServer + "clients/" + '/blacklist', {
+        method: 'GET',
+        headers: {
+            'Content-type': "application/json",
+            'Access-Control-Allow-Origin': '*'
+        },
+        mode: 'cors'
+    }).then(res => {
+        if (!res.ok) {
+            throw new Error();
+        }
+        return res.json();
+    }).catch(e => {
+        console.log(e)
+        alert("Hubo un error en la API con la obtencion de los datos")
+    })
+
+    return response
+}
+
+export async function fetchGetAllNoBlacklist() {
+    const response = await fetch(urlServer + "client/" + '/noBlacklist', {
+        method: 'GET',
+        headers: {
+            'Content-type': "application/json",
+            'Access-Control-Allow-Origin': '*'
+        },
+        mode: 'cors'
+    }).then(res => {
+        if (!res.ok) {
+            throw new Error();
+        }
+        return res.json();
+    }).catch(e => {
+        console.log(e)
+        alert("Hubo un error en la API con la obtencion de los datos")
     })
 
     return response

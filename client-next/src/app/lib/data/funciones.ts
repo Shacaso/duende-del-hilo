@@ -1,3 +1,5 @@
+import { fetchDeleteById } from "../fetching"
+
 //Funcion que concatena los mesajes de error de las validaciones
 export function jsonProcess(data: any[]) {
     let output = ""
@@ -8,3 +10,11 @@ export function jsonProcess(data: any[]) {
     return output
 }
 
+export const deleteAction = async (id: string, path: string) => {
+    const result = window.confirm("¿Seguro que desea eliminar el registro?")
+
+    if (result) {
+        await fetchDeleteById(id, path)
+        alert("Registro eliminado")
+    }
+}

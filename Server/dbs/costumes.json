@@ -36,5 +36,13 @@
     "category": "Magicos",
     "details": "asdasd",
     "dischargeDate": ""
+  },
+  {
+    "id": "2bba9fc6-2ed7-46f0-88dd-28a3c606d053",
+    "name": "Doctor",
+    "price": 8500,
+    "category": "Profesiones",
+    "details": "asdasd",
+    "dischargeDate": ""
   }
 ]

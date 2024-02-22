@@ -7,7 +7,8 @@ import { Table } from "./components/Table";
 import { useEffect, useState } from "react";
 import { Client } from "@/app/lib/definitions";
 import { SearchInputIcon } from "@/assets/svg";
-import { fetchGetAll } from "@/app/lib/fetching";
+import { fetchGetAllActives } from "@/app/lib/fetching";
+import { deleteAction } from "@/app/lib/data/funciones";
 
 export default function ClientPage() {
   const [clients, setClients] = useState<Client[]>([]);
@@ -24,9 +25,13 @@ export default function ClientPage() {
   };
 
   const getClients = async () => {
-    const data: Client[] = await fetchGetAll("clients");
+    const data: Client[] = await fetchGetAllActives("clients");
     setClients(data);
   };
+
+  const deleteClient = (id: string) => {
+    deleteAction(id, "clients")
+  }
 
   useEffect(() => {
     getClients();
@@ -37,7 +42,7 @@ export default function ClientPage() {
       <DataList
         title='Cliente'
         // setViewMode={viewModeType.TABLE}
-        element={<Table data={result} />}
+        element={<Table data={result} deleteClient={deleteClient}/>}
       >
         <div>
           <DataList.Header>

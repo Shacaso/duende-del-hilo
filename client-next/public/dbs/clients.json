@@ -9,7 +9,8 @@
     "direction": "Calle falsa 123",
     "departament": "Ciudad",
     "postalCode": 5539,
-    "blacklist": false
+    "blacklist": true,
+    "dischargeDate": "2024-02-22 21:25:59"
   },
   {
     "id": "cc20444d-f6e8-40ab-9d55-38042429fe11",
@@ -21,7 +22,7 @@
     "direction": "Calle falsa 123",
     "departament": "Ciudad",
     "postalCode": 5539,
-    "blacklist": false,
+    "blacklist": true,
     "dischargeDate": ""
   },
   {
@@ -34,8 +35,8 @@
     "direction": "Calle falsa 123",
     "departament": "Ciudad",
     "postalCode": 5539,
-    "blacklist": false,
-    "dischargeDate": ""
+    "blacklist": true,
+    "dischargeDate": "2024-02-22 21:45:14"
   },
   {
     "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",

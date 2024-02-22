@@ -1,4 +1,5 @@
 // import PropTypes from 'prop-types';
+import { deleteAction } from "@/app/lib/data/funciones";
 import { Costume } from "@/app/lib/definitions";
 import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
 // import { useProviders, useModal } from '@/hooks';
@@ -8,11 +9,15 @@ import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
 
 interface Props {
   data: Costume[];
+  deleteCostume: (id: string) => void
 }
 
 const headers = ["Nombre", "Categoria", "Precio", "Detalles", "Acciones"];
 
-export function Table({ data }: Props) {
+export function Table({ data, deleteCostume }: Props  ) {
+
+  
+
   // const { loading, deleteProvider } = useProviders();
   // const { openModal } = useModal();
 
@@ -66,7 +71,7 @@ export function Table({ data }: Props) {
               <td className='flex gap-2'>
               <button
                 className='btn btn-circle btn-ghost'
-                // onClick={() => deleteProviderAlert(provider.id)}
+                onClick={() => deleteCostume(costume.id)}
               >
                 <TrashIcon />
               </button>
