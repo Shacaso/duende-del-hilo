@@ -1,4 +1,5 @@
 // import PropTypes from 'prop-types';
+import { deleteAction } from "@/app/lib/data/funciones";
 import type { Client } from "@/app/lib/definitions";
 import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
 // import { useProviders, useModal } from '@/hooks';
@@ -8,7 +9,7 @@ import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
 
 interface Props {
   data: Client[];
-  deleteClient: (id: string) => void
+  type: string;
 }
 
 const headers = [
@@ -23,7 +24,7 @@ const headers = [
   "Acciones",
 ];
 
-export function Table({ data, deleteClient }: Props) {
+export function Table({ data, type }: Props) {
   // const { loading, deleteProvider } = useProviders();
   // const { openModal } = useModal();
 
@@ -79,7 +80,7 @@ export function Table({ data, deleteClient }: Props) {
               <td className='flex gap-2'>
                 <button
                   className='btn btn-circle btn-ghost'
-                  onClick={() => deleteClient(client.id)}
+                  onClick={() => deleteAction(client.id, type)}
                 >
                   <TrashIcon />
                 </button>

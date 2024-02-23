@@ -7,10 +7,19 @@ import { Table } from "./components/Table";
 import { useEffect, useState } from "react";
 import { Client } from "@/app/lib/definitions";
 import { SearchInputIcon } from "@/assets/svg";
+<<<<<<< Updated upstream
 import { fetchGetAllActives } from "@/app/lib/fetching";
 import { deleteAction } from "@/app/lib/data/funciones";
+=======
+import { fetchGetAll } from "@/app/lib/fetching";
+import { useModal } from "@/modal";
+import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
+>>>>>>> Stashed changes
 
 export default function ClientPage() {
+  const [confirmationModalOpen, setConfirmationModalOpen] =
+    useState<boolean>(false);
+
   const [clients, setClients] = useState<Client[]>([]);
   const [search, setSearch] = useState("");
 
@@ -38,6 +47,7 @@ export default function ClientPage() {
   }, []);
 
   return (
+<<<<<<< Updated upstream
     <div className='w-full px-5 mt-10'>
       <DataList
         title='Cliente'
@@ -49,57 +59,77 @@ export default function ClientPage() {
             <div className='flex gap-5 my-2'>
               <div className='flex-1'>
                 {/* <Search
+=======
+    <>
+      <div className='w-full px-5 mt-10'>
+        <DataList
+          title='Cliente'
+          // setViewMode={viewModeType.TABLE}
+          element={<Table data={result} />}
+        >
+          <div>
+            <DataList.Header>
+              <div className='flex gap-5 my-2'>
+                <div className='flex-1'>
+                  {/* <Search
+>>>>>>> Stashed changes
                   placeholder='Buscar cliente'
                   onNewValue={handleFilters}
                 /> */}
-                <div className='flex items-center justify-between p-2 rounded-md  bg-base-200'>
-                  <form className='w-full'>
-                    <input
-                      autoComplete='false'
-                      className='w-full flex-grow p-1 outline-none text-secondary bg-base-200 text-md'
-                      placeholder='Buscar cliente'
-                      type='text'
-                      name='search'
-                      value={search}
-                      onChange={handleChange}
-                    />
-                  </form>
-                  <span>
-                    <SearchInputIcon className='w-6 h-6 cursor-pointer [&>path]:hover:stroke-primary-focus ' />
-                  </span>
+                  <div className='flex items-center justify-between p-2 rounded-md  bg-base-200'>
+                    <form className='w-full'>
+                      <input
+                        autoComplete='false'
+                        className='w-full flex-grow p-1 outline-none text-secondary bg-base-200 text-md'
+                        placeholder='Buscar cliente'
+                        type='text'
+                        name='search'
+                        value={search}
+                        onChange={handleChange}
+                      />
+                    </form>
+                    <span>
+                      <SearchInputIcon className='w-6 h-6 cursor-pointer [&>path]:hover:stroke-primary-focus ' />
+                    </span>
+                  </div>
                 </div>
+                <Button
+                  className='gap-3 lg:w-52 btn btn-primary md:w-80'
+                  onClick={() =>
+                    setConfirmationModalOpen(!confirmationModalOpen)
+                  }
+                >
+                  <div className='flex items-center gap-5'>
+                    <PlusIcon />
+                    Nuevo Cliente
+                  </div>
+                </Button>
               </div>
-              <Button
-                className='gap-3 lg:w-52 btn btn-primary md:w-80'
-                // onClick={() =>
-                //   openModal(<FormProduct />, {
-                //     title: "Nuevo Cliente",
-                //     className: "modal-provider",
-                //   })
-                // }
-              >
-                <div className='flex items-center gap-5'>
-                  <PlusIcon />
-                  Nuevo Cliente
-                </div>
-              </Button>
-            </div>
-          </DataList.Header>
-          {/* <DataList.Filters>
+            </DataList.Header>
+            {/* <DataList.Filters>
             <h1>filters group</h1>
           </DataList.Filters> */}
-          <h1 className='mt-10 text-center'>
-            ORDENAR ALFABETICAMENTE POR COLUMNA
-          </h1>
-        </div>
-      </DataList>
-      {/* {totalPages > 1 && (
+            <h1 className='mt-10 text-center'>
+              ORDENAR ALFABETICAMENTE POR COLUMNA
+            </h1>
+          </div>
+        </DataList>
+        {/* {totalPages > 1 && (
         <Paginated
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={setCurrentPage}
         />
       )} */}
-    </div>
+      </div>
+      {/* {confirmationModalOpen && ( */}
+      <ConfirmationModal
+        isOpen={confirmationModalOpen}
+        handleClose={() => setConfirmationModalOpen(!confirmationModalOpen)}
+      >
+        <h1>Hellow</h1>
+      </ConfirmationModal>
+      {/* )} */}
+    </>
   );
 }

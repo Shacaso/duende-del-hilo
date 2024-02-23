@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { createContext, useMemo, useState } from 'react';
-import { Modal } from '../components/';
+import { createContext, useMemo, useState } from "react";
+import { Modal } from "../components/";
 
 interface Props {
   children: JSX.Element;
@@ -15,8 +15,8 @@ interface InitialModalState {
 const initialState: InitialModalState = {
   open: false,
   element: <></>,
-  title: '',
-  className: '',
+  title: "",
+  className: "",
 };
 interface Options {
   title?: string;
@@ -33,11 +33,14 @@ export function ModalProvider({ children }: Props) {
   const [modal, setModal] = useState<InitialModalState>(initialState);
 
   const openModal = (element: JSX.Element, options: Options = {}) => {
+    console.log(element);
+    console.log(options);
+
     setModal({
       open: true,
       element,
-      title: options?.title ?? '',
-      className: options?.className ?? '',
+      title: options?.title ?? "",
+      className: options?.className ?? "",
     });
   };
 
