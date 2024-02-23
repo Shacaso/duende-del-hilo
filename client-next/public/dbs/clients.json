@@ -88,6 +88,19 @@
     "departament": "Ciudad",
     "postalCode": 5539,
     "blacklist": false,
-    "dischargeDate": ""
+    "dischargeDate": "2024-02-23 19:47:50"
+  },
+  {
+    "id": "d78fc04e-bbcc-42a2-9104-45bc97e98113",
+    "name": "ASD",
+    "surname": "ASD",
+    "dni": 35123123,
+    "phoneNumber": 2613459875,
+    "email": "ASD@ASD.COM",
+    "direction": "Calle 7",
+    "departament": "Ciudad",
+    "postalCode": 5513,
+    "blacklist": false,
+    "dischargeDate": "2024-02-23 20:36:51"
   }
 ]
