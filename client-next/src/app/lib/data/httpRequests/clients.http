@@ -1,0 +1,17 @@
+GET http://localhost:3000/api/clients
+
+
+POST http://localhost:3000/api/clients
+Content-Type: application/json
+
+{
+    "name": "lablala",
+    "surname": "Vargas",
+    "dni": 35123123,
+    "phoneNumber": 2615123123,
+    "email": "enzo@gmail.com",
+    "direction": "Calle falsa 123",
+    "departament": "Ciudad",
+    "postalCode": 5539,
+    "blacklist": false
+}

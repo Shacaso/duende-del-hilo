@@ -18,10 +18,15 @@ export async function POST(req: Request) {
 
   if (!result.success) {
     const messageError = jsonProcess(JSON.parse(result.error.message))
-    return NextResponse.json({error: true, message: messageError}, { status: 400 })
+    const response = NextResponse.json({error: true, message: messageError}, { status: 400 })
+    console.log({error: true, message: messageError, status: 400 })
+    return response
   }
 
   const response: Client | CustomError = await create<Client>(body, clientsPath)
-  if (response instanceof CustomError) return NextResponse.json(response, { status: response.codigo })
+  if (response instanceof CustomError) {
+    console.log({error: response.error, message: response.message, status: response.codigo })
+    return NextResponse.json(response, { status: response.codigo })
+  }
   return NextResponse.json(response)
 }
