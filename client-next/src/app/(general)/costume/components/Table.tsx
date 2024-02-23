@@ -2,6 +2,10 @@
 import { deleteAction } from "@/app/lib/data/funciones";
 import { Costume } from "@/app/lib/definitions";
 import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
+import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
+import { useState } from "react";
+import Form from "./Form";
+import View from "./View";
 // import { useProviders, useModal } from '@/hooks';
 // import { TableSkeleton } from '@/components';
 // import swal from 'sweetalert';
@@ -9,17 +13,15 @@ import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
 
 interface Props {
   data: Costume[];
-  deleteCostume: (id: string) => void
+  type: string;
 }
 
 const headers = ["Nombre", "Categoria", "Precio", "Detalles", "Acciones"];
 
-export function Table({ data, deleteCostume }: Props  ) {
-
-  
-
-  // const { loading, deleteProvider } = useProviders();
-  // const { openModal } = useModal();
+export function Table({ data, type }: Props) {
+  const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
+  const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
+  const [costume, setCostume] = useState<Costume>();
 
   // const deleteProviderAlert = (id: number) => {
   //   swal({
@@ -62,69 +64,62 @@ export function Table({ data, deleteCostume }: Props  ) {
           </tr>
         </thead>
         <tbody>
-          {data.map((costume: Costume, index: number) =>(
+          {data.map((costume: Costume) => (
             <tr key={costume.id}>
               <td>{costume.name}</td>
               <td>{costume.category}</td>
               <td>{costume.price}</td>
               <td>{costume.details}</td>
               <td className='flex gap-2'>
-              <button
-                className='btn btn-circle btn-ghost'
-                onClick={() => deleteCostume(costume.id)}
-              >
-                <TrashIcon />
-              </button>
-              <button
-                className='btn btn-circle btn-ghost'
-                // onClick={() =>
-                //   openModal(<UpdateProvider provider={provider} />)
-                // }
-              >
-                <PencilAltIcon />
-              </button>
-              <button
-                className='btn btn-circle btn-ghost'
-                // onClick={() =>
-                //   openModal(<ProductDetail product={provider} />, {
-                //     className: "modal-product",
-                //   })
-                // }
-              >
-                <ViewIcon />
-              </button>
-            </td>
+                <button
+                  className='btn btn-circle btn-ghost'
+                  onClick={() => deleteAction(costume.id, type)}
+                >
+                  <TrashIcon />
+                </button>
+                <button
+                  className='btn btn-circle btn-ghost'
+                  onClick={() => {
+                    setCostume(costume), setUpdateModalOpen(!updateModalOpen);
+                  }}
+                >
+                  <PencilAltIcon />
+                </button>
+                <button
+                  className='btn btn-circle btn-ghost'
+                  onClick={() => {
+                    setCostume(costume), setViewModalOpen(!viewModalOpen);
+                  }}
+                >
+                  <ViewIcon />
+                </button>
+              </td>
             </tr>
           ))}
-          
-            
-          {/* {data.map(provider => (
-              <tr key={provider.id}>
-                <td>{provider.name}</td>
-                <td>{provider.company}</td>
-                <td>{provider.phone}</td>
-                <td>{provider.email}</td>
-                <td className='flex gap-2'>
-                  <button
-                    className='btn btn-circle'
-                    onClick={() => deleteProviderAlert(provider.id)}
-                  >
-                    <TrashIcon />
-                  </button>
-                  <button
-                    className='btn btn-circle'
-                    onClick={() =>
-                      openModal(<UpdateProvider provider={provider} />)
-                    }
-                  >
-                    <PencilAltIcon />
-                  </button>
-                </td>
-              </tr>
-            ))} */}
         </tbody>
       </table>
-      {/* )} */}
+      {updateModalOpen && (
+        <ConfirmationModal
+          title='UPDATE CLIENT'
+          isOpen={updateModalOpen}
+          handleClose={() => setUpdateModalOpen(!updateModalOpen)}
+        >
+          <div className='overflow-auto h-[462px]'>
+            <Form data={costume} />
+          </div>
+        </ConfirmationModal>
+      )}
+      {viewModalOpen && (
+        <ConfirmationModal
+          title='VIEW CLIENT'
+          isOpen={viewModalOpen}
+          handleClose={() => setViewModalOpen(!viewModalOpen)}
+        >
+          <div className='overflow-auto h-[462px]'>
+            <View data={costume} />
+          </div>
+        </ConfirmationModal>
+      )}
     </>
   );
 }

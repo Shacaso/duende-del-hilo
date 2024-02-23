@@ -9,7 +9,7 @@
   },
   {
     "id": "59a627da-7463-408b-8348-44100f7f366d",
-    "name": "Fantasmas",
+    "name": "Fantasmass",
     "price": 3000,
     "category": "Halloween",
     "details": "asdasd",
@@ -69,6 +69,14 @@
     "price": 8500,
     "category": "Halloween",
     "details": "asdasd",
-    "dischargeDate": ""
+    "dischargeDate": "2024-02-23 18:24:30"
+  },
+  {
+    "id": "0ec7d96a-bd36-4ef1-8313-7e8bf1a56d29",
+    "name": "Tricking",
+    "price": 3000,
+    "category": "Halloween",
+    "details": "Patadas",
+    "dischargeDate": "2024-02-23 18:34:39"
   }
 ]
