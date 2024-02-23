@@ -7,14 +7,8 @@ import { Table } from "./components/Table";
 import { useEffect, useState } from "react";
 import { Client } from "@/app/lib/definitions";
 import { SearchInputIcon } from "@/assets/svg";
-<<<<<<< Updated upstream
-import { fetchGetAllActives } from "@/app/lib/fetching";
-import { deleteAction } from "@/app/lib/data/funciones";
-=======
 import { fetchGetAll } from "@/app/lib/fetching";
-import { useModal } from "@/modal";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
->>>>>>> Stashed changes
 
 export default function ClientPage() {
   const [confirmationModalOpen, setConfirmationModalOpen] =
@@ -34,45 +28,27 @@ export default function ClientPage() {
   };
 
   const getClients = async () => {
-    const data: Client[] = await fetchGetAllActives("clients");
+    const data: Client[] = await fetchGetAll("clients");
     setClients(data);
   };
-
-  const deleteClient = (id: string) => {
-    deleteAction(id, "clients")
-  }
 
   useEffect(() => {
     getClients();
   }, []);
 
   return (
-<<<<<<< Updated upstream
-    <div className='w-full px-5 mt-10'>
-      <DataList
-        title='Cliente'
-        // setViewMode={viewModeType.TABLE}
-        element={<Table data={result} deleteClient={deleteClient}/>}
-      >
-        <div>
-          <DataList.Header>
-            <div className='flex gap-5 my-2'>
-              <div className='flex-1'>
-                {/* <Search
-=======
     <>
       <div className='w-full px-5 mt-10'>
         <DataList
           title='Cliente'
           // setViewMode={viewModeType.TABLE}
-          element={<Table data={result} />}
+          element={<Table data={result} type='clients' />}
         >
           <div>
             <DataList.Header>
               <div className='flex gap-5 my-2'>
                 <div className='flex-1'>
                   {/* <Search
->>>>>>> Stashed changes
                   placeholder='Buscar cliente'
                   onNewValue={handleFilters}
                 /> */}
