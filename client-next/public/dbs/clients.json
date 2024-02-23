@@ -1,12 +1,12 @@
 [
   {
     "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
-    "name": "Rodrigo",
+    "name": "Rodrigoo",
     "surname": "Vargas",
     "dni": 35123123,
     "phoneNumber": 2615123123,
     "email": "angelvargas@gmail.com",
-    "direction": "Calle falsa 123",
+    "direction": "",
     "departament": "Ciudad",
     "postalCode": 5539,
     "blacklist": true,
@@ -65,13 +65,26 @@
     "dischargeDate": ""
   },
   {
-    "id": "",
+    "id": "d78fc04e-bbcc-42a2-9104-45bc97e98111",
     "name": "Emiliano",
     "surname": "Araya",
     "dni": 35123123,
     "phoneNumber": 2613458343,
     "email": "emilianoaraya2001@gmail.com",
-    "direction": "ASD",
+    "direction": "Calle falsa 123",
+    "departament": "Ciudad",
+    "postalCode": 5539,
+    "blacklist": false,
+    "dischargeDate": ""
+  },
+  {
+    "id": "d78fc04e-bbcc-42a2-9104-45bc97e98112",
+    "name": "Mayraa",
+    "surname": "Aryaa",
+    "dni": 35123123,
+    "phoneNumber": 2613847642,
+    "email": "mayra@gmail.com",
+    "direction": "",
     "departament": "Ciudad",
     "postalCode": 5539,
     "blacklist": false,

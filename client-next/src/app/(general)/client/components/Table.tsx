@@ -2,6 +2,10 @@
 import { deleteAction } from "@/app/lib/data/funciones";
 import type { Client } from "@/app/lib/definitions";
 import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
+import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
+import { useState } from "react";
+import Form from "./Form";
+import View from "./View";
 // import { useProviders, useModal } from '@/hooks';
 // import { TableSkeleton } from '@/components';
 // import swal from 'sweetalert';
@@ -25,6 +29,10 @@ const headers = [
 ];
 
 export function Table({ data, type }: Props) {
+  const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
+  const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
+  const [client, setClient] = useState<Client>();
+
   // const { loading, deleteProvider } = useProviders();
   // const { openModal } = useModal();
 
@@ -69,44 +77,68 @@ export function Table({ data, type }: Props) {
           </tr>
         </thead>
         <tbody className='overflow-auto'>
-          {data.map((client) => (
-            <tr key={client.id}>
-              <td>{client.name}</td>
-              <td>{client.surname}</td>
-              <td>{client.dni}</td>
-              <td>{client.phoneNumber}</td>
-              <td>{client.email}</td>
-              <td>{client.departament}</td>
-              <td className='flex gap-2'>
-                <button
-                  className='btn btn-circle btn-ghost'
-                  onClick={() => deleteAction(client.id, type)}
-                >
-                  <TrashIcon />
-                </button>
-                <button
-                  className='btn btn-circle btn-ghost'
-                  // onClick={() =>
-                  //   openModal(<UpdateProvider provider={provider} />)
-                  // }
-                >
-                  <PencilAltIcon />
-                </button>
-                <button
-                  className='btn btn-circle btn-ghost'
-                  // onClick={() =>
-                  //   openModal(<ProductDetail product={provider} />, {
-                  //     className: "modal-product",
-                  //   })
-                  // }
-                >
-                  <ViewIcon />
-                </button>
-              </td>
-            </tr>
-          ))}
+          {data.map((client) => {
+            return (
+              <>
+                <tr key={client.id}>
+                  <td>{client.name}</td>
+                  <td>{client.surname}</td>
+                  <td>{client.dni}</td>
+                  <td>{client.phoneNumber}</td>
+                  <td>{client.email}</td>
+                  <td>{client.departament}</td>
+                  <td className='flex gap-2'>
+                    <button
+                      className='btn btn-circle btn-ghost'
+                      onClick={() => deleteAction(client.id, type)}
+                    >
+                      <TrashIcon />
+                    </button>
+                    <button
+                      className='btn btn-circle btn-ghost'
+                      onClick={() => {
+                        setClient(client), setUpdateModalOpen(!updateModalOpen);
+                      }}
+                    >
+                      <PencilAltIcon />
+                    </button>
+                    <button
+                      className='btn btn-circle btn-ghost'
+                      onClick={() => {
+                        setClient(client), setViewModalOpen(!viewModalOpen);
+                      }}
+                    >
+                      <ViewIcon />
+                    </button>
+                  </td>
+                </tr>
+              </>
+            );
+          })}
         </tbody>
       </table>
+      {updateModalOpen && (
+        <ConfirmationModal
+          title='UPDATE CLIENT'
+          isOpen={updateModalOpen}
+          handleClose={() => setUpdateModalOpen(!updateModalOpen)}
+        >
+          <div className='overflow-auto h-[462px]'>
+            <Form data={client} />
+          </div>
+        </ConfirmationModal>
+      )}
+      {viewModalOpen && (
+        <ConfirmationModal
+          title='VIEW CLIENT'
+          isOpen={viewModalOpen}
+          handleClose={() => setViewModalOpen(!viewModalOpen)}
+        >
+          <div className='overflow-auto h-[462px]'>
+            <View data={client} />
+          </div>
+        </ConfirmationModal>
+      )}
     </>
   );
 }

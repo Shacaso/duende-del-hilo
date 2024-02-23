@@ -1,9 +1,14 @@
-import { fetchPost } from "@/app/lib/fetching";
+import { Client } from "@/app/lib/definitions";
+import { fetchPatch, fetchPost } from "@/app/lib/fetching";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { z, ZodError } from "zod";
 
-export default function Form() {
+interface Props {
+  data?: Client;
+}
+
+export default function Form({ data }: Props) {
   const clientSchema = z.object({
     name: z.string({
       invalid_type_error: "El nombre debe ser un string",
@@ -66,16 +71,16 @@ export default function Form() {
     handleBlur,
   } = useFormik({
     initialValues: {
-      id: "",
-      name: "",
-      surname: "",
-      dni: undefined,
-      phoneNumber: undefined,
-      email: "",
-      direction: "",
-      departament: "",
-      postalCode: undefined,
-      blacklist: false,
+      id: data?.id ?? "",
+      name: data?.name ?? "",
+      surname: data?.surname ?? "",
+      dni: data?.dni ?? undefined,
+      phoneNumber: data?.phoneNumber ?? undefined,
+      email: data?.email ?? "",
+      direction: data?.address ?? "",
+      departament: data?.departament ?? "",
+      postalCode: data?.postalCode ?? undefined,
+      blacklist: data?.blacklist ?? false,
     },
     validate: (values) => {
       try {
@@ -85,9 +90,19 @@ export default function Form() {
       }
     },
     onSubmit: (values) => {
-      fetchPost(values, "clients").then((res) => {
-        console.log(res);
-      });
+      if (!data) {
+        fetchPost(values, "clients").then((res) => {
+          if (res) {
+            alert("El cliente se ha guardado");
+          }
+        });
+      } else {
+        fetchPatch(data.id, values, "clients").then((res) => {
+          if (res) {
+            alert("El cliente se ha actualizado");
+          }
+        });
+      }
     },
   });
 
