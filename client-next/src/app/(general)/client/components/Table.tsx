@@ -68,7 +68,7 @@ export function Table({ data, type }: Props) {
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className='overflow-auto'>
           {data.map((client) => (
             <tr key={client.id}>
               <td>{client.name}</td>
@@ -105,33 +105,8 @@ export function Table({ data, type }: Props) {
               </td>
             </tr>
           ))}
-          {/* {data.map(provider => (
-              <tr key={provider.id}>
-                <td>{provider.name}</td>
-                <td>{provider.company}</td>
-                <td>{provider.phone}</td>
-                <td>{provider.email}</td>
-                <td className='flex gap-2'>
-                  <button
-                    className='btn btn-circle'
-                    onClick={() => deleteProviderAlert(provider.id)}
-                  >
-                    <TrashIcon />
-                  </button>
-                  <button
-                    className='btn btn-circle'
-                    onClick={() =>
-                      openModal(<UpdateProvider provider={provider} />)
-                    }
-                  >
-                    <PencilAltIcon />
-                  </button>
-                </td>
-              </tr>
-            ))} */}
         </tbody>
       </table>
-      {/* )} */}
     </>
   );
 }

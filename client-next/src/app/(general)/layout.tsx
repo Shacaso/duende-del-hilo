@@ -8,7 +8,7 @@ interface Props {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <div className='flex h-screen'>
+    <div className='flex h-screen overflow-auto'>
       <Navbar />
       {children}
     </div>

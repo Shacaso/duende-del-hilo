@@ -9,6 +9,7 @@ import { Client } from "@/app/lib/definitions";
 import { SearchInputIcon } from "@/assets/svg";
 import { fetchGetAll } from "@/app/lib/fetching";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
+import Form from "./components/Form";
 
 export default function ClientPage() {
   const [confirmationModalOpen, setConfirmationModalOpen] =
@@ -98,14 +99,17 @@ export default function ClientPage() {
         />
       )} */}
       </div>
-      {/* {confirmationModalOpen && ( */}
-      <ConfirmationModal
-        isOpen={confirmationModalOpen}
-        handleClose={() => setConfirmationModalOpen(!confirmationModalOpen)}
-      >
-        <h1>Hellow</h1>
-      </ConfirmationModal>
-      {/* )} */}
+      {confirmationModalOpen && (
+        <ConfirmationModal
+          title='Form Client'
+          isOpen={confirmationModalOpen}
+          handleClose={() => setConfirmationModalOpen(!confirmationModalOpen)}
+        >
+          <div className='overflow-auto h-[462px]'>
+            <Form />
+          </div>
+        </ConfirmationModal>
+      )}
     </>
   );
 }

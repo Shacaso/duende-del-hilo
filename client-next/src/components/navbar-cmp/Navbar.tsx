@@ -29,10 +29,7 @@ const menuItems = [
     label: "Clientes",
     Icon: UserIcon,
     href: "/client",
-    subMenu: [
-      { label: "Black list", href: "/client/blacklist" },
-      { label: "No activos", href: "/client/noActives" }
-    ],
+    subMenu: [{ label: "Black list", href: "/client/blacklist" }],
   },
   {
     label: "Facturas",
@@ -49,7 +46,6 @@ const menuItems = [
       { label: "Adultos", href: "/costume" },
       { label: "Nignos", href: "/costume" },
       { label: "Accesorios", href: "/costume" },
-      { label: "No Activos", href: "/costume/noActives" },
     ],
   },
   {
@@ -61,7 +57,7 @@ const menuItems = [
 
 export default function Navbar() {
   return (
-    <nav className=' min-h-full pt-5 menu bg-base-200 text-base-content w-60 mr-5 rounded-e-3xl'>
+    <nav className=' min-h-full sticky left-0 top-0 pt-5 menu bg-base-200 text-base-content w-60 mr-5 rounded-e-3xl'>
       <Link href={"/home"} className='px-2 mb-[2rem] mx-auto'>
         <Logo />
       </Link>

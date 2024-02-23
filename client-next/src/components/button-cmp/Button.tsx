@@ -1,7 +1,7 @@
 interface Props {
   children?: JSX.Element;
   className?: string;
-  onClick?: Function;
+  onClick?: () => void;
 }
 
 export default function Button({
@@ -12,6 +12,7 @@ export default function Button({
   return (
     <button
       className={`${className} normal-case btn btn-primary btn-block btn-component`}
+      onClick={onClick}
     >
       {children}
     </button>

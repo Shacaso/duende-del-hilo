@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
 import ReactPortal from "../reactportal-cmp/ReactPortal";
+import { ModalTitle } from "./components/ModalTitle";
 
 interface Props {
   children: React.ReactNode;
   isOpen: boolean;
   handleClose: () => void;
+  title?: string;
 }
 
 export default function ConfirmationModal({
   children,
   isOpen,
   handleClose,
+  title,
 }: Props) {
-  console.log("HERE!");
-
   useEffect(() => {
     const closeOnEscapeKey = (e: KeyboardEvent) =>
       e.key === "Escape" ? handleClose() : null;
@@ -43,22 +44,20 @@ export default function ConfirmationModal({
       md:items-center 
       `}
       >
-        <section className='max-w-[400px] w-full bg-[white] shadow-xl flex-1 rounded-t-[1rem] absolute z-50 md:rounded-[1rem]'>
-          {/* {title && <ModalTitle>{title}</ModalTitle>} */}
+        <section className='max-w-[600px] w-full h-[600px] bg-white shadow-xl flex-1 rounded-t-[1rem] absolute z-50 md:rounded-[1rem]'>
+          {title && <ModalTitle>{title}</ModalTitle>}
           <button
             className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'
             onClick={handleClose}
           >
             ✕
           </button>
-          <div className='p-4'>{children}</div>
+          <div className='p-10'>{children}</div>
         </section>
         <span
-          className='backdrop-blur-sm w-full h-full bg-accent/50 cursor-pointer'
+          className='backdrop-blur-sm w-full h-full bg-black/50 cursor-pointer'
           onClick={handleClose}
-        >
-          ¿CERRAR?
-        </span>
+        ></span>
       </div>
     </ReactPortal>
   );
