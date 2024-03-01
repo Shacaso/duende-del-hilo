@@ -38,6 +38,7 @@ const departaments: string[] = await allDepartaments();
 const dnis: number[] = await allDni();
 
 const clientSchema = z.object({
+  id: z.string().optional(),
   name: z.string({
     invalid_type_error: "El nombre debe ser un string",
     required_error: "El nombre es requerido",
