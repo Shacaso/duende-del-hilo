@@ -5,7 +5,7 @@ import { DataList, Search } from "@/components";
 import Button from "@/components/button-cmp/Button";
 import { Table } from "./components/Table";
 import { useEffect, useState } from "react";
-import { Client } from "@/app/lib/definitions";
+import { Client, Departament } from "@/app/lib/definitions";
 import { SearchInputIcon } from "@/assets/svg";
 import { fetchGetAll } from "@/app/lib/fetching";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";

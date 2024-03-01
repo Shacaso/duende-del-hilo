@@ -33,6 +33,8 @@ export function Table({ data, type }: Props) {
   const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
   const [client, setClient] = useState<Client>();
 
+  const DNIs = data.map((item) => item.dni);
+
   // const { loading, deleteProvider } = useProviders();
   // const { openModal } = useModal();
 
@@ -79,40 +81,38 @@ export function Table({ data, type }: Props) {
         <tbody className='overflow-auto'>
           {data.map((client) => {
             return (
-              <>
-                <tr key={client.id}>
-                  <td>{client.name}</td>
-                  <td>{client.surname}</td>
-                  <td>{client.dni}</td>
-                  <td>{client.phoneNumber}</td>
-                  <td>{client.email}</td>
-                  <td>{client.departament}</td>
-                  <td className='flex gap-2'>
-                    <button
-                      className='btn btn-circle btn-ghost'
-                      onClick={() => deleteAction(client.id, type)}
-                    >
-                      <TrashIcon />
-                    </button>
-                    <button
-                      className='btn btn-circle btn-ghost'
-                      onClick={() => {
-                        setClient(client), setUpdateModalOpen(!updateModalOpen);
-                      }}
-                    >
-                      <PencilAltIcon />
-                    </button>
-                    <button
-                      className='btn btn-circle btn-ghost'
-                      onClick={() => {
-                        setClient(client), setViewModalOpen(!viewModalOpen);
-                      }}
-                    >
-                      <ViewIcon />
-                    </button>
-                  </td>
-                </tr>
-              </>
+              <tr key={client.id}>
+                <td>{client.name}</td>
+                <td>{client.surname}</td>
+                <td>{client.dni}</td>
+                <td>{client.phoneNumber}</td>
+                <td>{client.email}</td>
+                <td>{client.departament}</td>
+                <td className='flex gap-2'>
+                  <button
+                    className='btn btn-circle btn-ghost'
+                    onClick={() => deleteAction(client.id, type)}
+                  >
+                    <TrashIcon />
+                  </button>
+                  <button
+                    className='btn btn-circle btn-ghost'
+                    onClick={() => {
+                      setClient(client), setUpdateModalOpen(!updateModalOpen);
+                    }}
+                  >
+                    <PencilAltIcon />
+                  </button>
+                  <button
+                    className='btn btn-circle btn-ghost'
+                    onClick={() => {
+                      setClient(client), setViewModalOpen(!viewModalOpen);
+                    }}
+                  >
+                    <ViewIcon />
+                  </button>
+                </td>
+              </tr>
             );
           })}
         </tbody>

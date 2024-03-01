@@ -1,7 +1,7 @@
-import { Client } from "@/app/lib/definitions";
-import { fetchPatch, fetchPost } from "@/app/lib/fetching";
+import { Client, Departament } from "@/app/lib/definitions";
+import { fetchGetAll, fetchPatch, fetchPost } from "@/app/lib/fetching";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { z, ZodError } from "zod";
 
 interface Props {
@@ -9,7 +9,13 @@ interface Props {
 }
 
 export default function Form({ data }: Props) {
+  const [departaments, setDepartaments] = useState<Departament[]>([]);
+  const [clients, setClients] = useState<Client[]>([]);
+  const dniClients = clients.map((client) => client.dni);
+  const nameDepartaments = departaments.map((departament) => departament.name);
+
   const clientSchema = z.object({
+    id: z.string().optional(),
     name: z.string({
       invalid_type_error: "El nombre debe ser un string",
       required_error: "El nombre es requerido",
@@ -22,12 +28,15 @@ export default function Form({ data }: Props) {
 
     dni: z
       .number({
-        invalid_type_error: "El dni debe ser un numero de 10 digitos",
-        required_error: "El dni es requerido",
+        invalid_type_error: " El dni debe ser un numero de 10 digitos ",
+        required_error: " El dni es requerido ",
       })
       .int()
       .min(1000000)
-      .max(99999999),
+      .max(99999999)
+      .refine((value) => !dniClients.includes(value), {
+        message: " Dni ya esta registrado ",
+      }),
     phoneNumber: z
       .number({
         invalid_type_error: "El telefono debe ser un numero de 10 digitos",
@@ -44,6 +53,12 @@ export default function Form({ data }: Props) {
       required_error: "La direccion es requerido",
     }),
 
+    departament: z
+      .string()
+      .refine((value) => nameDepartaments.includes(value), {
+        message: "No se encuenta el departamento en la base de datos",
+      }),
+
     postalCode: z
       .number({
         invalid_type_error: "El codigo postal debe ser un numero de 10 digitos",
@@ -59,6 +74,8 @@ export default function Form({ data }: Props) {
         required_error: "El blacklist es requerido",
       })
       .default(false),
+
+    dischargeDate: z.string().default(""),
   });
 
   const {
@@ -74,12 +91,12 @@ export default function Form({ data }: Props) {
       id: data?.id ?? "",
       name: data?.name ?? "",
       surname: data?.surname ?? "",
-      dni: data?.dni ?? undefined,
-      phoneNumber: data?.phoneNumber ?? undefined,
+      dni: data?.dni ?? 0,
+      phoneNumber: data?.phoneNumber ?? 0,
       email: data?.email ?? "",
       direction: data?.address ?? "",
       departament: data?.departament ?? "",
-      postalCode: data?.postalCode ?? undefined,
+      postalCode: data?.postalCode ?? 0,
       blacklist: data?.blacklist ?? false,
     },
     validate: (values) => {
@@ -90,6 +107,8 @@ export default function Form({ data }: Props) {
       }
     },
     onSubmit: (values) => {
+      // console.log(values);
+
       if (!data) {
         fetchPost(values, "clients").then((res) => {
           if (res) {
@@ -105,6 +124,21 @@ export default function Form({ data }: Props) {
       }
     },
   });
+
+  const getClients = async () => {
+    const data: Client[] = await fetchGetAll("clients");
+    setClients(data);
+  };
+
+  const getDepartaments = async () => {
+    const data: Departament[] = await fetchGetAll("departaments");
+    setDepartaments(data);
+  };
+
+  useEffect(() => {
+    getClients();
+    getDepartaments();
+  }, []);
 
   return (
     <form
@@ -136,7 +170,7 @@ export default function Form({ data }: Props) {
       {touched.dni && errors.dni && <p>{errors.dni}</p>}
       <input
         className='w-full input input-bordered h-full'
-        placeholder='dni'
+        placeholder='dni look at me'
         type='number'
         name='dni'
         value={values.dni}
@@ -167,15 +201,22 @@ export default function Form({ data }: Props) {
       />
 
       {touched.departament && errors.departament && <p>{errors.departament}</p>}
-      <input
-        className='w-full input input-bordered h-full'
-        placeholder='departament'
-        type='text'
-        name='departament'
-        value={values.departament}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+      <label>
+        <input
+          list='departaments'
+          name='departament'
+          className='w-full input input-bordered h-full'
+          placeholder='departament'
+          value={values.departament}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+      </label>
+      <datalist id='departaments'>
+        {departaments.map((item) => (
+          <option key={item.id} value={item.name}></option>
+        ))}
+      </datalist>
 
       {touched.postalCode && errors.postalCode && <p>{errors.postalCode}</p>}
       <input

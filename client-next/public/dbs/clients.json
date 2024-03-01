@@ -65,7 +65,7 @@
     "dischargeDate": ""
   },
   {
-    "id": "d78fc04e-bbcc-42a2-9104-45bc97e98111",
+    "id": "d78fc04e-bbcc-42a2-9104-45bc97e98151",
     "name": "Emiliano",
     "surname": "Araya",
     "dni": 35123123,
@@ -102,5 +102,18 @@
     "postalCode": 5513,
     "blacklist": false,
     "dischargeDate": "2024-02-23 20:36:51"
+  },
+  {
+    "id": "",
+    "name": "Alejo",
+    "surname": "Araya",
+    "dni": 42749595,
+    "phoneNumber": 2613430975,
+    "email": "alejoaraya2000@gmail.com",
+    "direction": "Calle 7",
+    "departament": "Ciudad",
+    "postalCode": 5500,
+    "blacklist": false,
+    "dischargeDate": ""
   }
 ]

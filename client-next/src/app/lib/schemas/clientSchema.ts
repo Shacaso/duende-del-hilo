@@ -57,7 +57,7 @@ const clientSchema = z.object({
     .int()
     .min(1000000)
     .max(99999999)
-    .refine((value) => dnis.includes(value), {
+    .refine((value) => !dnis.includes(value), {
       message: "Dni ya esta registrado",
     }),
 
