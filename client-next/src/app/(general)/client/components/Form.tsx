@@ -205,7 +205,7 @@ export default function Form({ data }: Props) {
         <input
           list='departaments'
           name='departament'
-          className='w-full input input-bordered h-full'
+          className='w-full input input-bordered '
           placeholder='departament'
           value={values.departament}
           onBlur={handleBlur}

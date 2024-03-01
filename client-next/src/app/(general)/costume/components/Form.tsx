@@ -1,7 +1,7 @@
-import { Costume } from "@/app/lib/definitions";
-import { fetchPatch, fetchPost } from "@/app/lib/fetching";
+import { Category, Costume } from "@/app/lib/definitions";
+import { fetchGetAll, fetchPatch, fetchPost } from "@/app/lib/fetching";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { z, ZodError } from "zod";
 
 interface Props {
@@ -9,6 +9,18 @@ interface Props {
 }
 
 export default function Form({ data }: Props) {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const nameCategories = categories.map((category) => category.name);
+
+  const getCategories = async () => {
+    const data: Category[] = await fetchGetAll("categories");
+    setCategories(data);
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   const costumeSchema = z.object({
     name: z.string({
       invalid_type_error: "El nombre debe ser un string",
@@ -24,7 +36,10 @@ export default function Form({ data }: Props) {
         message: "El precio debe ser mayor que 0",
       }),
 
-    category: z.string(),
+    category: z.string().refine((value) => nameCategories.includes(value), {
+      message: "No se encuenta la categoria en la base de datos",
+    }),
+
     details: z.string({
       invalid_type_error: "Los detalles debe ser un string",
       required_error: "Los detalles son requeridos",
@@ -45,7 +60,7 @@ export default function Form({ data }: Props) {
     initialValues: {
       id: data?.id ?? "",
       name: data?.name ?? "",
-      price: data?.price ?? undefined,
+      price: data?.price ?? 0,
       category: data?.category ?? "",
       details: data?.details ?? "",
     },
@@ -101,7 +116,7 @@ export default function Form({ data }: Props) {
       />
 
       {touched.category && errors.category && <p>{errors.category}</p>}
-      <input
+      {/* <input
         className='w-full input input-bordered h-full'
         placeholder='category'
         type='text'
@@ -109,7 +124,23 @@ export default function Form({ data }: Props) {
         value={values.category}
         onBlur={handleBlur}
         onChange={handleChange}
-      />
+      /> */}
+      <label>
+        <input
+          list='categories'
+          name='category'
+          className='w-full input input-bordered '
+          placeholder='category'
+          value={values.category}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+      </label>
+      <datalist id='categories'>
+        {categories.map((item) => (
+          <option key={item.id} value={item.name}></option>
+        ))}
+      </datalist>
 
       {touched.details && errors.details && <p>{errors.details}</p>}
       <input

@@ -1,4 +1,3 @@
-
 export interface Entity {
   id: string;
   dischargeDate?: string;
@@ -11,7 +10,7 @@ export interface Costume extends Entity {
   details: string;
 }
 
-export interface Client extends Entity{
+export interface Client extends Entity {
   name: string;
   surname: string;
   dni: number;
@@ -23,20 +22,20 @@ export interface Client extends Entity{
   blacklist: boolean;
 }
 
-export interface Departament extends Entity{
+export interface Departament extends Entity {
   name: string;
 }
 
-export interface Bill extends Entity{
+export interface Bill extends Entity {
   billNumber: number;
-  date: string
+  date: string;
   returned: boolean;
   amount: number;
   idUser: string;
   note: string;
 }
 
-export interface Category extends Entity{
+export interface Category extends Entity {
   name: string;
 }
 
@@ -45,18 +44,18 @@ export interface Filter {
 }
 
 export class CustomError {
-  error: boolean
-  message: string
-  codigo?: number
+  error: boolean;
+  message: string;
+  codigo?: number;
 
   constructor(error: boolean, message: string, codigo?: number) {
-    this.error = error
-    this.message = message
-    this.codigo = codigo
+    this.error = error;
+    this.message = message;
+    this.codigo = codigo;
   }
 }
 
 export interface UserLogin {
-  user: string
-  password: string
+  user: string;
+  password: string;
 }
