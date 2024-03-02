@@ -1,58 +1,57 @@
-import { z } from "zod"
-import { getAll } from "../data/entityRepository"
-import { Category, Costume, CustomError } from "../definitions"
-import { categoriesPath } from "../data/paths"
+import { z } from "zod";
+import { getAll } from "../data/entityRepository";
+import { Category, Costume, CustomError } from "../definitions";
+import { categoriesPath } from "../data/paths";
 
 const allCategories = async () => {
+	const data = await getAll<Category>(categoriesPath);
 
-    const data = await getAll<Category>(categoriesPath)
+	if (data) {
+		if (data instanceof CustomError) return [];
 
-    if (data) {
-        if (data instanceof CustomError) return []
+		const categories: Category[] = data;
+		const nameCategories = categories.map((category) => category.name);
+		return nameCategories;
+	} else {
+		return [];
+	}
+};
 
-        const categories: Category[] = data
-        const nameCategories = categories.map(category => category.name)
-        return nameCategories
-    } else {
-        return []
-    }
-}
-
-const categories: string[] = await allCategories()
+const categories: string[] = await allCategories();
 
 const costumeSchema = z.object({
+	id: z.string().optional(),
 
-    name: z.string({
-        invalid_type_error: 'El nombre debe ser un string',
-        required_error: 'El nombre es requerido'
-    }),
+	name: z.string({
+		invalid_type_error: "El nombre debe ser un string",
+		required_error: "El nombre es requerido",
+	}),
 
-    price: z.coerce.number({
-        invalid_type_error: 'El precio debe ser un numero mayor que 0',
-        required_error: 'El precio es requerido'
-    }).positive({
-        message: "El precio debe ser mayor que 0"
-    }),
+	price: z.coerce
+		.number({
+			invalid_type_error: "El precio debe ser un numero mayor que 0",
+			required_error: "El precio es requerido",
+		})
+		.positive({
+			message: "El precio debe ser mayor que 0",
+		}),
 
-    category: z
-        .string()
-        .refine(value => categories.includes(value), {
-            message: 'No se encuenta la categoria en la base de datos',
-        }),
+	category: z.string().refine((value) => categories.includes(value), {
+		message: "No se encuenta la categoria en la base de datos",
+	}),
 
-    details: z.string({
-        invalid_type_error: 'Los detalles debe ser un string',
-        required_error: 'Los detalles son requeridos'
-    }),
+	details: z.string({
+		invalid_type_error: "Los detalles debe ser un string",
+		required_error: "Los detalles son requeridos",
+	}),
 
-    dischargeDate: z.string().default("")
-
-})
+	dischargeDate: z.string().default(""),
+});
 
 export function validateCostume(object: Costume) {
-    return costumeSchema.safeParse(object)
+	return costumeSchema.safeParse(object);
 }
 
 export function validateParcialCostume(object: Costume) {
-    return costumeSchema.partial().safeParse(object)
+	return costumeSchema.partial().safeParse(object);
 }

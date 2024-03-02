@@ -1,21 +1,21 @@
-import { z } from 'zod'
-import { Category } from '../definitions'
+import { z } from "zod";
+import { Category } from "../definitions";
 
 const categorySchema = z.object({
+	id: z.string().optional(),
 
-    name: z.string({
-        invalid_type_error: 'La categoria debe ser un string',
-        required_error: 'La categoria es requerido'
-    }),
+	name: z.string({
+		invalid_type_error: "La categoria debe ser un string",
+		required_error: "La categoria es requerido",
+	}),
 
-    dischargeDate: z.string().default("")
-
-})
+	dischargeDate: z.string().default(""),
+});
 
 export function validateCategory(object: Category) {
-    return categorySchema.safeParse(object)
+	return categorySchema.safeParse(object);
 }
 
 export function validateParcialCategory(object: Category) {
-    return categorySchema.partial().safeParse(object)
+	return categorySchema.partial().safeParse(object);
 }

@@ -1,177 +1,182 @@
-import { randomUUID } from "crypto"
-import { CustomError, Entity, UserLogin } from "../definitions"
-import { allEntities, saveAllEntities } from "./GetAndSaveJson"
+import { randomUUID } from "crypto";
+import { CustomError, Entity, UserLogin } from "../definitions";
+import { allEntities, saveAllEntities } from "./GetAndSaveJson";
 
 export const getAll = async <T extends Entity>(path: string) => {
-    const response = await allEntities<T>(path)
-    if (response instanceof CustomError) return response
-    
-    return response
-}
+	const response = await allEntities<T>(path);
+	if (response instanceof CustomError) return response;
+
+	return response;
+};
 
 export const getAllActives = async <T extends Entity>(path: string) => {
-    const response = await allEntities<T>(path)
-    if (response instanceof CustomError) return response
-    
-    const activesEntities = response.filter((entity: T) => {
-        return (
-            !entity.dischargeDate
-        )
-    })
+	const response = await allEntities<T>(path);
+	if (response instanceof CustomError) return response;
 
-    return activesEntities
-}
+	const activesEntities = response.filter((entity: T) => {
+		return !entity.dischargeDate;
+	});
+
+	return activesEntities;
+};
 
 export const getAllNoActives = async <T extends Entity>(path: string) => {
-    const response = await allEntities<T>(path)
-    if (response instanceof CustomError) return response
-    
-    const activesEntities = response.filter((entity: T) => {
-        return (
-            entity.dischargeDate
-        )
-    })
+	const response = await allEntities<T>(path);
+	if (response instanceof CustomError) return response;
 
-    return activesEntities
-}
+	const activesEntities = response.filter((entity: T) => {
+		return entity.dischargeDate;
+	});
+
+	return activesEntities;
+};
 
 export const getById = async <T extends Entity>(id: string, path: string) => {
-    const response = await allEntities<T>(path)
-    if (response instanceof CustomError) return response
+	const response = await allEntities<T>(path);
+	if (response instanceof CustomError) return response;
 
-    const entities: T[] = response
+	const entities: T[] = response;
 
-    const entity: T | undefined = entities.find(entity => entity.id == id)
-    if (entity) return entity
+	const entity: T | undefined = entities.find((entity) => entity.id == id);
+	if (entity) return entity;
 
-    return new CustomError(true, 'Id no encontrado', 404)
-}
+	return new CustomError(true, "Id no encontrado", 404);
+};
 
 export const create = async <T extends Entity>(input: T, path: string) => {
+	const newEntity: T = {
+		...input,
+		id: randomUUID(),
+		dischargeDate: "",
+	};
 
-    const newEntity: T = {
-        id: randomUUID(),
-        ...input,
-        dischargeDate: '',
-    }
+	const response = await allEntities<T>(path);
+	if (response instanceof CustomError) return response;
 
-    const response = await allEntities<T>(path)
-    if (response instanceof CustomError) return response
+	let entities: T[] = response;
 
-    let entities: T[] = response
+	if (entities) {
+		entities.push(newEntity);
+	} else {
+		entities = [newEntity];
+	}
 
-    if (entities) {
-        entities.push(newEntity)
-    } else {
-        entities = [newEntity]
-    }
+	const responseSave = await saveAllEntities<T>(entities, path);
+	if (responseSave instanceof CustomError) return responseSave;
 
-    const responseSave = await saveAllEntities<T>(entities, path)
-    if (responseSave instanceof CustomError) return responseSave
+	return newEntity;
+};
 
-    return newEntity
+export const update = async <T extends Entity>(
+	id: string,
+	input: T,
+	path: string
+) => {
+	const response = await allEntities<T>(path);
+	if (response instanceof CustomError) return response;
+	const entities: T[] = response;
 
-}
+	const entityIndex = entities.findIndex((entity) => entity.id === id);
 
-export const update = async <T extends Entity>(id: string, input: T, path: string) => {
-    const response = await allEntities<T>(path)
-    if (response instanceof CustomError) return response
-    const entities: T[] = response
+	if (entityIndex === -1) return new CustomError(true, "Id no encontrado", 404);
 
-    const entityIndex = entities.findIndex(entity => entity.id === id)
+	entities[entityIndex] = {
+		...entities[entityIndex],
+		...input,
+	};
 
-    if (entityIndex === -1) return new CustomError(true, 'Id no encontrado', 404)
+	const responseSave = await saveAllEntities<T>(entities, path);
+	if (responseSave instanceof CustomError) return responseSave;
 
-    entities[entityIndex] = {
-        ...entities[entityIndex],
-        ...input
-    }
+	return entities[entityIndex];
+};
 
-    const responseSave = await saveAllEntities<T>(entities, path)
-    if (responseSave instanceof CustomError) return responseSave
+export const hardDelete = async <T extends Entity>(
+	id: string,
+	path: string
+) => {
+	const response = await allEntities<T>(path);
+	if (response instanceof CustomError) return response;
+	const entities: T[] = response;
 
-    return entities[entityIndex]
-}
+	const entityAEliminar = entities.filter((entity) => entity.id === id);
 
-export const hardDelete = async <T extends Entity>(id: string, path: string) => {
-    const response = await allEntities<T>(path)
-    if (response instanceof CustomError) return response
-    const entities: T[] = response
+	if (entityAEliminar.length === 0) {
+		return new CustomError(true, "Id no encontrado", 404);
+	} else {
+		const newEntities = entities.filter((entity) => entity.id !== id);
+		const responseSave = await saveAllEntities<T>(newEntities, path);
+		if (responseSave instanceof CustomError) return responseSave;
+		return entityAEliminar[0];
+	}
+};
 
-    const entityAEliminar = entities.filter(entity => entity.id === id)
+export const logicDelete = async <T extends Entity>(
+	id: string,
+	path: string
+) => {
+	const response = await allEntities<T>(path);
+	if (response instanceof CustomError) return response;
+	const entities: T[] = response;
 
-    if (entityAEliminar.length === 0) {
-        return new CustomError(true, 'Id no encontrado', 404)
-    } else {
-        const newEntities = entities.filter(entity => entity.id !== id)
-        const responseSave = await saveAllEntities<T>(newEntities, path)
-        if (responseSave instanceof CustomError) return responseSave
-        return entityAEliminar[0]
-    }
-}
+	const entityIndex = entities.findIndex((entity) => entity.id === id);
+	if (entityIndex === -1) return new CustomError(true, "Id no encontrado", 404);
 
-export const logicDelete = async <T extends Entity>(id: string, path: string) => {
-    const response = await allEntities<T>(path)
-    if (response instanceof CustomError) return response
-    const entities: T[] = response
+	const [date, time] = new Date().toISOString().split("T");
+	const [a, b] = time.split(".");
 
-    const entityIndex = entities.findIndex(entity => entity.id === id)
-    if (entityIndex === -1) return new CustomError(true, 'Id no encontrado', 404)
+	const dischargeDate = {
+		dischargeDate: date + " " + a,
+	};
 
+	entities[entityIndex] = {
+		...entities[entityIndex],
+		...dischargeDate,
+	};
 
-    const [date, time] = new Date().toISOString().split('T')
-    const [a, b] = time.split('.')
+	const responseSave = await saveAllEntities<T>(entities, path);
+	if (responseSave instanceof CustomError) return responseSave;
 
-    const dischargeDate = {
-        dischargeDate: date + ' ' + a
-    }
-
-    entities[entityIndex] = {
-        ...entities[entityIndex],
-        ...dischargeDate
-    }
-
-    const responseSave = await saveAllEntities<T>(entities, path)
-    if (responseSave instanceof CustomError) return responseSave
-
-    return entities[entityIndex]
-}
+	return entities[entityIndex];
+};
 
 export const login = async (input: UserLogin, path: string) => {
-    const response = await allEntities<UserLogin>(path)
-    if (response instanceof CustomError) return response
-    const userRight: UserLogin = response
+	const response = await allEntities<UserLogin>(path);
+	if (response instanceof CustomError) return response;
+	const userRight: UserLogin = response;
 
-    if (input.user === userRight.user && input.password === userRight.password) {
-        const response = {
-            message: 'Login ok',
-            status : 200
-        }
-        return response
-    }
+	if (input.user === userRight.user && input.password === userRight.password) {
+		const response = {
+			message: "Login ok",
+			status: 200,
+		};
+		return response;
+	}
 
-    const responseLogin: CustomError = new CustomError(true, 'User y/o contraseña invalidos', 400)
-    return responseLogin
-
-}
+	const responseLogin: CustomError = new CustomError(
+		true,
+		"User y/o contraseña invalidos",
+		400
+	);
+	return responseLogin;
+};
 
 export const changePassword = async (input: UserLogin, path: string) => {
-    const response = await allEntities<UserLogin>(path)
-    if (response instanceof CustomError) return response
-    let user: UserLogin = response
+	const response = await allEntities<UserLogin>(path);
+	if (response instanceof CustomError) return response;
+	let user: UserLogin = response;
 
-    user = {
-        ...user,
-        ...input
-    }
+	user = {
+		...user,
+		...input,
+	};
 
-    const responseSave = await saveAllEntities<UserLogin>(user, path)
-    if (responseSave instanceof CustomError) return responseSave
+	const responseSave = await saveAllEntities<UserLogin>(user, path);
+	if (responseSave instanceof CustomError) return responseSave;
 
-    const responseOk = {
-        message: 'Contraseña cambiada',
-        status : 200
-    }
-    return responseOk
-
-}
+	const responseOk = {
+		message: "Contraseña cambiada",
+		status: 200,
+	};
+	return responseOk;
+};
