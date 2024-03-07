@@ -45,9 +45,9 @@ export const stylesNavbar = StyleSheet.create({
     marginRight: 10,
   },
   logo: {
-    width: 300,
-    height: 260,
-    marginBottom: 25,
+    width: 60,
+    height: 100,
+    // marginBottom: 25,
   },
 });
 

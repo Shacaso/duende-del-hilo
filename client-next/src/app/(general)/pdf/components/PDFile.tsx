@@ -1,4 +1,5 @@
-import { Page, Text, View, Document } from "@react-pdf/renderer";
+/* eslint-disable jsx-a11y/alt-text */
+import { Page, Text, Image, View, Document } from "@react-pdf/renderer";
 
 import {
   stylesNavbar,
@@ -8,8 +9,13 @@ import {
   stylesSignature,
   stylesTyC,
 } from "./assets/styles";
+import LogoSVG from "./logo.svg";
+import LogoPNG from "./logoPNG.png";
+import LogoJPG from "./logoJPG.jpg";
 
-import Logo from "./logo.svg";
+const Duende = () => {
+  return <Image src={<LogoSVG />} style={stylesNavbar.logo} />;
+};
 
 export const PDFile = () => (
   <Document>
@@ -17,8 +23,7 @@ export const PDFile = () => (
       <View style={{ margin: 30 }}>
         <View style={stylesNavbar.headerStructure}>
           <View>
-            {/* <Logo /> */}
-            <Text>EL DUENDE</Text>
+            <Duende />
           </View>
           <View style={stylesNavbar.header}>
             <View style={stylesNavbar.headerItemCenter}>

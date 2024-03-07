@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-pdf/renderer": "^3.1.14",
+    "@react-pdf/renderer": "^3.3.8",
     "@svgr/webpack": "^8.1.0",
     "formik": "^2.4.5",
     "next": "14.0.4",
