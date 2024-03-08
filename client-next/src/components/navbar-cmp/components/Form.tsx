@@ -1,4 +1,10 @@
-import { Bill, BillDto, Client, Departament } from "@/app/lib/definitions";
+import {
+  Bill,
+  BillDto,
+  Client,
+  Costume,
+  Departament,
+} from "@/app/lib/definitions";
 import { fetchGetAll, fetchPatch, fetchPost } from "@/app/lib/fetching";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
@@ -10,25 +16,9 @@ interface Props {
 
 export default function Form({ data }: Props) {
   const [clients, setClients] = useState<Client[]>([]);
+  const [costumesList, setCostumes] = useState<Costume[]>([]);
+  const [costumeSelected, setCostumeSelected] = useState<string[]>([]);
   const idClients = clients.map((client: Client) => client.dni);
-
-  //   SELECCIONE DISFRAZ
-  // -----------------------------------
-  // |                                 |
-  // -----------------------------------
-
-  // LISTADO DE DISFRACES
-  // -----------------------------------
-  // | VAQUERO x                       |
-  // |                                 |
-  // |                                 |
-  // |                                 |
-  // |                                 |
-  // |                                 |
-  // |                                 |
-  // |                                 |
-  // |                                 |
-  // -----------------------------------
 
   const billSchema = z.object({
     id: z.string().optional(),
@@ -67,7 +57,6 @@ export default function Form({ data }: Props) {
 
     dischargeDate: z.string().default(""),
   });
-
   const {
     initialValues,
     handleSubmit,
@@ -83,6 +72,7 @@ export default function Form({ data }: Props) {
       date: data?.date ?? "",
       returned: data?.returned ?? "",
       amount: data?.amount ?? 0,
+      costumes: data?.costumes ?? costumeSelected,
       dniClient: data?.dniClient ?? "",
       note: data?.note ?? "",
       dischargeDate: data?.dischargeDate ?? "",
@@ -95,29 +85,50 @@ export default function Form({ data }: Props) {
     //   }
     // },
     onSubmit: (values) => {
-      if (!data) {
-        fetchPost(values, "bills").then((res) => {
-          if (res) {
-            alert("La factura se ha guardado");
-          }
-        });
-      } else {
-        fetchPatch(data.id, values, "bills").then((res) => {
-          if (res) {
-            alert("La factura se ha actualizado");
-          }
-        });
-      }
+      console.log(values);
+
+      // if (!data) {
+      //   fetchPost(values, "bills").then((res) => {
+      //     if (res) {
+      //       alert("La factura se ha guardado");
+      //     }
+      //   });
+      // } else {
+      //   fetchPatch(data.id, values, "bills").then((res) => {
+      //     if (res) {
+      //       alert("La factura se ha actualizado");
+      //     }
+      //   });
+      // }
     },
   });
+
+  const handleChangeData = (e: { target: { value: any } }) => {
+    const costume = e.target.value;
+    const updateCostume = [...costumeSelected, costume];
+    setCostumeSelected(updateCostume);
+    console.log(updateCostume);
+  };
+  const handleDelete = (index: number) => {
+    const updateCostume = costumeSelected;
+    updateCostume.splice(index, 1);
+    setCostumeSelected(updateCostume);
+    console.log(updateCostume);
+  };
 
   const getClients = async () => {
     const data: Client[] = await fetchGetAll("clients");
     setClients(data);
   };
 
+  const getCostumes = async () => {
+    const data: Costume[] = await fetchGetAll("costumes");
+    setCostumes(data);
+  };
+
   useEffect(() => {
     getClients();
+    getCostumes();
   }, []);
 
   return (
@@ -125,6 +136,44 @@ export default function Form({ data }: Props) {
       className='flex flex-col gap-5 w-full h-full p-5'
       onSubmit={handleSubmit}
     >
+      <div className='h-52 w-full bg-base-100 flex gap-2 py-2 px-1'>
+        {costumeSelected.map((item, index) => (
+          <div key={index} className='badge badge-primary gap-2 p-4'>
+            {item}
+            <svg
+              onClick={() => handleDelete(index)}
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              className='inline-block w-4 h-4 stroke-current'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M6 18L18 6M6 6l12 12'
+              ></path>
+            </svg>
+          </div>
+        ))}
+      </div>
+      {touched.costumes && errors.costumes && <p>{errors.costumes}</p>}
+      <label>
+        <input
+          list='costumes'
+          name='costumes'
+          className='w-full input input-bordered '
+          placeholder='Elegir disfraces'
+          value={values.costumes}
+          onBlur={handleBlur}
+          onChange={handleChangeData}
+        />
+      </label>
+      <datalist id='costumes'>
+        {costumesList.map((item) => (
+          <option key={item.id} value={item.name}></option>
+        ))}
+      </datalist>
       {/* {touched.billNumber && errors.billNumber && <p>{errors.billNumber}</p>}
 			<input
 				className="w-full input input-bordered h-full"
