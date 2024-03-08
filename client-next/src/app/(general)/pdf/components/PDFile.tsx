@@ -14,7 +14,7 @@ import LogoPNG from "./logoPNG.png";
 import LogoJPG from "./logoJPG.jpg";
 
 const Duende = () => {
-  return <Image src={<LogoSVG />} style={stylesNavbar.logo} />;
+  // return <Image src={<LogoSVG />} style={stylesNavbar.logo} />;
 };
 
 export const PDFile = () => (
@@ -22,9 +22,7 @@ export const PDFile = () => (
     <Page size='A4'>
       <View style={{ margin: 30 }}>
         <View style={stylesNavbar.headerStructure}>
-          <View>
-            <Duende />
-          </View>
+          <View>{/* <Duende /> */}</View>
           <View style={stylesNavbar.header}>
             <View style={stylesNavbar.headerItemCenter}>
               <Text style={{ fontSize: 32 }}>El Duende Del Hilo</Text>

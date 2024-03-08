@@ -78,5 +78,21 @@
     "category": "Halloween",
     "details": "Patadas",
     "dischargeDate": "2024-02-23 18:34:39"
+  },
+  {
+    "id": "b5396b36-7071-4479-98e8-c509903cbec5",
+    "name": "Pedro",
+    "price": 123,
+    "category": "Halloween",
+    "details": "Detalles",
+    "dischargeDate": ""
+  },
+  {
+    "id": "30e1e038-b734-416f-ad7a-28e844e70fb2",
+    "name": "XIMENA",
+    "price": 27,
+    "category": "Magicos",
+    "details": "HERMOSA",
+    "dischargeDate": ""
   }
 ]

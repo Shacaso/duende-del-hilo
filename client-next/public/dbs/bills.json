@@ -82,5 +82,14 @@
     },
     "note": "asdasd",
     "dischargeDate": ""
+  },
+  {
+    "id": "82a94441-b8d5-47ba-9988-4a408cd55f35",
+    "billNumber": 5,
+    "date": "2024-03-07 18:26:49",
+    "returned": "",
+    "amount": 100,
+    "note": "Alejo Aryaa",
+    "dischargeDate": ""
   }
 ]
