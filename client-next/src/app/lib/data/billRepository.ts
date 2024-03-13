@@ -36,6 +36,7 @@ export const create = async (input: BillDto, path: string) => {
 		returned: input.returned,
 		amount: input.amount,
 		client: client,
+		costumes: input.costumes,
 		note: input.note,
 		dischargeDate: "",
 	};
