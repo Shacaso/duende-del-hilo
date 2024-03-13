@@ -1,190 +1,68 @@
 [
-  {
-    "id": "518f1ba0-e5d6-40e2-8e93-f54dc582ccad",
-    "billNumber": 1,
-    "date": "2024-03-02 19:03:25",
-    "amount": 123,
-    "client": {
-      "id": "cc20444d-f6e8-40ab-9d55-38042429fe11",
-      "name": "Enzo",
-      "surname": "Vargas",
-      "dni": 35123124,
-      "phoneNumber": 2615123123,
-      "email": "angelvargas@gmail.com",
-      "direction": "Calle falsa 123",
-      "departament": "Ciudad",
-      "postalCode": 5539,
-      "blacklist": true,
-      "dischargeDate": ""
-    },
-    "note": "asdasd",
-    "dischargeDate": ""
-  },
-  {
-    "id": "3df08f66-37dd-460a-8cd5-1504357c376b",
-    "billNumber": 2,
-    "date": "2024-03-02 19:27:56",
-    "amount": 123,
-    "client": {
-      "id": "cc20444d-f6e8-40ab-9d55-38042429fe11",
-      "name": "Enzo",
-      "surname": "Vargas",
-      "dni": 35123124,
-      "phoneNumber": 2615123123,
-      "email": "angelvargas@gmail.com",
-      "direction": "Calle falsa 123",
-      "departament": "Ciudad",
-      "postalCode": 5539,
-      "blacklist": true,
-      "dischargeDate": ""
-    },
-    "note": "asdasd",
-    "dischargeDate": ""
-  },
-  {
-    "id": "8eb03e7d-7496-464d-b6ac-e4a3d9f43bac",
-    "billNumber": 3,
-    "date": "2024-03-02 19:35:08",
-    "amount": 123,
-    "client": {
-      "id": "cc20444d-f6e8-40ab-9d55-38042429fe11",
-      "name": "Enzo",
-      "surname": "Vargas",
-      "dni": 35123124,
-      "phoneNumber": 2615123123,
-      "email": "angelvargas@gmail.com",
-      "direction": "Calle falsa 123",
-      "departament": "Ciudad",
-      "postalCode": 5539,
-      "blacklist": true,
-      "dischargeDate": ""
-    },
-    "note": "asdasd",
-    "dischargeDate": ""
-  },
-  {
-    "id": "eafc7900-563e-490e-a91b-2105af51324a",
-    "billNumber": 4,
-    "date": "2024-03-02 20:16:12",
-    "amount": 123,
-    "client": {
-      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
-      "name": "Enzo",
-      "surname": "Vargas",
-      "dni": 35123124,
-      "phoneNumber": 2615123123,
-      "email": "enzo@gmail.com",
-      "direction": "Calle falsa 123",
-      "departament": "Ciudad",
-      "postalCode": 5539,
-      "blacklist": false,
-      "dischargeDate": ""
-    },
-    "note": "asdasd",
-    "dischargeDate": ""
-  },
-  {
-    "id": "82a94441-b8d5-47ba-9988-4a408cd55f35",
-    "billNumber": 5,
-    "date": "2024-03-07 18:26:49",
-    "returned": "",
-    "amount": 100,
-    "note": "Alejo Aryaa",
-    "dischargeDate": ""
-  },
-  {
-    "id": "1092b798-b33a-4d24-8efa-3e7e997204e6",
-    "billNumber": 6,
-    "date": "2024-03-13 19:01:24",
-    "amount": 123,
-    "client": {
-      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
-      "name": "Enzo",
-      "surname": "Vargas",
-      "dni": 35123124,
-      "phoneNumber": 2615123123,
-      "email": "enzo@gmail.com",
-      "direction": "Calle falsa 123",
-      "departament": "Ciudad",
-      "postalCode": 5539,
-      "blacklist": false,
-      "dischargeDate": ""
-    },
-    "note": "asdasd",
-    "dischargeDate": ""
-  },
-  {
-    "id": "fcd098e4-7374-442b-9050-fd1d1014b1dc",
-    "billNumber": 7,
-    "date": "2024-03-13 19:03:16",
-    "amount": 123,
-    "client": {
-      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
-      "name": "Enzo",
-      "surname": "Vargas",
-      "dni": 35123124,
-      "phoneNumber": 2615123123,
-      "email": "enzo@gmail.com",
-      "direction": "Calle falsa 123",
-      "departament": "Ciudad",
-      "postalCode": 5539,
-      "blacklist": false,
-      "dischargeDate": ""
-    },
-    "costumes": [
-      "asdasd",
-      "123123"
-    ],
-    "note": "asdasd",
-    "dischargeDate": ""
-  },
-  {
-    "id": "82208174-7ff2-40a3-9e46-a70ef4207dc7",
-    "billNumber": 8,
-    "date": "2024-03-13 19:26:18",
-    "amount": 123,
-    "client": {
-      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
-      "name": "Enzo",
-      "surname": "Vargas",
-      "dni": 35123124,
-      "phoneNumber": 2615123123,
-      "email": "enzo@gmail.com",
-      "direction": "Calle falsa 123",
-      "departament": "Ciudad",
-      "postalCode": 5539,
-      "blacklist": false,
-      "dischargeDate": ""
-    },
-    "costumes": [
-      "Jason"
-    ],
-    "note": "asdasd",
-    "dischargeDate": ""
-  },
-  {
-    "id": "00e0276e-5949-407d-b522-0dc5cdb21d16",
-    "billNumber": 9,
-    "date": "2024-03-13 19:26:32",
-    "amount": 123,
-    "client": {
-      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
-      "name": "Enzo",
-      "surname": "Vargas",
-      "dni": 35123124,
-      "phoneNumber": 2615123123,
-      "email": "enzo@gmail.com",
-      "direction": "Calle falsa 123",
-      "departament": "Ciudad",
-      "postalCode": 5539,
-      "blacklist": false,
-      "dischargeDate": ""
-    },
-    "costumes": [
-      "Jason",
-      "Doctor"
-    ],
-    "note": "asdasd",
-    "dischargeDate": ""
-  }
+	{
+		"id": "fcd098e4-7374-442b-9050-fd1d1014b1dc",
+		"billNumber": 7,
+		"date": "2024-03-13 19:03:16",
+		"amount": 123,
+		"client": {
+			"id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
+			"name": "Enzo",
+			"surname": "Vargas",
+			"dni": 35123124,
+			"phoneNumber": 2615123123,
+			"email": "enzo@gmail.com",
+			"direction": "Calle falsa 123",
+			"departament": "Ciudad",
+			"postalCode": 5539,
+			"blacklist": false,
+			"dischargeDate": ""
+		},
+		"costumes": ["asdasd", "123123"],
+		"note": "asdasd",
+		"dischargeDate": ""
+	},
+	{
+		"id": "82208174-7ff2-40a3-9e46-a70ef4207dc7",
+		"billNumber": 8,
+		"date": "2024-03-13 19:26:18",
+		"amount": 123,
+		"client": {
+			"id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
+			"name": "Enzo",
+			"surname": "Vargas",
+			"dni": 35123124,
+			"phoneNumber": 2615123123,
+			"email": "enzo@gmail.com",
+			"direction": "Calle falsa 123",
+			"departament": "Ciudad",
+			"postalCode": 5539,
+			"blacklist": false,
+			"dischargeDate": ""
+		},
+		"costumes": ["Jason", "Doctor"],
+		"note": "asdasd",
+		"dischargeDate": ""
+	},
+	{
+		"id": "00e0276e-5949-407d-b522-0dc5cdb21d16",
+		"billNumber": 9,
+		"date": "2024-03-13 19:26:32",
+		"amount": 123,
+		"client": {
+			"id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
+			"name": "Enzo",
+			"surname": "Vargas",
+			"dni": 35123124,
+			"phoneNumber": 2615123123,
+			"email": "enzo@gmail.com",
+			"direction": "Calle falsa 123",
+			"departament": "Ciudad",
+			"postalCode": 5539,
+			"blacklist": false,
+			"dischargeDate": ""
+		},
+		"costumes": ["Jason", "Doctor"],
+		"note": "asdasd",
+		"dischargeDate": ""
+	}
 ]
