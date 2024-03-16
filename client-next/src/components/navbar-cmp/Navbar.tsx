@@ -46,6 +46,11 @@ export default function Navbar() {
       href: "/bill",
     },
     {
+      label: "Categorias",
+      Icon: UserIcon,
+      href: "/client",
+    },
+    {
       label: "Disfraz",
       Icon: CostumeIcon,
       href: "/costume",
