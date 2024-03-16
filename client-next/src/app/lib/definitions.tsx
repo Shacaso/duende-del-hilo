@@ -16,7 +16,7 @@ export interface Client extends Entity {
 	dni: number;
 	phoneNumber: number;
 	email: string;
-	address: string;
+	direction: string;
 	departament: string;
 	postalCode: number;
 	blacklist: boolean;
