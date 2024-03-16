@@ -4,7 +4,7 @@ import { Costume } from "@/app/lib/definitions";
 import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import { useState } from "react";
-import Form from "./Form";
+import FormNewCostume from "./FormNewCostume";
 import View from "./View";
 // import { useProviders, useModal } from '@/hooks';
 // import { TableSkeleton } from '@/components';
@@ -105,7 +105,7 @@ export function Table({ data, type }: Props) {
           handleClose={() => setUpdateModalOpen(!updateModalOpen)}
         >
           <div className='overflow-auto h-[462px]'>
-            <Form data={costume} />
+            <FormNewCostume data={costume} />
           </div>
         </ConfirmationModal>
       )}

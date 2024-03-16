@@ -17,7 +17,7 @@ import MainMenuItem from "./MainMenuItem";
 import Logo from "../Logo";
 import ConfirmationModal from "../modal-cmp/ConfirmationModal";
 import { useState } from "react";
-import Form from "./components/Form";
+import FormCreateNewBill from "./components/FormCreateNewBill";
 
 export default function Navbar() {
   const [confirmationModalOpen, setConfirmationModalOpen] =
@@ -83,7 +83,7 @@ export default function Navbar() {
           handleClose={() => setConfirmationModalOpen(!confirmationModalOpen)}
         >
           <div className='overflow-auto h-[462px]'>
-            <Form />
+            <FormCreateNewBill />
           </div>
         </ConfirmationModal>
       )}
