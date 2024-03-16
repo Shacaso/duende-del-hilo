@@ -11,7 +11,7 @@ import { Costume } from "@/app/lib/definitions";
 import { SearchInputIcon } from "@/assets/svg";
 import { deleteAction } from "@/app/lib/data/funciones";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
-import Form from "./components/Form";
+import FormNewCostume from "./components/FormNewCostume";
 
 export default function CostumePage() {
   const [confirmationModalOpen, setConfirmationModalOpen] =
@@ -101,7 +101,7 @@ export default function CostumePage() {
           handleClose={() => setConfirmationModalOpen(!confirmationModalOpen)}
         >
           <div className='overflow-auto h-[462px]'>
-            <Form />
+            <FormNewCostume />
           </div>
         </ConfirmationModal>
       )}

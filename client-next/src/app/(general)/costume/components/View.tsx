@@ -2,7 +2,7 @@ import { deleteAction } from "@/app/lib/data/funciones";
 import { Costume } from "@/app/lib/definitions";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import React, { useState } from "react";
-import Form from "./Form";
+import FormNewCostume from "./FormNewCostume";
 
 interface Props {
   data?: Costume;
@@ -54,7 +54,7 @@ export default function View({ data }: Props) {
           handleClose={() => setUpdateModalOpen(!updateModalOpen)}
         >
           <div className='overflow-auto h-[462px]'>
-            <Form data={data} />
+            <FormNewCostume data={data} />
           </div>
         </ConfirmationModal>
       )}
