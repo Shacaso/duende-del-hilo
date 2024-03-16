@@ -85,6 +85,7 @@ export default function Form({ data }: Props) {
     //   }
     // },
     onSubmit: (values) => {
+      values.dniClient = Number(values.dniClient.toString().split(" ")[0]);
       console.log(values);
 
       // if (!data) {
@@ -104,16 +105,25 @@ export default function Form({ data }: Props) {
   });
 
   const handleChangeData = (e: { target: { value: any } }) => {
-    const costume = e.target.value;
-    const updateCostume = [...costumeSelected, costume];
-    setCostumeSelected(updateCostume);
-    console.log(updateCostume);
+    let costume = e.target.value;
+    costume = costume.split(" ");
+    if (costume[0] !== "") {
+      setCostumeSelected(costume[0]);
+      values.costumes.push(costume[0]);
+      values.amount += Number(costume[2].substr(1));
+      // console.log(values.costumes);
+    }
+    // const updateCostume = [...costumeSelected, costume];
   };
-  const handleDelete = (index: number) => {
-    const updateCostume = costumeSelected;
-    updateCostume.splice(index, 1);
-    setCostumeSelected(updateCostume);
-    console.log(updateCostume);
+
+  const handleDelete = (index: number, value: string) => {
+    const costume = values.costumes.splice(index, 1);
+    console.log(value);
+    setCostumeSelected(costume);
+    // updateCostume.splice(index, 1);
+    // const updateCostume = costumeSelected;
+    // console.log(updateCostume);
+    // setCostumeSelected(updateCostume);
   };
 
   const getClients = async () => {
@@ -137,11 +147,11 @@ export default function Form({ data }: Props) {
       onSubmit={handleSubmit}
     >
       <div className='h-52 w-full bg-base-100 flex gap-2 py-2 px-1'>
-        {costumeSelected.map((item, index) => (
+        {values.costumes.map((item, index) => (
           <div key={index} className='badge badge-primary gap-2 p-4'>
             {item}
             <svg
-              onClick={() => handleDelete(index)}
+              onClick={() => handleDelete(index, item)}
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
               viewBox='0 0 24 24'
@@ -160,54 +170,23 @@ export default function Form({ data }: Props) {
       {touched.costumes && errors.costumes && <p>{errors.costumes}</p>}
       <label>
         <input
-          list='costumes'
-          name='costumes'
+          list='test'
+          name='test'
           className='w-full input input-bordered '
           placeholder='Elegir disfraces'
-          value={values.costumes}
           onBlur={handleBlur}
           onChange={handleChangeData}
+          // onSelect={() => handleSelect}
         />
       </label>
-      <datalist id='costumes'>
+      <datalist id='test'>
         {costumesList.map((item) => (
-          <option key={item.id} value={item.name}></option>
+          <option
+            key={item.id}
+            value={`${item.name} - $${item.price}`}
+          ></option>
         ))}
       </datalist>
-      {/* {touched.billNumber && errors.billNumber && <p>{errors.billNumber}</p>}
-			<input
-				className="w-full input input-bordered h-full"
-				placeholder="billNumber"
-				type="number"
-				name="billNumber"
-				value={values.billNumber}
-				onChange={handleChange}
-				onBlur={handleBlur}
-				disabled
-			/> */}
-
-      {/* {touched.date && errors.date && <p>{errors.date}</p>}
-			<input
-				className="w-full input input-bordered h-full"
-				placeholder="date"
-				type="string"
-				name="date"
-				value={values.date}
-				onBlur={handleBlur}
-				onChange={handleChange}
-				disabled
-			/> */}
-
-      {/* {touched.returned && errors.returned && <p>{errors.returned}</p>}
-      <input
-        className='w-full input input-bordered h-full'
-        placeholder='returned look at me'
-        type='number'
-        name='returned'
-        value={values.returned}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      /> */}
 
       {touched.amount && errors.amount && <p>{errors.amount}</p>}
       <input
@@ -219,17 +198,6 @@ export default function Form({ data }: Props) {
         onBlur={handleBlur}
         onChange={handleChange}
       />
-
-      {/* {touched.idUser && errors.idUser && <p>{errors.idUser}</p>}
-      <input
-        className='w-full input input-bordered h-full'
-        placeholder='idUser'
-        type='text'
-        name='idUser'
-        value={values.idUser}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      /> */}
 
       {touched.dniClient && errors.dniClient && <p>{errors.dniClient}</p>}
       <label>
@@ -245,7 +213,10 @@ export default function Form({ data }: Props) {
       </label>
       <datalist id='users'>
         {clients.map((item) => (
-          <option key={item.dni} value={item.dni}></option>
+          <option
+            key={item.dni}
+            value={`${item.dni} - ${item.name} ${item.surname}`}
+          ></option>
         ))}
       </datalist>
 
@@ -260,19 +231,6 @@ export default function Form({ data }: Props) {
         onChange={handleChange}
       />
 
-      {/* {touched.dischargeDate && errors.dischargeDate && (
-				<p>{errors.dischargeDate}</p>
-			)}
-			<input
-				className="w-full input input-bordered h-full"
-				placeholder="dischargeDate"
-				type="text"
-				name="dischargeDate"
-				value={values.dischargeDate}
-				onBlur={handleBlur}
-				onChange={handleChange}
-				disabled
-			/> */}
       <button className='btn btn-primary' type='submit'>
         SAVE!
       </button>
