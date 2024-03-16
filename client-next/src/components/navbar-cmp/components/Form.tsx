@@ -86,44 +86,51 @@ export default function Form({ data }: Props) {
     // },
     onSubmit: (values) => {
       values.dniClient = Number(values.dniClient.toString().split(" ")[0]);
-      console.log(values);
+      // console.log(values);
 
-      // if (!data) {
-      //   fetchPost(values, "bills").then((res) => {
-      //     if (res) {
-      //       alert("La factura se ha guardado");
-      //     }
-      //   });
-      // } else {
-      //   fetchPatch(data.id, values, "bills").then((res) => {
-      //     if (res) {
-      //       alert("La factura se ha actualizado");
-      //     }
-      //   });
-      // }
+      if (!data) {
+        fetchPost(values, "bills").then((res) => {
+          if (res) {
+            alert("La factura se ha guardado");
+          }
+        });
+      } else {
+        fetchPatch(data.id, values, "bills").then((res) => {
+          if (res) {
+            alert("La factura se ha actualizado");
+          }
+        });
+      }
     },
   });
 
   const handleChangeData = (e: { target: { value: any } }) => {
     let costume = e.target.value;
+    // document.addEventListener("keydown", ({ key }) => {
+    //   if (key === "Backspace") {
+    //     e.target.value = "";
+    //     return;
+    //   }
+    // });
     costume = costume.split(" ");
+    if (costume[1] !== "-") {
+      return;
+    }
     if (costume[0] !== "") {
-      setCostumeSelected(costume[0]);
       values.costumes.push(costume[0]);
       values.amount += Number(costume[2].substr(1));
-      // console.log(values.costumes);
+      setCostumeSelected(costume[0]);
+      e.target.value = "";
     }
-    // const updateCostume = [...costumeSelected, costume];
   };
 
   const handleDelete = (index: number, value: string) => {
-    const costume = values.costumes.splice(index, 1);
-    console.log(value);
-    setCostumeSelected(costume);
-    // updateCostume.splice(index, 1);
-    // const updateCostume = costumeSelected;
-    // console.log(updateCostume);
-    // setCostumeSelected(updateCostume);
+    const costumeUpdate = values.costumes.splice(index, 1);
+    const costume = costumesList.filter(
+      (item: Costume) => item.name === value
+    )[0];
+    values.amount -= costume.price;
+    setCostumeSelected(costumeUpdate);
   };
 
   const getClients = async () => {
@@ -180,7 +187,7 @@ export default function Form({ data }: Props) {
         />
       </label>
       <datalist id='test'>
-        {costumesList.map((item) => (
+        {costumesList.map((item: Costume) => (
           <option
             key={item.id}
             value={`${item.name} - $${item.price}`}
