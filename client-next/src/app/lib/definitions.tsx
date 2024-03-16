@@ -42,7 +42,7 @@ export interface Bill extends Entity {
 	returned: boolean;
 	amount: number;
 	client: Client;
-	costumes: string[];
+	costumes: Costume[];
 	note: string;
 }
 
