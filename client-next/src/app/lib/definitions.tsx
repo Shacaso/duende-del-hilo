@@ -29,8 +29,12 @@ export interface Departament extends Entity {
 export interface BillDto extends Entity {
 	billNumber: number;
 	date: string;
+	returnedDate: string;
+	retirementDate: string;
 	returned: boolean;
-	amount: number;
+	amountTotal: number;
+	advancement: number;
+	remainingBalance: number;
 	costumes: string[];
 	dniClient: number;
 	note: string;
@@ -39,8 +43,12 @@ export interface BillDto extends Entity {
 export interface Bill extends Entity {
 	billNumber: number;
 	date: string;
+	returnedDate: string;
+	retirementDate: string;
 	returned: boolean;
-	amount: number;
+	amountTotal: number;
+	advancement: number;
+	remainingBalance: number;
 	client: Client;
 	costumes: Costume[];
 	note: string;

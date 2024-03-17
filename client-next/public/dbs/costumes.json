@@ -9,7 +9,7 @@
   },
   {
     "id": "59a627da-7463-408b-8348-44100f7f366d",
-    "name": "Fantasmass",
+    "name": "Fantasmas",
     "price": 3000,
     "category": "Halloween",
     "details": "asdasd",
@@ -49,7 +49,7 @@
   },
   {
     "id": "f2feb561-c881-4240-b16e-ed32d9c0b674",
-    "name": "Doctora2",
+    "name": "Doctora",
     "price": 12200,
     "category": "Profesiones",
     "details": "asdasd",
@@ -57,7 +57,7 @@
   },
   {
     "id": "9787c76f-d4c8-4796-886c-8b5850ffe7b7",
-    "name": "Doctor",
+    "name": "Mascara",
     "price": 8500,
     "category": "Profesiones",
     "details": "asdasd",
@@ -65,7 +65,7 @@
   },
   {
     "id": "0ec7d96a-bd36-4ef1-8313-7e8bf1a56d28",
-    "name": "Doctor",
+    "name": "Freedy Krueger",
     "price": 8500,
     "category": "Halloween",
     "details": "asdasd",
@@ -93,6 +93,14 @@
     "price": 27,
     "category": "Magicos",
     "details": "HERMOSA",
+    "dischargeDate": ""
+  },
+  {
+    "name": "Robot",
+    "price": 8500,
+    "category": "Halloween",
+    "details": "asdasd",
+    "id": "bdf49508-31ca-4240-ac94-b9d6a27d678e",
     "dischargeDate": ""
   }
 ]

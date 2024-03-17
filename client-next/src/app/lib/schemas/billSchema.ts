@@ -2,105 +2,119 @@ import { z } from "zod";
 import { clientsPath, costumesPath } from "../data/paths";
 import { getAll } from "../data/entityRepository";
 import { Bill, BillDto, Client, Costume, CustomError } from "../definitions";
+import { costumeSchema } from "./costumeSchema";
 
 const allUsers = async () => {
-  const data = await getAll<Client>(clientsPath);
+	const data = await getAll<Client>(clientsPath);
 
-  if (data) {
-    if (data instanceof CustomError) return [];
+	if (data) {
+		if (data instanceof CustomError) return [];
 
-    const clients: Client[] = data;
-    const idsClients = clients.map((client) => client.dni);
-    return idsClients;
-  } else {
-    return [];
-  }
+		const clients: Client[] = data;
+		const idsClients = clients.map((client) => client.dni);
+		return idsClients;
+	} else {
+		return [];
+	}
 };
 
 const idsUsers: number[] = await allUsers();
 
-const allCostumes = async () => {
-  const data = await getAll<Costume>(costumesPath);
+export const allCostumesNames = async () => {
+	const data = await getAll<Costume>(costumesPath);
 
-  if (data) {
-    if (data instanceof CustomError) return [];
+	if (data) {
+		if (data instanceof CustomError) return [];
 
-    const costumes: Costume[] = data;
-    const costumesNames = costumes.map((costume) => costume.name);
-    return costumesNames;
-  } else {
-    return [];
-  }
+		const costumes: Costume[] = data;
+		const costumesNames = costumes.map((costume) => costume.name);
+		return costumesNames;
+	} else {
+		return [];
+	}
 };
 
-const costumesNames: string[] = await allCostumes();
+const costumesNames: string[] = await allCostumesNames();
 
 export const billSchema = z.object({
-  id: z.string().optional(),
+	id: z.string().optional(),
 
-  billNumber: z.number().optional(),
+	billNumber: z.number().optional(),
 
-  date: z.string().optional(),
+	date: z.string().optional(),
 
-  returned: z.coerce
-    .boolean({
-      invalid_type_error: "El valor del atributo devuelto debe ser un booleano",
-    })
-    .default(false),
+	returnedDate: z.string(),
 
-  amount: z
-    .number({
-      invalid_type_error: "El monto debe ser un numero mayor que 0",
-      required_error: "El monto  es requerido",
-    })
-    .positive(),
+	retirementDate: z.string(),
 
-  dniClient: z
-    .number({
-      invalid_type_error: "El dni debe ser un numero mayor que 0",
-      required_error: "El dni es requerido",
-    })
-    .refine((value) => idsUsers.includes(value), {
-      message: "No se encuenta ese id de Usuario en la base de datos",
-    }),
+	returned: z.coerce
+		.boolean({
+			invalid_type_error: "El valor del atributo devuelto debe ser un booleano",
+		})
+		.default(false),
 
-  note: z.string({
-    invalid_type_error: "La nota debe ser un string",
-    required_error: "La nota es requerido",
-  }),
+	amountTotal: z
+		.number({
+			invalid_type_error: "El monto total debe ser un numero mayor que 0",
+			required_error: "El monto  es requerido",
+		})
+		.positive(),
 
-  costumes: z
-    .string({
-      invalid_type_error: "Costumes debe ser un array de nombres de disfraces",
-      required_error: "La factura debe contener disfraces comprados",
-    })
-    .array()
-    .nonempty({
-      message: "La factura debe contener al menos un disfraz comprado",
-    })
-    .refine(
-      (costumes) => {
-        let bandera = true;
-        for (let index = 0; index < costumes.length; index++) {
-          if (!costumesNames.includes(costumes[index])) {
-            bandera = false;
-            break;
-          }
-        }
-        return bandera;
-      },
-      {
-        message: "No se encuenta ese disfraz en la base de datos",
-      }
-    ),
+	advancement: z
+		.number({
+			invalid_type_error: "El adelanto debe ser un numero mayor que 0",
+			required_error: "El adelanto  es requerido",
+		})
+		.positive(),
 
-  dischargeDate: z.string().default(""),
+	remainingBalance: z.number().optional(),
+
+	dniClient: z
+		.number({
+			invalid_type_error: "El dni debe ser un numero mayor que 0",
+			required_error: "El dni es requerido",
+		})
+		.refine((value) => idsUsers.includes(value), {
+			message: "No se encuenta ese id de Usuario en la base de datos",
+		}),
+
+	note: z.string({
+		invalid_type_error: "La nota debe ser un string",
+		required_error: "La nota es requerido",
+	}),
+
+	costumes: z
+		.string({
+			invalid_type_error: "Costumes debe ser un array de nombres de disfraces",
+			required_error: "La factura debe contener disfraces comprados",
+		})
+		.array()
+		.nonempty({
+			message: "La factura debe contener al menos un disfraz comprado",
+		})
+		.refine(
+			(costumes) => {
+				let bandera = true;
+				for (let index = 0; index < costumes.length; index++) {
+					if (!costumesNames.includes(costumes[index])) {
+						bandera = false;
+						break;
+					}
+				}
+				return bandera;
+			},
+			{
+				message: "No se encuenta ese disfraz en la base de datos",
+			}
+		),
+
+	dischargeDate: z.string().default(""),
 });
 
 export function validateBill(object: BillDto) {
-  return billSchema.safeParse(object);
+	return billSchema.safeParse(object);
 }
 
 export function validateParcialBill(object: Bill) {
-  return billSchema.partial().safeParse(object);
+	return billSchema.partial().safeParse(object);
 }

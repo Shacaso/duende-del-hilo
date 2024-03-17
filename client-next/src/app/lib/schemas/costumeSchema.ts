@@ -2,6 +2,7 @@ import { z } from "zod";
 import { getAll } from "../data/entityRepository";
 import { Category, Costume, CustomError } from "../definitions";
 import { categoriesPath } from "../data/paths";
+import { allCostumesNames } from "./billSchema";
 
 const allCategories = async () => {
 	const data = await getAll<Category>(categoriesPath);
@@ -19,13 +20,31 @@ const allCategories = async () => {
 
 const categories: string[] = await allCategories();
 
-const costumeSchema = z.object({
+const costumesNames: string[] = await allCostumesNames();
+
+export const costumeSchema = z.object({
 	id: z.string().optional(),
 
-	name: z.string({
-		invalid_type_error: "El nombre debe ser un string",
-		required_error: "El nombre es requerido",
-	}),
+	name: z
+		.string({
+			invalid_type_error: "El nombre debe ser un string",
+			required_error: "El nombre es requerido",
+		})
+		.refine(
+			(name) => {
+				let bandera = true;
+				for (let index = 0; index < costumesNames.length; index++) {
+					if (costumesNames[index] === name) {
+						bandera = false;
+						break;
+					}
+				}
+				return bandera;
+			},
+			{
+				message: "Ese nombre ya se encuentra en la base de datos",
+			}
+		),
 
 	price: z.coerce
 		.number({

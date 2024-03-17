@@ -1,13 +1,14 @@
 import { randomUUID } from "crypto";
-import { Bill, BillDto, Client, CustomError } from "../definitions";
+import { Bill, BillDto, Client, Costume, CustomError } from "../definitions";
 import { allEntities, saveAllEntities } from "./GetAndSaveJson";
 import { clientsPath } from "./paths";
+import { getClientByDNI, getCostumeArray, getDateAndHour } from "./funciones";
 
 export const create = async (input: BillDto, path: string) => {
-	const response = await allEntities<Bill>(path);
+	const entities = await allEntities<Bill>(path);
 
-	if (response instanceof CustomError) return response;
-	let entities: Bill[] = response;
+	if (entities instanceof CustomError) return entities;
+	let bills: Bill[] = entities;
 
 	let lastBill = 1;
 
@@ -15,39 +16,41 @@ export const create = async (input: BillDto, path: string) => {
 		lastBill = entities[entities.length - 1].billNumber + 1;
 	}
 
-	const fechaHora: Date = new Date();
-	fechaHora.setHours(fechaHora.getHours() - 3);
-	const [date, time] = fechaHora.toISOString().split("T");
-	const [a, b] = time.split(".");
+	const { date, hour } = getDateAndHour();
 
-	const responseClient: Client[] | CustomError = await allEntities<Client>(
-		clientsPath
+	const clientFound: Client | CustomError = await getClientByDNI(
+		input.dniClient
 	);
+	if (clientFound instanceof CustomError) return clientFound;
 
-	if (responseClient instanceof CustomError) return response;
-	let client: Client = responseClient.filter((client: Client) => {
-		return client.dni === input.dniClient;
-	})[0];
+	const costumesFound: Costume[] | CustomError = await getCostumeArray(
+		input.costumes
+	);
+	if (costumesFound instanceof CustomError) return costumesFound;
 
 	const newBill: Bill = {
 		id: randomUUID(),
 		billNumber: lastBill,
-		date: date + " " + a,
+		date: date + " " + hour,
+		returnedDate: input.retirementDate,
+		retirementDate: input.retirementDate,
 		returned: input.returned,
-		amount: input.amount,
-		client: client,
-		costumes: input.costumes,
+		amountTotal: input.amountTotal,
+		advancement: input.advancement,
+		remainingBalance: input.amountTotal - input.advancement,
+		client: clientFound,
+		costumes: costumesFound,
 		note: input.note,
 		dischargeDate: "",
 	};
 
-	if (entities) {
-		entities.push(newBill);
+	if (bills) {
+		bills.push(newBill);
 	} else {
-		entities = [newBill];
+		bills = [newBill];
 	}
 
-	const responseSave = await saveAllEntities<Bill>(entities, path);
+	const responseSave = await saveAllEntities<Bill>(bills, path);
 	if (responseSave instanceof CustomError) return responseSave;
 
 	return newBill;
