@@ -3,7 +3,7 @@
     "id": "fcd098e4-7374-442b-9050-fd1d1014b1dc",
     "billNumber": 7,
     "date": "2024-03-13 19:03:16",
-    "amount": 123,
+    "amountTotal": 123,
     "client": {
       "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
       "name": "Enzo",
@@ -42,7 +42,7 @@
     "id": "82208174-7ff2-40a3-9e46-a70ef4207dc7",
     "billNumber": 8,
     "date": "2024-03-13 19:26:18",
-    "amount": 123,
+    "amountTotal": 123,
     "client": {
       "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
       "name": "Enzo",
@@ -56,10 +56,7 @@
       "blacklist": false,
       "dischargeDate": ""
     },
-    "costumes": [
-      "Jason",
-      "Doctor"
-    ],
+    "costumes": ["Jason", "Doctor"],
     "note": "asdasd",
     "dischargeDate": ""
   },
@@ -67,7 +64,7 @@
     "id": "00e0276e-5949-407d-b522-0dc5cdb21d16",
     "billNumber": 9,
     "date": "2024-03-13 19:26:32",
-    "amount": 123,
+    "amountTotal": 123,
     "client": {
       "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
       "name": "Enzo",
@@ -81,10 +78,7 @@
       "blacklist": false,
       "dischargeDate": ""
     },
-    "costumes": [
-      "Jason",
-      "Doctor"
-    ],
+    "costumes": ["Jason", "Doctor"],
     "note": "asdasd",
     "dischargeDate": ""
   },
@@ -93,7 +87,7 @@
     "billNumber": 10,
     "date": "2024-03-16 18:12:56",
     "returned": "",
-    "amount": 10000,
+    "amountTotal": 10000,
     "client": {
       "id": "d78f1323e-bbcc-42a2-9104-45bc97e98113",
       "name": "Alejo",
@@ -107,10 +101,7 @@
       "blacklist": false,
       "dischargeDate": ""
     },
-    "costumes": [
-      "Ada",
-      "Jason"
-    ],
+    "costumes": ["Ada", "Jason"],
     "note": "fasdf",
     "dischargeDate": ""
   },
@@ -155,6 +146,58 @@
       }
     ],
     "note": "asdasd",
+    "dischargeDate": ""
+  },
+  {
+    "id": "4b2bcd60-3851-4511-a978-dd9868041584",
+    "billNumber": 12,
+    "date": "2024-03-17 15:40:18",
+    "returnedDate": "2024-03-17",
+    "retirementDate": "2024-03-17",
+    "returned": "",
+    "amountTotal": 20000,
+    "advancement": 10000,
+    "remainingBalance": 10000,
+    "client": {
+      "id": "d78f1323e-bbcc-42a2-9104-45bc97e98113",
+      "name": "Alejo",
+      "surname": "Araya",
+      "dni": 42749595,
+      "phoneNumber": 2613430975,
+      "email": "alejoaraya2000@gmail.com",
+      "direction": "Calle 7",
+      "departament": "Ciudad",
+      "postalCode": 5500,
+      "blacklist": false,
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "id": "060f1ca0-04eb-497f-a524-316dcf97e4aa",
+        "name": "Doctor",
+        "price": 8500,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "9787c76f-d4c8-4796-886c-8b5850ffe7b7",
+        "name": "Mascara",
+        "price": 8500,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "59a627da-7463-408b-8348-44100f7f366d",
+        "name": "Fantasmas",
+        "price": 3000,
+        "category": "Halloween",
+        "details": "asdasd",
+        "dischargeDate": ""
+      }
+    ],
+    "note": "Informacion relevante",
     "dischargeDate": ""
   }
 ]

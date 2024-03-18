@@ -48,7 +48,7 @@ export default function Navbar() {
     {
       label: "Categorias",
       Icon: UserIcon,
-      href: "/client",
+      href: "/categories",
     },
     {
       label: "Disfraz",

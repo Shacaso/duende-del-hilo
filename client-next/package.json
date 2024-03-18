@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-pdf/renderer": "^3.3.8",
+    "@reduxjs/toolkit": "^2.2.1",
     "@svgr/webpack": "^8.1.0",
     "formik": "^2.4.5",
     "next": "14.0.4",
