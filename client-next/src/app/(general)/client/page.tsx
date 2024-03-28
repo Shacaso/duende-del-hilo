@@ -7,20 +7,23 @@ import { Table } from "./components/Table";
 import { useEffect, useState } from "react";
 import { Client, Departament } from "@/app/lib/definitions";
 import { SearchInputIcon } from "@/assets/svg";
-import { fetchGetAll } from "@/app/lib/fetching";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import Form from "./components/Form";
+import { useAppSelector } from "@/lib/store";
+import { fetchGetAll } from "@/app/lib/fetching";
 
 export default function ClientPage() {
+  const clients: Client[] = useAppSelector((state) => state.clients.clients);
+
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
 
-  const [clients, setClients] = useState<Client[]>([]);
+  // const [clients, setClients] = useState<Client[]>([]);
   const [search, setSearch] = useState("");
 
   const result = !clients
     ? clients
-    : clients.filter((client) =>
+    : clients.filter((client: Client) =>
         client.name.toLowerCase().includes(search.toLowerCase())
       );
 
@@ -28,14 +31,16 @@ export default function ClientPage() {
     setSearch(e.target.value);
   };
 
-  const getClients = async () => {
-    const data: Client[] = await fetchGetAll("clients");
-    setClients(data);
-  };
+  // const getClients = async () => {
+  //   const data: Client[] = await fetchGetAll("clients");
+  //   console.log(data);
 
-  useEffect(() => {
-    getClients();
-  }, []);
+  //   setClients(data);
+  // };
+
+  // useEffect(() => {
+  //   getClients();
+  // }, []);
 
   return (
     <>
