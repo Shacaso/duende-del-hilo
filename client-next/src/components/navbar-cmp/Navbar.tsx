@@ -71,11 +71,11 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className=' min-h-full sticky left-0 top-0 pt-5 menu bg-base-200 text-base-content w-60 mr-5 rounded-e-3xl'>
-        <Link href={"/home"} className='px-2 mb-[2rem] mx-auto'>
+      <nav className='flex gap-5 flex-col h-full overflow-y-auto items-center sticky min-w-60 max-w-60 left-0 top-0 pt-5 menu bg-base-200 text-base-content  rounded-e-3xl'>
+        <Link href={"/home"}>
           <Logo />
         </Link>
-        <ul>
+        <ul className='overflow-y-auto '>
           {menuItems.map((item, index) => {
             return <MainMenuItem key={index} {...item} />;
           })}

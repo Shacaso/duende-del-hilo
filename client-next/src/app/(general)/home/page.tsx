@@ -19,25 +19,12 @@ import NotificationDash from "./components/NotificationDash";
 
 export default function Dashboard() {
   return (
-    <div className='w-full px-5 mt-5'>
+    <div className=' px-10 mt-5 w-full'>
       <Welcome />
       <div className='flex flex-col justify-center  gap-5 mb-5 md:flex-row md:flex-wrap py-5'>
-        <Stat
-          title='Nueva factura'
-          // stat={products.length}
-          Icon={IconEntrada}
-          url={"/product"}
-        />
-        {/* <Stat
-          title='Clientes'
-          // stat={providers.length}
-          Icon={ProviderIcon}
-          url={"/provider"}
-          // loading={loadingProviders}
-        /> */}
+        <Stat title='Nueva factura' Icon={IconEntrada} url={"/product"} />
         <Stat
           title='Pendinetes de devolucion'
-          // stat={movements.filter(m => m.tipo === 'SALIDA').length}
           Icon={HistoricalIcon}
           url={"/history"}
         />
