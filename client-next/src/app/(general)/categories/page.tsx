@@ -10,12 +10,15 @@ import { fetchGetAll } from "@/app/lib/fetching";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import { Table } from "./components/Table";
 import Form from "./components/Form";
+import { useCategory } from "@/hook/useCategory";
 
 export default function CategoriesPage() {
+  const { getAllCategories, categories } = useCategory();
+
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
 
-  const [categories, setCategories] = useState<Category[]>([]);
+  // const [categories, setCategories] = useState<Category[]>([]);
   const [search, setSearch] = useState("");
 
   const result = !categories
@@ -28,13 +31,13 @@ export default function CategoriesPage() {
     setSearch(e.target.value);
   };
 
-  const getClients = async () => {
-    const data: Category[] = await fetchGetAll("categories");
-    setCategories(data);
-  };
+  // const getClients = async () => {
+  //   const data: Category[] = await fetchGetAll("categories");
+  //   setCategories(data);
+  // };
 
   useEffect(() => {
-    getClients();
+    getAllCategories();
   }, []);
 
   return (

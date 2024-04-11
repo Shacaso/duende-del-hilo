@@ -12,12 +12,14 @@ import { SearchInputIcon } from "@/assets/svg";
 import { deleteAction } from "@/app/lib/data/funciones";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import FormNewCostume from "./components/FormNewCostume";
+import { useCostume } from "@/hook/useCostume";
 
 export default function CostumePage() {
+  const { getAllCustomes, costumes } = useCostume();
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
 
-  const [costumes, setCostumes] = useState<Costume[]>([]);
+  // const [costumes, setCostumes] = useState<Costume[]>([]);
   const [search, setSearch] = useState("");
 
   const result = !costumes
@@ -30,13 +32,13 @@ export default function CostumePage() {
     setSearch(e.target.value);
   };
 
-  const getCostumes = async () => {
-    const data: Costume[] = await fetchGetAllActives("costumes");
-    setCostumes(data);
-  };
+  // const getCostumes = async () => {
+  //   const data: Costume[] = await fetchGetAllActives("costumes");
+  //   setCostumes(data);
+  // };
 
   useEffect(() => {
-    getCostumes();
+    getAllCustomes();
   }, []);
 
   return (

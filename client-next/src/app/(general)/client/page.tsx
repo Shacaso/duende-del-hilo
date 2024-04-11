@@ -11,9 +11,11 @@ import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import Form from "./components/Form";
 import { useAppSelector } from "@/lib/store";
 import { fetchGetAll } from "@/app/lib/fetching";
+import { useClient } from "@/hook/useClient";
 
 export default function ClientPage() {
-  const clients: Client[] = useAppSelector((state) => state.clients.clients);
+  const { getAllClients, clients } = useClient();
+  // const clients: Client[] = useAppSelector((state) => state.clients.clients);
 
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
@@ -38,9 +40,9 @@ export default function ClientPage() {
   //   setClients(data);
   // };
 
-  // useEffect(() => {
-  //   getClients();
-  // }, []);
+  useEffect(() => {
+    getAllClients();
+  }, []);
 
   return (
     <>
