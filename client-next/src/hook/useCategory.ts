@@ -3,10 +3,12 @@ import { useAppSelector, useAppDispatch } from "@/lib/store";
 import {
   getAllCategoriesAsync,
   //   getOneClientByIdAsync,
-  //   createClientAsync,
+  createCategoryAsync,
   //   updateClientAsync,
+  deleteCategoryAsync,
   setCategorySync,
   cleanCreatedCategorySync,
+  updateCategoryAsync,
 } from "@/lib/features/category/category.slice";
 import { Category } from "@/app/lib/definitions";
 
@@ -19,15 +21,19 @@ export function useCategory() {
   function getAllCategories() {
     categories.length === 0 && dispatch(getAllCategoriesAsync());
   }
+  function deleteCategory(id: string) {
+    dispatch(deleteCategoryAsync(id));
+  }
   //   function getOneClientById(id: string) {
   //     dispatch(getOneClientByIdAsync(id));
   //   }
-  //   function createClient(newClient: User) {
-  //     dispatch(createClientAsync(newClient));
-  //   }
-  //   function updateClient(modified: User) {
-  //     dispatch(updateClientAsync(modified));
-  //   }
+  function createCategory(body: Category) {
+    dispatch(createCategoryAsync(body));
+  }
+  function updateCategory(body: Category) {
+    dispatch(updateCategoryAsync(body));
+  }
+
   function setCostume(category: Category) {
     dispatch(setCategorySync(category));
   }
@@ -43,8 +49,9 @@ export function useCategory() {
     error,
     getAllCategories,
     // getOneClientById,
-    // createClient,
-    // updateClient,
+    deleteCategory,
+    createCategory,
+    updateCategory,
     setCostume,
     cleanCreatedCostume,
   };

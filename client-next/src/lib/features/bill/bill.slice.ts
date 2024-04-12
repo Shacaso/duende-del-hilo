@@ -1,4 +1,4 @@
-import { Costume } from "@/app/lib/definitions";
+import { Bill } from "@/app/lib/definitions";
 import {
   fetchGetAll,
   fetchPost,
@@ -13,67 +13,65 @@ import {
 } from "@reduxjs/toolkit";
 
 // thunk functions
-export const getAllCostumesAsync = createAsyncThunk(
-  "costume/getAll",
-  async () => {
-    const costumes: Costume[] = await fetchGetAll("costumes");
-    console.log(costumes);
-    return costumes;
+export const getAllBillsAsync = createAsyncThunk(
+  "bill/getAll",
+  async (): Promise<Bill[]> => {
+    return await fetchGetAll("bills");
   }
 );
 // export const createClientAsync = createAsyncThunk(
-//   "client/create",
-//   async (newClient: Costume) => {
+//   "bill/create",
+//   async (newClient: Bill) => {
 //     const created = await await fetchPost(newClient, "clients");
 //     return created;
 //   }
 // );
 // export const getOneClientByIdAsync = createAsyncThunk(
-//   "client/getOneById",
+//   "bill/getOneById",
 //   async (id: string) => {
-//     const client = await fetchGetById(id, "clients");
-//     return client;
+//     const bill = await fetchGetById(id, "clients");
+//     return bill;
 //   }
 // );
 // export const updateClientAsync = createAsyncThunk(
-//   "client/update",
-//   async (modified: Costume) => {
+//   "bill/update",
+//   async (modified: Bill) => {
 //     const updated = await fetchPatch(modified.id, modified, "clients");
 //     return updated;
 //   }
 // );
 interface State {
-  costumes: Costume[];
+  bills: Bill[];
   isLoading: boolean;
-  costume?: Costume;
-  created?: Costume;
+  bill?: Bill;
+  created?: Bill;
   error?: string;
 }
 
 const initialState: State = {
-  costumes: [],
+  bills: [],
   isLoading: false,
 };
 
-export const costumeSlice = createSlice({
-  name: "costume",
+export const billSlice = createSlice({
+  name: "bill",
   initialState,
   reducers: {
-    setCostumeSync(state, action: PayloadAction<Costume>) {
-      return { ...state, client: action.payload };
+    setBillSync(state, action: PayloadAction<Bill>) {
+      return { ...state, bill: action.payload };
     },
-    cleanCreatedCostumeSync(state) {
+    cleanCreatedBillSync(state) {
       const { created, ...newState } = state;
       return { ...newState };
     },
   },
   extraReducers(builder) {
     // GETALL
-    builder.addCase(getAllCostumesAsync.pending, (state) => {
+    builder.addCase(getAllBillsAsync.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(getAllCostumesAsync.fulfilled, (state, action) => {
-      state.costumes = action.payload;
+    builder.addCase(getAllBillsAsync.fulfilled, (state, action) => {
+      state.bills = action.payload;
       state.isLoading = false;
     });
 
@@ -98,8 +96,8 @@ export const costumeSlice = createSlice({
     //   state.isLoading = true;
     // });
     // builder.addCase(getOneClientByIdAsync.fulfilled, (state, action) => {
-    //   const client = action.payload;
-    //   state.client = client;
+    //   const bill = action.payload;
+    //   state.bill = bill;
     //   state.isLoading = false;
     // });
 
@@ -117,5 +115,5 @@ export const costumeSlice = createSlice({
   },
 });
 
-export const { setCostumeSync, cleanCreatedCostumeSync } = costumeSlice.actions;
-export const costumeReducer = costumeSlice.reducer;
+export const { setBillSync, cleanCreatedBillSync } = billSlice.actions;
+export const billReducer = billSlice.reducer;

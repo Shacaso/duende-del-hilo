@@ -4,6 +4,7 @@ import {
   fetchPost,
   fetchGetById,
   fetchPatch,
+  fetchDeleteById,
 } from "@/app/lib/fetching";
 
 import {
@@ -20,13 +21,12 @@ export const getAllCategoriesAsync = createAsyncThunk(
     return categories;
   }
 );
-// export const createClientAsync = createAsyncThunk(
-//   "category/create",
-//   async (newClient: Category) => {
-//     const created = await await fetchPost(newClient, "clients");
-//     return created;
-//   }
-// );
+export const createCategoryAsync = createAsyncThunk(
+  "category/create",
+  async (body: Category): Promise<Category> => {
+    return await await fetchPost(body, "categories");
+  }
+);
 // export const getOneClientByIdAsync = createAsyncThunk(
 //   "category/getOneById",
 //   async (id: string) => {
@@ -34,13 +34,19 @@ export const getAllCategoriesAsync = createAsyncThunk(
 //     return category;
 //   }
 // );
-// export const updateClientAsync = createAsyncThunk(
-//   "category/update",
-//   async (modified: Category) => {
-//     const updated = await fetchPatch(modified.id, modified, "clients");
-//     return updated;
-//   }
-// );
+export const updateCategoryAsync = createAsyncThunk(
+  "category/update",
+  async (body: Category): Promise<Category> => {
+    return await fetchPatch(body.id, body, "categories");
+  }
+);
+
+export const deleteCategoryAsync = createAsyncThunk(
+  "category/delete",
+  async (id: string): Promise<Category> => {
+    return await fetchDeleteById(id, "categories");
+  }
+);
 interface State {
   categories: Category[];
   isLoading: boolean;
@@ -77,20 +83,20 @@ export const categorySlice = createSlice({
     });
 
     // * CREATE
-    // builder.addCase(createClientAsync.pending, (state) => {
-    //   state.isLoading = true;
-    //   state.error = "";
-    // });
-    // builder.addCase(createClientAsync.fulfilled, (state, action) => {
-    //   const newClient = action.payload;
-    //   state.clients.push(newClient);
-    //   state.created = newClient;
-    //   state.isLoading = false;
-    // });
-    // builder.addCase(createClientAsync.rejected, (state, action) => {
-    //   state.error = action.error.message;
-    //   state.isLoading = false;
-    // });
+    builder.addCase(createCategoryAsync.pending, (state) => {
+      state.isLoading = true;
+      state.error = "";
+    });
+    builder.addCase(createCategoryAsync.fulfilled, (state, action) => {
+      const body = action.payload;
+      state.categories.push(body);
+      state.created = body;
+      state.isLoading = false;
+    });
+    builder.addCase(createCategoryAsync.rejected, (state, action) => {
+      state.error = action.error.message;
+      state.isLoading = false;
+    });
 
     // // GETBYID
     // builder.addCase(getOneClientByIdAsync.pending, (state) => {
@@ -103,16 +109,30 @@ export const categorySlice = createSlice({
     // });
 
     // // UPDATE
-    // builder.addCase(updateClientAsync.pending, (state) => {
-    //   state.isLoading = true;
-    // });
-    // builder.addCase(updateClientAsync.fulfilled, (state, action) => {
-    //   const updated = action.payload;
-    //   const id = updated.id;
-    //   const index = state.clients.findIndex((item) => item.id === id);
-    //   state.clients[index] = updated;
-    //   state.isLoading = false;
-    // });
+    builder.addCase(updateCategoryAsync.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateCategoryAsync.fulfilled, (state, action) => {
+      const updated: Category = action.payload;
+      const { id } = updated;
+      const index = state.categories.findIndex((item) => item.id === id);
+      state.categories[index] = updated;
+      state.isLoading = false;
+    });
+
+    //! DELETE
+    builder.addCase(deleteCategoryAsync.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteCategoryAsync.fulfilled, (state, action) => {
+      const deleted: Category = action.payload;
+      const { id } = deleted;
+      const index = state.categories.findIndex((item) => item.id === id);
+      state.categories.slice(index, 1);
+      console.log(state.categories);
+
+      state.isLoading = false;
+    });
   },
 });
 

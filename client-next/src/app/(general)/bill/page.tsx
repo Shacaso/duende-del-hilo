@@ -4,7 +4,7 @@ import { DataList, Search } from "@/components";
 import Button from "@/components/button-cmp/Button";
 import { Table } from "./components/Table";
 import Filters from "./components/Filters";
-import { Bill } from "@/app/lib/definitions";
+import { type Bill } from "@/app/lib/definitions";
 import { useEffect, useState } from "react";
 import { fetchGetAll } from "@/app/lib/fetching";
 // import { viewModeType } from '@/components/datalist-cmp/constants';
@@ -14,9 +14,12 @@ import { fetchGetAll } from "@/app/lib/fetching";
 // import { FilterDate } from './components/FilterDate';
 // import {Button} from '@/components'
 import { SearchInputIcon } from "@/assets/svg";
+import { useBill } from "@/hook/useBill";
 
-export default function History() {
-  const [bills, setBills] = useState<Bill[]>([]);
+export default function Bill() {
+  const { getAllBills, bills, isLoading } = useBill();
+
+  // const [bills, setBills] = useState<Bill[]>([]);
 
   const [search, setSearch] = useState("");
 
@@ -28,16 +31,16 @@ export default function History() {
     setSearch(e.target.value);
   };
 
-  const getBills = async () => {
-    const data: Bill[] = await fetchGetAll("bills");
-    setBills(data);
-  };
+  // const getBills = async () => {
+  //   const data: Bill[] = await fetchGetAll("bills");
+  //   setBills(data);
+  // };
 
   useEffect(() => {
-    getBills();
+    getAllBills();
   }, []);
 
-  console.log(bills);
+  // console.log(bills);
 
   //   const { movements, getAllMovements } = useMovements();
   //   const [searchQuery, setSearchQuery] = useState('');

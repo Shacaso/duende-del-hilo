@@ -1,23 +1,23 @@
 "use client";
 import { useAppSelector, useAppDispatch } from "@/lib/store";
 import {
-  getAllCostumesAsync,
+  getAllBillsAsync,
   //   getOneClientByIdAsync,
   //   createClientAsync,
   //   updateClientAsync,
-  setCostumeSync,
-  cleanCreatedCostumeSync,
-} from "@/lib/features/custome/custome.slice";
-import { Costume } from "@/app/lib/definitions";
+  setBillSync,
+  cleanCreatedBillSync,
+} from "@/lib/features/bill/bill.slice";
+import { Bill } from "@/app/lib/definitions";
 
-export function useCostume() {
+export function useBill() {
   const dispatch = useAppDispatch();
-  const { costume, isLoading, costumes, created, error } = useAppSelector(
-    (state) => state.costumes
+  const { bill, isLoading, bills, created, error } = useAppSelector(
+    (state) => state.bills
   );
 
-  function getAllCustomes() {
-    costumes.length === 0 && dispatch(getAllCostumesAsync());
+  function getAllBills() {
+    bills.length === 0 && dispatch(getAllBillsAsync());
   }
   //   function getOneClientById(id: string) {
   //     dispatch(getOneClientByIdAsync(id));
@@ -28,24 +28,24 @@ export function useCostume() {
   //   function updateClient(modified: User) {
   //     dispatch(updateClientAsync(modified));
   //   }
-  function setCostume(costume: Costume) {
-    dispatch(setCostumeSync(costume));
+  function setBill(bill: Bill) {
+    dispatch(setBillSync(bill));
   }
-  function cleanCreatedCostume() {
-    dispatch(cleanCreatedCostumeSync());
+  function cleanCreatedBill() {
+    dispatch(cleanCreatedBillSync());
   }
 
   return {
-    costumes,
+    bills,
     isLoading,
-    costume,
+    bill,
     created,
     error,
-    getAllCustomes,
+    getAllBills,
     // getOneClientById,
     // createClient,
     // updateClient,
-    setCostume,
-    cleanCreatedCostume,
+    setBill,
+    cleanCreatedBill,
   };
 }

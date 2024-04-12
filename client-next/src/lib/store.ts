@@ -1,13 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import type { TypedUseSelectorHook } from "react-redux";
-import { clientReducer, costumeReducer, categoryReducer } from "./features";
+import {
+  clientReducer,
+  costumeReducer,
+  categoryReducer,
+  billReducer,
+} from "./features";
 
 export const store = configureStore({
   reducer: {
     clients: clientReducer,
     costumes: costumeReducer,
     categories: categoryReducer,
+    bills: billReducer,
   },
 });
 

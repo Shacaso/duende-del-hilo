@@ -1,5 +1,6 @@
 import { Category } from "@/app/lib/definitions";
 import { fetchPatch, fetchPost } from "@/app/lib/fetching";
+import { useCategory } from "@/hook/useCategory";
 import { useFormik } from "formik";
 import { z, ZodError } from "zod";
 
@@ -8,6 +9,8 @@ interface Props {
 }
 
 export default function Form({ data }: Props) {
+  const { createCategory, updateCategory, created } = useCategory();
+
   const clientSchema = z.object({
     id: z.string().optional(),
     name: z.string({
@@ -24,6 +27,7 @@ export default function Form({ data }: Props) {
     errors,
     touched,
     handleBlur,
+    resetForm,
   } = useFormik({
     initialValues: {
       id: data?.id ?? "",
@@ -40,18 +44,13 @@ export default function Form({ data }: Props) {
       // console.log(values);
 
       if (!data) {
-        fetchPost(values, "categories").then((res) => {
-          if (res) {
-            alert("La categoria se ha guardado");
-          }
-        });
+        createCategory(values);
+        resetForm();
       } else {
-        fetchPatch(data.id, values, "categories").then((res) => {
-          if (res) {
-            alert("La categoria se ha actualizado");
-          }
-        });
+        updateCategory(values);
       }
+
+      created && alert("La categoria se ha guardado");
     },
   });
 

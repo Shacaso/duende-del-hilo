@@ -30,7 +30,11 @@ export function Table({ data }: Props) {
           return (
             <tr key={bill.id}>
               <td>
-                <div className='badge badge-primary badge-lg'></div>
+                <div
+                  className={`badge badge-lg ${
+                    bill.returned ? "badge-success" : "badge-primary"
+                  }`}
+                ></div>
               </td>
               <td> {bill.billNumber}</td>
               <td>{bill.date}</td>
@@ -86,55 +90,6 @@ export function Table({ data }: Props) {
             </tr>
           );
         })}
-        <tr>
-          <td>
-            <div className='badge badge-success badge-lg'></div>
-          </td>
-          <td>0002</td>
-          <td>13/11/2023</td>
-          <td>Ximena Morales</td>
-          <td>$8000</td>
-          <td>3458764</td>
-          <td>
-            <button
-              className='btn btn-circle'
-              // onClick={() =>
-              //   openModal(<ProductDetail product={product} />, {
-              //     className: 'modal-product',
-              //   })
-              // }
-            >
-              <ViewIcon />
-            </button>
-            <button
-              className='btn btn-circle'
-              // onClick={() => {
-              //   swal({
-              //     text: "Agregar comentario, decir si se ha devulto",
-              //   });
-              // }
-              // }
-            >
-              <PencilAltIcon />
-            </button>
-          </td>
-        </tr>
-        {/* {data.map(({ cantidad, descripcion, fecha_asiento, tipo }, index) => (
-          <tr key={index}>
-            <td>{descripcion}</td>
-            <td>{cantidad}</td>
-            <td>
-              <p
-                className={`w-24 py-3 text-xs text-center badge ${
-                  tipo === 'ENTRADA' ? 'badge-success' : 'badge-error'
-                }`}
-              >
-                {tipo}
-              </p>
-            </td>
-            <td>{fecha_asiento.slice(0,10).split('-').reverse().join('-')}</td>
-          </tr>
-        ))} */}
       </tbody>
     </table>
   );
