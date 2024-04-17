@@ -63,9 +63,12 @@ export const billSchema = z.object({
 	advancement: z
 		.number({
 			invalid_type_error: "El adelanto debe ser un numero mayor que 0",
-			required_error: "El adelanto  es requerido",
+			required_error: "El adelanto es requerido",
 		})
-		.positive(),
+		.nonnegative({
+			message: "El adelanto debe ser positivo",
+		})
+		.optional(),
 
 	remainingBalance: z.number().optional(),
 

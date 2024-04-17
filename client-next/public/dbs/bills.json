@@ -56,7 +56,10 @@
       "blacklist": false,
       "dischargeDate": ""
     },
-    "costumes": ["Jason", "Doctor"],
+    "costumes": [
+      "Jason",
+      "Doctor"
+    ],
     "note": "asdasd",
     "dischargeDate": ""
   },
@@ -78,7 +81,10 @@
       "blacklist": false,
       "dischargeDate": ""
     },
-    "costumes": ["Jason", "Doctor"],
+    "costumes": [
+      "Jason",
+      "Doctor"
+    ],
     "note": "asdasd",
     "dischargeDate": ""
   },
@@ -101,7 +107,10 @@
       "blacklist": false,
       "dischargeDate": ""
     },
-    "costumes": ["Ada", "Jason"],
+    "costumes": [
+      "Ada",
+      "Jason"
+    ],
     "note": "fasdf",
     "dischargeDate": ""
   },
@@ -198,6 +207,330 @@
       }
     ],
     "note": "Informacion relevante",
+    "dischargeDate": ""
+  },
+  {
+    "id": "bfe86b5d-f3c2-473c-a868-1b7ba1ee54ec",
+    "billNumber": 13,
+    "date": "2024-04-16 22:18:53",
+    "returnedDate": "2024-04-18",
+    "retirementDate": "2024-04-18",
+    "returned": "",
+    "amountTotal": 12200,
+    "advancement": 2000,
+    "remainingBalance": 10200,
+    "client": {
+      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98111",
+      "name": "Matias",
+      "surname": "Araya",
+      "dni": 35123126,
+      "phoneNumber": 2615123123,
+      "email": "enzo@gmail.com",
+      "direction": "Calle falsa 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": false,
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "id": "f2feb561-c881-4240-b16e-ed32d9c0b674",
+        "name": "Doctora",
+        "price": 12200,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      }
+    ],
+    "note": "asdcvsv",
+    "dischargeDate": ""
+  },
+  {
+    "id": "0468fea3-0186-458a-8137-6f126e6b348a",
+    "billNumber": 14,
+    "date": "2024-04-16 22:25:32",
+    "returnedDate": "2024-04-18",
+    "retirementDate": "2024-04-18",
+    "returned": "",
+    "amountTotal": 9000,
+    "advancement": 2500,
+    "remainingBalance": 6500,
+    "client": {
+      "id": "d78f1323e-bbcc-42a2-9104-45bc97e98113",
+      "name": "Alejo",
+      "surname": "Araya",
+      "dni": 42749595,
+      "phoneNumber": 2613430975,
+      "email": "alejoaraya2000@gmail.com",
+      "direction": "Calle 7",
+      "departament": "Ciudad",
+      "postalCode": 5500,
+      "blacklist": false,
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "id": "9787c76f-d4c8-4796-886c-8b5850ffe7b7",
+        "name": "Mascara",
+        "price": 8500,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      }
+    ],
+    "note": "",
+    "dischargeDate": ""
+  },
+  {
+    "id": "c9d3d57d-e959-4d90-8cdd-f484c277023f",
+    "billNumber": 15,
+    "date": "2024-04-16 22:26:53",
+    "returnedDate": "2024-04-18",
+    "retirementDate": "2024-04-18",
+    "returned": "",
+    "amountTotal": 12200,
+    "advancement": 1,
+    "remainingBalance": 12199,
+    "client": {
+      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
+      "name": "Enzo",
+      "surname": "Vargas",
+      "dni": 35123124,
+      "phoneNumber": 2615123123,
+      "email": "enzo@gmail.com",
+      "direction": "Calle falsa 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": false,
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "id": "f2feb561-c881-4240-b16e-ed32d9c0b674",
+        "name": "Doctora",
+        "price": 12200,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      }
+    ],
+    "note": "asdcvsv",
+    "dischargeDate": ""
+  },
+  {
+    "id": "d90f37d4-95bd-46fd-943b-e3a5ff852628",
+    "billNumber": 16,
+    "date": "2024-04-16 22:36:54",
+    "returnedDate": "2024-04-18",
+    "retirementDate": "2024-04-18",
+    "returned": "",
+    "amountTotal": 4000,
+    "advancement": 0,
+    "remainingBalance": 4000,
+    "client": {
+      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98113",
+      "name": "ASD",
+      "surname": "ASD",
+      "dni": 35123129,
+      "phoneNumber": 2613459875,
+      "email": "ASD@ASD.COM",
+      "direction": "Calle 7",
+      "departament": "Ciudad",
+      "postalCode": 5513,
+      "blacklist": false,
+      "dischargeDate": "2024-02-23 20:36:51"
+    },
+    "costumes": [
+      {
+        "id": "0a9b9c44-2c39-4823-98ea-4fc32c33e0c3",
+        "name": "Bombero",
+        "price": 4000,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      }
+    ],
+    "note": "asdcvsv",
+    "dischargeDate": ""
+  },
+  {
+    "id": "eadb080c-dfa6-4cd2-aa56-90fae835c074",
+    "billNumber": 17,
+    "date": "2024-04-16 22:40:59",
+    "returnedDate": "2024-04-18",
+    "retirementDate": "2024-04-18",
+    "returned": "",
+    "amountTotal": 5000,
+    "advancement": 0,
+    "remainingBalance": 5000,
+    "client": {
+      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98151",
+      "name": "Emiliano",
+      "surname": "Araya",
+      "dni": 35123127,
+      "phoneNumber": 2613458343,
+      "email": "emilianoaraya2001@gmail.com",
+      "direction": "Calle falsa 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": false,
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "id": "7541a4e7-6255-41b0-b225-5ae9b8f15419",
+        "name": "Ada",
+        "price": 5000,
+        "category": "Magicos",
+        "details": "asdasd",
+        "dischargeDate": ""
+      }
+    ],
+    "note": "asdcvsv",
+    "dischargeDate": ""
+  },
+  {
+    "id": "2fd5d612-278d-439f-a62f-3329edff96ac",
+    "billNumber": 18,
+    "date": "2024-04-16 22:49:48",
+    "returnedDate": "2024-04-18",
+    "retirementDate": "2024-04-18",
+    "returned": "",
+    "amountTotal": 29200,
+    "advancement": 5000,
+    "remainingBalance": 24200,
+    "client": {
+      "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+      "name": "Rodrigoo",
+      "surname": "Vargas",
+      "dni": 35123123,
+      "phoneNumber": 2615123123,
+      "email": "angelvargas@gmail.com",
+      "direction": "Ficticia 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": true,
+      "dischargeDate": "2024-02-22 21:25:59"
+    },
+    "costumes": [
+      {
+        "id": "f2feb561-c881-4240-b16e-ed32d9c0b674",
+        "name": "Doctora",
+        "price": 12200,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "7541a4e7-6255-41b0-b225-5ae9b8f15419",
+        "name": "Ada",
+        "price": 5000,
+        "category": "Magicos",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "0a9b9c44-2c39-4823-98ea-4fc32c33e0c3",
+        "name": "Bombero",
+        "price": 4000,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "59a627da-7463-408b-8348-44100f7f366d",
+        "name": "Fantasmas",
+        "price": 3000,
+        "category": "Halloween",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "4be27f66-e350-4ce4-9b6b-97b54970d29c",
+        "name": "Jason",
+        "price": 5000,
+        "category": "Halloween",
+        "details": "Asdasdasd",
+        "dischargeDate": "2024-02-22 22:13:38"
+      }
+    ],
+    "note": "Me encantan los difraces",
+    "dischargeDate": ""
+  },
+  {
+    "id": "7abccb83-b149-4328-ab7a-247d782f0502",
+    "billNumber": 19,
+    "date": "2024-04-16 22:57:12",
+    "returnedDate": "2024-04-20",
+    "retirementDate": "2024-04-18",
+    "returned": "",
+    "amountTotal": 47700,
+    "advancement": 4500,
+    "remainingBalance": 43200,
+    "client": {
+      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98113",
+      "name": "ASD",
+      "surname": "ASD",
+      "dni": 35123129,
+      "phoneNumber": 2613459875,
+      "email": "ASD@ASD.COM",
+      "direction": "Calle 7",
+      "departament": "Ciudad",
+      "postalCode": 5513,
+      "blacklist": false,
+      "dischargeDate": "2024-02-23 20:36:51"
+    },
+    "costumes": [
+      {
+        "id": "9787c76f-d4c8-4796-886c-8b5850ffe7b7",
+        "name": "Mascara",
+        "price": 8500,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "9787c76f-d4c8-4796-886c-8b5850ffe7b7",
+        "name": "Mascara",
+        "price": 8500,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "9787c76f-d4c8-4796-886c-8b5850ffe7b7",
+        "name": "Mascara",
+        "price": 8500,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "f2feb561-c881-4240-b16e-ed32d9c0b674",
+        "name": "Doctora",
+        "price": 12200,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "d2def12e-ca91-4dcc-8260-2d1a42d1b14d",
+        "name": "Duende",
+        "price": 6000,
+        "category": "Magicos",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "0a9b9c44-2c39-4823-98ea-4fc32c33e0c3",
+        "name": "Bombero",
+        "price": 4000,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      }
+    ],
+    "note": "Me encantan los difraces",
     "dischargeDate": ""
   }
 ]

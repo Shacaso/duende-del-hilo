@@ -32,7 +32,7 @@ export const create = async (input: BillDto, path: string) => {
 		id: randomUUID(),
 		billNumber: lastBill,
 		date: date + " " + hour,
-		returnedDate: input.retirementDate,
+		returnedDate: input.returnedDate,
 		retirementDate: input.retirementDate,
 		returned: input.returned,
 		amountTotal: input.amountTotal,

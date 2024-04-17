@@ -1,4 +1,4 @@
-import { Entity } from "./definitions";
+import { CustomError, Entity } from "./definitions";
 
 const urlServer = "http://localhost:3000/api/";
 
@@ -11,15 +11,16 @@ export async function fetchGetAll(path: string) {
 		},
 		mode: "cors",
 	})
-		.then((res) => {
+		.then(async (res) => {
 			if (!res.ok) {
-				throw new Error();
+				const message = await res.json();
+				throw new CustomError(true, message.message);
 			}
 			return res.json();
 		})
 		.catch((e) => {
-			console.log(e);
-			alert("Hubo un error en la API con la obtencion de los datos");
+			console.log(e.message);
+			alert("Hubo un error en la API con el guardado del dato: " + e.message);
 		});
 
 	return response;
@@ -34,15 +35,16 @@ export async function fetchGetAllActives(path: string) {
 		},
 		mode: "cors",
 	})
-		.then((res) => {
+		.then(async (res) => {
 			if (!res.ok) {
-				throw new Error();
+				const message = await res.json();
+				throw new CustomError(true, message.message);
 			}
 			return res.json();
 		})
 		.catch((e) => {
-			console.log(e);
-			alert("Hubo un error en la API con la obtencion de los datos");
+			console.log(e.message);
+			alert("Hubo un error en la API con el guardado del dato: " + e.message);
 		});
 
 	return response;
@@ -57,15 +59,16 @@ export async function fetchGetAllNoActives(path: string) {
 		},
 		mode: "cors",
 	})
-		.then((res) => {
+		.then(async (res) => {
 			if (!res.ok) {
-				throw new Error();
+				const message = await res.json();
+				throw new CustomError(true, message.message);
 			}
 			return res.json();
 		})
 		.catch((e) => {
-			console.log(e);
-			alert("Hubo un error en la API con la obtencion de los datos");
+			console.log(e.message);
+			alert("Hubo un error en la API con el guardado del dato: " + e.message);
 		});
 
 	return response;
@@ -80,15 +83,16 @@ export async function fetchGetById(id: string, path: string) {
 		},
 		mode: "cors",
 	})
-		.then((res) => {
+		.then(async (res) => {
 			if (!res.ok) {
-				throw new Error();
+				const message = await res.json();
+				throw new CustomError(true, message.message);
 			}
 			return res.json();
 		})
 		.catch((e) => {
-			console.log(e);
-			alert("Hubo un error en la API con la obtencion de los datos");
+			console.log(e.message);
+			alert("Hubo un error en la API con el guardado del dato: " + e.message);
 		});
 
 	return response;
@@ -102,16 +106,16 @@ export async function fetchPost<T extends Entity>(input: T, path: string) {
 		},
 		body: JSON.stringify(input),
 	})
-		.then((res) => {
+		.then(async (res) => {
 			if (!res.ok) {
-				console.log(res);
-				throw new Error();
+				const message = await res.json();
+				throw new CustomError(true, message.message);
 			}
 			return res.json();
 		})
 		.catch((e) => {
-			console.log(e);
-			alert("Hubo un error en la API con el guardado del dato");
+			console.log(e.message);
+			alert("Hubo un error en la API con el guardado del dato: " + e.message);
 		});
 
 	return response;
@@ -129,15 +133,16 @@ export async function fetchPatch<T extends Entity>(
 		},
 		body: JSON.stringify(input),
 	})
-		.then((res) => {
+		.then(async (res) => {
 			if (!res.ok) {
-				throw new Error();
+				const message = await res.json();
+				throw new CustomError(true, message.message);
 			}
 			return res.json();
 		})
 		.catch((e) => {
-			console.log(e);
-			alert("Hubo un error en la API con la modificacion de los datos");
+			console.log(e.message);
+			alert("Hubo un error en la API con el guardado del dato: " + e.message);
 		});
 
 	return response;
@@ -152,15 +157,16 @@ export async function fetchDeleteById(id: string, path: string) {
 		},
 		mode: "cors",
 	})
-		.then((res) => {
+		.then(async (res) => {
 			if (!res.ok) {
-				throw new Error();
+				const message = await res.json();
+				throw new CustomError(true, message.message);
 			}
 			return res.json();
 		})
 		.catch((e) => {
-			console.log(e);
-			alert("Hubo un error en la API con la eliminacion de los datos");
+			console.log(e.message);
+			alert("Hubo un error en la API con el guardado del dato: " + e.message);
 		});
 
 	return response;
@@ -175,15 +181,16 @@ export async function fetchGetAllBlacklist() {
 		},
 		mode: "cors",
 	})
-		.then((res) => {
+		.then(async (res) => {
 			if (!res.ok) {
-				throw new Error();
+				const message = await res.json();
+				throw new CustomError(true, message.message);
 			}
 			return res.json();
 		})
 		.catch((e) => {
-			console.log(e);
-			alert("Hubo un error en la API con la obtencion de los datos");
+			console.log(e.message);
+			alert("Hubo un error en la API con el guardado del dato: " + e.message);
 		});
 
 	return response;
@@ -198,15 +205,16 @@ export async function fetchGetAllNoBlacklist() {
 		},
 		mode: "cors",
 	})
-		.then((res) => {
+		.then(async (res) => {
 			if (!res.ok) {
-				throw new Error();
+				const message = await res.json();
+				throw new CustomError(true, message.message);
 			}
 			return res.json();
 		})
 		.catch((e) => {
-			console.log(e);
-			alert("Hubo un error en la API con la obtencion de los datos");
+			console.log(e.message);
+			alert("Hubo un error en la API con el guardado del dato: " + e.message);
 		});
 
 	return response;
