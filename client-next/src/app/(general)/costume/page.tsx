@@ -15,16 +15,18 @@ import FormNewCostume from "./components/FormNewCostume";
 import { useCostume } from "@/hook/useCostume";
 
 export default function CostumePage() {
-  const { getAllCustomes, costumes } = useCostume();
+  const { getAllCostumes, costumes } = useCostume();
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
 
-  // const [costumes, setCostumes] = useState<Costume[]>([]);
   const [search, setSearch] = useState("");
 
+  const initial = costumes.filter(
+    (category) => category.dischargeDate?.length === 0
+  );
   const result = !costumes
-    ? costumes
-    : costumes.filter((costume) =>
+    ? initial
+    : initial.filter((costume) =>
         costume.name.toLowerCase().includes(search.toLowerCase())
       );
 
@@ -38,8 +40,8 @@ export default function CostumePage() {
   // };
 
   useEffect(() => {
-    getAllCustomes();
-  }, []);
+    getAllCostumes();
+  });
 
   return (
     <>
@@ -47,7 +49,7 @@ export default function CostumePage() {
         <DataList
           title='Disfraz'
           // setViewMode={viewModeType.TABLE}
-          element={<Table data={result} type='costumes' />}
+          element={<Table data={result} />}
         >
           <div>
             <DataList.Header>

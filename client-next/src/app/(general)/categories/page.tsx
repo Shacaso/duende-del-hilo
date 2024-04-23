@@ -17,14 +17,15 @@ export default function CategoriesPage() {
 
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
-
-  // const [categories, setCategories] = useState<Category[]>([]);
   const [search, setSearch] = useState("");
 
+  const initial = categories.filter(
+    (category) => category.dischargeDate?.length === 0
+  );
   const result = !categories
-    ? categories
-    : categories.filter((client) =>
-        client.name.toLowerCase().includes(search.toLowerCase())
+    ? initial
+    : initial.filter((category) =>
+        category.name.toLowerCase().includes(search.toLowerCase())
       );
 
   const handleChange = (e: { target: { value: any } }) => {
@@ -38,7 +39,7 @@ export default function CategoriesPage() {
 
   useEffect(() => {
     getAllCategories();
-  }, []);
+  });
 
   return (
     <>

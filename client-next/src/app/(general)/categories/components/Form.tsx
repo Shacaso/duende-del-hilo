@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function Form({ data }: Props) {
-  const { createCategory, updateCategory, created } = useCategory();
+  const { createCategory, updateCategory, created, updated } = useCategory();
 
   const clientSchema = z.object({
     id: z.string().optional(),
@@ -49,8 +49,6 @@ export default function Form({ data }: Props) {
       } else {
         updateCategory(values);
       }
-
-      created && alert("La categoria se ha guardado");
     },
   });
 

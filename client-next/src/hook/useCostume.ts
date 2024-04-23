@@ -1,35 +1,39 @@
 "use client";
 import { useAppSelector, useAppDispatch } from "@/lib/store";
 import {
-  getAllCostumesAsync,
-  //   getOneClientByIdAsync,
-  //   createClientAsync,
-  //   updateClientAsync,
+  getAllAsync,
+  deleteAsync,
   setCostumeSync,
   cleanCreatedCostumeSync,
-} from "@/lib/features/custome/custome.slice";
+  updateAsync,
+  createAsync,
+  //   getOneClientByIdAsync,
+} from "@/lib/features/costume/costume.slice";
 import { Costume } from "@/app/lib/definitions";
 
 export function useCostume() {
   const dispatch = useAppDispatch();
-  const { costume, isLoading, costumes, created, error } = useAppSelector(
-    (state) => state.costumes
-  );
+  const { costume, isLoading, costumes, created, error, updated } =
+    useAppSelector((state) => state.costumes);
 
-  function getAllCustomes() {
-    costumes.length === 0 && dispatch(getAllCostumesAsync());
+  function getAllCostumes() {
+    costumes.length === 0 && dispatch(getAllAsync());
+  }
+  function deleteCostume(id: string) {
+    dispatch(deleteAsync(id));
   }
   //   function getOneClientById(id: string) {
   //     dispatch(getOneClientByIdAsync(id));
   //   }
-  //   function createClient(newClient: User) {
-  //     dispatch(createClientAsync(newClient));
-  //   }
-  //   function updateClient(modified: User) {
-  //     dispatch(updateClientAsync(modified));
-  //   }
-  function setCostume(costume: Costume) {
-    dispatch(setCostumeSync(costume));
+  function createCostume(body: Costume) {
+    dispatch(createAsync(body));
+  }
+  function updateCostume(body: Costume) {
+    dispatch(updateAsync(body));
+  }
+
+  function setCostume(body: Costume) {
+    dispatch(setCostumeSync(body));
   }
   function cleanCreatedCostume() {
     dispatch(cleanCreatedCostumeSync());
@@ -40,12 +44,14 @@ export function useCostume() {
     isLoading,
     costume,
     created,
+    updated,
     error,
-    getAllCustomes,
-    // getOneClientById,
-    // createClient,
-    // updateClient,
+    getAllCostumes,
+    createCostume,
+    updateCostume,
+    deleteCostume,
     setCostume,
     cleanCreatedCostume,
+    // getOneClientById,
   };
 }

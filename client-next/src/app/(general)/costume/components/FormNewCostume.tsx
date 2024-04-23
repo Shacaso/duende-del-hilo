@@ -5,25 +5,23 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { z, ZodError } from "zod";
 import FormCategory from "./category/FormCategory";
+import { useCategory } from "@/hook/useCategory";
+import { useCostume } from "@/hook/useCostume";
 
 interface Props {
   data?: Costume;
 }
 
 export default function FormNewCostume({ data }: Props) {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const nameCategories = categories.map((category) => category.name);
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
-
-  const getCategories = async () => {
-    const data: Category[] = await fetchGetAll("categories");
-    setCategories(data);
-  };
+  const { getAllCategories, categories } = useCategory();
+  const { createCostume, updateCostume, created, updated } = useCostume();
+  const nameCategories = categories.map((category) => category.name);
 
   useEffect(() => {
-    getCategories();
-  }, []);
+    getAllCategories();
+  });
 
   const costumeSchema = z.object({
     name: z.string({
@@ -77,17 +75,9 @@ export default function FormNewCostume({ data }: Props) {
     },
     onSubmit: (values) => {
       if (!data) {
-        fetchPost(values, "costumes").then((res) => {
-          if (res) {
-            alert("El disfraz se ha guardado");
-          }
-        });
+        createCostume(values);
       } else {
-        fetchPatch(data.id, values, "costumes").then((res) => {
-          if (res) {
-            alert("El disfraz se ha actualizado");
-          }
-        });
+        updateCostume(values);
       }
     },
   });
