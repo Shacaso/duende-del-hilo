@@ -41,7 +41,7 @@ export default function CategoriesPage() {
     <>
       <div className='w-full px-5 mt-10'>
         <DataList
-          title='Cliente'
+          title='Categoria'
           // setViewMode={viewModeType.TABLE}
           element={<Table data={result} type='categories' />}
         >
@@ -58,7 +58,7 @@ export default function CategoriesPage() {
                       <input
                         autoComplete='false'
                         className='w-full flex-grow p-1 outline-none text-secondary bg-base-200 text-md'
-                        placeholder='Buscar cliente'
+                        placeholder='Buscar categoria'
                         type='text'
                         name='search'
                         value={search}
@@ -78,7 +78,7 @@ export default function CategoriesPage() {
                 >
                   <div className='flex items-center gap-5'>
                     <PlusIcon />
-                    Nuevo Cliente
+                    Nueva Categoria
                   </div>
                 </Button>
               </div>

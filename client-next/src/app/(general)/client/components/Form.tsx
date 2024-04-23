@@ -1,5 +1,6 @@
 import { Client, Departament } from "@/app/lib/definitions";
 import { fetchGetAll, fetchPatch, fetchPost } from "@/app/lib/fetching";
+import { InputDataList, Input } from "@/components";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { z, ZodError } from "zod";
@@ -16,15 +17,19 @@ export default function Form({ data }: Props) {
 
   const clientSchema = z.object({
     id: z.string().optional(),
-    name: z.string({
-      invalid_type_error: "El nombre debe ser un string",
-      required_error: "El nombre es requerido",
-    }),
+    name: z
+      .string({
+        invalid_type_error: "El nombre debe ser un string",
+        required_error: "El nombre es requerido",
+      })
+      .min(3),
 
-    surname: z.string({
-      invalid_type_error: "El apellido debe ser un string",
-      required_error: "El apellido es requerido",
-    }),
+    surname: z
+      .string({
+        invalid_type_error: "El apellido debe ser un string",
+        required_error: "El apellido es requerido",
+      })
+      .min(2),
 
     dni: z
       .number({
@@ -48,17 +53,18 @@ export default function Form({ data }: Props) {
 
     email: z.string().email("Email inválido"),
 
-    direction: z.string({
-      invalid_type_error: "La direccion debe ser un string",
-      required_error: "La direccion es requerido",
-    }),
+    direction: z
+      .string({
+        invalid_type_error: "La direccion debe ser un string",
+        required_error: "La direccion es requerido",
+      })
+      .min(3),
 
     departament: z
       .string()
       .refine((value) => nameDepartaments.includes(value), {
         message: "No se encuenta el departamento en la base de datos",
       }),
-
     postalCode: z
       .number({
         invalid_type_error: "El codigo postal debe ser un numero de 10 digitos",
@@ -141,14 +147,15 @@ export default function Form({ data }: Props) {
   }, []);
 
   return (
-    <form className='flex flex-col gap-5 p-5' onSubmit={handleSubmit}>
-      <div className='flex justify-between '>
-        {touched.name && errors.name && <p>{errors.name}</p>}
-        <input
-          className={`input input-bordered ${
-            touched.name && errors.name ? "border border-red-500" : "border"
-          }`}
-          placeholder='name'
+    <form
+      className='flex flex-col gap-5 p-5 [&>div]:flex [&>div]:justify-between [&>div]:gap-2'
+      onSubmit={handleSubmit}
+    >
+      <div>
+        <Input
+          validate={touched.name && errors.name ? true : false}
+          title='Nombre'
+          placeholder='Ingrese nombre'
           type='text'
           name='name'
           value={values.name}
@@ -156,103 +163,88 @@ export default function Form({ data }: Props) {
           onBlur={handleBlur}
         />
 
-        {touched.surname && errors.surname && <p>{errors.surname}</p>}
-        <input
-          className={`input input-bordered ${
-            touched.name && errors.name ? "border border-red-500" : "border"
-          }`}
-          placeholder='surname'
+        <Input
+          validate={touched.surname && errors.surname ? true : false}
+          title='Apellido'
+          placeholder='Ingrese apellido'
           type='text'
           name='surname'
           value={values.surname}
-          onBlur={handleBlur}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
       </div>
 
-      <div className='flex justify-between '>
-        {/* {touched.dni && errors.dni && <p>{errors.dni}</p>} */}
-        <input
-          className={`input input-bordered ${
-            touched.name && errors.name ? "border border-red-500" : "border"
-          }`}
-          placeholder='dni look at me'
+      <div>
+        <Input
+          validate={touched.dni && errors.dni ? true : false}
+          title='DNI'
+          placeholder='Ingrese dni'
           type='number'
           name='dni'
           value={values.dni}
-          onBlur={handleBlur}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
 
-        {/* {touched.phoneNumber && errors.phoneNumber && (
-          <p>{errors.phoneNumber}</p>
-        )} */}
-        <input
-          className={`input input-bordered border ${
-            touched.name && errors.name ? " border-red-500" : "border"
-          }`}
-          placeholder='phoneNumber'
+        <Input
+          validate={touched.phoneNumber && errors.phoneNumber ? true : false}
+          title='Numero de celular'
+          placeholder='Ingrese numero de celular'
           type='number'
           name='phoneNumber'
           value={values.phoneNumber}
-          onBlur={handleBlur}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
       </div>
 
-      {touched.direction && errors.direction && <p>{errors.direction}</p>}
-      <input
-        className=' input input-bordered '
-        placeholder='direction'
+      <Input
+        validate={touched.direction && errors.direction ? true : false}
+        title='Direccion'
+        placeholder='Ingrese la direccion'
         type='text'
         name='direction'
         value={values.direction}
-        onBlur={handleBlur}
         onChange={handleChange}
+        onBlur={handleBlur}
       />
 
-      <div className='flex justify-between '>
-        {touched.departament && errors.departament && (
-          <p>{errors.departament}</p>
-        )}
-        <label>
-          <input
-            list='departaments'
-            name='departament'
-            className=' input input-bordered '
-            placeholder='departament'
-            value={values.departament}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-        </label>
-        <datalist id='departaments'>
-          {departaments.map((item) => (
-            <option key={item.id} value={item.name}></option>
-          ))}
-        </datalist>
+      <div>
+        <InputDataList
+          data={departaments}
+          list='departaments'
+          validate={touched.departament && errors.departament ? true : false}
+          title='Departamento'
+          placeholder='Ingrese departamento'
+          type='text'
+          name='departament'
+          value={values.departament}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
 
-        {touched.postalCode && errors.postalCode && <p>{errors.postalCode}</p>}
-        <input
-          className=' input input-bordered '
-          placeholder='postalCode'
+        <Input
+          validate={touched.postalCode && errors.postalCode ? true : false}
+          title='Codigo postal'
+          placeholder='Ingrese codigo postal'
           type='number'
           name='postalCode'
           value={values.postalCode}
-          onBlur={handleBlur}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
       </div>
 
-      {touched.email && errors.email && <p>{errors.email}</p>}
-      <input
-        className=' input input-bordered '
-        placeholder='email'
-        type='email'
+      <Input
+        validate={touched.email && errors.email ? true : false}
+        title='Correo electronico'
+        placeholder='Ingrese correo electronico'
+        type='text'
         name='email'
         value={values.email}
-        onBlur={handleBlur}
         onChange={handleChange}
+        onBlur={handleBlur}
       />
       <button className='btn btn-primary' type='submit'>
         SAVE!

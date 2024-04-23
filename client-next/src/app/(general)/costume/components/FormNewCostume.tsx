@@ -95,70 +95,72 @@ export default function FormNewCostume({ data }: Props) {
   return (
     <>
       <form
-        className='flex flex-col gap-5 w-full h-full p-5'
+        className='flex flex-col gap-5 w-full h-full justify-between p-5'
         onSubmit={handleSubmit}
       >
-        {touched.name && errors.name && <p>{errors.name}</p>}
-        <input
-          className='w-full input input-bordered h-full'
-          placeholder='name'
-          type='text'
-          name='name'
-          value={values.name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
+        <div className='flex flex-col gap-5'>
+          {touched.name && errors.name && <p>{errors.name}</p>}
+          <input
+            className='w-full input input-bordered '
+            placeholder='name'
+            type='text'
+            name='name'
+            value={values.name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
 
-        {touched.price && errors.price && <p>{errors.price}</p>}
-        <input
-          className='w-full input input-bordered h-full'
-          placeholder='price'
-          type='number'
-          name='price'
-          value={values.price}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+          {touched.price && errors.price && <p>{errors.price}</p>}
+          <input
+            className='w-full input input-bordered '
+            placeholder='price'
+            type='number'
+            name='price'
+            value={values.price}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
 
-        {touched.category && errors.category && <p>{errors.category}</p>}
-        <div className='flex gap-5 items-center justify-center'>
-          <div className='flex-1'>
-            <label>
-              <input
-                list='categories'
-                name='category'
-                className='w-full input input-bordered '
-                placeholder='category'
-                value={values.category}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-            </label>
-            <datalist id='categories'>
-              {categories.map((item) => (
-                <option key={item.id} value={item.name}></option>
-              ))}
-            </datalist>
+          {touched.category && errors.category && <p>{errors.category}</p>}
+          <div className='flex gap-5 items-center justify-center'>
+            <div className='flex-1'>
+              <label>
+                <input
+                  list='categories'
+                  name='category'
+                  className='w-full input input-bordered '
+                  placeholder='category'
+                  value={values.category}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                />
+              </label>
+              <datalist id='categories'>
+                {categories.map((item) => (
+                  <option key={item.id} value={item.name}></option>
+                ))}
+              </datalist>
+            </div>
+            <button
+              type='button'
+              onClick={() => setConfirmationModalOpen(!confirmationModalOpen)}
+              className='btn  btn-primary  btn-xs h-full'
+            >
+              +
+            </button>
           </div>
-          <button
-            type='button'
-            onClick={() => setConfirmationModalOpen(!confirmationModalOpen)}
-            className='btn h-full btn-primary  btn-xs'
-          >
-            +
-          </button>
-        </div>
 
-        {touched.details && errors.details && <p>{errors.details}</p>}
-        <input
-          className='w-full input input-bordered h-full'
-          placeholder='details'
-          type='text'
-          name='details'
-          value={values.details}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+          {touched.details && errors.details && <p>{errors.details}</p>}
+          <input
+            className='w-full input input-bordered '
+            placeholder='details'
+            type='text'
+            name='details'
+            value={values.details}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+        </div>
         <button className='btn btn-primary' type='submit'>
           SAVE!
         </button>
