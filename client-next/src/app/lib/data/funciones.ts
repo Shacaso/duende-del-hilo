@@ -20,6 +20,7 @@ export const deleteAction = async (id: string, path: string) => {
 			if (res) alert("Registro eliminado");
 		});
 	}
+	location.reload();
 };
 
 export async function getCostumeArray(

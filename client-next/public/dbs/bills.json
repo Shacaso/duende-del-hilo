@@ -56,7 +56,10 @@
       "blacklist": false,
       "dischargeDate": ""
     },
-    "costumes": ["Jason", "Doctor"],
+    "costumes": [
+      "Jason",
+      "Doctor"
+    ],
     "note": "asdasd",
     "dischargeDate": ""
   },
@@ -78,7 +81,10 @@
       "blacklist": false,
       "dischargeDate": ""
     },
-    "costumes": ["Jason", "Doctor"],
+    "costumes": [
+      "Jason",
+      "Doctor"
+    ],
     "note": "asdasd",
     "dischargeDate": ""
   },
@@ -101,7 +107,10 @@
       "blacklist": false,
       "dischargeDate": ""
     },
-    "costumes": ["Ada", "Jason"],
+    "costumes": [
+      "Ada",
+      "Jason"
+    ],
     "note": "fasdf",
     "dischargeDate": ""
   },
@@ -198,6 +207,78 @@
       }
     ],
     "note": "Informacion relevante",
+    "dischargeDate": ""
+  },
+  {
+    "id": "6ba67f0f-53d5-41ee-8afe-16547cb53ba7",
+    "billNumber": 13,
+    "date": "2024-04-24 18:35:34",
+    "returnedDate": "2024-04-26",
+    "retirementDate": "2024-04-26",
+    "returned": "",
+    "amountTotal": 3000,
+    "advancement": 2000,
+    "remainingBalance": 1000,
+    "client": {
+      "id": "d78f1323e-bbcc-42a2-9104-45bc97e98113",
+      "name": "Alejo",
+      "surname": "Araya",
+      "dni": 42749595,
+      "phoneNumber": 2613430975,
+      "email": "alejoaraya2000@gmail.com",
+      "direction": "Calle 7",
+      "departament": "Ciudad",
+      "postalCode": 5500,
+      "blacklist": false,
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "id": "0ec7d96a-bd36-4ef1-8313-7e8bf1a56d29",
+        "name": "Tricking",
+        "price": 3000,
+        "category": "Halloween",
+        "details": "Patadas",
+        "dischargeDate": "2024-02-23 18:34:39"
+      }
+    ],
+    "note": "asdcvsv",
+    "dischargeDate": ""
+  },
+  {
+    "id": "b7cac9be-6f8e-4389-afa3-dc9f084a52a1",
+    "billNumber": 14,
+    "date": "2024-04-24 18:41:31",
+    "returnedDate": "2024-04-27",
+    "retirementDate": "2024-04-26",
+    "returned": "",
+    "amountTotal": 8500,
+    "advancement": 2000,
+    "remainingBalance": 6500,
+    "client": {
+      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98151",
+      "name": "Emiliano",
+      "surname": "Araya",
+      "dni": 35123127,
+      "phoneNumber": 2613458343,
+      "email": "emilianoaraya2001@gmail.com",
+      "direction": "Calle falsa 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": false,
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "id": "060f1ca0-04eb-497f-a524-316dcf97e4aa",
+        "name": "Doctor",
+        "price": 8500,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      }
+    ],
+    "note": "Me encantan los difraces",
     "dischargeDate": ""
   }
 ]

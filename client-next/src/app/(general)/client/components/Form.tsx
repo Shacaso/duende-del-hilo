@@ -34,9 +34,22 @@ export default function Form({ data }: Props) {
 			.int()
 			.min(1000000)
 			.max(99999999)
-			.refine((value) => !dniClients.includes(value), {
-				message: " Dni ya esta registrado ",
-			}),
+			.refine(
+				(dni) => {
+					let bandera = 0;
+					for (let index = 0; index < dniClients.length; index++) {
+						if (dniClients[index] === dni) {
+							bandera++;
+							break;
+						}
+					}
+					if (bandera === 0 || bandera === 1) return true;
+					return false;
+				},
+				{
+					message: " Dni ya esta registrado ",
+				}
+			),
 		phoneNumber: z
 			.number({
 				invalid_type_error: "El telefono debe ser un numero de 10 digitos",

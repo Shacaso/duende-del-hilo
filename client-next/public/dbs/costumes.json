@@ -85,7 +85,7 @@
     "price": 123,
     "category": "Halloween",
     "details": "Detalles",
-    "dischargeDate": ""
+    "dischargeDate": "2024-04-23 20:11:48"
   },
   {
     "id": "30e1e038-b734-416f-ad7a-28e844e70fb2",
@@ -93,14 +93,30 @@
     "price": 27,
     "category": "Magicos",
     "details": "HERMOSA",
-    "dischargeDate": ""
+    "dischargeDate": "2024-04-23 20:07:12"
   },
   {
     "name": "Robot",
     "price": 8500,
     "category": "Halloween",
-    "details": "asdasd",
+    "details": "asdasdasd",
     "id": "bdf49508-31ca-4240-ac94-b9d6a27d678e",
     "dischargeDate": ""
+  },
+  {
+    "id": "6df37128-d71b-438f-9d09-57b947bb318d",
+    "name": "Diablo",
+    "price": 5000,
+    "category": "Halloween",
+    "details": "ASDASD",
+    "dischargeDate": "2024-04-23 20:26:33"
+  },
+  {
+    "id": "42d47c45-9904-45cc-ab99-56268d85b475",
+    "name": "enfermera",
+    "price": 6000,
+    "category": "Profesiones",
+    "details": "asdas",
+    "dischargeDate": "2024-04-23 20:32:16"
   }
 ]
