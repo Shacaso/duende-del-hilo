@@ -123,10 +123,10 @@ export const PDFile = ({ data }: Props) => (
 					</View>
 					<View style={stylesDetail.date}>
 						<View>
-							<Text>Fecha de retiro _ _ / _ _ / _ _ _ _</Text>
+							<Text>Fecha de retiro: {data.retirementDate}</Text>
 						</View>
 						<View>
-							<Text>Fecha de devolucion _ _ / _ _ / _ _ _ _</Text>
+							<Text>Fecha de devolucion {data.returnedDate}</Text>
 						</View>
 					</View>
 				</View>
@@ -170,9 +170,9 @@ export const PDFile = ({ data }: Props) => (
 					</View>
 					<View style={stylesPrice.price}>
 						<Text style={{ fontWeight: "bold" }}>Precio total</Text>
-						<Text>{"Total .... " + data.amount}</Text>
-						<Text>Seña ......$ 2000</Text>
-						<Text>Saldo .....</Text>
+						<Text>Total .... $ {data.amountTotal}</Text>
+						<Text>Seña ......$ {data.advancement}</Text>
+						<Text>Saldo .....$ {data.remainingBalance}</Text>
 					</View>
 				</View>
 				<View style={stylesSignature.signatureStructure}>
