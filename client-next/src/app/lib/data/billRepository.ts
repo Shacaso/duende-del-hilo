@@ -1,7 +1,6 @@
 import { randomUUID } from "crypto";
 import { Bill, BillDto, Client, Costume, CustomError } from "../definitions";
 import { allEntities, saveAllEntities } from "./GetAndSaveJson";
-import { clientsPath } from "./paths";
 import { getClientByDNI, getCostumeArray, getDateAndHour } from "./funciones";
 
 export const create = async (input: BillDto, path: string) => {
