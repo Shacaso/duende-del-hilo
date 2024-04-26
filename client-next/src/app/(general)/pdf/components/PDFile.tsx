@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Page, Text, Image, View, Document } from "@react-pdf/renderer";
+import { Page, Text, View, Document } from "@react-pdf/renderer";
 
 import {
 	stylesNavbar,
