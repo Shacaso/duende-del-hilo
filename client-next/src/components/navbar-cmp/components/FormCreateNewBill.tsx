@@ -8,6 +8,8 @@ import {
 } from "@/app/lib/definitions";
 import { fetchGetAll, fetchPatch, fetchPost } from "@/app/lib/fetching";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
+import { useClient } from "@/hook/useClient";
+import { useCostume } from "@/hook/useCostume";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { z, ZodError } from "zod";
@@ -17,50 +19,14 @@ interface Props {
 }
 
 export default function FormCreateNewBill({ data }: Props) {
-  const [clients, setClients] = useState<Client[]>([]);
-  const [costumesList, setCostumes] = useState<Costume[]>([]);
+  const { getAllClients, clients } = useClient();
+  const { getAllCostumes, costumes: costumesList } = useCostume();
+
   const [costumeSelected, setCostumeSelected] = useState<string[]>([]);
-  const idClients = clients.map((client: Client) => client.dni);
+
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
 
-  const billSchema = z.object({
-    id: z.string().optional(),
-
-    billNumber: z.number().optional(),
-
-    date: z.string().optional(),
-
-    returned: z
-      .boolean({
-        invalid_type_error:
-          "El valor del atributo devuelto debe ser un booleano",
-      })
-      .default(false),
-
-    amountTotal: z
-      .number({
-        invalid_type_error: "El monto debe ser un numero mayor que 0",
-        required_error: "El monto  es requerido",
-      })
-      .positive(),
-
-    dniClient: z.coerce
-      .number({
-        invalid_type_error: "El dni debe ser un numero mayor que 0",
-        required_error: "El dni es requerido",
-      })
-      .refine((value) => idClients.includes(value), {
-        message: "No se encuenta ese id de Usuario en la base de datos",
-      }),
-
-    note: z.string({
-      invalid_type_error: "La nota debe ser un string",
-      required_error: "La nota es requerido",
-    }),
-
-    dischargeDate: z.string().default(""),
-  });
   const {
     initialValues,
     handleSubmit,
@@ -141,20 +107,10 @@ export default function FormCreateNewBill({ data }: Props) {
     setCostumeSelected(costumeUpdate);
   };
 
-  const getClients = async () => {
-    const data: Client[] = await fetchGetAll("clients");
-    setClients(data);
-  };
-
-  const getCostumes = async () => {
-    const data: Costume[] = await fetchGetAll("costumes");
-    setCostumes(data);
-  };
-
   useEffect(() => {
-    getClients();
-    getCostumes();
-  }, []);
+    getAllClients();
+    getAllCostumes();
+  });
 
   return (
     <>

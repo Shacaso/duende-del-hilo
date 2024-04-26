@@ -1,105 +1,52 @@
 "use client";
 
-import { DataList, Search } from "@/components";
+import { DataList } from "@/components";
 import Button from "@/components/button-cmp/Button";
 import { Table } from "./components/Table";
 import Filters from "./components/Filters";
 import { type Bill } from "@/app/lib/definitions";
 import { useEffect, useState } from "react";
-import { fetchGetAll } from "@/app/lib/fetching";
-// import { viewModeType } from '@/components/datalist-cmp/constants';
-// import { Table, Filters } from './components';
-// import { useMovements } from '@/hooks';
-// import { useEffect, useState } from 'react';
-// import { FilterDate } from './components/FilterDate';
-// import {Button} from '@/components'
 import { SearchInputIcon } from "@/assets/svg";
 import { useBill } from "@/hook/useBill";
 
 export default function Bill() {
-  const { getAllBills, bills, isLoading } = useBill();
-
-  // const [bills, setBills] = useState<Bill[]>([]);
+  const { getAllBills, bills } = useBill();
 
   const [search, setSearch] = useState("");
 
   const result = !bills
     ? bills
-    : bills.filter((bill) => bill.client?.dni === Number.parseInt(search));
-
+    : bills.filter(
+        (bill: Bill) =>
+          bill.client.name.toLowerCase().includes(search.toLowerCase()) ||
+          bill.client.surname.toLowerCase().includes(search.toLowerCase()) ||
+          bill.date.toLowerCase().includes(search.toLowerCase()) ||
+          bill.billNumber
+            .toString()
+            .toLowerCase()
+            .includes(search.toLowerCase()) ||
+          bill.amountTotal
+            .toString()
+            .toLowerCase()
+            .includes(search.toLowerCase()) ||
+          bill.client.dni
+            .toString()
+            .toLowerCase()
+            .includes(search.toLowerCase())
+      );
   const handleChange = (e: { target: { value: any } }) => {
     setSearch(e.target.value);
   };
 
-  // const getBills = async () => {
-  //   const data: Bill[] = await fetchGetAll("bills");
-  //   setBills(data);
-  // };
-
   useEffect(() => {
     getAllBills();
-  }, []);
-
-  // console.log(bills);
-
-  //   const { movements, getAllMovements } = useMovements();
-  //   const [searchQuery, setSearchQuery] = useState('');
-  //   const [filterType, setFilterType] = useState('');
-  //   const [filteredMovements, setFilteredMovements] = useState([]);
-  //   const [startDate, setStartDate] = useState(new Date('01/01/2023'));
-  //   const [endDate, setEndDate] = useState(new Date());
-
-  //   useEffect(() => {
-  //     getAllMovements();
-  //   }, []);
-
-  //   useEffect(() => {
-  //     const descriptionFiltered = movements.filter(movement =>
-  //       movement.descripcion.toLowerCase().includes(searchQuery.toLowerCase())
-  //     );
-
-  //     const typeFiltered = filterType
-  //       ? descriptionFiltered.filter(movement => movement.tipo === filterType)
-  //       : descriptionFiltered;
-
-  //     const dateFiltered = typeFiltered.filter(movement => {
-  //       const movementDate = new Date(movement.fecha_asiento);
-  //       return movementDate >= startDate && movementDate <= endDate;
-  //     });
-
-  //     setFilteredMovements(dateFiltered);
-  //   }, [searchQuery, movements, filterType, startDate, endDate]);
-
-  //   const handleSearch = query => {
-  //     setSearchQuery(query);
-  //   };
-
-  //   const handleFilterType = selectedType => {
-  //     setFilterType(selectedType);
-  //   };
-
-  //   const handleDateChange = (start, end) => {
-  //       setStartDate(start);
-  //       setEndDate(end);
-  //   };
+  });
 
   return (
     <div className='w-full px-5 mt-10'>
-      <DataList
-        title='Facturas'
-        //   setViewMode={viewModeType.TABLE}
-        element={<Table data={bills} />}
-      >
+      <DataList title='Facturas' element={<Table data={result} />}>
         <div>
-          <Button
-            className='w-full btn btn-primary my-5'
-            //   onClick={() =>
-            //     openModal(<FormProduct />, {
-            //       title: 'Nuevo Disfraz',
-            //       className: 'modal-product',
-            //     })
-            //   }
-          >
+          <Button className='w-full btn btn-primary my-5'>
             <h1>Generar Reporte</h1>
           </Button>
           <DataList.Header>

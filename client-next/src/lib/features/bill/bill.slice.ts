@@ -1,10 +1,5 @@
 import { Bill } from "@/app/lib/definitions";
-import {
-  fetchGetAll,
-  fetchPost,
-  fetchGetById,
-  fetchPatch,
-} from "@/app/lib/fetching";
+import { fetchGetAll, fetchPost, fetchPatch } from "@/app/lib/fetching";
 
 import {
   type PayloadAction,
@@ -12,34 +7,27 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 
+const path = "bills";
+
 // thunk functions
-export const getAllBillsAsync = createAsyncThunk(
+export const getAllAsync = createAsyncThunk(
   "bill/getAll",
   async (): Promise<Bill[]> => {
-    return await fetchGetAll("bills");
+    return await fetchGetAll(path);
   }
 );
-// export const createClientAsync = createAsyncThunk(
-//   "bill/create",
-//   async (newClient: Bill) => {
-//     const created = await await fetchPost(newClient, "clients");
-//     return created;
-//   }
-// );
-// export const getOneClientByIdAsync = createAsyncThunk(
-//   "bill/getOneById",
-//   async (id: string) => {
-//     const bill = await fetchGetById(id, "clients");
-//     return bill;
-//   }
-// );
-// export const updateClientAsync = createAsyncThunk(
-//   "bill/update",
-//   async (modified: Bill) => {
-//     const updated = await fetchPatch(modified.id, modified, "clients");
-//     return updated;
-//   }
-// );
+export const createAsync = createAsyncThunk(
+  "bill/create",
+  async (body: Bill): Promise<Bill> => {
+    return await fetchPost(body, path);
+  }
+);
+export const updateAsync = createAsyncThunk(
+  "bill/update",
+  async (body: Bill): Promise<Bill> => {
+    return await fetchPatch(body.id, body, path);
+  }
+);
 interface State {
   bills: Bill[];
   isLoading: boolean;
@@ -66,52 +54,45 @@ export const billSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    // GETALL
-    builder.addCase(getAllBillsAsync.pending, (state) => {
+    //* GETALL
+    builder.addCase(getAllAsync.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(getAllBillsAsync.fulfilled, (state, action) => {
+    builder.addCase(getAllAsync.fulfilled, (state, action) => {
       state.bills = action.payload;
       state.isLoading = false;
     });
 
     // * CREATE
-    // builder.addCase(createClientAsync.pending, (state) => {
-    //   state.isLoading = true;
-    //   state.error = "";
-    // });
-    // builder.addCase(createClientAsync.fulfilled, (state, action) => {
-    //   const newClient = action.payload;
-    //   state.clients.push(newClient);
-    //   state.created = newClient;
-    //   state.isLoading = false;
-    // });
-    // builder.addCase(createClientAsync.rejected, (state, action) => {
-    //   state.error = action.error.message;
-    //   state.isLoading = false;
-    // });
+    builder.addCase(createAsync.pending, (state) => {
+      state.isLoading = true;
+      state.error = "";
+    });
+    builder.addCase(createAsync.fulfilled, (state, action) => {
+      const body = action.payload;
+      state.bills.push(body);
+      state.created = body;
+      alert("La factura se ha guardado");
+      state.isLoading = false;
+    });
+    builder.addCase(createAsync.rejected, (state, action) => {
+      state.error = action.error.message;
+      state.isLoading = false;
+    });
 
-    // // GETBYID
-    // builder.addCase(getOneClientByIdAsync.pending, (state) => {
-    //   state.isLoading = true;
-    // });
-    // builder.addCase(getOneClientByIdAsync.fulfilled, (state, action) => {
-    //   const bill = action.payload;
-    //   state.bill = bill;
-    //   state.isLoading = false;
-    // });
-
-    // // UPDATE
-    // builder.addCase(updateClientAsync.pending, (state) => {
-    //   state.isLoading = true;
-    // });
-    // builder.addCase(updateClientAsync.fulfilled, (state, action) => {
-    //   const updated = action.payload;
-    //   const id = updated.id;
-    //   const index = state.clients.findIndex((item) => item.id === id);
-    //   state.clients[index] = updated;
-    //   state.isLoading = false;
-    // });
+    //* UPDATE
+    builder.addCase(updateAsync.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateAsync.fulfilled, (state, action) => {
+      const updated: Bill = action.payload;
+      const { id } = updated;
+      const index = state.bills.findIndex((item) => item.id === id);
+      state.bills[index] = updated;
+      // state.updated = updated;
+      alert("La factura se ha actualizado");
+      state.isLoading = false;
+    });
   },
 });
 

@@ -76,7 +76,7 @@ export const categorySlice = createSlice({
     },
   },
   extraReducers(builder) {
-    // GETALL
+    //* GETALL
     builder.addCase(getAllCategoriesAsync.pending, (state) => {
       state.isLoading = true;
     });
@@ -126,7 +126,7 @@ export const categorySlice = createSlice({
       state.isLoading = false;
     });
 
-    //! DELETE
+    //* DELETE
     builder.addCase(deleteCategoryAsync.pending, (state) => {
       state.isLoading = true;
     });

@@ -1,19 +1,15 @@
-// import PropTypes from 'prop-types';
-import { deleteAction } from "@/app/lib/data/funciones";
 import type { Client } from "@/app/lib/definitions";
 import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import { useState } from "react";
 import Form from "./Form";
 import View from "./View";
-// import { useProviders, useModal } from '@/hooks';
+import { useClient } from "@/hook/useClient";
 // import { TableSkeleton } from '@/components';
 // import swal from 'sweetalert';
-// import { UpdateProvider } from './UpdateProvider';
 
 interface Props {
   data: Client[];
-  type: string;
 }
 
 const headers = [
@@ -28,12 +24,14 @@ const headers = [
   "Acciones",
 ];
 
-export function Table({ data, type }: Props) {
+export function Table({ data }: Props) {
+  const { deleteClient } = useClient();
+
   const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
   const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
   const [client, setClient] = useState<Client>();
 
-  const DNIs = data.map((item) => item.dni);
+  // const DNIs = data.map((item) => item.dni);
 
   // const { loading, deleteProvider } = useProviders();
   // const { openModal } = useModal();
@@ -91,7 +89,7 @@ export function Table({ data, type }: Props) {
                 <td className='flex gap-2'>
                   <button
                     className='btn btn-circle btn-ghost'
-                    onClick={() => deleteAction(client.id, type)}
+                    onClick={() => deleteClient(client.id)}
                   >
                     <TrashIcon />
                   </button>

@@ -1,7 +1,7 @@
 // import PropTypes from 'prop-types';
-import { Bill, Client } from "@/app/lib/definitions";
+import { Bill, Client, Costume } from "@/app/lib/definitions";
 import { fetchGetById } from "@/app/lib/fetching";
-import { PencilAltIcon, ViewIcon } from "@/assets/svg";
+import { TrashIcon, ViewIcon } from "@/assets/svg";
 import { PDFViewer } from "@react-pdf/renderer";
 import { PDFile } from "../../pdf/components/PDFile";
 // import swal from 'sweetalert';
@@ -42,13 +42,15 @@ export function Table({ data }: Props) {
               <td>{bill.amountTotal}</td>
               <td>{bill.client?.dni}</td>
               <td>
-                {bill.costumes.map((costume, index) => {
-                  if (index === bill.costumes.length - 1) {
-                    return costume.name;
-                  } else {
-                    return costume.name + ", ";
+                {bill.costumes.map(
+                  (costume: Costume, index: number): string => {
+                    if (index === bill.costumes.length - 1) {
+                      return costume.name;
+                    } else {
+                      return costume.name + ", ";
+                    }
                   }
-                })}
+                )}
               </td>
 
               <td>
@@ -75,16 +77,8 @@ export function Table({ data }: Props) {
                     </div>
                   </div>
                 </dialog>
-                <button
-                  className='btn btn-circle'
-                  // onClick={() => {
-                  //   swal({
-                  //     text: "Agregar comentario, decir si se ha devulto",
-                  //   });
-                  // }
-                  // }
-                >
-                  <PencilAltIcon />
+                <button className='btn btn-circle'>
+                  <TrashIcon />
                 </button>
               </td>
             </tr>

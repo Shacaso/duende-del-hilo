@@ -1,14 +1,13 @@
 "use client";
 import { useAppSelector, useAppDispatch } from "@/lib/store";
 import {
-  getAllBillsAsync,
-  //   getOneClientByIdAsync,
-  //   createClientAsync,
-  //   updateClientAsync,
+  getAllAsync,
+  createAsync,
+  updateAsync,
   setBillSync,
   cleanCreatedBillSync,
 } from "@/lib/features/bill/bill.slice";
-import { Bill } from "@/app/lib/definitions";
+import { Bill, BillDto } from "@/app/lib/definitions";
 
 export function useBill() {
   const dispatch = useAppDispatch();
@@ -17,20 +16,21 @@ export function useBill() {
   );
 
   function getAllBills() {
-    bills.length === 0 && dispatch(getAllBillsAsync());
+    bills.length === 0 && dispatch(getAllAsync());
   }
-  //   function getOneClientById(id: string) {
-  //     dispatch(getOneClientByIdAsync(id));
-  //   }
-  //   function createClient(newClient: User) {
-  //     dispatch(createClientAsync(newClient));
-  //   }
-  //   function updateClient(modified: User) {
-  //     dispatch(updateClientAsync(modified));
-  //   }
+
+  function createBill(body: BillDto) {
+    dispatch(createAsync(body));
+  }
+
+  function updateBill(body: Bill) {
+    dispatch(updateAsync(body));
+  }
+
   function setBill(bill: Bill) {
     dispatch(setBillSync(bill));
   }
+
   function cleanCreatedBill() {
     dispatch(cleanCreatedBillSync());
   }
@@ -42,9 +42,8 @@ export function useBill() {
     created,
     error,
     getAllBills,
-    // getOneClientById,
-    // createClient,
-    // updateClient,
+    createBill,
+    updateBill,
     setBill,
     cleanCreatedBill,
   };

@@ -532,5 +532,41 @@
     ],
     "note": "Me encantan los difraces",
     "dischargeDate": ""
+  },
+  {
+    "id": "e5da6c21-7114-4057-bfea-43f4aae3b57f",
+    "billNumber": 20,
+    "date": "2024-04-26 18:52:11",
+    "returnedDate": "2024-04-23",
+    "retirementDate": "2024-05-01",
+    "returned": "",
+    "amountTotal": 5000,
+    "advancement": 3555,
+    "remainingBalance": 1445,
+    "client": {
+      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98111",
+      "name": "Matias",
+      "surname": "Araya",
+      "dni": 35123126,
+      "phoneNumber": 2615123123,
+      "email": "enzo@gmail.com",
+      "direction": "Calle falsa 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": false,
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "id": "7541a4e7-6255-41b0-b225-5ae9b8f15419",
+        "name": "Ada",
+        "price": 5000,
+        "category": "Magicos",
+        "details": "asdasd",
+        "dischargeDate": ""
+      }
+    ],
+    "note": "asfdasd",
+    "dischargeDate": ""
   }
 ]

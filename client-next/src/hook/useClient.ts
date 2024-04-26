@@ -3,8 +3,9 @@ import { useAppSelector, useAppDispatch } from "@/lib/store";
 import {
   getAllClientsAsync,
   //   getOneClientByIdAsync,
-  //   createClientAsync,
-  //   updateClientAsync,
+  createClientAsync,
+  updateClientAsync,
+  deleteClientAsync,
   setClientSync,
   cleanCreatedClientSync,
 } from "@/lib/features/client/client.slice";
@@ -19,15 +20,18 @@ export function useClient() {
   function getAllClients() {
     clients.length === 0 && dispatch(getAllClientsAsync());
   }
+  function deleteClient(id: string) {
+    dispatch(deleteClientAsync(id));
+  }
   //   function getOneClientById(id: string) {
   //     dispatch(getOneClientByIdAsync(id));
   //   }
-  //   function createClient(newClient: User) {
-  //     dispatch(createClientAsync(newClient));
-  //   }
-  //   function updateClient(modified: User) {
-  //     dispatch(updateClientAsync(modified));
-  //   }
+  function createClient(body: Client) {
+    dispatch(createClientAsync(body));
+  }
+  function updateClient(body: Client) {
+    dispatch(updateClientAsync(body));
+  }
   function setClient(client: Client) {
     dispatch(setClientSync(client));
   }
@@ -43,8 +47,9 @@ export function useClient() {
     error,
     getAllClients,
     // getOneClientById,
-    // createClient,
-    // updateClient,
+    deleteClient,
+    createClient,
+    updateClient,
     setClient,
     cleanCreatedClient,
   };

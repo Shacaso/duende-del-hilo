@@ -26,8 +26,11 @@ export default function CostumePage() {
   );
   const result = !costumes
     ? initial
-    : initial.filter((costume) =>
-        costume.name.toLowerCase().includes(search.toLowerCase())
+    : initial.filter(
+        (costume: Costume) =>
+          costume.name.toLowerCase().includes(search.toLowerCase()) ||
+          costume.category.toLowerCase().includes(search.toLowerCase()) ||
+          costume.price.toString().toLowerCase().includes(search.toLowerCase())
       );
 
   const handleChange = (e: { target: { value: any } }) => {
