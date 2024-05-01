@@ -12,7 +12,7 @@ import { PDFile } from "../../../../components/pdf/PDFile";
 
 export default function ProductsDashboard() {
   const { getAllBills, bills } = useBill();
-  const headers = ["N`Factura", "Fecha", "Nombre", "Acciones"];
+  const headers = ["N`Factura", "Nombre completo", "Total", "Ver"];
 
   useEffect(() => {
     getAllBills();

@@ -69,7 +69,7 @@ export function Table({ data }: Props) {
         <TableSkeleton rows={5} headers={headers} />
       ) : ( */}
       <div className='overflow-x-auto '>
-        <table className='table  table-lg bg-base-200 [&>thead>tr]:text-lg my-5'>
+        <table className='table table-lg bg-base-200 [&>thead>tr]:text-lg my-5'>
           <thead>
             <tr>
               {headers.map((headerItem: string, index: number) => (
@@ -79,7 +79,7 @@ export function Table({ data }: Props) {
           </thead>
           <tbody>
             {data.map((client) => (
-              <tr className='hover:bg-base-300' key={client.id}>
+              <tr className='hover:bg-base-300 text-lg' key={client.id}>
                 <td>{client.name}</td>
                 <td>{client.surname}</td>
                 <td>{client.dni}</td>

@@ -52,14 +52,12 @@ export default function Form({ data }: Props) {
 
     email: z.string().email("Email inválido"),
 
-
     direction: z
       .string({
         invalid_type_error: "La direccion debe ser un string",
         required_error: "La direccion es requerido",
       })
       .min(3),
-
 
     departament: z
       .string()
@@ -116,14 +114,12 @@ export default function Form({ data }: Props) {
       }
     },
     onSubmit: (values) => {
-
       if (!data) {
         createClient(values);
       } else {
         updateClient(values);
       }
       resetForm();
-
     },
   });
 
@@ -175,7 +171,7 @@ export default function Form({ data }: Props) {
         <Input
           validate={touched.dni && errors.dni ? true : false}
           title='DNI'
-          placeholder='Ingrese dni'
+          placeholder='Ingrese DNI'
           type='number'
           name='dni'
           value={values.dni}
@@ -185,8 +181,8 @@ export default function Form({ data }: Props) {
 
         <Input
           validate={touched.phoneNumber && errors.phoneNumber ? true : false}
-          title='Numero de celular'
-          placeholder='Ingrese numero de celular'
+          title='Número de celular'
+          placeholder='Ingrese nro de celular'
           type='number'
           name='phoneNumber'
           value={values.phoneNumber}
@@ -197,8 +193,8 @@ export default function Form({ data }: Props) {
 
       <Input
         validate={touched.direction && errors.direction ? true : false}
-        title='Direccion'
-        placeholder='Ingrese la direccion'
+        title='Dirección'
+        placeholder='Ingrese la dirección'
         type='text'
         name='direction'
         value={values.direction}
@@ -222,8 +218,8 @@ export default function Form({ data }: Props) {
 
         <Input
           validate={touched.postalCode && errors.postalCode ? true : false}
-          title='Codigo postal'
-          placeholder='Ingrese codigo postal'
+          title='Código postal'
+          placeholder='Ingrese código postal'
           type='number'
           name='postalCode'
           value={values.postalCode}
@@ -234,17 +230,16 @@ export default function Form({ data }: Props) {
 
       <Input
         validate={touched.email && errors.email ? true : false}
-        title='Correo electronico'
-        placeholder='Ingrese correo electronico'
+        title='Correo electrónico'
+        placeholder='Ingrese correo electrónico'
         type='text'
         name='email'
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
-
       />
       <button className='btn btn-primary' type='submit'>
-        SAVE!
+        GUARDAR
       </button>
     </form>
   );

@@ -66,7 +66,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className='flex gap-5 flex-col h-full overflow-y-auto items-center sticky min-w-60 max-w-60 left-0 top-0 pt-5 menu bg-base-200 text-base-content  rounded-e-3xl'>
+      <nav className='flex gap-5 flex-col h-full overflow-y-auto items-center sticky w-60 left-0 top-0 pt-5 menu bg-base-200 text-base-content  rounded-e-3xl'>
         <Link href={"/home"}>
           <Logo />
         </Link>

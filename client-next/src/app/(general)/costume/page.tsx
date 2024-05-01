@@ -103,7 +103,7 @@ export default function CostumePage() {
       </div>
       {confirmationModalOpen && (
         <ConfirmationModal
-          title='Form Costume'
+          title='CREAR DISFRAZ'
           isOpen={confirmationModalOpen}
           handleClose={() => setConfirmationModalOpen(!confirmationModalOpen)}
         >

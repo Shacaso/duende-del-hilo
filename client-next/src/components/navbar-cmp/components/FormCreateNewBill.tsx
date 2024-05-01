@@ -1,3 +1,4 @@
+import Form from "@/app/(general)/client/components/Form";
 import FormNewCostume from "@/app/(general)/costume/components/FormNewCostume";
 import {
   Bill,
@@ -7,6 +8,7 @@ import {
   Departament,
 } from "@/app/lib/definitions";
 import { fetchGetAll, fetchPatch, fetchPost } from "@/app/lib/fetching";
+import Input from "@/components/Input";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import { useClient } from "@/hook/useClient";
 import { useCostume } from "@/hook/useCostume";
@@ -25,6 +27,8 @@ export default function FormCreateNewBill({ data }: Props) {
   const [costumeSelected, setCostumeSelected] = useState<string[]>([]);
 
   const [confirmationModalOpen, setConfirmationModalOpen] =
+    useState<boolean>(false);
+  const [confirmationClientModalOpen, setConfirmationClientModalOpen] =
     useState<boolean>(false);
 
   const {
@@ -114,33 +118,35 @@ export default function FormCreateNewBill({ data }: Props) {
 
   return (
     <>
-      <form className='flex flex-col gap-5 w-full  p-5' onSubmit={handleSubmit}>
-        <label>Listado de disfraces</label>
-        <div className='h-52 w-full bg-base-100 flex flex-wrap gap-2 py-2 px-1'>
-          {values.costumes.map((item, index) => (
-            <div key={index} className='badge badge-primary gap-2 p-4'>
-              {item}
-              <svg
-                onClick={() => handleDelete(index, item)}
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                className='inline-block w-4 h-4 stroke-current'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth='2'
-                  d='M6 18L18 6M6 6l12 12'
-                ></path>
-              </svg>
-            </div>
-          ))}
+      <form className='flex flex-col gap-5 w-full px-2' onSubmit={handleSubmit}>
+        <div className='gap-3 flex-col flex'>
+          <label>Listado de disfraces</label>
+          <div className='h-52 w-full bg-base-100 flex flex-wrap gap-2 py-2 px-1'>
+            {values.costumes.map((item, index) => (
+              <div key={index} className='badge badge-primary gap-2 p-4'>
+                {item}
+                <svg
+                  onClick={() => handleDelete(index, item)}
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  className='inline-block w-4 h-4 stroke-current'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M6 18L18 6M6 6l12 12'
+                  ></path>
+                </svg>
+              </div>
+            ))}
+          </div>
         </div>
 
         {touched.costumes && errors.costumes && <p>{errors.costumes}</p>}
         <div className='flex gap-5 items-center justify-center'>
-          <div className='flex-1'>
+          <div className='w-full'>
             <label>
               <input
                 list='costumes'
@@ -164,7 +170,7 @@ export default function FormCreateNewBill({ data }: Props) {
           <button
             type='button'
             onClick={() => setConfirmationModalOpen(!confirmationModalOpen)}
-            className='btn h-full btn-primary  btn-xs'
+            className='btn  btn-primary btn-xs h-full'
           >
             +
           </button>
@@ -184,47 +190,78 @@ export default function FormCreateNewBill({ data }: Props) {
           onChange={handleChange}
         />
 
-        {touched.advancement && errors.advancement && (
-          <p>{errors.advancement}</p>
-        )}
-        <label>Adelanto</label>
-        <input
-          className='w-full input input-bordered h-full'
-          placeholder='advancement'
-          type='number'
-          name='advancement'
-          value={values.advancement}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+        <div className='flex flex-row gap-5'>
+          <div className='flex flex-col gap-3'>
+            {touched.advancement && errors.advancement && (
+              <p>{errors.advancement}</p>
+            )}
+            <label>Seña</label>
+            <input
+              className='w-full input input-bordered h-full'
+              placeholder='Ingrese seña'
+              type='number'
+              name='advancement'
+              value={values.advancement}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className='flex flex-col gap-3'>
+            <label className='text-orange-400'>Depósito</label>
+            <input
+              className='w-full input input-bordered h-full'
+              placeholder='Ingrese depósito'
+              type='number'
+              name='advancement'
+              value={values.advancement}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
         {touched.dniClient && errors.dniClient && <p>{errors.dniClient}</p>}
-        <label>Cliente</label>
-        <label>
-          <input
-            list='users'
-            name='dniClient'
-            className='w-full input input-bordered '
-            placeholder='dniClient'
-            value={values.dniClient}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-        </label>
-        <datalist id='users'>
-          {clients.map((item) => (
-            <option
-              key={item.dni}
-              value={`${item.dni} - ${item.name} ${item.surname}`}
-            ></option>
-          ))}
-        </datalist>
+        <div className='flex gap-5 items-center justify-center'>
+          <div className='flex-1'>
+            <label>Cliente</label>
+            <label>
+              <input
+                list='users'
+                name='dniClient'
+                className='w-full input input-bordered '
+                placeholder='Buscar clientes'
+                value={values.dniClient}
+                onBlur={handleBlur}
+                onChange={handleChange}
+              />
+            </label>
+            <datalist id='users'>
+              {clients.map((item) => (
+                <option
+                  key={item.dni}
+                  value={`${item.dni} - ${item.name} ${item.surname}`}
+                ></option>
+              ))}
+            </datalist>
+          </div>
+
+          <button
+            type='button'
+            onClick={() =>
+              setConfirmationClientModalOpen(!confirmationClientModalOpen)
+            }
+            className='btn h-full btn-primary btn-xs'
+          >
+            +
+          </button>
+        </div>
 
         {touched.note && errors.note && <p>{errors.note}</p>}
-        <label>Nota</label>
+        <label>Notas</label>
         <input
           className='w-full input input-bordered h-full'
-          placeholder='note'
+          placeholder='Ingrese notas'
           type='text'
           name='note'
           value={values.note}
@@ -232,40 +269,63 @@ export default function FormCreateNewBill({ data }: Props) {
           onChange={handleChange}
         />
 
-        <label>Fecha de devolucion</label>
-        <input
-          type='date'
-          name='returnedDate'
-          value={values.returnedDate}
-          className='w-full h-10 input input-bordered '
-          onBlur={handleBlur}
-          onChange={handleChange}
-          // onSelect={() => handleSelect}
-        />
+        <div className='flex flex-row gap-5'>
+          <div className='flex flex-col gap-3 w-full'>
+            <Input
+              placeholder='Ingrese fecha de devolución'
+              validate={
+                touched.returnedDate && errors.returnedDate ? true : false
+              }
+              title='Fecha de devolución'
+              type='date'
+              name='returnedDate'
+              value={values.returnedDate}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label>Fecha de retiro</label>
-        <input
-          type='date'
-          name='retirementDate'
-          value={values.retirementDate}
-          className='w-full h-10 input input-bordered '
-          onBlur={handleBlur}
-          onChange={handleChange}
-          // onSelect={() => handleSelect}
-        />
+          <div className='flex flex-col gap-3 w-full'>
+            <Input
+              placeholder='Ingrese fecha de devolución'
+              validate={
+                touched.retirementDate && errors.retirementDate ? true : false
+              }
+              title='Fecha de retiro'
+              type='date'
+              name='retirementDate'
+              value={values.retirementDate}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
         <button className='btn btn-primary' type='submit'>
-          SAVE!
+          GUARDAR
         </button>
       </form>
       {confirmationModalOpen && (
         <ConfirmationModal
-          title='Form Costume'
+          title='CREAR DISFRAZ'
           isOpen={confirmationModalOpen}
           handleClose={() => setConfirmationModalOpen(!confirmationModalOpen)}
         >
           <div className='overflow-auto h-[462px]'>
             <FormNewCostume />
+          </div>
+        </ConfirmationModal>
+      )}
+      {confirmationClientModalOpen && (
+        <ConfirmationModal
+          title='CREAR CLIENTE'
+          isOpen={confirmationClientModalOpen}
+          handleClose={() =>
+            setConfirmationClientModalOpen(!confirmationClientModalOpen)
+          }
+        >
+          <div className='overflow-auto h-[462px]'>
+            <Form />
           </div>
         </ConfirmationModal>
       )}

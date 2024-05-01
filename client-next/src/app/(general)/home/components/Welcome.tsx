@@ -31,6 +31,7 @@ export function Welcome() {
           </h3>
         </div>
       </div> */}
+      </div>
     </div>
   );
 }

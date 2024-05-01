@@ -107,7 +107,7 @@ export default function ClientPage() {
       </div>
       {confirmationModalOpen && (
         <ConfirmationModal
-          title='Formulario de cliente'
+          title='CREAR CLIENTE'
           isOpen={confirmationModalOpen}
           handleClose={() => setConfirmationModalOpen(!confirmationModalOpen)}
         >
