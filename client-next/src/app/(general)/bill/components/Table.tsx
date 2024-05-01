@@ -3,7 +3,7 @@ import { Bill, Client, Costume } from "@/app/lib/definitions";
 import { fetchGetById } from "@/app/lib/fetching";
 import { TrashIcon, ViewIcon } from "@/assets/svg";
 import { PDFViewer } from "@react-pdf/renderer";
-import { PDFile } from "../../../../components/pdf/PDFile";
+import { PDFile } from "@/components/pdf/PDFile";
 // import swal from 'sweetalert';
 
 interface Props {
