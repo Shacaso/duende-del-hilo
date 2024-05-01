@@ -2,7 +2,6 @@ import { z } from "zod";
 import { clientsPath, costumesPath } from "../data/paths";
 import { getAll } from "../data/entityRepository";
 import { Bill, BillDto, Client, Costume, CustomError } from "../definitions";
-import { costumeSchema } from "./costumeSchema";
 
 const allUsers = async () => {
 	const data = await getAll<Client>(clientsPath);

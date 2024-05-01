@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Departament, Entity } from "../definitions";
+import { Departament } from "../definitions";
 
 export const departamentSchema = z.object({
 	id: z.string().optional(),
