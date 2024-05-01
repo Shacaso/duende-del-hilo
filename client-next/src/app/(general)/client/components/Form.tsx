@@ -1,5 +1,6 @@
 import { Client, Departament } from "@/app/lib/definitions";
 import { fetchGetAll, fetchPatch, fetchPost } from "@/app/lib/fetching";
+import { InputDataList, Input } from "@/components";
 import { useClient } from "@/hook/useClient";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
@@ -14,6 +15,7 @@ export default function Form({ data }: Props) {
   const [clients, setClients] = useState<Client[]>([]);
   const dniClients = clients.map((client) => client.dni);
   const nameDepartaments = departaments.map((departament) => departament.name);
+
   const { createClient, updateClient } = useClient();
 
   const clientSchema = z.object({
@@ -50,10 +52,14 @@ export default function Form({ data }: Props) {
 
     email: z.string().email("Email inválido"),
 
-    direction: z.string({
-      invalid_type_error: "La direccion debe ser un string",
-      required_error: "La direccion es requerido",
-    }),
+
+    direction: z
+      .string({
+        invalid_type_error: "La direccion debe ser un string",
+        required_error: "La direccion es requerido",
+      })
+      .min(3),
+
 
     departament: z
       .string()
@@ -110,12 +116,14 @@ export default function Form({ data }: Props) {
       }
     },
     onSubmit: (values) => {
+
       if (!data) {
         createClient(values);
       } else {
         updateClient(values);
       }
       resetForm();
+
     },
   });
 
@@ -136,102 +144,104 @@ export default function Form({ data }: Props) {
 
   return (
     <form
-      className='flex flex-col gap-5 w-full h-full p-5'
+      className='flex flex-col gap-5 p-5 [&>div]:flex [&>div]:justify-between [&>div]:gap-2'
       onSubmit={handleSubmit}
     >
-      {touched.name && errors.name && <p>{errors.name}</p>}
-      <input
-        className='w-full input input-bordered h-full'
-        placeholder='name'
-        type='text'
-        name='name'
-        value={values.name}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+      <div>
+        <Input
+          validate={touched.name && errors.name ? true : false}
+          title='Nombre'
+          placeholder='Ingrese nombre'
+          type='text'
+          name='name'
+          value={values.name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
 
-      {touched.surname && errors.surname && <p>{errors.surname}</p>}
-      <input
-        className='w-full input input-bordered h-full'
-        placeholder='surname'
-        type='text'
-        name='surname'
-        value={values.surname}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+        <Input
+          validate={touched.surname && errors.surname ? true : false}
+          title='Apellido'
+          placeholder='Ingrese apellido'
+          type='text'
+          name='surname'
+          value={values.surname}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+      </div>
 
-      {touched.dni && errors.dni && <p>{errors.dni}</p>}
-      <input
-        className='w-full input input-bordered h-full'
-        placeholder='dni look at me'
-        type='number'
-        name='dni'
-        value={values.dni}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+      <div>
+        <Input
+          validate={touched.dni && errors.dni ? true : false}
+          title='DNI'
+          placeholder='Ingrese dni'
+          type='number'
+          name='dni'
+          value={values.dni}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
 
-      {touched.phoneNumber && errors.phoneNumber && <p>{errors.phoneNumber}</p>}
-      <input
-        className='w-full input input-bordered h-full'
-        placeholder='phoneNumber'
-        type='number'
-        name='phoneNumber'
-        value={values.phoneNumber}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+        <Input
+          validate={touched.phoneNumber && errors.phoneNumber ? true : false}
+          title='Numero de celular'
+          placeholder='Ingrese numero de celular'
+          type='number'
+          name='phoneNumber'
+          value={values.phoneNumber}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+      </div>
 
-      {touched.direction && errors.direction && <p>{errors.direction}</p>}
-      <input
-        className='w-full input input-bordered h-full'
-        placeholder='direction'
+      <Input
+        validate={touched.direction && errors.direction ? true : false}
+        title='Direccion'
+        placeholder='Ingrese la direccion'
         type='text'
         name='direction'
         value={values.direction}
-        onBlur={handleBlur}
         onChange={handleChange}
+        onBlur={handleBlur}
       />
 
-      {touched.departament && errors.departament && <p>{errors.departament}</p>}
-      <label>
-        <input
+      <div>
+        <InputDataList
+          data={departaments}
           list='departaments'
+          validate={touched.departament && errors.departament ? true : false}
+          title='Departamento'
+          placeholder='Ingrese departamento'
+          type='text'
           name='departament'
-          className='w-full input input-bordered '
-          placeholder='departament'
           value={values.departament}
-          onBlur={handleBlur}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
-      </label>
-      <datalist id='departaments'>
-        {departaments.map((item) => (
-          <option key={item.id} value={item.name}></option>
-        ))}
-      </datalist>
 
-      {touched.postalCode && errors.postalCode && <p>{errors.postalCode}</p>}
-      <input
-        className='w-full input input-bordered h-full'
-        placeholder='postalCode'
-        type='number'
-        name='postalCode'
-        value={values.postalCode}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+        <Input
+          validate={touched.postalCode && errors.postalCode ? true : false}
+          title='Codigo postal'
+          placeholder='Ingrese codigo postal'
+          type='number'
+          name='postalCode'
+          value={values.postalCode}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+      </div>
 
-      {touched.email && errors.email && <p>{errors.email}</p>}
-      <input
-        className='w-full input input-bordered h-full'
-        placeholder='email'
-        type='email'
+      <Input
+        validate={touched.email && errors.email ? true : false}
+        title='Correo electronico'
+        placeholder='Ingrese correo electronico'
+        type='text'
         name='email'
         value={values.email}
-        onBlur={handleBlur}
         onChange={handleChange}
+        onBlur={handleBlur}
+
       />
       <button className='btn btn-primary' type='submit'>
         SAVE!

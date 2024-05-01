@@ -68,18 +68,18 @@ export function Table({ data }: Props) {
       {/* {loading ? (
         <TableSkeleton rows={5} headers={headers} />
       ) : ( */}
-      <table className='table table-lg bg-base-200 [&>thead>tr]:text-lg '>
-        <thead>
-          <tr>
-            {headers.map((headerItem: string, index: number) => (
-              <th key={index}>{headerItem}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className='overflow-auto'>
-          {data.map((client) => {
-            return (
-              <tr key={client.id}>
+      <div className='overflow-x-auto '>
+        <table className='table  table-lg bg-base-200 [&>thead>tr]:text-lg my-5'>
+          <thead>
+            <tr>
+              {headers.map((headerItem: string, index: number) => (
+                <th key={index}>{headerItem}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((client) => (
+              <tr className='hover:bg-base-300' key={client.id}>
                 <td>{client.name}</td>
                 <td>{client.surname}</td>
                 <td>{client.dni}</td>
@@ -111,10 +111,11 @@ export function Table({ data }: Props) {
                   </button>
                 </td>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       {updateModalOpen && (
         <ConfirmationModal
           title='UPDATE CLIENT'

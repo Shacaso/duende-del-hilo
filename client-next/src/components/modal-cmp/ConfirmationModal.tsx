@@ -52,7 +52,7 @@ export default function ConfirmationModal({
           >
             ✕
           </button>
-          <div className='p-10'>{children}</div>
+          <div className='p-8'>{children}</div>
         </section>
         <span
           className='backdrop-blur-sm w-full h-full bg-black/50 cursor-pointer'

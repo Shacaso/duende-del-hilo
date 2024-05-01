@@ -45,7 +45,7 @@ export default function CategoriesPage() {
     <>
       <div className='w-full px-5 mt-10'>
         <DataList
-          title='Categorias'
+          title='Categoria'
           // setViewMode={viewModeType.TABLE}
           element={<Table data={result} type='categories' />}
         >

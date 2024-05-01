@@ -19,6 +19,7 @@ export default function Dashboard() {
     useState<boolean>(false);
 
   return (
+
     <>
       <div className='w-full px-5 mt-5'>
         <Welcome />
@@ -32,6 +33,7 @@ export default function Dashboard() {
           <Stat title='Categorias' Icon={CategoryIcon} url={"/categories"} />
           <Stat title='Facturas' Icon={BillsIcon} url={"/bill"} />
         </div>
+
 
         <div className=' flex gap-5'>
           <DashboardPanel

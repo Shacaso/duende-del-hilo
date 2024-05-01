@@ -40,7 +40,10 @@ export default function FormCategory() {
   });
 
   return (
-    <form className='flex flex-col gap-5 w-full p-5' onSubmit={handleSubmit}>
+    <form
+      className='flex flex-col gap-5 w-full p-5 justify-between h-full'
+      onSubmit={handleSubmit}
+    >
       {touched.name && errors.name && <p>{errors.name}</p>}
       <input
         className='w-full input input-bordered '

@@ -44,12 +44,12 @@ export default function Form({ data }: Props) {
 
   return (
     <form
-      className='flex flex-col gap-5 w-full h-full p-5'
+      className='flex flex-col justify-between gap-5 w-full h-full p-5'
       onSubmit={handleSubmit}
     >
       {touched.name && errors.name && <p>{errors.name}</p>}
       <input
-        className='w-full input input-bordered h-full'
+        className='w-full input input-bordered '
         placeholder='name'
         type='text'
         name='name'
