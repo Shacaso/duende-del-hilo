@@ -6,6 +6,7 @@ import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import { useState } from "react";
 import FormNewCostume from "./FormNewCostume";
 import View from "./View";
+import { useCostume } from "@/hook/useCostume";
 // import { useProviders, useModal } from '@/hooks';
 // import { TableSkeleton } from '@/components';
 // import swal from 'sweetalert';
@@ -13,15 +14,15 @@ import View from "./View";
 
 interface Props {
   data: Costume[];
-  type: string;
 }
 
 const headers = ["Nombre", "Categoria", "Precio", "Detalles", "Acciones"];
 
-export function Table({ data, type }: Props) {
+export function Table({ data }: Props) {
   const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
   const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
   const [costume, setCostume] = useState<Costume>();
+  const { deleteCostume } = useCostume();
 
   // const deleteProviderAlert = (id: number) => {
   //   swal({
@@ -73,7 +74,10 @@ export function Table({ data, type }: Props) {
               <td className='flex gap-2'>
                 <button
                   className='btn btn-circle btn-ghost'
-                  onClick={() => deleteAction(costume.id, type)}
+                  onClick={() => {
+                    window.confirm("¿Seguro que desea eliminar el registro?") &&
+                      deleteCostume(costume.id);
+                  }}
                 >
                   <TrashIcon />
                 </button>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar-cmp/Navbar";
+import StoreProvider from "./StoreProvider";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 
@@ -17,7 +18,9 @@ interface Props {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang='en'>
-      <body className={poppins.className}>{children}</body>
+      <body className={poppins.className}>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   );
 }

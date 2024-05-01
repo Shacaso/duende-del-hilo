@@ -1,80 +1,80 @@
 export interface Entity {
-	id: string;
-	dischargeDate?: string;
+  id: string;
+  dischargeDate?: string;
 }
 
 export interface Costume extends Entity {
-	name: string;
-	price: number;
-	category: string;
-	details: string;
+  name: string;
+  price: number;
+  category: string;
+  details: string;
 }
 
 export interface Client extends Entity {
-	name: string;
-	surname: string;
-	dni: number;
-	phoneNumber: number;
-	email: string;
-	direction: string;
-	departament: string;
-	postalCode: number;
-	blacklist: boolean;
+  name: string;
+  surname: string;
+  dni: number;
+  phoneNumber: number;
+  email: string;
+  direction: string;
+  departament: string;
+  postalCode: number;
+  blacklist: boolean;
 }
 
 export interface Departament extends Entity {
-	name: string;
+  name: string;
 }
 
 export interface BillDto extends Entity {
-	billNumber: number;
-	date: string;
-	returnedDate: string;
-	retirementDate: string;
-	returned: boolean;
-	amountTotal: number;
-	advancement: number;
-	remainingBalance: number;
-	costumes: string[];
-	dniClient: number;
-	note: string;
+  billNumber: number;
+  date: string;
+  returnedDate: string;
+  retirementDate: string;
+  returned: boolean;
+  amountTotal: number;
+  advancement: number;
+  remainingBalance: number;
+  costumes: string[];
+  dniClient: number;
+  note: string;
 }
 
 export interface Bill extends Entity {
-	billNumber: number;
-	date: string;
-	returnedDate: string;
-	retirementDate: string;
-	returned: boolean;
-	amountTotal: number;
-	advancement: number;
-	remainingBalance: number;
-	client: Client;
-	costumes: Costume[];
-	note: string;
+  billNumber: number;
+  date: string;
+  returnedDate: string;
+  retirementDate: string;
+  returned: boolean;
+  amountTotal: number;
+  advancement: number;
+  remainingBalance: number;
+  client: Client;
+  costumes: Costume[];
+  note: string;
 }
 
 export interface Category extends Entity {
-	name: string;
+  name: string;
 }
 
 export interface Filter {
-	keyword: string;
+  keyword: string;
 }
 
 export class CustomError {
-	error: boolean;
-	message: string;
-	codigo?: number;
+  error: boolean;
+  message: string;
+  codigo?: number;
 
-	constructor(error: boolean, message: string, codigo?: number) {
-		this.error = error;
-		this.message = message;
-		this.codigo = codigo;
-	}
+  constructor(error: boolean, message: string, codigo?: number) {
+    this.error = error;
+    this.message = message;
+    this.codigo = codigo;
+  }
 }
 
 export interface UserLogin {
-	user: string;
-	password: string;
+  user: string;
+  password: string;
 }

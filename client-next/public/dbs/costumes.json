@@ -45,7 +45,7 @@
     "price": 8500,
     "category": "Profesiones",
     "details": "asdasd",
-    "dischargeDate": ""
+    "dischargeDate": "2024-05-01 15:59:52"
   },
   {
     "id": "f2feb561-c881-4240-b16e-ed32d9c0b674",
@@ -53,14 +53,14 @@
     "price": 12200,
     "category": "Profesiones",
     "details": "asdasd",
-    "dischargeDate": ""
+    "dischargeDate": "2024-04-23 22:46:51"
   },
   {
     "id": "9787c76f-d4c8-4796-886c-8b5850ffe7b7",
-    "name": "Mascara",
+    "name": "Mascaras",
     "price": 8500,
-    "category": "Profesiones",
-    "details": "asdasd",
+    "category": "Profesioness",
+    "details": "Super mascaras",
     "dischargeDate": ""
   },
   {
@@ -85,7 +85,7 @@
     "price": 123,
     "category": "Halloween",
     "details": "Detalles",
-    "dischargeDate": "2024-04-23 20:11:48"
+    "dischargeDate": "2024-04-23 22:46:48"
   },
   {
     "id": "30e1e038-b734-416f-ad7a-28e844e70fb2",
@@ -93,30 +93,62 @@
     "price": 27,
     "category": "Magicos",
     "details": "HERMOSA",
-    "dischargeDate": "2024-04-23 20:07:12"
+    "dischargeDate": "2024-04-23 22:46:47"
   },
   {
     "name": "Robot",
     "price": 8500,
     "category": "Halloween",
-    "details": "asdasdasd",
+    "details": "asdasd",
     "id": "bdf49508-31ca-4240-ac94-b9d6a27d678e",
-    "dischargeDate": ""
+    "dischargeDate": "2024-04-23 22:46:46"
   },
   {
-    "id": "6df37128-d71b-438f-9d09-57b947bb318d",
-    "name": "Diablo",
-    "price": 5000,
-    "category": "Halloween",
-    "details": "ASDASD",
-    "dischargeDate": "2024-04-23 20:26:33"
+    "id": "9b6b7e2f-2ad8-4714-8ee3-0a62ad363513",
+    "name": "testsss",
+    "price": 999,
+    "category": "MAMAMIA",
+    "details": "HERMOSA",
+    "dischargeDate": "2024-04-23 22:46:45"
   },
   {
-    "id": "42d47c45-9904-45cc-ab99-56268d85b475",
-    "name": "enfermera",
-    "price": 6000,
-    "category": "Profesiones",
-    "details": "asdas",
-    "dischargeDate": "2024-04-23 20:32:16"
+    "id": "b8f607f1-081c-48e2-87d7-18af6bffff39",
+    "name": "reqewewqw",
+    "price": 4552353,
+    "category": "Alejo",
+    "details": "fadsafdsfds",
+    "dischargeDate": "2024-04-23 22:46:44"
+  },
+  {
+    "id": "cbb21df2-d2a8-40fd-bfc3-2febacb1fc0e",
+    "name": "hjlk",
+    "price": 897,
+    "category": "aljeo",
+    "details": "kl;'fd",
+    "dischargeDate": "2024-04-23 22:46:41"
+  },
+  {
+    "id": "e5143ec7-9179-4414-a2f7-bab3a3cc7f22",
+    "name": "asd",
+    "price": 2134,
+    "category": "j",
+    "details": "asdf",
+    "dischargeDate": "2024-04-23 22:46:38"
+  },
+  {
+    "id": "c5f0353e-112c-464b-bb5c-b78979fd93ae",
+    "name": "a",
+    "price": 1,
+    "category": "a",
+    "details": "a",
+    "dischargeDate": "2024-04-23 16:27:16"
+  },
+  {
+    "id": "ef43c1d1-f3a7-4b29-88e6-7907d6b460f4",
+    "name": "hjlk",
+    "price": 789,
+    "category": "que hermosa novia tengo",
+    "details": "hljk",
+    "dischargeDate": "2024-04-23 16:28:15"
   }
 ]

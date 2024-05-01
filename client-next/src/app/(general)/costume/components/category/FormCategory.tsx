@@ -1,13 +1,12 @@
 import { Category } from "@/app/lib/definitions";
 import { fetchPatch, fetchPost } from "@/app/lib/fetching";
+import { useCategory } from "@/hook/useCategory";
 import { useFormik } from "formik";
 import { z, ZodError } from "zod";
 
-interface Props {
-  data?: Category;
-}
+export default function FormCategory() {
+  const { createCategory, created } = useCategory();
 
-export default function FormCategory({ data }: Props) {
   const categorySchema = z.object({
     name: z.string({
       invalid_type_error: "El nombre debe ser un string",
@@ -25,8 +24,8 @@ export default function FormCategory({ data }: Props) {
     handleBlur,
   } = useFormik({
     initialValues: {
-      id: data?.id ?? "",
-      name: data?.name ?? "",
+      id: "",
+      name: "",
     },
     validate: (values) => {
       try {
@@ -36,19 +35,7 @@ export default function FormCategory({ data }: Props) {
       }
     },
     onSubmit: (values) => {
-      if (!data) {
-        fetchPost(values, "categories").then((res) => {
-          if (res) {
-            alert("La categoria se ha guardado");
-          }
-        });
-      } else {
-        fetchPatch(data.id, values, "categories").then((res) => {
-          if (res) {
-            alert("La categoria se ha actualizado");
-          }
-        });
-      }
+      createCategory(values);
     },
   });
 
