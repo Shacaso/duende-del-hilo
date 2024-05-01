@@ -154,7 +154,7 @@
     "date": "2024-03-17 15:40:18",
     "returnedDate": "2024-03-17",
     "retirementDate": "2024-03-17",
-    "returned": "",
+    "returned": true,
     "amountTotal": 20000,
     "advancement": 10000,
     "remainingBalance": 10000,

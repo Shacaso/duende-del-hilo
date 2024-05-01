@@ -12,32 +12,39 @@ import { SearchInputIcon } from "@/assets/svg";
 import { deleteAction } from "@/app/lib/data/funciones";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import FormNewCostume from "./components/FormNewCostume";
+import { useCostume } from "@/hook/useCostume";
 
 export default function CostumePage() {
+  const { getAllCostumes, costumes } = useCostume();
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
 
-  const [costumes, setCostumes] = useState<Costume[]>([]);
   const [search, setSearch] = useState("");
 
+  const initial = costumes.filter(
+    (category) => category.dischargeDate?.length === 0
+  );
   const result = !costumes
-    ? costumes
-    : costumes.filter((costume) =>
-        costume.name.toLowerCase().includes(search.toLowerCase())
+    ? initial
+    : initial.filter(
+        (costume: Costume) =>
+          costume.name.toLowerCase().includes(search.toLowerCase()) ||
+          costume.category.toLowerCase().includes(search.toLowerCase()) ||
+          costume.price.toString().toLowerCase().includes(search.toLowerCase())
       );
 
   const handleChange = (e: { target: { value: any } }) => {
     setSearch(e.target.value);
   };
 
-  const getCostumes = async () => {
-    const data: Costume[] = await fetchGetAllActives("costumes");
-    setCostumes(data);
-  };
+  // const getCostumes = async () => {
+  //   const data: Costume[] = await fetchGetAllActives("costumes");
+  //   setCostumes(data);
+  // };
 
   useEffect(() => {
-    getCostumes();
-  }, []);
+    getAllCostumes();
+  });
 
   return (
     <>
@@ -45,7 +52,7 @@ export default function CostumePage() {
         <DataList
           title='Disfraz'
           // setViewMode={viewModeType.TABLE}
-          element={<Table data={result} type='costumes' />}
+          element={<Table data={result} />}
         >
           <div>
             <DataList.Header>

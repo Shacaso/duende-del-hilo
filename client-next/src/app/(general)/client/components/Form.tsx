@@ -1,6 +1,7 @@
 import { Client, Departament } from "@/app/lib/definitions";
 import { fetchGetAll, fetchPatch, fetchPost } from "@/app/lib/fetching";
 import { InputDataList, Input } from "@/components";
+import { useClient } from "@/hook/useClient";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { z, ZodError } from "zod";
@@ -15,21 +16,19 @@ export default function Form({ data }: Props) {
   const dniClients = clients.map((client) => client.dni);
   const nameDepartaments = departaments.map((departament) => departament.name);
 
+  const { createClient, updateClient } = useClient();
+
   const clientSchema = z.object({
     id: z.string().optional(),
-    name: z
-      .string({
-        invalid_type_error: "El nombre debe ser un string",
-        required_error: "El nombre es requerido",
-      })
-      .min(3),
+    name: z.string({
+      invalid_type_error: "El nombre debe ser un string",
+      required_error: "El nombre es requerido",
+    }),
 
-    surname: z
-      .string({
-        invalid_type_error: "El apellido debe ser un string",
-        required_error: "El apellido es requerido",
-      })
-      .min(2),
+    surname: z.string({
+      invalid_type_error: "El apellido debe ser un string",
+      required_error: "El apellido es requerido",
+    }),
 
     dni: z
       .number({
@@ -53,6 +52,7 @@ export default function Form({ data }: Props) {
 
     email: z.string().email("Email inválido"),
 
+
     direction: z
       .string({
         invalid_type_error: "La direccion debe ser un string",
@@ -60,11 +60,13 @@ export default function Form({ data }: Props) {
       })
       .min(3),
 
+
     departament: z
       .string()
       .refine((value) => nameDepartaments.includes(value), {
         message: "No se encuenta el departamento en la base de datos",
       }),
+
     postalCode: z
       .number({
         invalid_type_error: "El codigo postal debe ser un numero de 10 digitos",
@@ -92,6 +94,7 @@ export default function Form({ data }: Props) {
     errors,
     touched,
     handleBlur,
+    resetForm,
   } = useFormik({
     initialValues: {
       id: data?.id ?? "",
@@ -113,21 +116,14 @@ export default function Form({ data }: Props) {
       }
     },
     onSubmit: (values) => {
-      // console.log(values);
 
       if (!data) {
-        fetchPost(values, "clients").then((res) => {
-          if (res) {
-            alert("El cliente se ha guardado");
-          }
-        });
+        createClient(values);
       } else {
-        fetchPatch(data.id, values, "clients").then((res) => {
-          if (res) {
-            alert("El cliente se ha actualizado");
-          }
-        });
+        updateClient(values);
       }
+      resetForm();
+
     },
   });
 
@@ -245,6 +241,7 @@ export default function Form({ data }: Props) {
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
+
       />
       <button className='btn btn-primary' type='submit'>
         SAVE!

@@ -1,41 +1,47 @@
 "use client";
 
 import { PlusIcon } from "@/assets/svg";
-import { DataList, Search } from "@/components";
+import { DataList } from "@/components";
 import Button from "@/components/button-cmp/Button";
 import { Table } from "./components/Table";
 import { useEffect, useState } from "react";
-import { Client, Departament } from "@/app/lib/definitions";
 import { SearchInputIcon } from "@/assets/svg";
-import { fetchGetAll } from "@/app/lib/fetching";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import Form from "./components/Form";
+import { useClient } from "@/hook/useClient";
+import { Client } from "@/app/lib/definitions";
 
 export default function ClientPage() {
+  const { getAllClients, clients } = useClient();
+  // const clients: Client[] = useAppSelector((state) => state.clients.clients);
+
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
 
-  const [clients, setClients] = useState<Client[]>([]);
+  // const [clients, setClients] = useState<Client[]>([]);
   const [search, setSearch] = useState("");
 
+  const initial = clients.filter(
+    (client) => client.dischargeDate?.length === 0
+  );
   const result = !clients
-    ? clients
-    : clients.filter((client) =>
-        client.name.toLowerCase().includes(search.toLowerCase())
+    ? initial
+    : initial.filter(
+        (client: Client) =>
+          client.name.toLowerCase().includes(search.toLowerCase()) ||
+          client.surname.toLowerCase().includes(search.toLowerCase()) ||
+          client.dni.toString().toLowerCase().includes(search.toLowerCase()) ||
+          client.departament.toLowerCase().includes(search.toLowerCase()) ||
+          client.email.toLowerCase().includes(search.toLowerCase())
       );
 
   const handleChange = (e: { target: { value: any } }) => {
     setSearch(e.target.value);
   };
 
-  const getClients = async () => {
-    const data: Client[] = await fetchGetAll("clients");
-    setClients(data);
-  };
-
   useEffect(() => {
-    getClients();
-  }, []);
+    getAllClients();
+  });
 
   return (
     <>
@@ -43,7 +49,7 @@ export default function ClientPage() {
         <DataList
           title='Cliente'
           // setViewMode={viewModeType.TABLE}
-          element={<Table data={result} type='clients' />}
+          element={<Table data={result} />}
         >
           <div>
             <DataList.Header>

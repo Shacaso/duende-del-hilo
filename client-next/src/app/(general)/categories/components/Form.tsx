@@ -1,20 +1,15 @@
 import { Category } from "@/app/lib/definitions";
-import { fetchPatch, fetchPost } from "@/app/lib/fetching";
+import { useCategory } from "@/hook/useCategory";
 import { useFormik } from "formik";
-import { z, ZodError } from "zod";
+import { ZodError } from "zod";
+import { validateCategory } from "@/app/lib/schemas/categorySchema";
 
 interface Props {
   data?: Category;
 }
 
 export default function Form({ data }: Props) {
-  const clientSchema = z.object({
-    id: z.string().optional(),
-    name: z.string({
-      invalid_type_error: "El nombre debe ser un string",
-      required_error: "El nombre es requerido",
-    }),
-  });
+  const { createCategory, updateCategory } = useCategory();
 
   const {
     initialValues,
@@ -24,6 +19,7 @@ export default function Form({ data }: Props) {
     errors,
     touched,
     handleBlur,
+    resetForm,
   } = useFormik({
     initialValues: {
       id: data?.id ?? "",
@@ -31,27 +27,18 @@ export default function Form({ data }: Props) {
     },
     validate: (values) => {
       try {
-        clientSchema.parse(values);
+        validateCategory(values);
       } catch (error) {
         if (error instanceof ZodError) return error.formErrors.fieldErrors;
       }
     },
     onSubmit: (values) => {
-      // console.log(values);
-
       if (!data) {
-        fetchPost(values, "categories").then((res) => {
-          if (res) {
-            alert("La categoria se ha guardado");
-          }
-        });
+        createCategory(values);
       } else {
-        fetchPatch(data.id, values, "categories").then((res) => {
-          if (res) {
-            alert("La categoria se ha actualizado");
-          }
-        });
+        updateCategory(values);
       }
+      resetForm();
     },
   });
 

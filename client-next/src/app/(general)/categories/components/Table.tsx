@@ -4,6 +4,7 @@ import { TrashIcon, PencilAltIcon } from "@/assets/svg";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import { useState } from "react";
 import Form from "./Form";
+import { useCategory } from "@/hook/useCategory";
 
 interface Props {
   data: Category[];
@@ -13,6 +14,7 @@ interface Props {
 const headers = ["Categoria", "Acciones"];
 
 export function Table({ data, type }: Props) {
+  const { deleteCategory } = useCategory();
   const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
   const [categories, setCategories] = useState<Category>();
 
@@ -64,7 +66,7 @@ export function Table({ data, type }: Props) {
                 <td className='flex gap-2'>
                   <button
                     className='btn btn-circle btn-ghost'
-                    onClick={() => deleteAction(category.id, type)}
+                    onClick={() => deleteCategory(category.id)}
                   >
                     <TrashIcon />
                   </button>

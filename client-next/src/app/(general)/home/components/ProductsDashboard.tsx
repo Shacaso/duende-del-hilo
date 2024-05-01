@@ -1,10 +1,22 @@
+"use client";
+
+import { Bill } from "@/app/lib/definitions";
 import { ViewIcon } from "@/assets/svg";
+import { useBill } from "@/hook/useBill";
+import { PDFViewer } from "@react-pdf/renderer";
+import { useEffect } from "react";
+import { PDFile } from "../../../../components/pdf/PDFile";
 // import { useProducts, useModal } from '@/hooks/';
 // import { TableSkeleton } from '@/components';
 // import { ProductDetail } from './ProductDetail';
 
 export default function ProductsDashboard() {
+  const { getAllBills, bills } = useBill();
   const headers = ["N`Factura", "Fecha", "Nombre", "Acciones"];
+
+  useEffect(() => {
+    getAllBills();
+  });
 
   return (
     <>
@@ -20,23 +32,40 @@ export default function ProductsDashboard() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>0001</td>
-            <td>13/11/2023</td>
-            <td>Nombre</td>
-            <td>
-              <button
-              // onClick={() =>
-              //   openModal(<ProductDetail product={product} />, {
-              //     title: '',
-              //     className: 'modal-product',
-              //   })
-              // }
-              >
-                <ViewIcon />
-              </button>
-            </td>
-          </tr>
+          {bills.slice(-5).map((bill: Bill) => (
+            <tr key={bill.id}>
+              <td>{bill.billNumber}</td>
+              <td>
+                {bill.client.name} {bill.client.surname}
+              </td>
+              <td>{bill.amountTotal}</td>
+              <td>
+                <button
+                  className='btn btn-circle'
+                  onClick={() => {
+                    document.getElementById(bill.id).showModal();
+                  }}
+                >
+                  <ViewIcon />
+                </button>
+                <dialog id={bill.id} className='modal'>
+                  <div className='modal-box w-11/12 max-w-5xl'>
+                    <form method='dialog'>
+                      {/* if there is a button in form, it will close the modal */}
+                      <button className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'>
+                        ✕
+                      </button>
+                    </form>
+                    <div className='p-4'>
+                      <PDFViewer style={{ width: "100%", height: "100vh" }}>
+                        <PDFile data={bill} />
+                      </PDFViewer>
+                    </div>
+                  </div>
+                </dialog>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       {/* )} */}

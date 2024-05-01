@@ -29,16 +29,16 @@ export default function Navbar() {
       Icon: IconEntrada,
       onClick: () => setConfirmationModalOpen(!confirmationModalOpen),
     },
-    {
+    /* {
       label: "Notificacion",
       Icon: BellSVG,
       href: "",
-    },
+    }, */
     {
       label: "Clientes",
       Icon: UserIcon,
       href: "/client",
-      subMenu: [{ label: "Black list", href: "" }],
+      /*  subMenu: [{ label: "Black list", href: "" }], */
     },
     {
       label: "Facturas",
@@ -54,18 +54,13 @@ export default function Navbar() {
       label: "Disfraz",
       Icon: CostumeIcon,
       href: "/costume",
-      subMenu: [
+      /* subMenu: [
         { label: "Cabezones", href: "" },
         { label: "Mascaras", href: "" },
         { label: "Adultos", href: "" },
         { label: "Nignos", href: "" },
         { label: "Accesorios", href: "" },
-      ],
-    },
-    {
-      label: "PDF",
-      Icon: BillsIcon,
-      href: "/pdf",
+      ], */
     },
   ];
 

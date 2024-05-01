@@ -67,10 +67,56 @@ export const costumeSchema = z.object({
 	dischargeDate: z.string().default(""),
 });
 
+export const costumeSchemaPartial = z.object({
+	id: z.string().optional(),
+
+	name: z
+		.string({
+			invalid_type_error: "El nombre debe ser un string",
+			required_error: "El nombre es requerido",
+		})
+		.refine(
+			(name) => {
+				let bandera = 0;
+				for (let index = 0; index < costumesNames.length; index++) {
+					if (costumesNames[index] === name) {
+						bandera++;
+						break;
+					}
+				}
+				if (bandera === 0 || bandera === 1) return true;
+				return false;
+			},
+			{
+				message: "Ese nombre ya se encuentra en la base de datos",
+			}
+		),
+
+	price: z.coerce
+		.number({
+			invalid_type_error: "El precio debe ser un numero mayor que 0",
+			required_error: "El precio es requerido",
+		})
+		.positive({
+			message: "El precio debe ser mayor que 0",
+		}),
+
+	category: z.string().refine((value) => categories.includes(value), {
+		message: "No se encuenta la categoria en la base de datos",
+	}),
+
+	details: z.string({
+		invalid_type_error: "Los detalles debe ser un string",
+		required_error: "Los detalles son requeridos",
+	}),
+
+	dischargeDate: z.string().default(""),
+});
+
 export function validateCostume(object: Costume) {
 	return costumeSchema.safeParse(object);
 }
 
 export function validateParcialCostume(object: Costume) {
-	return costumeSchema.partial().safeParse(object);
+	return costumeSchemaPartial.partial().safeParse(object);
 }

@@ -9,8 +9,10 @@ export function Welcome() {
         <span>Bienvenida</span>
         <span className='font-bold capitalize'>Marcela</span>
       </h1>
-      {/* <div className='flex flex-col   justify-between  [&>div]:flex [&>div]:items-center [&>div]:gap-2 [&>div>h3]:text-md'>
-        <div>
+
+      <div className='flex flex-col   justify-between  [&>div]:flex [&>div]:items-center [&>div]:gap-2 [&>div>h3]:text-md'>
+        {/* <div>
+
           <CalendarSVG />
           <h3>26/12/2023</h3>
           <h3>{date}</h3>

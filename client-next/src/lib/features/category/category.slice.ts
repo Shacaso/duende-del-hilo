@@ -13,18 +13,23 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 
+const path = "categories";
+
 // thunk functions
 export const getAllCategoriesAsync = createAsyncThunk(
   "category/getAll",
-  async () => {
-    const categories: Category[] = await fetchGetAll("categories");
+  async (): Promise<Category[]> => {
+    const categories: Category[] = await fetchGetAll(path);
+
     return categories;
   }
 );
 export const createCategoryAsync = createAsyncThunk(
   "category/create",
   async (body: Category): Promise<Category> => {
-    return await await fetchPost(body, "categories");
+
+    return await fetchPost(body, path);
+
   }
 );
 // export const getOneClientByIdAsync = createAsyncThunk(
@@ -37,14 +42,18 @@ export const createCategoryAsync = createAsyncThunk(
 export const updateCategoryAsync = createAsyncThunk(
   "category/update",
   async (body: Category): Promise<Category> => {
-    return await fetchPatch(body.id, body, "categories");
+
+    return await fetchPatch(body.id, body, path);
+
   }
 );
 
 export const deleteCategoryAsync = createAsyncThunk(
   "category/delete",
   async (id: string): Promise<Category> => {
-    return await fetchDeleteById(id, "categories");
+
+    return await fetchDeleteById(id, path);
+
   }
 );
 interface State {
@@ -52,6 +61,7 @@ interface State {
   isLoading: boolean;
   category?: Category;
   created?: Category;
+  updated?: Category;
   error?: string;
 }
 
@@ -61,7 +71,9 @@ const initialState: State = {
 };
 
 export const categorySlice = createSlice({
-  name: "categories",
+
+  name: path,
+
   initialState,
   reducers: {
     setCategorySync(state, action: PayloadAction<Category>) {
@@ -73,7 +85,9 @@ export const categorySlice = createSlice({
     },
   },
   extraReducers(builder) {
-    // GETALL
+
+    //* GETALL
+
     builder.addCase(getAllCategoriesAsync.pending, (state) => {
       state.isLoading = true;
     });
@@ -91,6 +105,9 @@ export const categorySlice = createSlice({
       const body = action.payload;
       state.categories.push(body);
       state.created = body;
+
+      alert("La categoria se ha guardado");
+
       state.isLoading = false;
     });
     builder.addCase(createCategoryAsync.rejected, (state, action) => {
@@ -108,7 +125,8 @@ export const categorySlice = createSlice({
     //   state.isLoading = false;
     // });
 
-    // // UPDATE
+
+    //* UPDATE
     builder.addCase(updateCategoryAsync.pending, (state) => {
       state.isLoading = true;
     });
@@ -117,10 +135,15 @@ export const categorySlice = createSlice({
       const { id } = updated;
       const index = state.categories.findIndex((item) => item.id === id);
       state.categories[index] = updated;
+
+
+      state.updated = updated;
+      alert("La categoria se ha actualizado");
       state.isLoading = false;
     });
 
-    //! DELETE
+    //* DELETE
+
     builder.addCase(deleteCategoryAsync.pending, (state) => {
       state.isLoading = true;
     });
@@ -128,7 +151,10 @@ export const categorySlice = createSlice({
       const deleted: Category = action.payload;
       const { id } = deleted;
       const index = state.categories.findIndex((item) => item.id === id);
-      state.categories.slice(index, 1);
+
+      state.categories.splice(index, 1);
+      alert("La categoria se ha eliminado");
+
       state.isLoading = false;
     });
   },
