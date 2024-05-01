@@ -2,12 +2,12 @@
   {
     "id": "fe1ff4fe-5522-4ca4-bb18-973e2388d978",
     "name": "Profesioness",
-    "dischargeDate": ""
+    "dischargeDate": "2024-04-30 22:05:10"
   },
   {
     "id": "d3341dfd-de1a-4703-a1dc-f2beed546e9d",
     "name": "Halloween",
-    "dischargeDate": ""
+    "dischargeDate": "2024-04-30 22:05:13"
   },
   {
     "id": "116f9bcf-6f0c-4530-b415-fa7036424280",
@@ -178,5 +178,30 @@
     "id": "4246d431-9e72-488b-a679-7f33edb704fc",
     "name": "312312312",
     "dischargeDate": "2024-04-26 21:57:21"
+  },
+  {
+    "id": "bbbc0991-f9a6-4bf0-b720-2c09182fab58",
+    "name": "Adulto",
+    "dischargeDate": ""
+  },
+  {
+    "id": "44db5d8b-f577-4b07-a318-cafb616c9c7a",
+    "name": "Niño",
+    "dischargeDate": ""
+  },
+  {
+    "id": "add59498-1750-47a9-bf7a-aacbd4d7cafd",
+    "name": "Mascara",
+    "dischargeDate": ""
+  },
+  {
+    "id": "c69b32f9-a7f0-4323-ba64-9cf72aaf68f5",
+    "name": "Cabezon",
+    "dischargeDate": ""
+  },
+  {
+    "id": "101f1350-9a7c-4ad5-9d48-c75aba12d673",
+    "name": "Otro",
+    "dischargeDate": ""
   }
 ]
