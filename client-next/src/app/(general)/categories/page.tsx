@@ -32,11 +32,6 @@ export default function CategoriesPage() {
     setSearch(e.target.value);
   };
 
-  // const getClients = async () => {
-  //   const data: Category[] = await fetchGetAll("categories");
-  //   setCategories(data);
-  // };
-
   useEffect(() => {
     getAllCategories();
   });
@@ -46,17 +41,12 @@ export default function CategoriesPage() {
       <div className='w-full px-5 mt-10'>
         <DataList
           title='Categoria'
-          // setViewMode={viewModeType.TABLE}
           element={<Table data={result} type='categories' />}
         >
           <div>
             <DataList.Header>
               <div className='flex gap-5 my-2'>
                 <div className='flex-1'>
-                  {/* <Search
-                placeholder='Buscar cliente'
-                onNewValue={handleFilters}
-              /> */}
                   <div className='flex items-center justify-between p-2 rounded-md  bg-base-200'>
                     <form className='w-full'>
                       <input
@@ -105,7 +95,7 @@ export default function CategoriesPage() {
       </div>
       {confirmationModalOpen && (
         <ConfirmationModal
-          title='Form Category'
+          title='CREAR CATEGORIA'
           isOpen={confirmationModalOpen}
           handleClose={() => setConfirmationModalOpen(!confirmationModalOpen)}
         >

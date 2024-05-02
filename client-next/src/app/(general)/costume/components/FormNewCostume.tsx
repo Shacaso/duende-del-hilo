@@ -7,6 +7,8 @@ import { z, ZodError } from "zod";
 import FormCategory from "./category/FormCategory";
 import { useCategory } from "@/hook/useCategory";
 import { useCostume } from "@/hook/useCostume";
+import Form from "../../categories/components/Form";
+import { Input } from "@/components";
 
 interface Props {
   data?: Costume;
@@ -89,10 +91,10 @@ export default function FormNewCostume({ data }: Props) {
         onSubmit={handleSubmit}
       >
         <div className='flex flex-col gap-5'>
-          {touched.name && errors.name && <p>{errors.name}</p>}
-          <input
-            className='w-full input input-bordered '
-            placeholder='name'
+          <Input
+            placeholder='Ingrese disfraz'
+            validate={touched.name && errors.name ? true : false}
+            title='Nombre del disfraz'
             type='text'
             name='name'
             value={values.name}
@@ -100,50 +102,47 @@ export default function FormNewCostume({ data }: Props) {
             onBlur={handleBlur}
           />
 
-          {touched.price && errors.price && <p>{errors.price}</p>}
-          <input
-            className='w-full input input-bordered '
-            placeholder='price'
-            type='number'
-            name='price'
-            value={values.price}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-
-          {touched.category && errors.category && <p>{errors.category}</p>}
-          <div className='flex gap-5 items-center justify-center'>
-            <div className='flex-1'>
-              <label>
-                <input
-                  list='categories'
-                  name='category'
-                  className='w-full input input-bordered '
-                  placeholder='category'
-                  value={values.category}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                />
-              </label>
-              <datalist id='categories'>
-                {categories.map((item) => (
-                  <option key={item.id} value={item.name}></option>
-                ))}
-              </datalist>
+          <div className='flex flex-col '>
+            <label>Categoria</label>
+            <div className='flex gap-5 items-center justify-center'>
+              <div className='w-full'>
+                <label>
+                  <input
+                    list='categories'
+                    name='category'
+                    className={`input input-bordered border w-full ${
+                      touched.category &&
+                      errors.category &&
+                      "border-primary border-2"
+                    }`}
+                    placeholder='Buscar categorias'
+                    value={values.category}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+                </label>
+                <datalist id='categories'>
+                  {categories
+                    .filter((item) => item.dischargeDate === "")
+                    .map((item) => (
+                      <option key={item.id} value={item.name}></option>
+                    ))}
+                </datalist>
+              </div>
+              <button
+                type='button'
+                onClick={() => setConfirmationModalOpen(!confirmationModalOpen)}
+                className='btn  btn-primary  btn-xs h-full'
+              >
+                +
+              </button>
             </div>
-            <button
-              type='button'
-              onClick={() => setConfirmationModalOpen(!confirmationModalOpen)}
-              className='btn  btn-primary  btn-xs h-full'
-            >
-              +
-            </button>
           </div>
-
           {touched.details && errors.details && <p>{errors.details}</p>}
-          <input
-            className='w-full input input-bordered '
-            placeholder='details'
+          <Input
+            placeholder='Ingrese detalles'
+            validate={touched.details && errors.details ? true : false}
+            title='Detalles'
             type='text'
             name='details'
             value={values.details}
@@ -157,12 +156,12 @@ export default function FormNewCostume({ data }: Props) {
       </form>
       {confirmationModalOpen && (
         <ConfirmationModal
-          title='Form Category'
+          title='CREAR CATEGORIA'
           isOpen={confirmationModalOpen}
           handleClose={() => setConfirmationModalOpen(!confirmationModalOpen)}
         >
           <div className='overflow-auto h-[462px]'>
-            <FormCategory />
+            <Form />
           </div>
         </ConfirmationModal>
       )}

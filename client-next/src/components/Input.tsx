@@ -6,6 +6,7 @@ interface Props {
   title: string;
   placeholder: string;
   type: string;
+  list?: string;
   name: string;
   value: string | number;
   onChange: {
@@ -25,6 +26,7 @@ interface Props {
 export default function Input({
   validate,
   title,
+  list,
   placeholder,
   type,
   name,
@@ -45,6 +47,7 @@ export default function Input({
         placeholder={placeholder}
         type={type}
         name={name}
+        list={list}
         value={value}
         onChange={onChange}
         onBlur={onBlur}

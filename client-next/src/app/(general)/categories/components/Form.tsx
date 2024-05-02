@@ -3,6 +3,7 @@ import { useCategory } from "@/hook/useCategory";
 import { useFormik } from "formik";
 import { ZodError } from "zod";
 import { validateCategory } from "@/app/lib/schemas/categorySchema";
+import { Input } from "@/components";
 
 interface Props {
   data?: Category;
@@ -47,19 +48,31 @@ export default function Form({ data }: Props) {
       className='flex flex-col justify-between gap-5 w-full h-full p-5'
       onSubmit={handleSubmit}
     >
-      {touched.name && errors.name && <p>{errors.name}</p>}
-      <input
-        className='w-full input input-bordered '
-        placeholder='name'
-        type='text'
-        name='name'
-        value={values.name}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+      <div className='flex flex-col gap-5'>
+        <Input
+          placeholder='Ingrese nombre de categoria'
+          validate={touched.name && errors.name ? true : false}
+          title='Categoria'
+          type='text'
+          name='name'
+          value={values.name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        <Input
+          placeholder='Ingrese precio'
+          validate={touched.name && errors.name ? true : false}
+          title='Precio'
+          type='number'
+          name='name'
+          value={values.name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+      </div>
 
       <button className='btn btn-primary' type='submit'>
-        SAVE!
+        GUARDAR
       </button>
     </form>
   );

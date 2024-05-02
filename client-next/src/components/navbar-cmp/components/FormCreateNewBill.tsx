@@ -146,7 +146,7 @@ export default function FormCreateNewBill({ data }: Props) {
 
         {touched.costumes && errors.costumes && <p>{errors.costumes}</p>}
         <div className='flex gap-5 items-center justify-center'>
-          <div className='w-full'>
+          <div className='flex-1'>
             <label>
               <input
                 list='costumes'
@@ -159,12 +159,14 @@ export default function FormCreateNewBill({ data }: Props) {
               />
             </label>
             <datalist id='costumes'>
-              {costumesList.map((item: Costume) => (
-                <option
-                  key={item.id}
-                  value={`${item.name} - $${item.price}`}
-                ></option>
-              ))}
+              {costumesList
+                .filter((item) => item.dischargeDate === "")
+                .map((item: Costume) => (
+                  <option
+                    key={item.id}
+                    value={`${item.name} - $${item.price}`}
+                  ></option>
+                ))}
             </datalist>
           </div>
           <button
@@ -176,13 +178,10 @@ export default function FormCreateNewBill({ data }: Props) {
           </button>
         </div>
 
-        {touched.amountTotal && errors.amountTotal && (
-          <p>{errors.amountTotal}</p>
-        )}
-        <label>Precio total</label>
-        <input
-          className='w-full input input-bordered h-full'
-          placeholder='amountTotal'
+        <Input
+          placeholder='Ingrese precio total'
+          validate={touched.amountTotal && errors.amountTotal ? true : false}
+          title='Precio total'
           type='number'
           name='amountTotal'
           value={values.amountTotal}
@@ -192,13 +191,12 @@ export default function FormCreateNewBill({ data }: Props) {
 
         <div className='flex flex-row gap-5'>
           <div className='flex flex-col gap-3'>
-            {touched.advancement && errors.advancement && (
-              <p>{errors.advancement}</p>
-            )}
-            <label>Seña</label>
-            <input
-              className='w-full input input-bordered h-full'
+            <Input
               placeholder='Ingrese seña'
+              validate={
+                touched.advancement && errors.advancement ? true : false
+              }
+              title='Seña'
               type='number'
               name='advancement'
               value={values.advancement}
@@ -207,10 +205,12 @@ export default function FormCreateNewBill({ data }: Props) {
             />
           </div>
 
-          <div className='flex flex-col gap-3'>
-            <label className='text-orange-400'>Depósito</label>
-            <input
-              className='w-full input input-bordered h-full'
+          <div className='border-4 border-red-300 '>
+            <Input
+              validate={
+                touched.advancement && errors.advancement ? true : false
+              }
+              title='Depósito'
               placeholder='Ingrese depósito'
               type='number'
               name='advancement'
@@ -227,9 +227,9 @@ export default function FormCreateNewBill({ data }: Props) {
             <label>Cliente</label>
             <label>
               <input
+                className='w-full input input-bordered '
                 list='users'
                 name='dniClient'
-                className='w-full input input-bordered '
                 placeholder='Buscar clientes'
                 value={values.dniClient}
                 onBlur={handleBlur}
@@ -237,12 +237,14 @@ export default function FormCreateNewBill({ data }: Props) {
               />
             </label>
             <datalist id='users'>
-              {clients.map((item) => (
-                <option
-                  key={item.dni}
-                  value={`${item.dni} - ${item.name} ${item.surname}`}
-                ></option>
-              ))}
+              {clients
+                .filter((item) => item.dischargeDate === "")
+                .map((item) => (
+                  <option
+                    key={item.dni}
+                    value={`${item.dni} - ${item.name} ${item.surname}`}
+                  ></option>
+                ))}
             </datalist>
           </div>
 
@@ -257,11 +259,10 @@ export default function FormCreateNewBill({ data }: Props) {
           </button>
         </div>
 
-        {touched.note && errors.note && <p>{errors.note}</p>}
-        <label>Notas</label>
-        <input
-          className='w-full input input-bordered h-full'
+        <Input
           placeholder='Ingrese notas'
+          validate={touched.note && errors.note ? true : false}
+          title='Notas'
           type='text'
           name='note'
           value={values.note}
