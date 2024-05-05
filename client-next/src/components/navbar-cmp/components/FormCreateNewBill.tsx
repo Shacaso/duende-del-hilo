@@ -121,7 +121,7 @@ export default function FormCreateNewBill({ data }: Props) {
       <form className='flex flex-col gap-5 w-full px-2' onSubmit={handleSubmit}>
         <div className='gap-3 flex-col flex'>
           <label>Listado de disfraces</label>
-          <div className='h-52 w-full bg-base-100 flex flex-wrap gap-2 py-2 px-1'>
+          <div className='min-h-32 h-full w-full bg-base-100 flex flex-wrap gap-x-2 gap-y-1 py-2 px-1'>
             {values.costumes.map((item, index) => (
               <div key={index} className='badge badge-primary gap-2 p-4'>
                 {item}
@@ -161,11 +161,8 @@ export default function FormCreateNewBill({ data }: Props) {
             <datalist id='costumes'>
               {costumesList
                 .filter((item) => item.dischargeDate === "")
-                .map((item: Costume) => (
-                  <option
-                    key={item.id}
-                    value={`${item.name} - $${item.price}`}
-                  ></option>
+                .map(({ id, name, category }: Costume) => (
+                  <option key={id} value={`${name} - ${category}`}></option>
                 ))}
             </datalist>
           </div>
@@ -178,32 +175,45 @@ export default function FormCreateNewBill({ data }: Props) {
           </button>
         </div>
 
-        <Input
-          placeholder='Ingrese precio total'
-          validate={touched.amountTotal && errors.amountTotal ? true : false}
-          title='Precio total'
-          type='number'
-          name='amountTotal'
-          value={values.amountTotal}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-
         <div className='flex flex-row gap-5'>
-          <div className='flex flex-col gap-3'>
+          <Input
+            placeholder='Ingrese precio total'
+            validate={touched.amountTotal && errors.amountTotal ? true : false}
+            title='Precio total'
+            type='number'
+            name='amountTotal'
+            value={values.amountTotal}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+
+          <div className='border-4 border-red-300 '>
             <Input
-              placeholder='Ingrese seña'
               validate={
-                touched.advancement && errors.advancement ? true : false
+                touched.amountTotal && errors.amountTotal ? true : false
               }
-              title='Seña'
+              title='Depósito total'
+              placeholder='Ingrese depósito total'
               type='number'
-              name='advancement'
-              value={values.advancement}
+              name='amountTotal'
+              value={values.amountTotal}
               onBlur={handleBlur}
               onChange={handleChange}
             />
           </div>
+        </div>
+        <hr />
+        <div className='flex flex-row gap-5'>
+          <Input
+            placeholder='Ingrese seña'
+            validate={touched.advancement && errors.advancement ? true : false}
+            title='Seña'
+            type='number'
+            name='advancement'
+            value={values.advancement}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
 
           <div className='border-4 border-red-300 '>
             <Input
@@ -302,7 +312,7 @@ export default function FormCreateNewBill({ data }: Props) {
           </div>
         </div>
 
-        <button className='btn btn-primary' type='submit'>
+        <button className='btn btn-success text-white' type='submit'>
           GUARDAR
         </button>
       </form>

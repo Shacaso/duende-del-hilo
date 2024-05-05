@@ -23,7 +23,7 @@ export default function ProductsDashboard() {
       {/* {loading ? (
         <TableSkeleton rows={6} headers={headers} />
       ) : ( */}
-      <table className='table bg-base-200 table-lg [&>thead>tr]:text-lg '>
+      <table className='table table-pin-rows bg-base-200 table-lg [&>thead>tr]:text-lg '>
         <thead>
           <tr>
             {headers.map((header: string, index: number) => (
@@ -32,40 +32,43 @@ export default function ProductsDashboard() {
           </tr>
         </thead>
         <tbody>
-          {bills.slice(-5).map((bill: Bill) => (
-            <tr key={bill.id}>
-              <td>{bill.billNumber}</td>
-              <td>
-                {bill.client.name} {bill.client.surname}
-              </td>
-              <td>{bill.amountTotal}</td>
-              <td>
-                <button
-                  className='btn btn-circle'
-                  onClick={() => {
-                    document.getElementById(bill.id).showModal();
-                  }}
-                >
-                  <ViewIcon />
-                </button>
-                <dialog id={bill.id} className='modal'>
-                  <div className='modal-box w-11/12 max-w-5xl'>
-                    <form method='dialog'>
-                      {/* if there is a button in form, it will close the modal */}
-                      <button className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'>
-                        ✕
-                      </button>
-                    </form>
-                    <div className='p-4'>
-                      <PDFViewer style={{ width: "100%", height: "100vh" }}>
-                        <PDFile data={bill} />
-                      </PDFViewer>
+          {bills
+            .slice(-5)
+            .reverse()
+            .map((bill: Bill) => (
+              <tr key={bill.id}>
+                <td>{bill.billNumber}</td>
+                <td>
+                  {bill.client.name} {bill.client.surname}
+                </td>
+                <td>{bill.amountTotal}</td>
+                <td>
+                  <button
+                    className='btn btn-circle'
+                    onClick={() => {
+                      document.getElementById(bill.id).showModal();
+                    }}
+                  >
+                    <ViewIcon />
+                  </button>
+                  <dialog id={bill.id} className='modal'>
+                    <div className='modal-box w-11/12 max-w-5xl'>
+                      <form method='dialog'>
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'>
+                          ✕
+                        </button>
+                      </form>
+                      <div className='p-4'>
+                        <PDFViewer style={{ width: "100%", height: "100vh" }}>
+                          <PDFile data={bill} />
+                        </PDFViewer>
+                      </div>
                     </div>
-                  </div>
-                </dialog>
-              </td>
-            </tr>
-          ))}
+                  </dialog>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
       {/* )} */}

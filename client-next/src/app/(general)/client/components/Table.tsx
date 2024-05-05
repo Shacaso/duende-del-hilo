@@ -129,7 +129,7 @@ export function Table({ data }: Props) {
       )}
       {viewModalOpen && (
         <ConfirmationModal
-          title='VIEW CLIENT'
+          title='DETALLE CLIENTE'
           isOpen={viewModalOpen}
           handleClose={() => setViewModalOpen(!viewModalOpen)}
         >

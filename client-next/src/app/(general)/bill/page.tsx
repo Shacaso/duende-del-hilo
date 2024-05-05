@@ -46,7 +46,7 @@ export default function Bill() {
     <div className='w-full px-5 mt-10'>
       <DataList title='Facturas' element={<Table data={result} />}>
         <div>
-          <Button className='w-full btn btn-primary my-5'>
+          <Button className='w-full btn btn-warning my-5 btn-disabled'>
             <h1>Generar Reporte</h1>
           </Button>
           <DataList.Header>

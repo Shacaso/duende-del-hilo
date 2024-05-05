@@ -104,7 +104,7 @@ export function Table({ data }: Props) {
       </table>
       {updateModalOpen && (
         <ConfirmationModal
-          title='UPDATE CLIENT'
+          title='ACTUALIZAR DISFRAZ'
           isOpen={updateModalOpen}
           handleClose={() => setUpdateModalOpen(!updateModalOpen)}
         >
@@ -115,7 +115,7 @@ export function Table({ data }: Props) {
       )}
       {viewModalOpen && (
         <ConfirmationModal
-          title='VIEW CLIENT'
+          title='VER DISFRAZ'
           isOpen={viewModalOpen}
           handleClose={() => setViewModalOpen(!viewModalOpen)}
         >

@@ -8,7 +8,7 @@ import FormCategory from "./category/FormCategory";
 import { useCategory } from "@/hook/useCategory";
 import { useCostume } from "@/hook/useCostume";
 import Form from "../../categories/components/Form";
-import { Input } from "@/components";
+import { Input, InputDataList } from "@/components";
 
 interface Props {
   data?: Costume;
@@ -90,7 +90,7 @@ export default function FormNewCostume({ data }: Props) {
         className='flex flex-col gap-5 w-full h-full justify-between p-5'
         onSubmit={handleSubmit}
       >
-        <div className='flex flex-col gap-5'>
+        <div className='flex flex-col gap-5 w-full'>
           <Input
             placeholder='Ingrese disfraz'
             validate={touched.name && errors.name ? true : false}
@@ -102,43 +102,19 @@ export default function FormNewCostume({ data }: Props) {
             onBlur={handleBlur}
           />
 
-          <div className='flex flex-col '>
-            <label>Categoria</label>
-            <div className='flex gap-5 items-center justify-center'>
-              <div className='w-full'>
-                <label>
-                  <input
-                    list='categories'
-                    name='category'
-                    className={`input input-bordered border w-full ${
-                      touched.category &&
-                      errors.category &&
-                      "border-primary border-2"
-                    }`}
-                    placeholder='Buscar categorias'
-                    value={values.category}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                  />
-                </label>
-                <datalist id='categories'>
-                  {categories
-                    .filter((item) => item.dischargeDate === "")
-                    .map((item) => (
-                      <option key={item.id} value={item.name}></option>
-                    ))}
-                </datalist>
-              </div>
-              <button
-                type='button'
-                onClick={() => setConfirmationModalOpen(!confirmationModalOpen)}
-                className='btn  btn-primary  btn-xs h-full'
-              >
-                +
-              </button>
-            </div>
-          </div>
-          {touched.details && errors.details && <p>{errors.details}</p>}
+          <InputDataList
+            data={categories}
+            list='categories'
+            validate={touched.category && errors.category ? true : false}
+            title='Categoria'
+            placeholder='Buscar categorias'
+            type='text'
+            name='category'
+            value={values.category}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+
           <Input
             placeholder='Ingrese detalles'
             validate={touched.details && errors.details ? true : false}
@@ -151,7 +127,7 @@ export default function FormNewCostume({ data }: Props) {
           />
         </div>
         <button className='btn btn-primary' type='submit'>
-          SAVE!
+          GUARDAR
         </button>
       </form>
       {confirmationModalOpen && (

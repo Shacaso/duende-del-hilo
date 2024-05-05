@@ -70,7 +70,7 @@ export default function Navbar() {
         <Link href={"/home"}>
           <Logo />
         </Link>
-        <ul className='overflow-y-auto '>
+        <ul className='overflow-y-auto [&>li]:text-lg '>
           {menuItems.map((item, index) => {
             return <MainMenuItem key={index} {...item} />;
           })}

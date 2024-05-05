@@ -35,15 +35,15 @@ export default function View({ data }: Props) {
             onClick={() => deleteAction(data?.id ?? "", "clients")}
             className='btn btn-primary'
           >
-            Delete
+            ELIMINAR
           </button>
           <button
             onClick={() => {
               setUpdateModalOpen(!updateModalOpen);
             }}
-            className='btn btn-secondary'
+            className='btn btn-warning'
           >
-            Update
+            ACTUALIZAR
           </button>
         </div>
       </div>

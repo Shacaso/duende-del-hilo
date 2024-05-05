@@ -1,14 +1,21 @@
 [
-  {
-    "id": "a296abeb-c5a8-40b3-8dbf-02583dde3c9b",
-    "name": "Ciudad"
-  },
-  {
-    "id": "2cd84a30-83d4-4378-8a2c-e471e1545f79",
-    "name": "Las Heras"
-  },
-  {
-    "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abf4",
-    "name": "Lujan"
-  }
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abf4", "name": "Capital" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abf5", "name": "General Alvear" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abf6", "name": "Godoy Cruz" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abf7", "name": "Guaymallén" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abf8", "name": "Junín" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abf9", "name": "La Paz" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abg1", "name": "Las Heras" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abg2", "name": "Lavalle" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abg3", "name": "Luján de Cuyo" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abg4", "name": "Maipú" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abg5", "name": "Malargüe" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abg6", "name": "Rivadavia" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abg7", "name": "San Carlos" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abg8", "name": "San Martín" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abg9", "name": "San Rafael" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abh1", "name": "Santa Rosa" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abh2", "name": "Tunuyán" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abh3", "name": "Tupungato" },
+  { "id": "898b51c7-cf3a-4fee-8fef-7a7ba110abh4", "name": "Otros" }
 ]

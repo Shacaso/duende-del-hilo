@@ -1,9 +1,14 @@
 [
   {
-    "id": "fcd098e4-7374-442b-9050-fd1d1014b1dc",
-    "billNumber": 7,
-    "date": "2024-03-13 19:03:16",
-    "amountTotal": 123,
+    "id": "6b2a54eb-c4cc-4728-bef5-efd45ec75b98",
+    "billNumber": 13,
+    "date": "2024-05-04 11:03:30",
+    "returnedDate": "2024-05-09",
+    "retirementDate": "2024-05-22",
+    "returned": "",
+    "amountTotal": 10000,
+    "advancement": 12345,
+    "remainingBalance": -2345,
     "client": {
       "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
       "name": "Enzo",
@@ -19,75 +24,43 @@
     },
     "costumes": [
       {
-        "id": "4be27f66-e350-4ce4-9b6b-97b54970d29c",
-        "name": "Jason",
-        "price": 5000,
+        "id": "59a627da-7463-408b-8348-44100f7f366d",
+        "name": "Fantasmas",
+        "price": 3000,
         "category": "Halloween",
-        "details": "Asdasdasd",
-        "dischargeDate": "2024-02-22 22:13:38"
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "0a9b9c44-2c39-4823-98ea-4fc32c33e0c3",
+        "name": "Bombero",
+        "price": 4000,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
       },
       {
         "id": "59a627da-7463-408b-8348-44100f7f366d",
-        "name": "Fantasmass",
+        "name": "Fantasmas",
         "price": 3000,
         "category": "Halloween",
         "details": "asdasd",
         "dischargeDate": ""
       }
     ],
-    "note": "asdasd",
+    "note": "jlahasfdjo;kafsd;jlkafsd",
     "dischargeDate": ""
   },
   {
-    "id": "82208174-7ff2-40a3-9e46-a70ef4207dc7",
-    "billNumber": 8,
-    "date": "2024-03-13 19:26:18",
-    "amountTotal": 123,
-    "client": {
-      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
-      "name": "Enzo",
-      "surname": "Vargas",
-      "dni": 35123124,
-      "phoneNumber": 2615123123,
-      "email": "enzo@gmail.com",
-      "direction": "Calle falsa 123",
-      "departament": "Ciudad",
-      "postalCode": 5539,
-      "blacklist": false,
-      "dischargeDate": ""
-    },
-    "costumes": ["Jason", "Doctor"],
-    "note": "asdasd",
-    "dischargeDate": ""
-  },
-  {
-    "id": "00e0276e-5949-407d-b522-0dc5cdb21d16",
-    "billNumber": 9,
-    "date": "2024-03-13 19:26:32",
-    "amountTotal": 123,
-    "client": {
-      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
-      "name": "Enzo",
-      "surname": "Vargas",
-      "dni": 35123124,
-      "phoneNumber": 2615123123,
-      "email": "enzo@gmail.com",
-      "direction": "Calle falsa 123",
-      "departament": "Ciudad",
-      "postalCode": 5539,
-      "blacklist": false,
-      "dischargeDate": ""
-    },
-    "costumes": ["Jason", "Doctor"],
-    "note": "asdasd",
-    "dischargeDate": ""
-  },
-  {
-    "id": "daad3d8f-1733-4105-a242-4d3ae4d22b2b",
-    "billNumber": 10,
-    "date": "2024-03-16 18:12:56",
+    "id": "4c29460f-a1a3-41e0-b027-476c4342d2e3",
+    "billNumber": 14,
+    "date": "2024-05-04 11:12:47",
+    "returnedDate": "2024-05-11",
+    "retirementDate": "2024-05-20",
     "returned": "",
-    "amountTotal": 10000,
+    "amountTotal": 78000,
+    "advancement": 50000,
+    "remainingBalance": 28000,
     "client": {
       "id": "d78f1323e-bbcc-42a2-9104-45bc97e98113",
       "name": "Alejo",
@@ -101,33 +74,119 @@
       "blacklist": false,
       "dischargeDate": ""
     },
-    "costumes": ["Ada", "Jason"],
-    "note": "fasdf",
-    "dischargeDate": ""
-  },
-  {
-    "id": "69b937c7-a392-420d-b8f9-85e158c147f4",
-    "billNumber": 11,
-    "date": "2024-03-16 20:52:11",
-    "returnedDate": "2024-03-15 19:27:56",
-    "retirementDate": "2024-03-15 19:27:56",
-    "amountTotal": 5000,
-    "advancement": 2000,
-    "remainingBalance": 3000,
-    "client": {
-      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
-      "name": "Enzo",
-      "surname": "Vargas",
-      "dni": 35123124,
-      "phoneNumber": 2615123123,
-      "email": "enzo@gmail.com",
-      "direction": "Calle falsa 123",
-      "departament": "Ciudad",
-      "postalCode": 5539,
-      "blacklist": false,
-      "dischargeDate": ""
-    },
     "costumes": [
+      {
+        "id": "59a627da-7463-408b-8348-44100f7f366d",
+        "name": "Fantasmas",
+        "price": 3000,
+        "category": "Halloween",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "0a9b9c44-2c39-4823-98ea-4fc32c33e0c3",
+        "name": "Bombero",
+        "price": 4000,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "7541a4e7-6255-41b0-b225-5ae9b8f15419",
+        "name": "Ada",
+        "price": 5000,
+        "category": "Magicos",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "d2def12e-ca91-4dcc-8260-2d1a42d1b14d",
+        "name": "Duende",
+        "price": 6000,
+        "category": "Magicos",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "9787c76f-d4c8-4796-886c-8b5850ffe7b7",
+        "name": "Mascaras",
+        "price": 8500,
+        "category": "Profesioness",
+        "details": "Super mascaras",
+        "dischargeDate": ""
+      },
+      {
+        "id": "59a627da-7463-408b-8348-44100f7f366d",
+        "name": "Fantasmas",
+        "price": 3000,
+        "category": "Halloween",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "0a9b9c44-2c39-4823-98ea-4fc32c33e0c3",
+        "name": "Bombero",
+        "price": 4000,
+        "category": "Profesiones",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "7541a4e7-6255-41b0-b225-5ae9b8f15419",
+        "name": "Ada",
+        "price": 5000,
+        "category": "Magicos",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "59a627da-7463-408b-8348-44100f7f366d",
+        "name": "Fantasmas",
+        "price": 3000,
+        "category": "Halloween",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "7541a4e7-6255-41b0-b225-5ae9b8f15419",
+        "name": "Ada",
+        "price": 5000,
+        "category": "Magicos",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "7541a4e7-6255-41b0-b225-5ae9b8f15419",
+        "name": "Ada",
+        "price": 5000,
+        "category": "Magicos",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "d2def12e-ca91-4dcc-8260-2d1a42d1b14d",
+        "name": "Duende",
+        "price": 6000,
+        "category": "Magicos",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
+      {
+        "id": "9787c76f-d4c8-4796-886c-8b5850ffe7b7",
+        "name": "Mascaras",
+        "price": 8500,
+        "category": "Profesioness",
+        "details": "Super mascaras",
+        "dischargeDate": ""
+      },
+      {
+        "id": "59a627da-7463-408b-8348-44100f7f366d",
+        "name": "Fantasmas",
+        "price": 3000,
+        "category": "Halloween",
+        "details": "asdasd",
+        "dischargeDate": ""
+      },
       {
         "id": "0a9b9c44-2c39-4823-98ea-4fc32c33e0c3",
         "name": "Bombero",
@@ -145,59 +204,7 @@
         "dischargeDate": ""
       }
     ],
-    "note": "asdasd",
-    "dischargeDate": ""
-  },
-  {
-    "id": "4b2bcd60-3851-4511-a978-dd9868041584",
-    "billNumber": 12,
-    "date": "2024-03-17 15:40:18",
-    "returnedDate": "2024-03-17",
-    "retirementDate": "2024-03-17",
-    "returned": true,
-    "amountTotal": 20000,
-    "advancement": 10000,
-    "remainingBalance": 10000,
-    "client": {
-      "id": "d78f1323e-bbcc-42a2-9104-45bc97e98113",
-      "name": "Alejo",
-      "surname": "Araya",
-      "dni": 42749595,
-      "phoneNumber": 2613430975,
-      "email": "alejoaraya2000@gmail.com",
-      "direction": "Calle 7",
-      "departament": "Ciudad",
-      "postalCode": 5500,
-      "blacklist": false,
-      "dischargeDate": ""
-    },
-    "costumes": [
-      {
-        "id": "060f1ca0-04eb-497f-a524-316dcf97e4aa",
-        "name": "Doctor",
-        "price": 8500,
-        "category": "Profesiones",
-        "details": "asdasd",
-        "dischargeDate": ""
-      },
-      {
-        "id": "9787c76f-d4c8-4796-886c-8b5850ffe7b7",
-        "name": "Mascara",
-        "price": 8500,
-        "category": "Profesiones",
-        "details": "asdasd",
-        "dischargeDate": ""
-      },
-      {
-        "id": "59a627da-7463-408b-8348-44100f7f366d",
-        "name": "Fantasmas",
-        "price": 3000,
-        "category": "Halloween",
-        "details": "asdasd",
-        "dischargeDate": ""
-      }
-    ],
-    "note": "Informacion relevante",
+    "note": "Alejo Aryaa",
     "dischargeDate": ""
   }
 ]

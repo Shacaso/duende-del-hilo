@@ -36,14 +36,14 @@ export default function InputDataList({
   list,
 }: Props) {
   return (
-    <div className='flex flex-col '>
+    <div className='flex flex-col w-full  '>
       <div className='w-full flex justify-between items-center'>
         <label htmlFor={name}>{title}</label>
         {validate && <div className='badge badge-primary badge-sm'></div>}
       </div>
       <label>
         <input
-          className={`input input-bordered border ${
+          className={`input input-bordered border w-full ${
             validate && "border-primary border-2"
           }`}
           placeholder={placeholder}
