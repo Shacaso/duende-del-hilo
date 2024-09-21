@@ -27,6 +27,27 @@ export const create = async (input: BillDto, path: string) => {
 	);
 	if (costumesFound instanceof CustomError) return costumesFound;
 
+	const priceReal = () => {
+		let result = 0;
+		for (let index = 0; index < costumesFound.length; index++) {
+			result += costumesFound[index].price;
+		}
+		if (input.others && input.others?.length !== 0) {
+			for (let index = 0; index < input.others.length; index++) {
+				result += input.others[index].price;
+			}
+		}
+		return result;
+	};
+
+	if (priceReal() !== input.amountTotal) {
+		return new CustomError(
+			true,
+			"El precio total no corresponde con la sumatoria de los productos",
+			400
+		);
+	}
+
 	const newBill: Bill = {
 		id: randomUUID(),
 		billNumber: lastBill,
@@ -39,6 +60,7 @@ export const create = async (input: BillDto, path: string) => {
 		remainingBalance: input.amountTotal - input.advancement,
 		client: clientFound,
 		costumes: costumesFound,
+		others: input.others,
 		note: input.note,
 		dischargeDate: "",
 	};
