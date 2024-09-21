@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { getAll } from "../data/entityRepository";
-import { Category, Costume, CustomError } from "../definitions";
+import { Category, Costume, CostumeDTO, CustomError } from "../definitions";
 import { categoriesPath } from "../data/paths";
 import { allCostumesNames } from "./billSchema";
 
@@ -46,18 +46,17 @@ export const costumeSchema = z.object({
 			}
 		),
 
+	category: z.string().refine((value) => categories.includes(value), {
+		message: "No se encuenta la categoria en la base de datos",
+	}),
+
 	price: z.coerce
 		.number({
 			invalid_type_error: "El precio debe ser un numero mayor que 0",
 			required_error: "El precio es requerido",
 		})
-		.positive({
-			message: "El precio debe ser mayor que 0",
-		}),
-
-	category: z.string().refine((value) => categories.includes(value), {
-		message: "No se encuenta la categoria en la base de datos",
-	}),
+		.optional()
+		.nullable(),
 
 	details: z.string({
 		invalid_type_error: "Los detalles debe ser un string",
@@ -113,7 +112,7 @@ export const costumeSchemaPartial = z.object({
 	dischargeDate: z.string().default(""),
 });
 
-export function validateCostume(object: Costume) {
+export function validateCostume(object: CostumeDTO) {
 	return costumeSchema.safeParse(object);
 }
 

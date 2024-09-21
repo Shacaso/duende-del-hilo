@@ -109,6 +109,20 @@ export const billSchema = z.object({
 				message: "No se encuenta ese disfraz en la base de datos",
 			}
 		),
+	others: z
+		.array(
+			z.object({
+				name: z.string(),
+				price: z
+					.number({
+						invalid_type_error: "El precio debe ser un numero mayor que 0",
+						required_error: "El precio es requerido",
+					})
+					.positive(),
+			})
+		)
+		.nullable()
+		.optional(),
 
 	dischargeDate: z.string().default(""),
 });
