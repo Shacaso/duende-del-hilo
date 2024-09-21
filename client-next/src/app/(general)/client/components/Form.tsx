@@ -181,7 +181,7 @@ export default function Form({ data }: Props) {
 
         <Input
           validate={touched.phoneNumber && errors.phoneNumber ? true : false}
-          title='Número de celular'
+          title='Número de celular 1'
           placeholder='Ingrese nro de celular'
           type='number'
           name='phoneNumber'
@@ -190,7 +190,16 @@ export default function Form({ data }: Props) {
           onBlur={handleBlur}
         />
       </div>
-
+      <Input
+        validate={touched.phoneNumber && errors.phoneNumber ? true : false}
+        title='Número de celular 2'
+        placeholder='Ingrese nro de celular'
+        type='number'
+        name='phoneNumber'
+        value={values.phoneNumber}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
       <Input
         validate={touched.direction && errors.direction ? true : false}
         title='Dirección'

@@ -16,7 +16,7 @@ interface Props {
   data: Costume[];
 }
 
-const headers = ["Nombre", "Categoria", "Precio", "Detalles", "Acciones"];
+const headers = ["Nombre", "Categoria", "Detalles", "Acciones"];
 
 export function Table({ data }: Props) {
   const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
@@ -69,7 +69,6 @@ export function Table({ data }: Props) {
             <tr key={costume.id}>
               <td>{costume.name}</td>
               <td>{costume.category}</td>
-              <td>{costume.price}</td>
               <td>{costume.details}</td>
               <td className='flex gap-2'>
                 <button

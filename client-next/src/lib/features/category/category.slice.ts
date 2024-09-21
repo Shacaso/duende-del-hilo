@@ -20,6 +20,7 @@ export const getAllCategoriesAsync = createAsyncThunk(
   "category/getAll",
   async (): Promise<Category[]> => {
     const categories: Category[] = await fetchGetAll(path);
+    console.log(categories);
 
     return categories;
   }
@@ -27,9 +28,7 @@ export const getAllCategoriesAsync = createAsyncThunk(
 export const createCategoryAsync = createAsyncThunk(
   "category/create",
   async (body: Category): Promise<Category> => {
-
     return await fetchPost(body, path);
-
   }
 );
 // export const getOneClientByIdAsync = createAsyncThunk(
@@ -42,18 +41,14 @@ export const createCategoryAsync = createAsyncThunk(
 export const updateCategoryAsync = createAsyncThunk(
   "category/update",
   async (body: Category): Promise<Category> => {
-
     return await fetchPatch(body.id, body, path);
-
   }
 );
 
 export const deleteCategoryAsync = createAsyncThunk(
   "category/delete",
   async (id: string): Promise<Category> => {
-
     return await fetchDeleteById(id, path);
-
   }
 );
 interface State {
@@ -71,7 +66,6 @@ const initialState: State = {
 };
 
 export const categorySlice = createSlice({
-
   name: path,
 
   initialState,
@@ -85,7 +79,6 @@ export const categorySlice = createSlice({
     },
   },
   extraReducers(builder) {
-
     //* GETALL
 
     builder.addCase(getAllCategoriesAsync.pending, (state) => {
@@ -125,7 +118,6 @@ export const categorySlice = createSlice({
     //   state.isLoading = false;
     // });
 
-
     //* UPDATE
     builder.addCase(updateCategoryAsync.pending, (state) => {
       state.isLoading = true;
@@ -135,7 +127,6 @@ export const categorySlice = createSlice({
       const { id } = updated;
       const index = state.categories.findIndex((item) => item.id === id);
       state.categories[index] = updated;
-
 
       state.updated = updated;
       alert("La categoria se ha actualizado");

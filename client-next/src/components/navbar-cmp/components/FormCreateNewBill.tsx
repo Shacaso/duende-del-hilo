@@ -83,6 +83,8 @@ export default function FormCreateNewBill({ data }: Props) {
   });
 
   const handleChangeData = (e: { target: { value: any } }) => {
+    console.log("handleChangeData, input:", { costume: e.target.value });
+
     let costume = e.target.value;
     // document.addEventListener("keydown", ({ key }) => {
     //   if (key === "Backspace") {
@@ -96,25 +98,65 @@ export default function FormCreateNewBill({ data }: Props) {
     }
     if (costume[0] !== "") {
       values.costumes.push(costume[0]);
-      values.amountTotal += Number(costume[2].substr(1));
+      // TODO values.amountTotal += Number(costume[2].substr(1));
       setCostumeSelected(costume[0]);
       e.target.value = "";
+      console.log("handleChangeData, output:", {
+        costume1: costume[0],
+        costume2: costume[1],
+        costume3: costume[2],
+      });
     }
   };
 
   const handleDelete = (index: number, value: string) => {
+    console.log("handleDelete, input:", { index, value });
+
     const costumeUpdate = values.costumes.splice(index, 1);
     const costume = costumesList.filter(
       (item: Costume) => item.name === value
     )[0];
     values.amountTotal -= costume.price;
     setCostumeSelected(costumeUpdate);
+    console.log("handleDelete, output:", { costumeUpdate });
   };
+
+  interface Accessorie {
+    id: number;
+    name: string;
+    price: number;
+  }
 
   useEffect(() => {
     getAllClients();
     getAllCostumes();
   });
+
+  const [accessories, setAccessories] = useState<Accessorie[]>([]);
+
+  const onAddAccessories = () => {
+    const newAccessorie: Accessorie = {
+      id:
+        accessories.length !== 0
+          ? accessories[accessories.length - 1].id + 1
+          : 1,
+      name: "",
+      price: 0,
+    };
+    console.log("onAddAccessories");
+
+    console.log("newAccessorie", newAccessorie);
+    const newState = [...accessories, newAccessorie];
+    console.log("newState", newState);
+
+    setAccessories(newState);
+  };
+  const onDeleteAccessories = (idAccessorie: number) => {
+    const accessoriesFiltered = accessories.filter(
+      (acc) => acc.id !== idAccessorie
+    );
+    setAccessories(accessoriesFiltered);
+  };
 
   return (
     <>
@@ -173,6 +215,42 @@ export default function FormCreateNewBill({ data }: Props) {
           >
             +
           </button>
+        </div>
+
+        <div className='flex gap-5 flex-col bg-slate-200 p-2 rounded-lg'>
+          <div className='flex justify-between'>
+            <h6 className='font-bold'>ACCESORIOS/OTROS</h6>
+            <button
+              type='button'
+              onClick={onAddAccessories}
+              className='btn btn-primary btn-xs'
+            >
+              +
+            </button>
+          </div>
+          <div className='w-full rounded-lg bg-slate-400 p-2 gap-2 flex flex-col'>
+            {accessories.map((acc) => (
+              <div key={acc.id} className='flex gap-2 items-center'>
+                <input
+                  placeholder='Nombre'
+                  className='input input-sm'
+                  type='text'
+                />
+                <input
+                  placeholder='Precio'
+                  className='input input-sm'
+                  type='text'
+                />
+                <button
+                  type='button'
+                  onClick={() => onDeleteAccessories(acc.id)}
+                  className='btn btn-xs btn-primary'
+                >
+                  -
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className='flex flex-row gap-5'>
@@ -285,27 +363,26 @@ export default function FormCreateNewBill({ data }: Props) {
             <Input
               placeholder='Ingrese fecha de devolución'
               validate={
-                touched.returnedDate && errors.returnedDate ? true : false
-              }
-              title='Fecha de devolución'
-              type='date'
-              name='returnedDate'
-              value={values.returnedDate}
-              onBlur={handleBlur}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className='flex flex-col gap-3 w-full'>
-            <Input
-              placeholder='Ingrese fecha de devolución'
-              validate={
                 touched.retirementDate && errors.retirementDate ? true : false
               }
               title='Fecha de retiro'
               type='date'
               name='retirementDate'
               value={values.retirementDate}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />
+          </div>
+          <div className='flex flex-col gap-3 w-full'>
+            <Input
+              placeholder='Ingrese fecha de devolución'
+              validate={
+                touched.returnedDate && errors.returnedDate ? true : false
+              }
+              title='Fecha de devolución'
+              type='date'
+              name='returnedDate'
+              value={values.returnedDate}
               onBlur={handleBlur}
               onChange={handleChange}
             />

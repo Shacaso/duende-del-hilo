@@ -24,6 +24,7 @@ export default function CostumePage() {
   const initial = costumes.filter(
     (category) => category.dischargeDate?.length === 0
   );
+
   const result = !costumes
     ? initial
     : initial.filter(

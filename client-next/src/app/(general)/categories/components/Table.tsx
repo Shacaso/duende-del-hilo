@@ -11,7 +11,7 @@ interface Props {
   type: string;
 }
 
-const headers = ["Categoria", "Acciones"];
+const headers = ["Categoria", "Precio", "Acciones"];
 
 export function Table({ data, type }: Props) {
   const { deleteCategory } = useCategory();

@@ -1,0 +1,33 @@
+### CATEGORIA
+
+- El precio va a sociado a la categoria.
+  Ejemplo:
+  Categoria: Adulto $2.500
+  Distraz: Batman Adulto -> ($2.500)
+
+# Cosa a tener en cuenta
+
+- Tanto la categoria OTROS y ACCESORIOS se debe poder agregar el precio manualmente sin que se persista
+
+### CLIENTE
+
+- Se le agrega un numero de celular mas y el segundo no es obligatorio.
+  TODO: Al crear un cliente se le va a enviar un mensaje de verificacion del numero, mail o SMS
+
+### FACTURA
+
+- Seccion OTROS/ACCESORIOS donde se van a poder cargar elementos a la facturas solo persistente en la misma.
+- Se le va a poder cargar Nombre y Precio.
+
+---
+
+| ACCESORIOS [+]|
+| |
+| [Peluca] [250] [-] |
+| [Lente] [3000] [-] |
+| [] [] [-] |
+| |
+| |
+| |
+
+---
