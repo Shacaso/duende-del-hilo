@@ -1,7 +1,7 @@
-import { Client, Costume, CustomError } from "../definitions";
+import { Category, Client, Costume, CustomError } from "../definitions";
 import { fetchDeleteById } from "../fetching";
 import { allEntities } from "./GetAndSaveJson";
-import { clientsPath, costumesPath } from "./paths";
+import { categoriesPath, clientsPath, costumesPath } from "./paths";
 
 //Funcion que concatena los mesajes de error de las validaciones
 export function jsonProcess(data: any[]) {
@@ -55,6 +55,22 @@ export async function getClientByDNI(
 	})[0];
 
 	return clientFound;
+}
+
+export async function getCategoryByName(
+	nameCategory: string
+): Promise<Category | CustomError> {
+	const responseCategory: Category[] | CustomError =
+		await allEntities<Category>(categoriesPath);
+
+	if (responseCategory instanceof CustomError) return responseCategory;
+	let categoryFound: Category = responseCategory.filter(
+		(category: Category) => {
+			return category.name === nameCategory;
+		}
+	)[0];
+
+	return categoryFound;
 }
 
 export function getDateAndHour() {

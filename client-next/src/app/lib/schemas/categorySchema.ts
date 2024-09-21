@@ -9,6 +9,15 @@ const categorySchema = z.object({
 		required_error: "La categoria es requerido",
 	}),
 
+	price: z
+		.number({
+			invalid_type_error: "El precio debe ser un numero mayor que 0",
+			required_error: "El precio es requerido",
+		})
+		.nonnegative({
+			message: "El precio debe ser positivo",
+		}),
+
 	dischargeDate: z.string().default(""),
 });
 

@@ -1,9 +1,10 @@
-import { create, getAll } from "@/app/lib/data/entityRepository";
-import { Costume, CustomError } from "@/app/lib/definitions";
+import { getAll } from "@/app/lib/data/entityRepository";
+import { Costume, CostumeDTO, CustomError } from "@/app/lib/definitions";
 import { costumesPath } from "@/app/lib/data/paths";
 import { NextResponse } from "next/server";
 import { validateCostume } from "@/app/lib/schemas/costumeSchema";
 import { jsonProcess } from "@/app/lib/data/funciones";
+import { create } from "@/app/lib/data/costumeRepository";
 
 export async function GET(req: Request) {
 	const response: Costume[] | CustomError = await getAll<Costume>(costumesPath);
@@ -13,7 +14,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-	const body: Costume = await req.json();
+	const body: CostumeDTO = await req.json();
 
 	const result = validateCostume(body);
 
@@ -26,10 +27,7 @@ export async function POST(req: Request) {
 		);
 	}
 
-	const response: Costume | CustomError = await create<Costume>(
-		body,
-		costumesPath
-	);
+	const response: Costume | CustomError = await create(body, costumesPath);
 	if (response instanceof CustomError) {
 		console.log(response.message);
 		return NextResponse.json(response, { status: response.codigo });
