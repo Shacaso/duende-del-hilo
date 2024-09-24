@@ -20,7 +20,6 @@ export const getAllCategoriesAsync = createAsyncThunk(
   "category/getAll",
   async (): Promise<Category[]> => {
     const categories: Category[] = await fetchGetAll(path);
-    console.log(categories);
 
     return categories;
   }

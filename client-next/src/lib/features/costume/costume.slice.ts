@@ -1,4 +1,4 @@
-import { Costume } from "@/app/lib/definitions";
+import { Costume, CostumeDTO } from "@/app/lib/definitions";
 import {
   fetchGetAll,
   fetchPost,
@@ -19,12 +19,15 @@ const path = "costumes";
 export const getAllAsync = createAsyncThunk(
   "costume/getAll",
   async (): Promise<Costume[]> => {
-    return await fetchGetAll(path);
+    const costumes = await fetchGetAll(path);
+    console.log(costumes);
+
+    return costumes;
   }
 );
 export const createAsync = createAsyncThunk(
   "costume/create",
-  async (body: Costume): Promise<Costume> => {
+  async (body: CostumeDTO): Promise<CostumeDTO> => {
     return await fetchPost(body, path);
   }
 );
@@ -37,7 +40,7 @@ export const createAsync = createAsyncThunk(
 // );
 export const updateAsync = createAsyncThunk(
   "costume/update",
-  async (body: Costume): Promise<Costume> => {
+  async (body: CostumeDTO): Promise<CostumeDTO> => {
     return await fetchPatch(body.id, body, path);
   }
 );

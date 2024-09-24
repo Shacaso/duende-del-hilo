@@ -13,7 +13,10 @@ const path = "bills";
 export const getAllAsync = createAsyncThunk(
   "bill/getAll",
   async (): Promise<Bill[]> => {
-    return await fetchGetAll(path);
+    const bills = await fetchGetAll(path);
+    console.log(bills);
+
+    return bills;
   }
 );
 export const createAsync = createAsyncThunk(

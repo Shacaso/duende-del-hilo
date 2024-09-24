@@ -1,12 +1,12 @@
 [
   {
-    "name": "Adulto",
-    "price": 2500,
+    "name": "Adultos",
+    "price": 2000,
     "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
     "dischargeDate": ""
   },
   {
-    "name": "Niño",
+    "name": "Niños",
     "price": 2000,
     "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
     "dischargeDate": ""
@@ -15,12 +15,24 @@
     "name": "Otros",
     "price": 0,
     "id": "79a6a12d-d09e-4920-b6b8-13d60025f0fc",
-    "dischargeDate": ""
+    "dischargeDate": "2024-09-21 17:26:45"
   },
   {
     "name": "Accesorios",
     "price": 0,
     "id": "4b438d8d-4c73-4f6b-9a04-6df4e6f76d0f",
+    "dischargeDate": "2024-09-21 17:26:48"
+  },
+  {
+    "id": "b9319011-1f5e-4b30-85dd-2a315a0844a7",
+    "name": "Mascaras",
+    "price": 2500,
+    "dischargeDate": ""
+  },
+  {
+    "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
+    "name": "Cabezones",
+    "price": 2500,
     "dischargeDate": ""
   }
 ]

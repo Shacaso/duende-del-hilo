@@ -1,4 +1,4 @@
-import { Category, Costume } from "@/app/lib/definitions";
+import { Category, Costume, CostumeDTO } from "@/app/lib/definitions";
 import { fetchGetAll, fetchPatch, fetchPost } from "@/app/lib/fetching";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import { useFormik } from "formik";
@@ -11,7 +11,7 @@ import Form from "../../categories/components/Form";
 import { Input, InputDataList } from "@/components";
 
 interface Props {
-  data?: Costume;
+  data?: CostumeDTO;
 }
 
 export default function FormNewCostume({ data }: Props) {
@@ -52,37 +52,46 @@ export default function FormNewCostume({ data }: Props) {
     dischargeDate: z.string().default(""),
   });
 
-  const {
-    initialValues,
-    handleSubmit,
-    values,
-    handleChange,
-    errors,
-    touched,
-    handleBlur,
-  } = useFormik({
-    initialValues: {
-      id: data?.id ?? "",
-      name: data?.name ?? "",
-      price: data?.price ?? 0,
-      category: data?.category ?? "",
-      details: data?.details ?? "",
-    },
-    validate: (values) => {
-      try {
-        costumeSchema.parse(values);
-      } catch (error) {
-        if (error instanceof ZodError) return error.formErrors.fieldErrors;
-      }
-    },
-    onSubmit: (values) => {
-      if (!data) {
-        createCostume(values);
-      } else {
-        updateCostume(values);
-      }
-    },
-  });
+  const initialValues = {
+    id: data?.id ?? "",
+    name: data?.name ?? "",
+    price: data?.price ?? 0,
+    category: data?.category ?? "",
+    details: data?.details ?? "",
+  };
+  const { handleSubmit, values, handleChange, errors, touched, handleBlur } =
+    useFormik({
+      initialValues,
+      validate: (values) => {
+        // try {
+        //   costumeSchema.parse(values);
+        // } catch (error) {
+        //   if (error instanceof ZodError) return error.formErrors.fieldErrors;
+        // }
+      },
+      onSubmit: (values) => {
+        // if (category) {
+        //   values.category = category;
+        //   values.price = category.price;
+        // }
+        // console.log(values);
+
+        if (!data) {
+          // createCostume(values)
+          fetchPost(values, "costumes").then((res) => {
+            if (res) {
+              alert("El disfraz se ha guardado");
+            }
+          });
+        } else {
+          fetchPatch(data.id, values, "costumes").then((res) => {
+            if (res) {
+              alert("El disfraz se ha actualizado");
+            }
+          });
+        }
+      },
+    });
 
   return (
     <>
@@ -111,8 +120,8 @@ export default function FormNewCostume({ data }: Props) {
             type='text'
             name='category'
             value={values.category}
-            onChange={handleChange}
             onBlur={handleBlur}
+            onChange={handleChange}
           />
 
           <Input

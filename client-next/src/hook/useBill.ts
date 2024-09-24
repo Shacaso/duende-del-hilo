@@ -19,9 +19,9 @@ export function useBill() {
     bills.length === 0 && dispatch(getAllAsync());
   }
 
-  function createBill(body: BillDto) {
-    dispatch(createAsync(body));
-  }
+  // function createBill(body: BillDto) {
+  //   dispatch(createAsync(body));
+  // }
 
   function updateBill(body: Bill) {
     dispatch(updateAsync(body));
@@ -42,7 +42,7 @@ export function useBill() {
     created,
     error,
     getAllBills,
-    createBill,
+    // createBill,
     updateBill,
     setBill,
     cleanCreatedBill,

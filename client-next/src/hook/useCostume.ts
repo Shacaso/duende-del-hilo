@@ -9,7 +9,7 @@ import {
   createAsync,
   //   getOneClientByIdAsync,
 } from "@/lib/features/costume/costume.slice";
-import { Costume } from "@/app/lib/definitions";
+import { Costume, CostumeDTO } from "@/app/lib/definitions";
 
 export function useCostume() {
   const dispatch = useAppDispatch();
@@ -25,10 +25,10 @@ export function useCostume() {
   //   function getOneClientById(id: string) {
   //     dispatch(getOneClientByIdAsync(id));
   //   }
-  function createCostume(body: Costume) {
+  function createCostume(body: CostumeDTO) {
     dispatch(createAsync(body));
   }
-  function updateCostume(body: Costume) {
+  function updateCostume(body: CostumeDTO) {
     dispatch(updateAsync(body));
   }
 

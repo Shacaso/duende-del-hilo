@@ -5,7 +5,9 @@ import {
   BillDto,
   Client,
   Costume,
+  CountCostume,
   Departament,
+  Others,
 } from "@/app/lib/definitions";
 import { fetchGetAll, fetchPatch, fetchPost } from "@/app/lib/fetching";
 import Input from "@/components/Input";
@@ -15,6 +17,8 @@ import { useCostume } from "@/hook/useCostume";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { z, ZodError } from "zod";
+import { CostumeInputList } from "./CostumeInputList";
+import { AccessoriesInputList } from "./AccessoriesInputList";
 
 interface Props {
   data?: BillDto;
@@ -24,7 +28,7 @@ export default function FormCreateNewBill({ data }: Props) {
   const { getAllClients, clients } = useClient();
   const { getAllCostumes, costumes: costumesList } = useCostume();
 
-  const [costumeSelected, setCostumeSelected] = useState<string[]>([]);
+  const [costumeSelected, setCostumeSelected] = useState<CountCostume[]>([]);
 
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
@@ -44,9 +48,10 @@ export default function FormCreateNewBill({ data }: Props) {
       id: data?.id ?? "",
       billNumber: data?.billNumber ?? 0,
       date: data?.date ?? "",
+      others: data?.others ?? null,
       returned: data?.returned ?? "",
       amountTotal: data?.amountTotal ?? 0,
-      costumes: data?.costumes ?? costumeSelected,
+      costumes: data?.costumes ?? null,
       dniClient: data?.dniClient ?? "",
       note: data?.note ?? "",
       dischargeDate: data?.dischargeDate ?? "",
@@ -64,62 +69,25 @@ export default function FormCreateNewBill({ data }: Props) {
     // },
     onSubmit: (values) => {
       values.dniClient = Number(values.dniClient.toString().split(" ")[0]);
-      // console.log(values);
+      values.costumes = countCostumesList;
+      values.others = accessories;
+      console.log("Submit form: ", values);
 
-      if (!data) {
-        fetchPost(values, "bills").then((res) => {
-          if (res) {
-            alert("La factura se ha guardado");
-          }
-        });
-      } else {
-        fetchPatch(data.id, values, "bills").then((res) => {
-          if (res) {
-            alert("La factura se ha actualizado");
-          }
-        });
-      }
+      // if (!data) {
+      //   fetchPost(values, "bills").then((res) => {
+      //     if (res) {
+      //       alert("La factura se ha guardado");
+      //     }
+      //   });
+      // } else {
+      //   fetchPatch(data.id, values, "bills").then((res) => {
+      //     if (res) {
+      //       alert("La factura se ha actualizado");
+      //     }
+      //   });
+      // }
     },
   });
-
-  const handleChangeData = (e: { target: { value: any } }) => {
-    console.log("handleChangeData, input:", { costume: e.target.value });
-
-    let costume = e.target.value;
-    // document.addEventListener("keydown", ({ key }) => {
-    //   if (key === "Backspace") {
-    //     e.target.value = "";
-    //     return;
-    //   }
-    // });
-    costume = costume.split(" ");
-    if (costume[1] !== "-") {
-      return;
-    }
-    if (costume[0] !== "") {
-      values.costumes.push(costume[0]);
-      // TODO values.amountTotal += Number(costume[2].substr(1));
-      setCostumeSelected(costume[0]);
-      e.target.value = "";
-      console.log("handleChangeData, output:", {
-        costume1: costume[0],
-        costume2: costume[1],
-        costume3: costume[2],
-      });
-    }
-  };
-
-  const handleDelete = (index: number, value: string) => {
-    console.log("handleDelete, input:", { index, value });
-
-    const costumeUpdate = values.costumes.splice(index, 1);
-    const costume = costumesList.filter(
-      (item: Costume) => item.name === value
-    )[0];
-    values.amountTotal -= costume.price;
-    setCostumeSelected(costumeUpdate);
-    console.log("handleDelete, output:", { costumeUpdate });
-  };
 
   interface Accessorie {
     id: number;
@@ -132,134 +100,89 @@ export default function FormCreateNewBill({ data }: Props) {
     getAllCostumes();
   });
 
-  const [accessories, setAccessories] = useState<Accessorie[]>([]);
+  const [accessories, setAccessories] = useState<Others[]>([]);
 
-  const onAddAccessories = () => {
-    const newAccessorie: Accessorie = {
-      id:
-        accessories.length !== 0
-          ? accessories[accessories.length - 1].id + 1
-          : 1,
-      name: "",
-      price: 0,
-    };
-    console.log("onAddAccessories");
-
-    console.log("newAccessorie", newAccessorie);
-    const newState = [...accessories, newAccessorie];
-    console.log("newState", newState);
-
-    setAccessories(newState);
+  const handleChangeAccessorie = (accessorios: Others[]) => {
+    // console.log("HandleChangeAccessorie.accesorie", accessorios);
+    setAccessories(accessorios);
   };
-  const onDeleteAccessories = (idAccessorie: number) => {
-    const accessoriesFiltered = accessories.filter(
-      (acc) => acc.id !== idAccessorie
-    );
-    setAccessories(accessoriesFiltered);
+
+  const [countCostumesList, setCountCostumesList] = useState<CountCostume[]>(
+    []
+  );
+  const handleChangeCostume = (costumes: CountCostume[]): void => {
+    setCountCostumesList(costumes);
   };
 
   return (
     <>
       <form className='flex flex-col gap-5 w-full px-2' onSubmit={handleSubmit}>
-        <div className='gap-3 flex-col flex'>
-          <label>Listado de disfraces</label>
-          <div className='min-h-32 h-full w-full bg-base-100 flex flex-wrap gap-x-2 gap-y-1 py-2 px-1'>
-            {values.costumes.map((item, index) => (
-              <div key={index} className='badge badge-primary gap-2 p-4'>
-                {item}
-                <svg
-                  onClick={() => handleDelete(index, item)}
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  className='inline-block w-4 h-4 stroke-current'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M6 18L18 6M6 6l12 12'
-                  ></path>
-                </svg>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {touched.costumes && errors.costumes && <p>{errors.costumes}</p>}
+        {touched.dniClient && errors.dniClient && <p>{errors.dniClient}</p>}
         <div className='flex gap-5 items-center justify-center'>
           <div className='flex-1'>
+            <label>Cliente</label>
             <label>
               <input
-                list='costumes'
-                name='costumes'
                 className='w-full input input-bordered '
-                placeholder='Elegir disfraces'
+                list='users'
+                name='dniClient'
+                placeholder='Buscar clientes'
+                value={values.dniClient}
                 onBlur={handleBlur}
-                onChange={handleChangeData}
-                // onSelect={() => handleSelect}
+                onChange={handleChange}
               />
             </label>
-            <datalist id='costumes'>
-              {costumesList
+            <datalist id='users'>
+              {clients
                 .filter((item) => item.dischargeDate === "")
-                .map(({ id, name, category }: Costume) => (
-                  <option key={id} value={`${name} - ${category}`}></option>
+                .map((item) => (
+                  <option
+                    key={item.dni}
+                    value={`${item.dni} - ${item.name} ${item.surname}`}
+                  ></option>
                 ))}
             </datalist>
           </div>
+
           <button
             type='button'
-            onClick={() => setConfirmationModalOpen(!confirmationModalOpen)}
-            className='btn  btn-primary btn-xs h-full'
+            onClick={() =>
+              setConfirmationClientModalOpen(!confirmationClientModalOpen)
+            }
+            className='btn h-full btn-primary btn-xs'
           >
             +
           </button>
         </div>
 
-        <div className='flex gap-5 flex-col bg-slate-200 p-2 rounded-lg'>
-          <div className='flex justify-between'>
-            <h6 className='font-bold'>ACCESORIOS/OTROS</h6>
-            <button
-              type='button'
-              onClick={onAddAccessories}
-              className='btn btn-primary btn-xs'
-            >
-              +
-            </button>
-          </div>
-          <div className='w-full rounded-lg bg-slate-400 p-2 gap-2 flex flex-col'>
-            {accessories.map((acc) => (
-              <div key={acc.id} className='flex gap-2 items-center'>
-                <input
-                  placeholder='Nombre'
-                  className='input input-sm'
-                  type='text'
-                />
-                <input
-                  placeholder='Precio'
-                  className='input input-sm'
-                  type='text'
-                />
-                <button
-                  type='button'
-                  onClick={() => onDeleteAccessories(acc.id)}
-                  className='btn btn-xs btn-primary'
-                >
-                  -
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
+        <div className='w-full h-1 bg-primary rounded-lg'></div>
 
-        <div className='flex flex-row gap-5'>
+        <CostumeInputList
+          handleChangeCostume={handleChangeCostume}
+          setConfirmationModalOpen={setConfirmationModalOpen}
+        />
+
+        <AccessoriesInputList handleChangeAccessorie={handleChangeAccessorie} />
+
+        <Input
+          placeholder='Ingrese notas'
+          validate={touched.note && errors.note ? true : false}
+          title='Notas'
+          type='text'
+          name='note'
+          value={values.note}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+
+        {/* <div className='flex flex-row gap-5'>
           <Input
-            placeholder='Ingrese precio total'
+            placeholder='Ingoeen precio total'
             validate={touched.amountTotal && errors.amountTotal ? true : false}
             title='Precio total'
             type='number'
             name='amountTotal'
+            readOnly
             value={values.amountTotal}
             onBlur={handleBlur}
             onChange={handleChange}
@@ -307,56 +230,79 @@ export default function FormCreateNewBill({ data }: Props) {
               onChange={handleChange}
             />
           </div>
-        </div>
-
-        {touched.dniClient && errors.dniClient && <p>{errors.dniClient}</p>}
-        <div className='flex gap-5 items-center justify-center'>
-          <div className='flex-1'>
-            <label>Cliente</label>
-            <label>
+        </div> */}
+        <div className='w-full h-1 bg-primary rounded-lg'></div>
+        <div>
+          <div className='flex gap-2 flex-col'>
+            <h1>Precio</h1>
+            <div className='flex gap-2'>
               <input
-                className='w-full input input-bordered '
-                list='users'
-                name='dniClient'
-                placeholder='Buscar clientes'
-                value={values.dniClient}
-                onBlur={handleBlur}
-                onChange={handleChange}
+                placeholder='Precio total'
+                className='input input-md'
+                type='number'
               />
-            </label>
-            <datalist id='users'>
-              {clients
-                .filter((item) => item.dischargeDate === "")
-                .map((item) => (
-                  <option
-                    key={item.dni}
-                    value={`${item.dni} - ${item.name} ${item.surname}`}
-                  ></option>
-                ))}
-            </datalist>
+              <input
+                placeholder='A cuenta'
+                className='input input-md'
+                type='number'
+              />
+              <input
+                placeholder='Saldo'
+                className='input input-md'
+                type='number'
+              />
+            </div>
           </div>
-
-          <button
-            type='button'
-            onClick={() =>
-              setConfirmationClientModalOpen(!confirmationClientModalOpen)
-            }
-            className='btn h-full btn-primary btn-xs'
-          >
-            +
-          </button>
         </div>
 
-        <Input
-          placeholder='Ingrese notas'
-          validate={touched.note && errors.note ? true : false}
-          title='Notas'
-          type='text'
-          name='note'
-          value={values.note}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+        <div>
+          <div className='flex gap-2 flex-col'>
+            <h1>Depósito</h1>
+            <div className='flex gap-2'>
+              <input
+                placeholder='Depósito total'
+                className='input input-md'
+                type='number'
+              />
+              <input
+                placeholder='A cuenta'
+                className='input input-md'
+                type='number'
+              />
+              <input
+                placeholder='Saldo'
+                className='input input-md'
+                type='number'
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className='flex gap-2'>
+          <Input
+            placeholder='Ingrese descuento'
+            validate={touched.amountTotal && errors.amountTotal ? true : false}
+            title='Descuento en precio'
+            type='number'
+            name='amountTotal'
+            // readOnly
+            value={values.amountTotal}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          <Input
+            placeholder='Ingrese descuento'
+            validate={touched.amountTotal && errors.amountTotal ? true : false}
+            title='Descuento en depósito'
+            type='number'
+            name='amountTotal'
+            // readOnly
+            value={values.amountTotal}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+        </div>
+        <div className='w-full h-1 bg-primary rounded-lg'></div>
 
         <div className='flex flex-row gap-5'>
           <div className='flex flex-col gap-3 w-full'>

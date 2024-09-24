@@ -11,5 +11,57 @@
     "details": "asdasdas",
     "price": 2500,
     "dischargeDate": ""
+  },
+  {
+    "id": "5171c49d-b493-4abc-ab36-837677b787c0",
+    "name": "Batman",
+    "category": {
+      "name": "Adultos",
+      "price": 2000,
+      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+      "dischargeDate": ""
+    },
+    "details": "Lentes grandes de sol para super fiestas",
+    "price": 2000,
+    "dischargeDate": ""
+  },
+  {
+    "id": "ce5eb765-2b93-4e6f-b3d3-939848a9728d",
+    "name": "Robin",
+    "category": {
+      "name": "Adultos",
+      "price": 2000,
+      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+      "dischargeDate": ""
+    },
+    "details": "Calza, palo, sombrero",
+    "price": 2000,
+    "dischargeDate": ""
+  },
+  {
+    "id": "e9aa9bd1-caf1-4fba-a178-a3b3e3f2b3d9",
+    "name": "Antman",
+    "category": {
+      "name": "Niños",
+      "price": 2000,
+      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
+      "dischargeDate": ""
+    },
+    "details": "Casco, body.",
+    "price": 2000,
+    "dischargeDate": ""
+  },
+  {
+    "id": "57b38917-6c66-4e02-a8cf-adb2be4725d3",
+    "name": "Mulan",
+    "category": {
+      "name": "Niños",
+      "price": 2000,
+      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
+      "dischargeDate": ""
+    },
+    "details": "Vestido, espada.",
+    "price": 2000,
+    "dischargeDate": ""
   }
 ]

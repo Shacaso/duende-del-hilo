@@ -7,6 +7,7 @@ interface Props {
   placeholder: string;
   type: string;
   list?: string;
+  readOnly?: boolean;
   name: string;
   value: string | number;
   onChange: {
@@ -32,6 +33,7 @@ export default function Input({
   name,
   value,
   onChange,
+  readOnly = false,
   onBlur,
 }: Props) {
   return (
@@ -45,6 +47,7 @@ export default function Input({
           validate && "border-primary border-2"
         }`}
         placeholder={placeholder}
+        readOnly={readOnly}
         type={type}
         name={name}
         list={list}

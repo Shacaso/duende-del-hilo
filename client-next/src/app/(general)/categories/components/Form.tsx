@@ -25,6 +25,7 @@ export default function Form({ data }: Props) {
     initialValues: {
       id: data?.id ?? "",
       name: data?.name ?? "",
+      price: data?.price ?? 0,
     },
     validate: (values) => {
       try {
@@ -61,11 +62,11 @@ export default function Form({ data }: Props) {
         />
         <Input
           placeholder='Ingrese precio'
-          validate={touched.name && errors.name ? true : false}
+          validate={touched.price && errors.price ? true : false}
           title='Precio'
           type='number'
-          name='name'
-          value={values.name}
+          name='price'
+          value={values.price}
           onChange={handleChange}
           onBlur={handleBlur}
         />

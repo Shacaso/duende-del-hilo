@@ -85,7 +85,7 @@ export const PDFile = ({ data }: Props) => (
                   return (
                     <View style={stylesDetail.detailItem} key={index}>
                       <Text>1</Text>
-                      <Text>{costume.category}</Text>
+                      <Text>{costume.category.name}</Text>
                       <Text>{costume.name}</Text>
                       <Text>{costume.details}</Text>
                       <Text>{costume.price}</Text>

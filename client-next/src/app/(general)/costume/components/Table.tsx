@@ -68,7 +68,7 @@ export function Table({ data }: Props) {
           {data.map((costume: Costume) => (
             <tr key={costume.id}>
               <td>{costume.name}</td>
-              <td>{costume.category}</td>
+              <td>{costume.category.name}</td>
               <td>{costume.details}</td>
               <td className='flex gap-2'>
                 <button

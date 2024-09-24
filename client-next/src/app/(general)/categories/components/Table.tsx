@@ -63,6 +63,7 @@ export function Table({ data, type }: Props) {
             return (
               <tr key={category.id}>
                 <td>{category.name}</td>
+                <td>{category.price}</td>
                 <td className='flex gap-2'>
                   <button
                     className='btn btn-circle btn-ghost'
