@@ -52,11 +52,18 @@ export const AccessoriesInputList = ({ handleChangeAccessorie }: Props) => {
         </button>
       </div>
       <div className='w-full rounded-lg bg-neutral p-2 gap-2 flex flex-col'>
+        {accessories.length > 0 && (
+          <div className='flex gap-32'>
+            <h1>Nombre</h1>
+            <h1>Cantidad</h1>
+            <h1>Precio unitario</h1>
+          </div>
+        )}
         {accessories.map((acc, index) => (
           <div key={index} className='flex gap-2 items-center'>
             <input
               placeholder='Nombre'
-              className='input input-sm'
+              className='input input-sm w-40'
               type='text'
               onChange={(event) => onChange(index, "name", event.target.value)}
               name='name'
@@ -64,7 +71,17 @@ export const AccessoriesInputList = ({ handleChangeAccessorie }: Props) => {
             />
             <input
               placeholder='Precio'
-              className='input input-sm'
+              className='input input-sm w-40 border-red-400 border-4'
+              type='number'
+              onChange={(event) =>
+                onChange(index, "price", Number(event.target.value))
+              }
+              name='price'
+              value={acc.price}
+            />
+            <input
+              placeholder='Cantidad'
+              className='input input-sm w-40'
               type='number'
               onChange={(event) =>
                 onChange(index, "price", Number(event.target.value))

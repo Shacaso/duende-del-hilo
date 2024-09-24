@@ -104,19 +104,34 @@ export const CostumeInputList = ({
         </datalist>
       </div>
       <div className='w-full rounded-lg bg-neutral p-2 gap-2 flex flex-col'>
+        {costumeSelected.length > 0 && (
+          <div className='flex gap-32'>
+            <h1>Disfraz</h1>
+            <h1>Cantidad</h1>
+            <h1>Precio</h1>
+          </div>
+        )}
         {costumeSelected.map((costume, index) => (
           <div key={index} className='flex gap-2 items-center'>
             <input
               placeholder='Disfraz'
-              className='input input-sm'
+              className='input input-sm w-40'
               type='text'
               value={costume.costumeName}
               readOnly
             />
             <input
               placeholder='Cantidad'
-              className='input input-sm'
+              className='input input-sm w-40'
               type='number'
+              value={costume.cant}
+              onChange={(event) => onChangeCant(event, index)}
+            />
+            <input
+              placeholder='Precio'
+              className='input input-sm w-40 border-red-400 border-4'
+              type='number'
+              readOnly
               value={costume.cant}
               onChange={(event) => onChangeCant(event, index)}
             />

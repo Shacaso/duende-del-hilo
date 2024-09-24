@@ -232,23 +232,23 @@ export default function FormCreateNewBill({ data }: Props) {
           </div>
         </div> */}
         <div className='w-full h-1 bg-primary rounded-lg'></div>
-        <div>
-          <div className='flex gap-2 flex-col'>
+        <div className=''>
+          <div className='flex gap-2 flex-col border-red-400 border-4'>
             <h1>Precio</h1>
             <div className='flex gap-2'>
               <input
                 placeholder='Precio total'
-                className='input input-md'
+                className='input input-md '
                 type='number'
               />
               <input
                 placeholder='A cuenta'
-                className='input input-md'
+                className='input input-md '
                 type='number'
               />
               <input
                 placeholder='Saldo'
-                className='input input-md'
+                className='input input-md '
                 type='number'
               />
             </div>
@@ -256,29 +256,29 @@ export default function FormCreateNewBill({ data }: Props) {
         </div>
 
         <div>
-          <div className='flex gap-2 flex-col'>
+          <div className='flex gap-2 flex-col border-red-400 border-4'>
             <h1>Depósito</h1>
             <div className='flex gap-2'>
               <input
                 placeholder='Depósito total'
-                className='input input-md'
+                className='input input-md '
                 type='number'
               />
               <input
                 placeholder='A cuenta'
-                className='input input-md'
+                className='input input-md '
                 type='number'
               />
               <input
                 placeholder='Saldo'
-                className='input input-md'
+                className='input input-md '
                 type='number'
               />
             </div>
           </div>
         </div>
 
-        <div className='flex gap-2'>
+        <div className='flex gap-2 border-red-400 border-4'>
           <Input
             placeholder='Ingrese descuento'
             validate={touched.amountTotal && errors.amountTotal ? true : false}
