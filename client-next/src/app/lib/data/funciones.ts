@@ -1,4 +1,11 @@
-import { Category, Client, Costume, CustomError } from "../definitions";
+import {
+	Category,
+	Client,
+	Costume,
+	CostumeCant,
+	CustomError,
+	InputArray,
+} from "../definitions";
 import { fetchDeleteById } from "../fetching";
 import { allEntities } from "./GetAndSaveJson";
 import { categoriesPath, clientsPath, costumesPath } from "./paths";
@@ -24,19 +31,20 @@ export const deleteAction = async (id: string, path: string) => {
 };
 
 export async function getCostumeArray(
-	data: string[]
-): Promise<CustomError | Costume[]> {
+	data: InputArray[]
+): Promise<CustomError | CostumeCant[]> {
 	const response = await allEntities<Costume>(costumesPath);
 	if (response instanceof CustomError) return response;
 
 	const costumes: Costume[] = response;
-	const costumesFound: Costume[] = [];
+	const costumesFound: CostumeCant[] = [];
 
-	data.forEach((costumeName) => {
+	data.forEach((input: InputArray) => {
 		const costumeFound: Costume | undefined = costumes.find(
-			(entity) => entity.name == costumeName
+			(entity) => entity.name === input.costumeName
 		);
-		if (costumeFound) costumesFound.push(costumeFound);
+		if (costumeFound)
+			costumesFound.push({ costume: costumeFound, cant: input.cant });
 	});
 
 	return costumesFound;

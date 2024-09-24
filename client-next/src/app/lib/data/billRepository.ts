@@ -1,5 +1,12 @@
 import { randomUUID } from "crypto";
-import { Bill, BillDto, Client, Costume, CustomError } from "../definitions";
+import {
+	Bill,
+	BillDto,
+	Client,
+	Costume,
+	CostumeCant,
+	CustomError,
+} from "../definitions";
 import { allEntities, saveAllEntities } from "./GetAndSaveJson";
 import { getClientByDNI, getCostumeArray, getDateAndHour } from "./funciones";
 
@@ -22,7 +29,7 @@ export const create = async (input: BillDto, path: string) => {
 	);
 	if (clientFound instanceof CustomError) return clientFound;
 
-	const costumesFound: Costume[] | CustomError = await getCostumeArray(
+	const costumesFound: CostumeCant[] | CustomError = await getCostumeArray(
 		input.costumes
 	);
 	if (costumesFound instanceof CustomError) return costumesFound;
@@ -30,11 +37,11 @@ export const create = async (input: BillDto, path: string) => {
 	const priceReal = () => {
 		let result = 0;
 		for (let index = 0; index < costumesFound.length; index++) {
-			result += costumesFound[index].price;
+			result += costumesFound[index].costume.price * costumesFound[index].cant;
 		}
 		if (input.others && input.others?.length !== 0) {
 			for (let index = 0; index < input.others.length; index++) {
-				result += input.others[index].price;
+				result += input.others[index].price * input.others[index].cant;
 			}
 		}
 		return result;
@@ -44,7 +51,7 @@ export const create = async (input: BillDto, path: string) => {
 		return new CustomError(
 			true,
 			"El precio total no corresponde con la sumatoria de los productos",
-			400
+			409
 		);
 	}
 

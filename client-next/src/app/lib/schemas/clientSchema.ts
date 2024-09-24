@@ -70,6 +70,16 @@ const clientSchema = z.object({
 		.min(1000000000)
 		.max(9999999999),
 
+	phoneNumberAlt: z
+		.number({
+			invalid_type_error: "El telefono debe ser un numero de 10 digitos",
+			required_error: "El telefono es requerido",
+		})
+		.int()
+		.min(1000000000)
+		.max(9999999999)
+		.optional(),
+
 	email: z.string().email("Email inválido"),
 
 	direction: z.string({
