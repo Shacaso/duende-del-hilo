@@ -12,7 +12,7 @@ import {
 import LogoSVG from "./logo.svg";
 import LogoPNG from "./logoPNG.png";
 import LogoJPG from "./logoJPG.jpg";
-import { Bill, Costume } from "@/app/lib/definitions";
+import { Bill, Costume, CostumeCant, Others } from "@/app/lib/definitions";
 
 const Duende = () => {
   // return <Image src={<LogoSVG />} style={stylesNavbar.logo} />;
@@ -77,21 +77,35 @@ export const PDFile = ({ data }: Props) => (
                 <View style={stylesDetail.detailItem}>
                   <Text>Cantidad:</Text>
                   <Text>Categoria:</Text>
-                  <Text>Disfraz:</Text>
+                  <Text>Nombre:</Text>
                   <Text>Detalle:</Text>
                   <Text>Precio Unitario</Text>
                 </View>
-                {data.costumes.map((costume: Costume, index: number) => {
-                  return (
-                    <View style={stylesDetail.detailItem} key={index}>
-                      <Text>1</Text>
-                      <Text>{costume.category.name}</Text>
-                      <Text>{costume.name}</Text>
-                      <Text>{costume.details}</Text>
-                      <Text>{costume.price}</Text>
-                    </View>
-                  );
-                })}
+                {data.costumes.map(
+                  (costumeCant: CostumeCant, index: number) => {
+                    return (
+                      <View style={stylesDetail.detailItem} key={index}>
+                        <Text>{costumeCant.cant}</Text>
+                        <Text>{costumeCant.costume.category.name}</Text>
+                        <Text>{costumeCant.costume.name}</Text>
+                        <Text>{costumeCant.costume.details}</Text>
+                        <Text>{costumeCant.costume.price}</Text>
+                      </View>
+                    );
+                  }
+                )}
+                {data.others &&
+                  data.others.map((other: Others, index: number) => {
+                    return (
+                      <View style={stylesDetail.detailItem} key={index}>
+                        <Text>{other.cant}</Text>
+                        <Text>Accesorio/Otros</Text>
+                        <Text>{other.name}</Text>
+                        <Text>---</Text>
+                        <Text>{other.price}</Text>
+                      </View>
+                    );
+                  })}
 
                 {/* <View style={stylesDetail.detailItem}>
                   <Text>Categoria:</Text>

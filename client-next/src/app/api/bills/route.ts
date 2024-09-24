@@ -39,8 +39,8 @@ export async function POST(req: Request) {
 		return NextResponse.json(response, { status: response.codigo });
 	}
 
-	/* await getPDF(response);
-  new Mailer(response.client.email).sendEmail(); */
+	await getPDF(response);
+	//new Mailer(response.client.email).sendEmail();
 
 	return NextResponse.json(response);
 }

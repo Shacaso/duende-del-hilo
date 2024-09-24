@@ -22,6 +22,7 @@ export interface Client extends Entity {
   surname: string;
   dni: number;
   phoneNumber: number;
+  phoneNumberAlt: number | null;
   email: string;
   direction: string;
   departament: string;
@@ -36,6 +37,7 @@ export interface Departament extends Entity {
 export interface Others {
   name: string;
   price: number;
+  cant: number;
 }
 
 export interface CountCostume {
@@ -44,33 +46,33 @@ export interface CountCostume {
 }
 
 export interface BillDto extends Entity {
-  advancement: number;
-  amountTotal: number;
   billNumber: number;
-  costumes: CountCostume[] | null;
   date: string;
-  dniClient: number;
-  note: string;
-  others: Others[] | null;
-  remainingBalance: number;
+  returnedDate: string;
   retirementDate: string;
   returned: boolean;
-  returnedDate: string;
+  amountTotal: number;
+  advancement: number;
+  remainingBalance: number;
+  costumes: InputArray[];
+  others: Others[] | null;
+  dniClient: number;
+  note: string;
 }
 
 export interface Bill extends Entity {
-  advancement: number;
-  amountTotal: number;
   billNumber: number;
-  client: Client;
-  costumes: Costume[];
   date: string;
-  note: string;
-  others: Others[] | null;
-  remainingBalance: number;
+  returnedDate: string;
   retirementDate: string;
   returned: boolean;
-  returnedDate: string;
+  amountTotal: number;
+  advancement: number;
+  remainingBalance: number;
+  client: Client;
+  costumes: CostumeCant[];
+  others: Others[] | null;
+  note: string;
 }
 
 export interface Category extends Entity {
@@ -97,4 +99,14 @@ export class CustomError {
 export interface UserLogin {
   user: string;
   password: string;
+}
+
+export interface CostumeCant {
+  costume: Costume;
+  cant: number;
+}
+
+export interface InputArray {
+  costumeName: string;
+  cant: number;
 }
