@@ -11,5 +11,18 @@
     "details": "asdasdas",
     "price": 2500,
     "dischargeDate": ""
+  },
+  {
+    "id": "81400c51-c82e-4e7b-8350-a752340b9e2d",
+    "name": "Doctor",
+    "category": {
+      "name": "Adulto",
+      "price": 2500,
+      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+      "dischargeDate": ""
+    },
+    "details": "asdasdas",
+    "price": 2500,
+    "dischargeDate": ""
   }
 ]

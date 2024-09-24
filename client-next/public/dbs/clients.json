@@ -115,5 +115,32 @@
     "postalCode": 5500,
     "blacklist": false,
     "dischargeDate": ""
+  },
+  {
+    "name": "lablala",
+    "surname": "Vargas",
+    "dni": 12311231,
+    "phoneNumber": 2615123123,
+    "email": "enzo@gmail.com",
+    "direction": "Calle falsa 123",
+    "departament": "Capital",
+    "postalCode": 5539,
+    "blacklist": false,
+    "id": "e79dc0eb-bd1f-4f91-bf9e-75c123640451",
+    "dischargeDate": ""
+  },
+  {
+    "name": "lablala",
+    "surname": "Vargas",
+    "dni": 12311232,
+    "phoneNumber": 2615123123,
+    "phoneNumberAlt": 2615123123,
+    "email": "enzo@gmail.com",
+    "direction": "Calle falsa 123",
+    "departament": "Capital",
+    "postalCode": 5539,
+    "blacklist": false,
+    "id": "7696360c-0ecc-4bd5-b3aa-6ee1799ffd42",
+    "dischargeDate": ""
   }
 ]

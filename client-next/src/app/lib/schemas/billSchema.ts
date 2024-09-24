@@ -1,7 +1,14 @@
 import { z } from "zod";
 import { clientsPath, costumesPath } from "../data/paths";
 import { getAll } from "../data/entityRepository";
-import { Bill, BillDto, Client, Costume, CustomError } from "../definitions";
+import {
+	Bill,
+	BillDto,
+	Client,
+	Costume,
+	CustomError,
+	CostumeCant,
+} from "../definitions";
 
 const allUsers = async () => {
 	const data = await getAll<Client>(clientsPath);
@@ -86,11 +93,12 @@ export const billSchema = z.object({
 	}),
 
 	costumes: z
-		.string({
-			invalid_type_error: "Costumes debe ser un array de nombres de disfraces",
-			required_error: "La factura debe contener disfraces comprados",
-		})
-		.array()
+		.array(
+			z.object({
+				costumeName: z.string(),
+				cant: z.number().positive(),
+			})
+		)
 		.nonempty({
 			message: "La factura debe contener al menos un disfraz comprado",
 		})
@@ -98,7 +106,7 @@ export const billSchema = z.object({
 			(costumes) => {
 				let bandera = true;
 				for (let index = 0; index < costumes.length; index++) {
-					if (!costumesNames.includes(costumes[index])) {
+					if (!costumesNames.includes(costumes[index].costumeName)) {
 						bandera = false;
 						break;
 					}
