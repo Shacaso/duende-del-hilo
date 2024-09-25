@@ -2,15 +2,15 @@ import { Client } from "@/app/lib/definitions";
 import { DOMAttributes, FocusEventHandler, InputHTMLAttributes } from "react";
 
 interface Props {
-  validate: boolean;
-  title: string;
-  placeholder: string;
-  type: string;
+  validate?: boolean;
+  title?: string;
+  placeholder?: string;
+  type?: string;
   list?: string;
   readOnly?: boolean;
-  name: string;
-  value: string | number;
-  onChange: {
+  name?: string;
+  value?: string | number;
+  onChange?: {
     (e: React.ChangeEvent<any>): void;
     <T_1 = string | React.ChangeEvent<any>>(
       field: T_1
@@ -18,7 +18,7 @@ interface Props {
       ? void
       : (e: string | React.ChangeEvent<any>) => void;
   };
-  onBlur: {
+  onBlur?: {
     (e: React.FocusEvent<any, Element>): void;
     <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
   };
@@ -43,7 +43,7 @@ export default function Input({
         {validate && <div className='badge badge-primary badge-sm'></div>}
       </div>
       <input
-        className={`input input-bordered border ${
+        className={`w-full input input-bordered border ${
           validate && "border-primary border-2"
         }`}
         placeholder={placeholder}

@@ -1,24 +1,14 @@
 import Form from "@/app/(general)/client/components/Form";
 import FormNewCostume from "@/app/(general)/costume/components/FormNewCostume";
-import {
-  Bill,
-  BillDto,
-  Client,
-  Costume,
-  CountCostume,
-  Departament,
-  Others,
-} from "@/app/lib/definitions";
-import { fetchGetAll, fetchPatch, fetchPost } from "@/app/lib/fetching";
+import { BillDto, CountCostume, Others } from "@/app/lib/definitions";
 import Input from "@/components/Input";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import { useClient } from "@/hook/useClient";
 import { useCostume } from "@/hook/useCostume";
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
-import { z, ZodError } from "zod";
-import { CostumeInputList } from "./CostumeInputList";
+import { useEffect, useState } from "react";
 import { AccessoriesInputList } from "./AccessoriesInputList";
+import { CostumeInputList } from "./CostumeInputList";
 
 interface Props {
   data?: BillDto;
@@ -26,74 +16,73 @@ interface Props {
 
 export default function FormCreateNewBill({ data }: Props) {
   const { getAllClients, clients } = useClient();
-  const { getAllCostumes, costumes: costumesList } = useCostume();
+  const { getAllCostumes /* , costumes: costumesList */ } = useCostume();
 
-  const [costumeSelected, setCostumeSelected] = useState<CountCostume[]>([]);
+  // const [costumeSelected, setCostumeSelected] = useState<CountCostume[]>([]);
 
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
   const [confirmationClientModalOpen, setConfirmationClientModalOpen] =
     useState<boolean>(false);
 
-  const {
-    initialValues,
-    handleSubmit,
-    values,
-    handleChange,
-    errors,
-    touched,
-    handleBlur,
-  } = useFormik({
-    initialValues: {
-      id: data?.id ?? "",
-      billNumber: data?.billNumber ?? 0,
-      date: data?.date ?? "",
-      others: data?.others ?? null,
-      returned: data?.returned ?? "",
-      amountTotal: data?.amountTotal ?? 0,
-      costumes: data?.costumes ?? null,
-      dniClient: data?.dniClient ?? "",
-      note: data?.note ?? "",
-      dischargeDate: data?.dischargeDate ?? "",
-      returnedDate: data?.returnedDate ?? "",
-      retirementDate: data?.retirementDate ?? "",
-      advancement: data?.advancement ?? 0,
-      remainingBalance: data?.remainingBalance ?? 0,
-    },
-    // validate: (values) => {
-    //   try {
-    //     billSchema.parse(values);
-    //   } catch (error) {
-    //     if (error instanceof ZodError) return error.formErrors.fieldErrors;
-    //   }
-    // },
-    onSubmit: (values) => {
-      values.dniClient = Number(values.dniClient.toString().split(" ")[0]);
-      values.costumes = countCostumesList;
-      values.others = accessories;
-      console.log("Submit form: ", values);
+  const { handleSubmit, values, handleChange, errors, touched, handleBlur } =
+    useFormik({
+      initialValues: {
+        id: data?.id ?? "",
+        billNumber: data?.billNumber ?? 0,
+        date: data?.date ?? "",
+        others: data?.others ?? null,
+        returned: data?.returned ?? "",
+        amountTotal: data?.amountTotal ?? 0,
+        demoPrecioACuenta: 0,
+        demoPrecioSaldo: 0,
+        demoDepositoTotal: 0,
+        demoDepositoACuenta: 0,
+        demoDepositoSaldo: 0,
+        demoDescuentoPrecio: 0,
+        demoDescuentoDeposito: 0,
+        costumes: data?.costumes ?? 0,
+        dniClient: data?.dniClient ?? "",
+        note: data?.note ?? "",
+        dischargeDate: data?.dischargeDate ?? "",
+        returnedDate: data?.returnedDate ?? "",
+        retirementDate: data?.retirementDate ?? "",
+        advancement: data?.advancement ?? 0,
+        remainingBalance: data?.remainingBalance ?? 0,
+      },
+      // validate: (values) => {
+      //   try {
+      //     billSchema.parse(values);
+      //   } catch (error) {
+      //     if (error instanceof ZodError) return error.formErrors.fieldErrors;
+      //   }
+      // },
+      onSubmit: (values) => {
+        values.dniClient = Number(values.dniClient.toString().split(" ")[0]);
+        values.costumes = countCostumesList;
+        values.others = accessories;
 
-      // if (!data) {
-      //   fetchPost(values, "bills").then((res) => {
-      //     if (res) {
-      //       alert("La factura se ha guardado");
-      //     }
-      //   });
-      // } else {
-      //   fetchPatch(data.id, values, "bills").then((res) => {
-      //     if (res) {
-      //       alert("La factura se ha actualizado");
-      //     }
-      //   });
-      // }
-    },
-  });
+        // values.demoPrecioSaldo = values.amountTotal - values.demoPrecioACuenta;
+        // values.demoDepositoSaldo =
+        //   values.demoDepositoTotal - values.demoDepositoACuenta;
 
-  interface Accessorie {
-    id: number;
-    name: string;
-    price: number;
-  }
+        console.log("Submit form: ", values);
+
+        // if (!data) {
+        //   fetchPost(values, "bills").then((res) => {
+        //     if (res) {
+        //       alert("La factura se ha guardado");
+        //     }
+        //   });
+        // } else {
+        //   fetchPatch(data.id, values, "bills").then((res) => {
+        //     if (res) {
+        //       alert("La factura se ha actualizado");
+        //     }
+        //   });
+        // }
+      },
+    });
 
   useEffect(() => {
     getAllClients();
@@ -103,7 +92,6 @@ export default function FormCreateNewBill({ data }: Props) {
   const [accessories, setAccessories] = useState<Others[]>([]);
 
   const handleChangeAccessorie = (accessorios: Others[]) => {
-    // console.log("HandleChangeAccessorie.accesorie", accessorios);
     setAccessories(accessorios);
   };
 
@@ -232,76 +220,135 @@ export default function FormCreateNewBill({ data }: Props) {
           </div>
         </div> */}
         <div className='w-full h-1 bg-primary rounded-lg'></div>
-        <div className=''>
-          <div className='flex gap-2 flex-col border-red-400 border-4'>
-            <h1>Precio</h1>
+        <div className='grid grid-cols-3 bg-slate-200 p-4 rounded-lg border-red-600 border-2'>
+          <div className='flex gap-2 flex-col  col-span-3'>
+            {/* <h1>Precio</h1> */}
             <div className='flex gap-2'>
-              <input
+              <Input
+                title='Precio total'
+                value={values.amountTotal}
                 placeholder='Precio total'
-                className='input input-md '
+                name='amountTotal'
                 type='number'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                validate={
+                  touched.amountTotal && errors.amountTotal ? true : false
+                }
               />
-              <input
+              <Input
+                title='A cuenta'
+                value={values.demoPrecioACuenta}
                 placeholder='A cuenta'
-                className='input input-md '
+                name='demoPrecioACuenta'
                 type='number'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                validate={
+                  touched.demoPrecioACuenta && errors.demoPrecioACuenta
+                    ? true
+                    : false
+                }
               />
-              <input
+              <Input
+                title='Saldo precio'
+                value={values.amountTotal - values.demoPrecioACuenta}
                 placeholder='Saldo'
-                className='input input-md '
+                readOnly
+                name='demoPrecioSaldo'
                 type='number'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                validate={
+                  touched.demoPrecioSaldo && errors.demoPrecioSaldo
+                    ? true
+                    : false
+                }
               />
             </div>
           </div>
-        </div>
-
-        <div>
-          <div className='flex gap-2 flex-col border-red-400 border-4'>
-            <h1>Depósito</h1>
+          <div className='flex gap-2 flex-col  col-span-3'>
+            {/* <h1>Depósito</h1> */}
             <div className='flex gap-2'>
-              <input
+              <Input
+                title='Depósito total'
+                value={values.demoDepositoTotal}
                 placeholder='Depósito total'
-                className='input input-md '
+                name='demoDepositoTotal'
                 type='number'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                validate={
+                  touched.demoDepositoTotal && errors.demoDepositoTotal
+                    ? true
+                    : false
+                }
               />
-              <input
+              <Input
+                title='A cuenta'
+                value={values.demoDepositoACuenta}
                 placeholder='A cuenta'
-                className='input input-md '
+                name='demoDepositoACuenta'
                 type='number'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                validate={
+                  touched.demoDepositoACuenta && errors.demoDepositoACuenta
+                    ? true
+                    : false
+                }
               />
-              <input
+              <Input
+                title='Saldo deposito'
+                value={values.demoDepositoTotal - values.demoDepositoACuenta}
                 placeholder='Saldo'
-                className='input input-md '
+                readOnly
+                name='demoDepositoSaldo'
                 type='number'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                validate={
+                  touched.demoDepositoSaldo && errors.demoDepositoSaldo
+                    ? true
+                    : false
+                }
               />
             </div>
           </div>
+          <div className='flex gap-2  col-span-3 '>
+            <Input
+              placeholder='Ingrese descuento'
+              validate={
+                touched.demoDescuentoPrecio && errors.demoDescuentoPrecio
+                  ? true
+                  : false
+              }
+              title='Descuento en precio'
+              type='number'
+              name='demoDescuentoPrecio'
+              // readOnly
+              value={values.demoDescuentoPrecio}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />
+            <Input
+              placeholder='Ingrese descuento'
+              validate={
+                touched.demoDescuentoDeposito && errors.demoDescuentoDeposito
+                  ? true
+                  : false
+              }
+              title='Descuento en depósito'
+              type='number'
+              name='demoDescuentoDeposito'
+              // readOnly
+              value={values.demoDescuentoDeposito}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />
+          </div>
         </div>
 
-        <div className='flex gap-2 border-red-400 border-4'>
-          <Input
-            placeholder='Ingrese descuento'
-            validate={touched.amountTotal && errors.amountTotal ? true : false}
-            title='Descuento en precio'
-            type='number'
-            name='amountTotal'
-            // readOnly
-            value={values.amountTotal}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-          <Input
-            placeholder='Ingrese descuento'
-            validate={touched.amountTotal && errors.amountTotal ? true : false}
-            title='Descuento en depósito'
-            type='number'
-            name='amountTotal'
-            // readOnly
-            value={values.amountTotal}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-        </div>
         <div className='w-full h-1 bg-primary rounded-lg'></div>
 
         <div className='flex flex-row gap-5'>
