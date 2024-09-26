@@ -91,15 +91,6 @@ export const costumeSchemaPartial = z.object({
 			}
 		),
 
-	price: z.coerce
-		.number({
-			invalid_type_error: "El precio debe ser un numero mayor que 0",
-			required_error: "El precio es requerido",
-		})
-		.positive({
-			message: "El precio debe ser mayor que 0",
-		}),
-
 	category: z.string().refine((value) => categories.includes(value), {
 		message: "No se encuenta la categoria en la base de datos",
 	}),

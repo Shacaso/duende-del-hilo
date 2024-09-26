@@ -1,13 +1,13 @@
 [
   {
     "name": "Adultos",
-    "price": 1,
+    "price": 3000,
     "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
     "dischargeDate": ""
   },
   {
     "name": "Niños",
-    "price": 2,
+    "price": 5000,
     "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
     "dischargeDate": ""
   },
