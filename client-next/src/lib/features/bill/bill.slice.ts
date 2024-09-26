@@ -14,7 +14,7 @@ export const getAllAsync = createAsyncThunk(
   "bill/getAll",
   async (): Promise<Bill[]> => {
     const bills = await fetchGetAll(path);
-    console.log(bills);
+    // console.log(bills);
 
     return bills;
   }

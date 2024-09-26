@@ -1,7 +1,15 @@
 import { Costume, CountCostume } from "@/app/lib/definitions";
 import { useCostume } from "@/hook/useCostume";
 import { useFormik } from "formik";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
+import { CostumeInputListItem } from "./CostumeInputListItem";
 
 interface Props {
   handleChangeCostume: (costumes: CountCostume[]) => void;
@@ -16,62 +24,71 @@ export const CostumeInputList = ({
 
   const [costumeSelected, setCostumeSelected] = useState<CountCostume[]>([]);
 
-  const onSelectCostume = (event: ChangeEvent<HTMLInputElement>) => {
-    let costume = event.target.value;
+  const onSelectCostume = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      let costume = event.target.value;
 
-    const isExist = costumes.find(
-      (u) => `${u.name} - ${u.category.name}` === costume
-    );
+      const isExist = costumes.find(
+        (u) => `${u.name} - ${u.category.name}` === costume
+      );
 
-    if (isExist) {
-      const newCostume: CountCostume = {
-        cant: 1,
-        costumeName: costume,
-      };
+      if (isExist) {
+        const newCostume: CountCostume = {
+          cant: 1,
+          costumeName: costume,
+        };
 
-      setCostumeSelected((prevState) => [...prevState, newCostume]);
-      handleChangeCostume([...costumeSelected, newCostume]);
-      event.target.value = "";
-    }
-  };
+        const updatedCostumes = [...costumeSelected, newCostume];
+        setCostumeSelected(updatedCostumes);
+        handleChangeCostume(updatedCostumes);
+        event.target.value = "";
+      }
+    },
+    [costumeSelected, costumes, handleChangeCostume]
+  );
 
-  const onChangeCant = (
-    event: ChangeEvent<HTMLInputElement>,
-    elementIndex: number
-  ) => {
-    const cant = Number(event.target.value);
+  const onChangeCant = useCallback(
+    (event: ChangeEvent<HTMLInputElement>, elementIndex: number) => {
+      const cant = Number(event.target.value);
 
-    if (cant < 1) return;
+      if (cant < 1) return;
 
-    setCostumeSelected((prevState) =>
-      prevState.map((state, index) =>
+      const updatedCostumes = costumeSelected.map((state, index) =>
         index === elementIndex
           ? { costumeName: state.costumeName, cant }
           : state
-      )
-    );
-    handleChangeCostume(
-      costumeSelected.map((state, index) =>
-        index === elementIndex
-          ? { costumeName: state.costumeName, cant }
-          : state
-      )
-    );
-  };
+      );
 
-  const onDeleteCostume = (elementIndex: number) => {
-    setCostumeSelected((prevState) =>
-      prevState.filter((_, index) => index !== elementIndex)
-    );
+      setCostumeSelected(updatedCostumes);
+      handleChangeCostume(updatedCostumes);
+    },
+    [costumeSelected, handleChangeCostume]
+  );
 
-    handleChangeCostume(
-      costumeSelected.filter((_, index) => index !== elementIndex)
-    );
-  };
+  const onDeleteCostume = useCallback(
+    (elementIndex: number) => {
+      const updatedCostumes = costumeSelected.filter(
+        (_, index) => index !== elementIndex
+      );
+      setCostumeSelected(updatedCostumes);
+      handleChangeCostume(updatedCostumes);
+    },
+    [costumeSelected, handleChangeCostume]
+  );
 
   const onOpenModal = () => {
     setConfirmationModalOpen((prevState) => !prevState);
   };
+
+  const costumePrices: number[] = useMemo(() => {
+    return costumeSelected.map((costume) => {
+      const costumeName = costume.costumeName.substring(
+        0,
+        costume.costumeName.indexOf(" -")
+      );
+      return costumes.find((u) => u.name === costumeName)?.price || 0;
+    });
+  }, [costumeSelected, costumes]);
 
   return (
     <div className='flex gap-5 flex-col bg-slate-200 p-2 rounded-lg'>
@@ -112,37 +129,14 @@ export const CostumeInputList = ({
           </div>
         )}
         {costumeSelected.map((costume, index) => (
-          <div key={index} className='flex gap-2 items-center'>
-            <input
-              placeholder='Disfraz'
-              className='input input-sm w-40'
-              type='text'
-              value={costume.costumeName}
-              readOnly
-            />
-            <input
-              placeholder='Cantidad'
-              className='input input-sm w-40'
-              type='number'
-              value={costume.cant}
-              onChange={(event) => onChangeCant(event, index)}
-            />
-            <input
-              placeholder='Precio'
-              className='input input-sm w-40 border-red-400 border-4'
-              type='number'
-              readOnly
-              value={costume.cant}
-              onChange={(event) => onChangeCant(event, index)}
-            />
-            <button
-              type='button'
-              onClick={() => onDeleteCostume(index)}
-              className='btn btn-xs btn-primary'
-            >
-              BORRAR
-            </button>
-          </div>
+          <CostumeInputListItem
+            key={index}
+            costume={costume}
+            index={index}
+            costumePrice={costumePrices[index]}
+            onChangeCant={onChangeCant}
+            onDeleteCostume={onDeleteCostume}
+          />
         ))}
       </div>
     </div>

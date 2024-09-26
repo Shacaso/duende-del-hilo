@@ -15,8 +15,9 @@ interface Props {
 const headers = [
   "Nombre",
   "Apellido",
-  "DNI",
-  "Telefono",
+  // "DNI",
+  "Telefono 1",
+  "Telefono 2",
   "Mail",
   // 'Direccion',
   "Departamento",
@@ -82,8 +83,8 @@ export function Table({ data }: Props) {
               <tr className='hover:bg-base-300 text-lg' key={client.id}>
                 <td>{client.name}</td>
                 <td>{client.surname}</td>
-                <td>{client.dni}</td>
                 <td>{client.phoneNumber}</td>
+                <td>{client.phoneNumberAlt}</td>
                 <td>{client.email}</td>
                 <td>{client.departament}</td>
                 <td className='flex gap-2'>

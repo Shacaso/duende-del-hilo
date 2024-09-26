@@ -2,15 +2,10 @@
   {
     "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
     "name": "Bombero",
-    "category": {
-      "name": "Adulto",
-      "price": 2500,
-      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
-      "dischargeDate": ""
-    },
+    "category": "Niños",
     "details": "asdasdas",
     "price": 2500,
-    "dischargeDate": ""
+    "dischargeDate": "2024-09-26 15:49:06"
   },
   {
     "id": "5171c49d-b493-4abc-ab36-837677b787c0",
@@ -63,5 +58,86 @@
     "details": "Vestido, espada.",
     "price": 2000,
     "dischargeDate": ""
+  },
+  {
+    "id": "15eec97f-0072-409e-9bb2-850963ff8ecb",
+    "name": "Matias",
+    "category": {
+      "name": "Adultos",
+      "price": 1,
+      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+      "dischargeDate": ""
+    },
+    "details": "matias araya",
+    "price": 1,
+    "dischargeDate": "2024-09-26 15:34:04"
+  },
+  {
+    "id": "f9a4cf73-df1e-4549-a3bb-a95ed95b18a9",
+    "name": "test",
+    "category": {
+      "name": "Adultos",
+      "price": 1,
+      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+      "dischargeDate": ""
+    },
+    "details": "test",
+    "price": 1,
+    "dischargeDate": "2024-09-26 15:49:02"
+  },
+  {
+    "id": "841aaab3-238e-4644-b5fd-f4ad400b82fe",
+    "name": "Princesa",
+    "category": "Niños",
+    "details": "Vestido largo rosado",
+    "price": 2,
+    "dischargeDate": ""
+  },
+  {
+    "id": "0ae9cf83-1d81-4a64-9317-cf59bbc9a50b",
+    "name": "Linterna verde",
+    "category": {
+      "name": "Adultos",
+      "price": 1,
+      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+      "dischargeDate": ""
+    },
+    "details": "Linter verde",
+    "price": 1,
+    "dischargeDate": ""
+  },
+  {
+    "id": "3169e7fe-246a-48ae-b818-55e6bad6fb26",
+    "name": "what",
+    "category": {
+      "name": "Niños",
+      "price": 2,
+      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
+      "dischargeDate": ""
+    },
+    "details": "ta hell",
+    "price": 2,
+    "dischargeDate": "2024-09-26 16:35:43"
+  },
+  {
+    "id": "f8f56f01-4f41-417f-a0df-1b0a58a6ef96",
+    "name": "de nada",
+    "category": "Adultos",
+    "details": "de nada",
+    "price": 2,
+    "dischargeDate": "2024-09-26 16:35:40"
+  },
+  {
+    "id": "7088232b-ea0a-40cf-9c92-3493613fb9b1",
+    "name": "asd",
+    "category": {
+      "name": "Adultos",
+      "price": 1,
+      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+      "dischargeDate": ""
+    },
+    "details": "asd",
+    "price": 1,
+    "dischargeDate": "2024-09-26 16:35:23"
   }
 ]

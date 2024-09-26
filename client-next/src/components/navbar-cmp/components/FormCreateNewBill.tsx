@@ -105,10 +105,43 @@ export default function FormCreateNewBill({ data }: Props) {
   return (
     <>
       <form className='flex flex-col gap-5 w-full px-2' onSubmit={handleSubmit}>
+        {/* <div className='flex gap-5 flex-col bg-slate-200 p-2 rounded-lg'>
+      <div className='flex justify-between'>
+        <h6 className='font-bold'>Disfraces</h6>
+        <button
+          type='button'
+          onClick={onOpenModal}
+          className='btn btn-primary btn-sm'
+        >
+          CREAR DISFRAZ
+        </button>
+      </div>
+      <div className='flex-1'>
+        <label>
+          <input
+            list='costumes'
+            name='costumes'
+            className='w-full input input-bordered '
+            placeholder='Elegir disfraces'
+            onChange={onSelectCostume}
+          />
+        </label> */}
         {touched.dniClient && errors.dniClient && <p>{errors.dniClient}</p>}
-        <div className='flex gap-5 items-center justify-center'>
+        <div className='flex gap-5 flex-col bg-slate-200 p-2 rounded-lg'>
+          <div className='flex justify-between'>
+            <h6 className='font-bold'>Cliente</h6>
+            <button
+              type='button'
+              onClick={() =>
+                setConfirmationClientModalOpen(!confirmationClientModalOpen)
+              }
+              className='btn btn-primary btn-sm'
+            >
+              CREAR CLIENTE
+            </button>
+          </div>
+
           <div className='flex-1'>
-            <label>Cliente</label>
             <label>
               <input
                 className='w-full input input-bordered '
@@ -131,16 +164,6 @@ export default function FormCreateNewBill({ data }: Props) {
                 ))}
             </datalist>
           </div>
-
-          <button
-            type='button'
-            onClick={() =>
-              setConfirmationClientModalOpen(!confirmationClientModalOpen)
-            }
-            className='btn h-full btn-primary btn-xs'
-          >
-            +
-          </button>
         </div>
 
         <div className='w-full h-1 bg-primary rounded-lg'></div>
@@ -220,7 +243,7 @@ export default function FormCreateNewBill({ data }: Props) {
           </div>
         </div> */}
         <div className='w-full h-1 bg-primary rounded-lg'></div>
-        <div className='grid grid-cols-3 bg-slate-200 p-4 rounded-lg border-red-600 border-2'>
+        <div className='grid grid-cols-3 bg-slate-200 p-4 rounded-lg '>
           <div className='flex gap-2 flex-col  col-span-3'>
             {/* <h1>Precio</h1> */}
             <div className='flex gap-2'>
@@ -266,7 +289,24 @@ export default function FormCreateNewBill({ data }: Props) {
                 }
               />
             </div>
+            <Input
+              placeholder='Ingrese descuento'
+              validate={
+                touched.demoDescuentoPrecio && errors.demoDescuentoPrecio
+                  ? true
+                  : false
+              }
+              title='Descuento en precio'
+              type='number'
+              name='demoDescuentoPrecio'
+              // readOnly
+              value={values.demoDescuentoPrecio}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            />
           </div>
+          <div className='w-full h-1 bg-slate-300 rounded-lg col-span-3  mt-3 mb-2'></div>
+
           <div className='flex gap-2 flex-col  col-span-3'>
             {/* <h1>Depósito</h1> */}
             <div className='flex gap-2'>
@@ -314,23 +354,6 @@ export default function FormCreateNewBill({ data }: Props) {
                 }
               />
             </div>
-          </div>
-          <div className='flex gap-2  col-span-3 '>
-            <Input
-              placeholder='Ingrese descuento'
-              validate={
-                touched.demoDescuentoPrecio && errors.demoDescuentoPrecio
-                  ? true
-                  : false
-              }
-              title='Descuento en precio'
-              type='number'
-              name='demoDescuentoPrecio'
-              // readOnly
-              value={values.demoDescuentoPrecio}
-              onBlur={handleBlur}
-              onChange={handleChange}
-            />
             <Input
               placeholder='Ingrese descuento'
               validate={

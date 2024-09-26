@@ -6,6 +6,7 @@ import {
   fetchPatch,
   fetchDeleteById,
 } from "@/app/lib/fetching";
+import { RootState } from "@/lib/store";
 
 import {
   type PayloadAction,
@@ -20,15 +21,21 @@ export const getAllAsync = createAsyncThunk(
   "costume/getAll",
   async (): Promise<Costume[]> => {
     const costumes = await fetchGetAll(path);
-    console.log(costumes);
+    // console.log(costumes);
 
     return costumes;
   }
 );
 export const createAsync = createAsyncThunk(
   "costume/create",
-  async (body: CostumeDTO): Promise<CostumeDTO> => {
-    return await fetchPost(body, path);
+  async (body: CostumeDTO): Promise<Costume> => {
+    try {
+      return await fetchPost(body, path);
+    } catch (error) {
+      console.error("Error updating costume:", error);
+      alert("Error updating costume:");
+      throw error;
+    }
   }
 );
 // export const getOneClientByIdAsync = createAsyncThunk(
@@ -40,8 +47,25 @@ export const createAsync = createAsyncThunk(
 // );
 export const updateAsync = createAsyncThunk(
   "costume/update",
-  async (body: CostumeDTO): Promise<CostumeDTO> => {
-    return await fetchPatch(body.id, body, path);
+  async (body: CostumeDTO, { getState }): Promise<Costume> => {
+    try {
+      const state = getState() as RootState;
+      const categories = state.categories.categories;
+      const res: CostumeDTO = await fetchPatch(body.id, body, path);
+
+      const categoryObject = categories.find((u) => u.name === res.category);
+
+      if (!categoryObject) {
+        throw new Error(`Category with name "${res.category}" not found.`);
+      }
+
+      const data: Costume = { ...res, category: categoryObject };
+
+      return data;
+    } catch (error) {
+      console.error("Error updating costume:", error);
+      throw error;
+    }
   }
 );
 export const deleteAsync = createAsyncThunk(
@@ -93,10 +117,10 @@ export const costumeSlice = createSlice({
       state.error = "";
     });
     builder.addCase(createAsync.fulfilled, (state, action) => {
-      const body = action.payload;
+      const body: Costume = action.payload;
       state.costumes.push(body);
       state.created = body;
-      alert("La categoria se ha guardado");
+      alert("El disfraz se ha guardado");
       state.isLoading = false;
     });
     builder.addCase(createAsync.rejected, (state, action) => {
@@ -124,7 +148,7 @@ export const costumeSlice = createSlice({
       const index = state.costumes.findIndex((item) => item.id === id);
       state.costumes[index] = updated;
       state.updated = updated;
-      alert("La categoria se ha actualizado");
+      alert("El disfraz se ha actualizado");
       state.isLoading = false;
     });
 
@@ -137,7 +161,7 @@ export const costumeSlice = createSlice({
       const { id } = deleted;
       const index = state.costumes.findIndex((item) => item.id === id);
       state.costumes.splice(index, 1);
-      alert("La categoria se ha eliminado");
+      alert("El disfraz se ha eliminado");
       state.isLoading = false;
     });
   },
