@@ -26,13 +26,19 @@
   {
     "id": "b9319011-1f5e-4b30-85dd-2a315a0844a7",
     "name": "Mascaras",
-    "price": 2500,
+    "price": 3,
     "dischargeDate": ""
   },
   {
     "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
     "name": "Cabezones",
-    "price": 2500,
+    "price": 4,
     "dischargeDate": ""
+  },
+  {
+    "id": "c009a2cb-b5f1-4f83-8b51-f682a91cec0f",
+    "name": "test",
+    "price": 5,
+    "dischargeDate": "2024-09-26 09:22:30"
   }
 ]

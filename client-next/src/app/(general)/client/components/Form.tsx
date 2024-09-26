@@ -49,6 +49,15 @@ export default function Form({ data }: Props) {
       .int()
       .min(1000000000)
       .max(9999999999),
+    phoneNumberAlt: z
+      .number({
+        invalid_type_error: "El telefono debe ser un numero de 10 digitos",
+        required_error: "El telefono es requerido",
+      })
+      .int()
+      .min(1000000000)
+      .max(9999999999)
+      .optional(),
 
     email: z.string().email("Email inválido"),
 
@@ -85,7 +94,6 @@ export default function Form({ data }: Props) {
   });
 
   const {
-    initialValues,
     handleSubmit,
     values,
     handleChange,
@@ -95,16 +103,17 @@ export default function Form({ data }: Props) {
     resetForm,
   } = useFormik({
     initialValues: {
+      blacklist: data?.blacklist ?? false,
+      departament: data?.departament ?? "",
+      direction: data?.direction ?? "",
+      dni: data?.dni ?? 0,
+      email: data?.email ?? "",
       id: data?.id ?? "",
       name: data?.name ?? "",
-      surname: data?.surname ?? "",
-      dni: data?.dni ?? 0,
       phoneNumber: data?.phoneNumber ?? 0,
-      email: data?.email ?? "",
-      direction: data?.direction ?? "",
-      departament: data?.departament ?? "",
+      phoneNumberAlt: data?.phoneNumberAlt ?? 0,
       postalCode: data?.postalCode ?? 0,
-      blacklist: data?.blacklist ?? false,
+      surname: data?.surname ?? "",
     },
     validate: (values) => {
       try {
@@ -139,35 +148,29 @@ export default function Form({ data }: Props) {
   }, []);
 
   return (
-    <form
-      className='flex flex-col gap-5 p-5 [&>div]:flex [&>div]:justify-between [&>div]:gap-2'
-      onSubmit={handleSubmit}
-    >
-      <div>
-        <Input
-          validate={touched.name && errors.name ? true : false}
-          title='Nombre'
-          placeholder='Ingrese nombre'
-          type='text'
-          name='name'
-          value={values.name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
+    <form className='grid grid-cols-2 gap-5' onSubmit={handleSubmit}>
+      <Input
+        validate={touched.name && errors.name ? true : false}
+        title='Nombre'
+        placeholder='Ingrese nombre'
+        type='text'
+        name='name'
+        value={values.name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+      <Input
+        validate={touched.surname && errors.surname ? true : false}
+        title='Apellido'
+        placeholder='Ingrese apellido'
+        type='text'
+        name='surname'
+        value={values.surname}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
 
-        <Input
-          validate={touched.surname && errors.surname ? true : false}
-          title='Apellido'
-          placeholder='Ingrese apellido'
-          type='text'
-          name='surname'
-          value={values.surname}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-      </div>
-
-      <div>
+      <div className='col-span-2 grid gap-5'>
         <Input
           validate={touched.dni && errors.dni ? true : false}
           title='DNI'
@@ -178,21 +181,45 @@ export default function Form({ data }: Props) {
           onChange={handleChange}
           onBlur={handleBlur}
         />
-
         <Input
-          validate={touched.phoneNumber && errors.phoneNumber ? true : false}
-          title='Número de celular 1'
-          placeholder='Ingrese nro de celular'
-          type='number'
-          name='phoneNumber'
-          value={values.phoneNumber}
+          validate={touched.direction && errors.direction ? true : false}
+          title='Dirección'
+          placeholder='Ingrese la dirección'
+          type='text'
+          name='direction'
+          value={values.direction}
           onChange={handleChange}
           onBlur={handleBlur}
         />
       </div>
+
+      <InputDataList
+        data={departaments}
+        list='departaments'
+        validate={touched.departament && errors.departament ? true : false}
+        title='Departamento'
+        placeholder='Ingrese departamento'
+        type='text'
+        name='departament'
+        value={values.departament}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+
+      <Input
+        validate={touched.postalCode && errors.postalCode ? true : false}
+        title='Código postal'
+        placeholder='Ingrese código postal'
+        type='number'
+        name='postalCode'
+        value={values.postalCode}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+
       <Input
         validate={touched.phoneNumber && errors.phoneNumber ? true : false}
-        title='Número de celular 2'
+        title='Número de celular 1'
         placeholder='Ingrese nro de celular'
         type='number'
         name='phoneNumber'
@@ -201,53 +228,30 @@ export default function Form({ data }: Props) {
         onBlur={handleBlur}
       />
       <Input
-        validate={touched.direction && errors.direction ? true : false}
-        title='Dirección'
-        placeholder='Ingrese la dirección'
-        type='text'
-        name='direction'
-        value={values.direction}
+        validate={
+          touched.phoneNumberAlt && errors.phoneNumberAlt ? true : false
+        }
+        title='Número de celular 2'
+        placeholder='Ingrese nro de celular'
+        type='number'
+        name='phoneNumberAlt'
+        value={values.phoneNumberAlt}
         onChange={handleChange}
         onBlur={handleBlur}
       />
-
-      <div>
-        <InputDataList
-          data={departaments}
-          list='departaments'
-          validate={touched.departament && errors.departament ? true : false}
-          title='Departamento'
-          placeholder='Ingrese departamento'
-          type='text'
-          name='departament'
-          value={values.departament}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-
+      <div className='col-span-2'>
         <Input
-          validate={touched.postalCode && errors.postalCode ? true : false}
-          title='Código postal'
-          placeholder='Ingrese código postal'
-          type='number'
-          name='postalCode'
-          value={values.postalCode}
+          validate={touched.email && errors.email ? true : false}
+          title='Correo electrónico'
+          placeholder='Ingrese correo electrónico'
+          type='text'
+          name='email'
+          value={values.email}
           onChange={handleChange}
           onBlur={handleBlur}
         />
       </div>
-
-      <Input
-        validate={touched.email && errors.email ? true : false}
-        title='Correo electrónico'
-        placeholder='Ingrese correo electrónico'
-        type='text'
-        name='email'
-        value={values.email}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
-      <button className='btn btn-primary' type='submit'>
+      <button className='btn btn-primary col-span-2' type='submit'>
         GUARDAR
       </button>
     </form>

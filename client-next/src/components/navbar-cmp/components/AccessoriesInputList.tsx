@@ -10,8 +10,9 @@ export const AccessoriesInputList = ({ handleChangeAccessorie }: Props) => {
 
   const onAddAccessories = () => {
     const newAccessorie: Others = {
+      cant: 1,
       name: "",
-      price: 0,
+      price: 1,
     };
 
     setAccessories((prevState) => [...prevState, newAccessorie]);
@@ -70,18 +71,18 @@ export const AccessoriesInputList = ({ handleChangeAccessorie }: Props) => {
               value={acc.name}
             />
             <input
-              placeholder='Precio'
-              className='input input-sm w-40 border-red-400 border-4'
-              type='number'
-              onChange={(event) =>
-                onChange(index, "price", Number(event.target.value))
-              }
-              name='price'
-              value={acc.price}
-            />
-            <input
               placeholder='Cantidad'
               className='input input-sm w-40'
+              type='number'
+              onChange={(event) =>
+                onChange(index, "cant", Number(event.target.value))
+              }
+              name='cant'
+              value={acc.cant}
+            />
+            <input
+              placeholder='Precio'
+              className='input input-sm w-40 '
               type='number'
               onChange={(event) =>
                 onChange(index, "price", Number(event.target.value))

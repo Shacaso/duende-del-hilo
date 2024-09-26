@@ -142,5 +142,33 @@
     "blacklist": false,
     "id": "7696360c-0ecc-4bd5-b3aa-6ee1799ffd42",
     "dischargeDate": ""
+  },
+  {
+    "blacklist": false,
+    "departament": "Lavalle",
+    "direction": "Magdallena 46",
+    "dni": 53874637,
+    "email": "matiasaraya@gmail.com",
+    "id": "b9548b2c-51a0-4984-9554-5049959f3a12",
+    "name": "Matias",
+    "phoneNumber": 3933491544,
+    "phoneNumberAlt": 2613430543,
+    "postalCode": 4402,
+    "surname": "Araya",
+    "dischargeDate": ""
+  },
+  {
+    "blacklist": false,
+    "departament": "Guaymallén",
+    "direction": "test@gmal.com",
+    "dni": 23983476,
+    "email": "test@gmail.com",
+    "id": "ba3a4834-c3b6-4a68-96a1-b949e266cd10",
+    "name": "TEST",
+    "phoneNumber": 2613439874,
+    "phoneNumberAlt": 2613746524,
+    "postalCode": 2345,
+    "surname": "TEST",
+    "dischargeDate": ""
   }
 ]

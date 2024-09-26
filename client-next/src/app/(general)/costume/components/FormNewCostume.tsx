@@ -11,7 +11,7 @@ import Form from "../../categories/components/Form";
 import { Input, InputDataList } from "@/components";
 
 interface Props {
-  data?: CostumeDTO;
+  data?: Costume;
 }
 
 export default function FormNewCostume({ data }: Props) {
@@ -56,42 +56,60 @@ export default function FormNewCostume({ data }: Props) {
     id: data?.id ?? "",
     name: data?.name ?? "",
     price: data?.price ?? 0,
-    category: data?.category ?? "",
+    category: data?.category.name ?? "",
     details: data?.details ?? "",
   };
-  const { handleSubmit, values, handleChange, errors, touched, handleBlur } =
-    useFormik({
-      initialValues,
-      validate: (values) => {
-        // try {
-        //   costumeSchema.parse(values);
-        // } catch (error) {
-        //   if (error instanceof ZodError) return error.formErrors.fieldErrors;
-        // }
-      },
-      onSubmit: (values) => {
-        // if (category) {
-        //   values.category = category;
-        //   values.price = category.price;
-        // }
-        // console.log(values);
+  const {
+    handleSubmit,
+    values,
+    handleChange,
+    errors,
+    touched,
+    handleBlur,
+    resetForm,
+  } = useFormik({
+    initialValues,
+    validate: (values) => {
+      // try {
+      //   costumeSchema.parse(values);
+      // } catch (error) {
+      //   if (error instanceof ZodError) return error.formErrors.fieldErrors;
+      // }
+    },
+    onSubmit: (values) => {
+      // values.category = categories.find(u => u.name === values.category.name)
 
-        if (!data) {
-          // createCostume(values)
-          fetchPost(values, "costumes").then((res) => {
-            if (res) {
-              alert("El disfraz se ha guardado");
-            }
-          });
-        } else {
-          fetchPatch(data.id, values, "costumes").then((res) => {
-            if (res) {
-              alert("El disfraz se ha actualizado");
-            }
-          });
-        }
-      },
-    });
+      // console.log("data submit:", values);
+
+      if (!data) {
+        createCostume(values);
+      } else {
+        updateCostume(values);
+      }
+      resetForm();
+
+      // if (category) {
+      //   values.category = category;
+      //   values.price = category.price;
+      // }
+      // console.log(values);
+
+      // if (!data) {
+      //   // createCostume(values)
+      //   fetchPost(values, "costumes").then((res) => {
+      //     if (res) {
+      //       alert("El disfraz se ha guardado");
+      //     }
+      //   });
+      // } else {
+      //   fetchPatch(data.id, values, "costumes").then((res) => {
+      //     if (res) {
+      //       alert("El disfraz se ha actualizado");
+      //     }
+      //   });
+      // }
+    },
+  });
 
   return (
     <>

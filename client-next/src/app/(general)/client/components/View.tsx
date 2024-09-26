@@ -26,8 +26,12 @@ export default function View({ data }: Props) {
             <span className='font-bold'>Dni:</span> {data?.dni}
           </p>
           <p className='text-xl'>
-            <span className='font-bold'>Numero de celular:</span>{" "}
+            <span className='font-bold'>Numero de celular 1:</span>{" "}
             {data?.phoneNumber}
+          </p>
+          <p className='text-xl'>
+            <span className='font-bold'>Numero de celular 2:</span>{" "}
+            {data?.phoneNumberAlt}
           </p>
           <p className='text-xl'>
             <span className='font-bold'>Email:</span> {data?.email}
