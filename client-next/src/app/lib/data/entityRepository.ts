@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { CustomError, Entity, UserLogin } from "../definitions";
+import { CustomError, Entity, UserLogin, Category } from "../definitions";
 import { allEntities, saveAllEntities } from "./GetAndSaveJson";
 
 export const getAll = async <T extends Entity>(path: string) => {

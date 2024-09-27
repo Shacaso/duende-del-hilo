@@ -3,12 +3,13 @@ import {
 	Bill,
 	BillDto,
 	Client,
-	Costume,
 	CostumeCant,
 	CustomError,
 } from "../definitions";
 import { allEntities, saveAllEntities } from "./GetAndSaveJson";
-import { getClientByDNI, getCostumeArray, getDateAndHour } from "./funciones";
+import { getDateAndHour } from "./funciones";
+import { getClientByDNI } from "./clientRepository";
+import { getCostumeArray } from "./costumeRepository";
 
 export const create = async (input: BillDto, path: string) => {
 	const entities = await allEntities<Bill>(path);
@@ -34,27 +35,6 @@ export const create = async (input: BillDto, path: string) => {
 	);
 	if (costumesFound instanceof CustomError) return costumesFound;
 
-	const priceReal = () => {
-		let result = 0;
-		for (let index = 0; index < costumesFound.length; index++) {
-			result += costumesFound[index].costume.price * costumesFound[index].cant;
-		}
-		if (input.others && input.others?.length !== 0) {
-			for (let index = 0; index < input.others.length; index++) {
-				result += input.others[index].price * input.others[index].cant;
-			}
-		}
-		return result;
-	};
-
-	if (priceReal() !== input.amountTotal) {
-		return new CustomError(
-			true,
-			"El precio total no corresponde con la sumatoria de los productos",
-			409
-		);
-	}
-
 	const newBill: Bill = {
 		id: randomUUID(),
 		billNumber: lastBill,
@@ -62,9 +42,16 @@ export const create = async (input: BillDto, path: string) => {
 		returnedDate: input.returnedDate,
 		retirementDate: input.retirementDate,
 		returned: input.returned,
-		amountTotal: input.amountTotal,
-		advancement: input.advancement,
-		remainingBalance: input.amountTotal - input.advancement,
+		precioTotal: input.precioTotal,
+		precioACuenta: input.precioACuenta,
+		precioDescuento: input.precioDescuento,
+		precioSaldo:
+			input.precioTotal - input.precioDescuento - input.precioACuenta,
+		depositoTotal: input.depositoTotal,
+		depositoACuenta: input.depositoACuenta,
+		depositoDescuento: input.depositoDescuento,
+		depositoSaldo:
+			input.depositoTotal - input.depositoDescuento - input.depositoACuenta,
 		client: clientFound,
 		costumes: costumesFound,
 		others: input.others,
