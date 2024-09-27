@@ -97,3 +97,35 @@ export async function getCostumesByCategory(idCategory: string) {
 
 	return costumesFound;
 }
+
+export const update = async (id: string, input: CostumeDTO) => {
+	const response = await allEntities<Costume>(costumesPath);
+	if (response instanceof CustomError) return response;
+	const costumes: Costume[] = response;
+
+	const costumeIndex = costumes.findIndex((costume) => costume.id === id);
+
+	if (costumeIndex === -1)
+		return new CustomError(true, "Id no encontrado", 404);
+
+	const category = input.category
+		? await getCategoryByName(input.category)
+		: costumes[costumeIndex].category;
+
+	if (category instanceof CustomError) return category;
+
+	costumes[costumeIndex] = {
+		id: costumes[costumeIndex].id,
+		name: input.name ? input.name : costumes[costumeIndex].name,
+		category: category,
+		details: input.details ? input.details : costumes[costumeIndex].details,
+		dischargeDate: input.dischargeDate
+			? input.dischargeDate
+			: costumes[costumeIndex].dischargeDate,
+	};
+
+	const responseSave = await saveAllEntities<Costume>(costumes, costumesPath);
+	if (responseSave instanceof CustomError) return responseSave;
+
+	return costumes[costumeIndex];
+};

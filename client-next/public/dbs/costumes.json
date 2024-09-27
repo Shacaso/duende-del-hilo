@@ -2,9 +2,13 @@
   {
     "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
     "name": "Bombero",
-    "category": "Niños",
+    "category": {
+      "name": "Adultos",
+      "price": 3000,
+      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+      "dischargeDate": ""
+    },
     "details": "asdasdas",
-    "price": 2500,
     "dischargeDate": "2024-09-26 15:49:06"
   },
   {

@@ -6,27 +6,38 @@ import { validateClient } from "@/app/lib/schemas/clientSchema";
 import { jsonProcess } from "@/app/lib/data/funciones";
 
 export async function GET(req: Request) {
-  const response: Client[] | CustomError = await getAll<Client>(clientsPath)
-  if (response instanceof CustomError) return NextResponse.json(response, { status: response.codigo })
-  return NextResponse.json(response)
+	const response: Client[] | CustomError = await getAll<Client>(clientsPath);
+	if (response instanceof CustomError)
+		return NextResponse.json(response, { status: response.codigo });
+	return NextResponse.json(response);
 }
 
 export async function POST(req: Request) {
-  const body: Client = await req.json()
+	const body: Client = await req.json();
 
-  const result = validateClient(body)
+	const result = validateClient(body);
 
-  if (!result.success) {
-    const messageError = jsonProcess(JSON.parse(result.error.message))
-    const response = NextResponse.json({error: true, message: messageError}, { status: 400 })
-    console.log({error: true, message: messageError, status: 400 })
-    return response
-  }
+	if (!result.success) {
+		const messageError = jsonProcess(JSON.parse(result.error.message));
+		const response = NextResponse.json(
+			{ error: true, message: messageError },
+			{ status: 400 }
+		);
+		console.log({ error: true, message: messageError, status: 400 });
+		return response;
+	}
 
-  const response: Client | CustomError = await create<Client>(body, clientsPath)
-  if (response instanceof CustomError) {
-    console.log({error: response.error, message: response.message, status: response.codigo })
-    return NextResponse.json(response, { status: response.codigo })
-  }
-  return NextResponse.json(response)
+	const response: Client | CustomError = await create<Client>(
+		body,
+		clientsPath
+	);
+	if (response instanceof CustomError) {
+		console.log({
+			error: response.error,
+			message: response.message,
+			status: response.codigo,
+		});
+		return NextResponse.json(response, { status: response.codigo });
+	}
+	return NextResponse.json(response, { status: 201 });
 }

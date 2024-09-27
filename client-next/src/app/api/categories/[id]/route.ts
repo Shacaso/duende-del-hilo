@@ -29,6 +29,12 @@ export async function PATCH(req: Request, context: { params: any }) {
 			{ error: true, message: messageError },
 			{ status: 400 }
 		);
+	} else if (Object.values(result.data).length === 0) {
+		const messageError = "No se proporcionaron atributos válidos";
+		return NextResponse.json(
+			{ error: true, message: messageError },
+			{ status: 400 }
+		);
 	}
 
 	const response: Category | CustomError = await update(id, body);

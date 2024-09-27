@@ -107,6 +107,6 @@ export function validateCostume(object: CostumeDTO) {
 	return costumeSchema.safeParse(object);
 }
 
-export function validateParcialCostume(object: Costume) {
+export function validateParcialCostume(object: CostumeDTO) {
 	return costumeSchemaPartial.partial().safeParse(object);
 }

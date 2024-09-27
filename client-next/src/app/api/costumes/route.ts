@@ -32,5 +32,5 @@ export async function POST(req: Request) {
 		console.log(response.message);
 		return NextResponse.json(response, { status: response.codigo });
 	}
-	return NextResponse.json(response);
+	return NextResponse.json(response, { status: 201 });
 }
