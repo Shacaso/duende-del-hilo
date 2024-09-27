@@ -6,7 +6,7 @@ import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import { useClient } from "@/hook/useClient";
 import { useCostume } from "@/hook/useCostume";
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { AccessoriesInputList } from "./AccessoriesInputList";
 import { CostumeInputList } from "./CostumeInputList";
 
@@ -16,7 +16,7 @@ interface Props {
 
 export default function FormCreateNewBill({ data }: Props) {
   const { getAllClients, clients } = useClient();
-  const { getAllCostumes /* , costumes: costumesList */ } = useCostume();
+  const { getAllCostumes, costumes: costumesList } = useCostume();
 
   // const [costumeSelected, setCostumeSelected] = useState<CountCostume[]>([]);
 
@@ -25,69 +25,79 @@ export default function FormCreateNewBill({ data }: Props) {
   const [confirmationClientModalOpen, setConfirmationClientModalOpen] =
     useState<boolean>(false);
 
-  const { handleSubmit, values, handleChange, errors, touched, handleBlur } =
-    useFormik({
-      initialValues: {
-        id: data?.id ?? "",
-        billNumber: data?.billNumber ?? 0,
-        date: data?.date ?? "",
-        others: data?.others ?? null,
-        returned: data?.returned ?? "",
-        amountTotal: data?.amountTotal ?? 0,
-        demoPrecioACuenta: 0,
-        demoPrecioSaldo: 0,
-        demoDepositoTotal: 0,
-        demoDepositoACuenta: 0,
-        demoDepositoSaldo: 0,
-        demoDescuentoPrecio: 0,
-        demoDescuentoDeposito: 0,
-        costumes: data?.costumes ?? 0,
-        dniClient: data?.dniClient ?? "",
-        note: data?.note ?? "",
-        dischargeDate: data?.dischargeDate ?? "",
-        returnedDate: data?.returnedDate ?? "",
-        retirementDate: data?.retirementDate ?? "",
-        advancement: data?.advancement ?? 0,
-        remainingBalance: data?.remainingBalance ?? 0,
-      },
-      // validate: (values) => {
-      //   try {
-      //     billSchema.parse(values);
-      //   } catch (error) {
-      //     if (error instanceof ZodError) return error.formErrors.fieldErrors;
-      //   }
-      // },
-      onSubmit: (values) => {
-        values.dniClient = Number(values.dniClient.toString().split(" ")[0]);
-        values.costumes = countCostumesList;
-        values.others = accessories;
+  const {
+    handleSubmit,
+    values,
+    handleChange,
+    errors,
+    touched,
+    handleBlur,
+    setStatus,
+  } = useFormik({
+    initialValues: {
+      id: data?.id ?? "",
+      billNumber: data?.billNumber ?? 0,
+      date: data?.date ?? "",
+      others: data?.others ?? null,
+      returned: data?.returned ?? "",
+      amountTotal: data?.amountTotal ?? 0,
+      demoPrecioACuenta: 0,
+      demoPrecioSaldo: 0,
+      demoDepositoTotal: 0,
+      demoDepositoACuenta: 0,
+      demoDepositoSaldo: 0,
+      demoDescuentoPrecio: 0,
+      demoDescuentoDeposito: 0,
+      costumes: data?.costumes ?? 0,
+      dniClient: data?.dniClient ?? "",
+      note: data?.note ?? "",
+      dischargeDate: data?.dischargeDate ?? "",
+      returnedDate: data?.returnedDate ?? "",
+      retirementDate: data?.retirementDate ?? "",
+      advancement: data?.advancement ?? 0,
+      remainingBalance: data?.remainingBalance ?? 0,
+    },
+    // validate: (values) => {
+    //   try {
+    //     billSchema.parse(values);
+    //   } catch (error) {
+    //     if (error instanceof ZodError) return error.formErrors.fieldErrors;
+    //   }
+    // },
+    onSubmit: (values) => {
+      values.dniClient = Number(values.dniClient.toString().split(" ")[0]);
+      values.costumes = countCostumesList;
+      values.others = accessories;
+      values.demoDepositoSaldo =
+        values.demoDepositoTotal - values.demoDepositoACuenta;
 
-        // values.demoPrecioSaldo = values.amountTotal - values.demoPrecioACuenta;
-        // values.demoDepositoSaldo =
-        //   values.demoDepositoTotal - values.demoDepositoACuenta;
+      // values.demoPrecioSaldo = values.amountTotal - values.demoPrecioACuenta;
+      // values.demoDepositoSaldo =
+      //   values.demoDepositoTotal - values.demoDepositoACuenta;
 
-        console.log("Submit form: ", values);
+      console.log("Submit form: ", values);
 
-        // if (!data) {
-        //   fetchPost(values, "bills").then((res) => {
-        //     if (res) {
-        //       alert("La factura se ha guardado");
-        //     }
-        //   });
-        // } else {
-        //   fetchPatch(data.id, values, "bills").then((res) => {
-        //     if (res) {
-        //       alert("La factura se ha actualizado");
-        //     }
-        //   });
-        // }
-      },
-    });
+      // if (!data) {
+      //   fetchPost(values, "bills").then((res) => {
+      //     if (res) {
+      //       alert("La factura se ha guardado");
+      //     }
+      //   });
+      // } else {
+      //   fetchPatch(data.id, values, "bills").then((res) => {
+      //     if (res) {
+      //       alert("La factura se ha actualizado");
+      //     }
+      //   });
+      // }
+    },
+  });
 
   useEffect(() => {
     getAllClients();
     getAllCostumes();
   });
+  const [demoPrecioTotal, setDemoPrecioTotal] = useState(0);
 
   const [accessories, setAccessories] = useState<Others[]>([]);
 
@@ -98,7 +108,37 @@ export default function FormCreateNewBill({ data }: Props) {
   const [countCostumesList, setCountCostumesList] = useState<CountCostume[]>(
     []
   );
+
   const handleChangeCostume = (costumes: CountCostume[]): void => {
+    // costumes.map((c) => c.price);
+
+    const costumesPrice = costumes.map(
+      (costume) =>
+        costume.costumeName.substring(0, costume.costumeName.indexOf(" -")) ===
+          costumesList.find(
+            (u) =>
+              u.name ===
+              costume.costumeName.substring(
+                0,
+                costume.costumeName.indexOf(" -")
+              )
+          )?.name &&
+        costumesList.find(
+          (u) =>
+            u.name ===
+            costume.costumeName.substring(0, costume.costumeName.indexOf(" -"))
+        )?.price
+    );
+
+    // costumesPrice.map((value) => {
+    //   if (value) {
+    //     setDemoPrecioTotal((prevState) => prevState + value);
+    //   }
+    // });
+
+    console.log(costumesPrice);
+    console.log(demoPrecioTotal);
+
     setCountCostumesList(costumes);
   };
 
@@ -186,62 +226,6 @@ export default function FormCreateNewBill({ data }: Props) {
           onChange={handleChange}
         />
 
-        {/* <div className='flex flex-row gap-5'>
-          <Input
-            placeholder='Ingoeen precio total'
-            validate={touched.amountTotal && errors.amountTotal ? true : false}
-            title='Precio total'
-            type='number'
-            name='amountTotal'
-            readOnly
-            value={values.amountTotal}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-
-          <div className='border-4 border-red-300 '>
-            <Input
-              validate={
-                touched.amountTotal && errors.amountTotal ? true : false
-              }
-              title='Depósito total'
-              placeholder='Ingrese depósito total'
-              type='number'
-              name='amountTotal'
-              value={values.amountTotal}
-              onBlur={handleBlur}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <hr />
-        <div className='flex flex-row gap-5'>
-          <Input
-            placeholder='Ingrese seña'
-            validate={touched.advancement && errors.advancement ? true : false}
-            title='Seña'
-            type='number'
-            name='advancement'
-            value={values.advancement}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-
-          <div className='border-4 border-red-300 '>
-            <Input
-              validate={
-                touched.advancement && errors.advancement ? true : false
-              }
-              title='Depósito'
-              placeholder='Ingrese depósito'
-              type='number'
-              name='advancement'
-              value={values.advancement}
-              onBlur={handleBlur}
-              onChange={handleChange}
-            />
-          </div>
-        </div> */}
         <div className='w-full h-1 bg-primary rounded-lg'></div>
         <div className='grid grid-cols-3 bg-slate-200 p-4 rounded-lg '>
           <div className='flex gap-2 flex-col  col-span-3'>
@@ -250,6 +234,7 @@ export default function FormCreateNewBill({ data }: Props) {
               <Input
                 title='Precio total'
                 value={values.amountTotal}
+                // readOnly
                 placeholder='Precio total'
                 name='amountTotal'
                 type='number'
@@ -312,6 +297,7 @@ export default function FormCreateNewBill({ data }: Props) {
             <div className='flex gap-2'>
               <Input
                 title='Depósito total'
+                // readOnly
                 value={values.demoDepositoTotal}
                 placeholder='Depósito total'
                 name='demoDepositoTotal'

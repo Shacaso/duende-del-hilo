@@ -86,7 +86,7 @@ export const CostumeInputList = ({
         0,
         costume.costumeName.indexOf(" -")
       );
-      return costumes.find((u) => u.name === costumeName)?.price || 0;
+      return costumes.find((u) => u.name === costumeName)?.category.price || 0;
     });
   }, [costumeSelected, costumes]);
 

@@ -51,15 +51,19 @@ export const updateAsync = createAsyncThunk(
     try {
       const state = getState() as RootState;
       const categories = state.categories.categories;
+      // console.log("body", body);
       const res: CostumeDTO = await fetchPatch(body.id, body, path);
+      // console.log("res", res);
 
       const categoryObject = categories.find((u) => u.name === res.category);
+      // console.log("categoryObject", categoryObject);
 
       if (!categoryObject) {
         throw new Error(`Category with name "${res.category}" not found.`);
       }
 
       const data: Costume = { ...res, category: categoryObject };
+      // console.log("data", data);
 
       return data;
     } catch (error) {
