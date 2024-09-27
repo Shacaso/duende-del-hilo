@@ -1,5 +1,5 @@
 import { Others } from "@/app/lib/definitions";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 interface Props {
   handleChangeAccessorie: (accessorios: Others[]) => void;
@@ -36,8 +36,11 @@ export const AccessoriesInputList = ({ handleChangeAccessorie }: Props) => {
       ...updatedProducts[index],
       [field]: value,
     };
-    setAccessories(updatedProducts);
+
+    // console.log("updatedProducts", updatedProducts);
+
     handleChangeAccessorie(updatedProducts);
+    setAccessories(updatedProducts);
   };
 
   return (

@@ -91,7 +91,7 @@
     "category": "Niños",
     "details": "Vestido largo rosado",
     "price": 2,
-    "dischargeDate": ""
+    "dischargeDate": "2024-09-27 08:53:18"
   },
   {
     "id": "0ae9cf83-1d81-4a64-9317-cf59bbc9a50b",
@@ -139,5 +139,37 @@
     "details": "asd",
     "price": 1,
     "dischargeDate": "2024-09-26 16:35:23"
+  },
+  {
+    "id": "77aa2c8e-65b0-4941-b78d-e11ae623eb34",
+    "name": "Pricesa",
+    "category": "Mascaras",
+    "details": "Vestido largo rosado",
+    "dischargeDate": "",
+    "price": 0
+  },
+  {
+    "id": "d9ab7bd3-d838-4c88-8c09-947679608bd9",
+    "name": "Buzz Lightyear",
+    "category": {
+      "name": "Adultos",
+      "price": 3000,
+      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+      "dischargeDate": ""
+    },
+    "details": "Body del personaje y mascara",
+    "dischargeDate": ""
+  },
+  {
+    "id": "cd9ad4f6-223e-46d7-8932-553a1b730d28",
+    "name": "asdasdasdas",
+    "category": {
+      "name": "Adultos",
+      "price": 3000,
+      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+      "dischargeDate": ""
+    },
+    "details": "adsasdasdasdas",
+    "dischargeDate": ""
   }
 ]

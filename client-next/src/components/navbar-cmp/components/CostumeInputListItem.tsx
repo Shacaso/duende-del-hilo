@@ -32,7 +32,7 @@ export const CostumeInputListItem = memo(
         />
         <input
           placeholder='Precio'
-          className='input input-sm w-40 border-red-400 border-4'
+          className='input input-sm w-40 '
           type='number'
           readOnly
           value={costumePrice}

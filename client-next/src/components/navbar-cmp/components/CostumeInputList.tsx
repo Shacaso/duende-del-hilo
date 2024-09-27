@@ -125,7 +125,7 @@ export const CostumeInputList = ({
           <div className='flex gap-32'>
             <h1>Disfraz</h1>
             <h1>Cantidad</h1>
-            <h1>Precio</h1>
+            <h1>Precio unitario</h1>
           </div>
         )}
         {costumeSelected.map((costume, index) => (

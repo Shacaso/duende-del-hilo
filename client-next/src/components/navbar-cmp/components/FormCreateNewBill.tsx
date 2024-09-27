@@ -40,22 +40,20 @@ export default function FormCreateNewBill({ data }: Props) {
       date: data?.date ?? "",
       others: data?.others ?? null,
       returned: data?.returned ?? "",
-      amountTotal: data?.amountTotal ?? 0,
-      demoPrecioACuenta: 0,
-      demoPrecioSaldo: 0,
-      demoDepositoTotal: 0,
-      demoDepositoACuenta: 0,
-      demoDepositoSaldo: 0,
-      demoDescuentoPrecio: 0,
-      demoDescuentoDeposito: 0,
+      precioTotal: data?.precioTotal ?? 0,
+      precioACuenta: data?.precioACuenta ?? 0,
+      precioSaldo: data?.precioSaldo ?? 0,
+      depositoTotal: data?.depositoTotal ?? 0,
+      depositoACuenta: data?.depositoACuenta ?? 0,
+      depositoSaldo: data?.depositoSaldo ?? 0,
+      precioDescuento: data?.precioDescuento ?? 0,
+      depositoDescuento: data?.depositoDescuento ?? 0,
       costumes: data?.costumes ?? 0,
       dniClient: data?.dniClient ?? "",
       note: data?.note ?? "",
       dischargeDate: data?.dischargeDate ?? "",
       returnedDate: data?.returnedDate ?? "",
       retirementDate: data?.retirementDate ?? "",
-      advancement: data?.advancement ?? 0,
-      remainingBalance: data?.remainingBalance ?? 0,
     },
     // validate: (values) => {
     //   try {
@@ -65,15 +63,18 @@ export default function FormCreateNewBill({ data }: Props) {
     //   }
     // },
     onSubmit: (values) => {
+      const precioTotal = demoPrecioTotalAccesorios + demoPrecioTotalDisfraz;
       values.dniClient = Number(values.dniClient.toString().split(" ")[0]);
       values.costumes = countCostumesList;
       values.others = accessories;
-      values.demoDepositoSaldo =
-        values.demoDepositoTotal - values.demoDepositoACuenta;
-
-      // values.demoPrecioSaldo = values.amountTotal - values.demoPrecioACuenta;
-      // values.demoDepositoSaldo =
-      //   values.demoDepositoTotal - values.demoDepositoACuenta;
+      values.depositoSaldo =
+        precioTotal - values.depositoACuenta - values.depositoDescuento;
+      values.precioSaldo =
+        precioTotal - values.precioACuenta - values.precioDescuento;
+      values.precioTotal = precioTotal - values.precioDescuento;
+      values.depositoTotal = precioTotal;
+      // values.depositoSaldo =
+      //   values.depositoTotal - values.depositoACuenta;
 
       console.log("Submit form: ", values);
 
@@ -97,75 +98,45 @@ export default function FormCreateNewBill({ data }: Props) {
     getAllClients();
     getAllCostumes();
   });
-  const [demoPrecioTotal, setDemoPrecioTotal] = useState(0);
+
+  const [demoPrecioTotalDisfraz, setDemoPrecioTotalDisfraz] = useState(0);
+  const [demoPrecioTotalAccesorios, setDemoPrecioTotaAccesorios] = useState(0);
 
   const [accessories, setAccessories] = useState<Others[]>([]);
-
-  const handleChangeAccessorie = (accessorios: Others[]) => {
-    setAccessories(accessorios);
-  };
 
   const [countCostumesList, setCountCostumesList] = useState<CountCostume[]>(
     []
   );
 
-  const handleChangeCostume = (costumes: CountCostume[]): void => {
-    // costumes.map((c) => c.price);
+  const handleChangeAccessorie = (accessorios: Others[]) => {
+    const accessoriesTotal = accessorios.reduce((total, item) => {
+      return total + item.price * item.cant;
+    }, 0);
 
-    const costumesPrice = costumes.map(
-      (costume) =>
-        costume.costumeName.substring(0, costume.costumeName.indexOf(" -")) ===
-          costumesList.find(
-            (u) =>
-              u.name ===
-              costume.costumeName.substring(
-                0,
-                costume.costumeName.indexOf(" -")
-              )
-          )?.name &&
-        costumesList.find(
-          (u) =>
-            u.name ===
-            costume.costumeName.substring(0, costume.costumeName.indexOf(" -"))
-        )?.price
-    );
+    setAccessories(accessorios);
+    setDemoPrecioTotaAccesorios(accessoriesTotal);
+  };
 
-    // costumesPrice.map((value) => {
-    //   if (value) {
-    //     setDemoPrecioTotal((prevState) => prevState + value);
-    //   }
-    // });
-
-    console.log(costumesPrice);
-    console.log(demoPrecioTotal);
+  const handleChangeCostume = (costumes: CountCostume[]) => {
+    const costumesTotal = costumes.reduce((total, costume) => {
+      const foundCostume = costumesList.find(
+        (u) =>
+          u.name ===
+          costume.costumeName.substring(0, costume.costumeName.indexOf(" -"))
+      );
+      if (foundCostume) {
+        return total + foundCostume.category.price * costume.cant;
+      }
+      return total;
+    }, 0);
 
     setCountCostumesList(costumes);
+    setDemoPrecioTotalDisfraz(costumesTotal);
   };
 
   return (
     <>
       <form className='flex flex-col gap-5 w-full px-2' onSubmit={handleSubmit}>
-        {/* <div className='flex gap-5 flex-col bg-slate-200 p-2 rounded-lg'>
-      <div className='flex justify-between'>
-        <h6 className='font-bold'>Disfraces</h6>
-        <button
-          type='button'
-          onClick={onOpenModal}
-          className='btn btn-primary btn-sm'
-        >
-          CREAR DISFRAZ
-        </button>
-      </div>
-      <div className='flex-1'>
-        <label>
-          <input
-            list='costumes'
-            name='costumes'
-            className='w-full input input-bordered '
-            placeholder='Elegir disfraces'
-            onChange={onSelectCostume}
-          />
-        </label> */}
         {touched.dniClient && errors.dniClient && <p>{errors.dniClient}</p>}
         <div className='flex gap-5 flex-col bg-slate-200 p-2 rounded-lg'>
           <div className='flex justify-between'>
@@ -233,59 +204,61 @@ export default function FormCreateNewBill({ data }: Props) {
             <div className='flex gap-2'>
               <Input
                 title='Precio total'
-                value={values.amountTotal}
-                // readOnly
+                value={
+                  demoPrecioTotalAccesorios +
+                  demoPrecioTotalDisfraz -
+                  values.precioDescuento
+                }
+                readOnly
                 placeholder='Precio total'
-                name='amountTotal'
+                name='precioTotal'
                 type='number'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 validate={
-                  touched.amountTotal && errors.amountTotal ? true : false
+                  touched.precioTotal && errors.precioTotal ? true : false
                 }
               />
               <Input
                 title='A cuenta'
-                value={values.demoPrecioACuenta}
+                value={values.precioACuenta}
                 placeholder='A cuenta'
-                name='demoPrecioACuenta'
+                name='precioACuenta'
                 type='number'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 validate={
-                  touched.demoPrecioACuenta && errors.demoPrecioACuenta
-                    ? true
-                    : false
+                  touched.precioACuenta && errors.precioACuenta ? true : false
                 }
               />
               <Input
                 title='Saldo precio'
-                value={values.amountTotal - values.demoPrecioACuenta}
+                value={
+                  demoPrecioTotalAccesorios +
+                  demoPrecioTotalDisfraz -
+                  values.precioACuenta -
+                  values.precioDescuento
+                }
                 placeholder='Saldo'
                 readOnly
-                name='demoPrecioSaldo'
+                name='precioSaldo'
                 type='number'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 validate={
-                  touched.demoPrecioSaldo && errors.demoPrecioSaldo
-                    ? true
-                    : false
+                  touched.precioSaldo && errors.precioSaldo ? true : false
                 }
               />
             </div>
             <Input
               placeholder='Ingrese descuento'
               validate={
-                touched.demoDescuentoPrecio && errors.demoDescuentoPrecio
-                  ? true
-                  : false
+                touched.precioDescuento && errors.precioDescuento ? true : false
               }
               title='Descuento en precio'
               type='number'
-              name='demoDescuentoPrecio'
-              // readOnly
-              value={values.demoDescuentoPrecio}
+              name='precioDescuento'
+              value={values.precioDescuento}
               onBlur={handleBlur}
               onChange={handleChange}
             />
@@ -297,61 +270,66 @@ export default function FormCreateNewBill({ data }: Props) {
             <div className='flex gap-2'>
               <Input
                 title='Depósito total'
-                // readOnly
-                value={values.demoDepositoTotal}
+                readOnly
+                value={
+                  demoPrecioTotalAccesorios +
+                  demoPrecioTotalDisfraz -
+                  values.depositoDescuento
+                }
                 placeholder='Depósito total'
-                name='demoDepositoTotal'
+                name='depositoTotal'
                 type='number'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 validate={
-                  touched.demoDepositoTotal && errors.demoDepositoTotal
-                    ? true
-                    : false
+                  touched.depositoTotal && errors.depositoTotal ? true : false
                 }
               />
               <Input
                 title='A cuenta'
-                value={values.demoDepositoACuenta}
+                value={values.depositoACuenta}
                 placeholder='A cuenta'
-                name='demoDepositoACuenta'
+                name='depositoACuenta'
                 type='number'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 validate={
-                  touched.demoDepositoACuenta && errors.demoDepositoACuenta
+                  touched.depositoACuenta && errors.depositoACuenta
                     ? true
                     : false
                 }
               />
               <Input
                 title='Saldo deposito'
-                value={values.demoDepositoTotal - values.demoDepositoACuenta}
+                value={
+                  demoPrecioTotalAccesorios +
+                  demoPrecioTotalDisfraz -
+                  values.depositoACuenta -
+                  values.depositoDescuento
+                }
                 placeholder='Saldo'
                 readOnly
-                name='demoDepositoSaldo'
+                name='depositoSaldo'
                 type='number'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 validate={
-                  touched.demoDepositoSaldo && errors.demoDepositoSaldo
-                    ? true
-                    : false
+                  touched.depositoSaldo && errors.depositoSaldo ? true : false
                 }
               />
             </div>
             <Input
               placeholder='Ingrese descuento'
               validate={
-                touched.demoDescuentoDeposito && errors.demoDescuentoDeposito
+                touched.depositoDescuento && errors.depositoDescuento
                   ? true
                   : false
               }
               title='Descuento en depósito'
               type='number'
-              name='demoDescuentoDeposito'
+              name='depositoDescuento'
               // readOnly
-              value={values.demoDescuentoDeposito}
+              value={values.depositoDescuento}
               onBlur={handleBlur}
               onChange={handleChange}
             />

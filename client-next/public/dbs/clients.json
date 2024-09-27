@@ -170,5 +170,19 @@
     "postalCode": 2345,
     "surname": "TEST",
     "dischargeDate": ""
+  },
+  {
+    "blacklist": false,
+    "departament": "Luján de Cuyo",
+    "direction": "Magdallena 46",
+    "dni": 39603387,
+    "email": "ximenamorales2024@gmail.com",
+    "id": "5cac322a-9a36-44ed-8817-165dead9a1e4",
+    "name": "Ximena",
+    "phoneNumber": 2613459864,
+    "phoneNumberAlt": 2613432958,
+    "postalCode": 5500,
+    "surname": "Morales",
+    "dischargeDate": ""
   }
 ]
