@@ -42,5 +42,5 @@ export async function POST(req: Request) {
 	await getPDF(response);
 	//new Mailer(response.client.email).sendEmail();
 
-	return NextResponse.json(response);
+	return NextResponse.json(response, { status: 201 });
 }
