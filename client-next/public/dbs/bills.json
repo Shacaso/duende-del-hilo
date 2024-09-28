@@ -65,5 +65,359 @@
     ],
     "note": "Gracias",
     "dischargeDate": ""
+  },
+  {
+    "id": "230608e4-bc5a-4e62-9d9e-f01693331a40",
+    "billNumber": 2,
+    "date": "2024-09-28 09:20:20",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-23",
+    "returned": false,
+    "precioTotal": 8000,
+    "precioACuenta": 8000,
+    "precioDescuento": 8000,
+    "precioSaldo": -8000,
+    "depositoTotal": 8000,
+    "depositoACuenta": 8000,
+    "depositoDescuento": 8000,
+    "depositoSaldo": -8000,
+    "client": {
+      "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+      "name": "Rodrigo",
+      "surname": "Vargas",
+      "dni": 35123123,
+      "phoneNumber": 2615123123,
+      "email": "rxvargas.92@gmail.com",
+      "direction": "Ficticia 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": true,
+      "dischargeDate": "2024-02-22 21:25:59"
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
+          "name": "Bombero",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+            "dischargeDate": ""
+          },
+          "details": "asdasdas",
+          "dischargeDate": "2024-09-26 15:49:06"
+        },
+        "cant": 2
+      },
+      {
+        "costume": {
+          "id": "5171c49d-b493-4abc-ab36-837677b787c0",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+            "dischargeDate": ""
+          },
+          "details": "Lentes grandes de sol para super fiestas",
+          "price": 2000,
+          "dischargeDate": ""
+        },
+        "cant": 1
+      }
+    ],
+    "others": [
+      {
+        "name": "Vincha",
+        "price": 500,
+        "cant": 2
+      }
+    ],
+    "note": "Gracias",
+    "dischargeDate": ""
+  },
+  {
+    "id": "21fd359d-1471-4c3e-baea-2b363024983c",
+    "billNumber": 3,
+    "date": "2024-09-28 09:20:47",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-23",
+    "returned": false,
+    "precioTotal": 8000,
+    "precioACuenta": 8000,
+    "precioSaldo": null,
+    "depositoTotal": 8000,
+    "depositoACuenta": 8000,
+    "depositoDescuento": 8000,
+    "depositoSaldo": -8000,
+    "client": {
+      "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+      "name": "Rodrigo",
+      "surname": "Vargas",
+      "dni": 35123123,
+      "phoneNumber": 2615123123,
+      "email": "rxvargas.92@gmail.com",
+      "direction": "Ficticia 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": true,
+      "dischargeDate": "2024-02-22 21:25:59"
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
+          "name": "Bombero",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+            "dischargeDate": ""
+          },
+          "details": "asdasdas",
+          "dischargeDate": "2024-09-26 15:49:06"
+        },
+        "cant": 2
+      },
+      {
+        "costume": {
+          "id": "5171c49d-b493-4abc-ab36-837677b787c0",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+            "dischargeDate": ""
+          },
+          "details": "Lentes grandes de sol para super fiestas",
+          "price": 2000,
+          "dischargeDate": ""
+        },
+        "cant": 1
+      }
+    ],
+    "others": [
+      {
+        "name": "Vincha",
+        "price": 500,
+        "cant": 2
+      }
+    ],
+    "note": "Gracias",
+    "dischargeDate": ""
+  },
+  {
+    "id": "f15d01b9-a649-4ed0-814a-a1a4b099ec94",
+    "billNumber": 4,
+    "date": "2024-09-28 09:36:46",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-23",
+    "returned": false,
+    "precioTotal": 8000,
+    "precioACuenta": 8000,
+    "precioDescuento": 0,
+    "precioSaldo": 0,
+    "depositoTotal": 8000,
+    "depositoACuenta": 0,
+    "depositoDescuento": 8000,
+    "depositoSaldo": 0,
+    "client": {
+      "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+      "name": "Rodrigo",
+      "surname": "Vargas",
+      "dni": 35123123,
+      "phoneNumber": 2615123123,
+      "email": "rxvargas.92@gmail.com",
+      "direction": "Ficticia 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": true,
+      "dischargeDate": "2024-02-22 21:25:59"
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
+          "name": "Bombero",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+            "dischargeDate": ""
+          },
+          "details": "asdasdas",
+          "dischargeDate": "2024-09-26 15:49:06"
+        },
+        "cant": 2
+      },
+      {
+        "costume": {
+          "id": "5171c49d-b493-4abc-ab36-837677b787c0",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+            "dischargeDate": ""
+          },
+          "details": "Lentes grandes de sol para super fiestas",
+          "price": 2000,
+          "dischargeDate": ""
+        },
+        "cant": 1
+      }
+    ],
+    "others": [
+      {
+        "name": "Vincha",
+        "price": 500,
+        "cant": 2
+      }
+    ],
+    "note": "Gracias",
+    "dischargeDate": ""
+  },
+  {
+    "id": "347358d7-90d2-439a-8c7c-59b6e1c4ff83",
+    "billNumber": 5,
+    "date": "2024-09-28 09:38:42",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-23",
+    "returned": false,
+    "precioTotal": 8000,
+    "precioACuenta": 5000,
+    "precioDescuento": 0,
+    "precioSaldo": 3000,
+    "depositoTotal": 8000,
+    "depositoACuenta": 0,
+    "depositoDescuento": 4000,
+    "depositoSaldo": 4000,
+    "client": {
+      "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+      "name": "Rodrigo",
+      "surname": "Vargas",
+      "dni": 35123123,
+      "phoneNumber": 2615123123,
+      "email": "rxvargas.92@gmail.com",
+      "direction": "Ficticia 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": true,
+      "dischargeDate": "2024-02-22 21:25:59"
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
+          "name": "Bombero",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+            "dischargeDate": ""
+          },
+          "details": "asdasdas",
+          "dischargeDate": "2024-09-26 15:49:06"
+        },
+        "cant": 2
+      },
+      {
+        "costume": {
+          "id": "5171c49d-b493-4abc-ab36-837677b787c0",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+            "dischargeDate": ""
+          },
+          "details": "Lentes grandes de sol para super fiestas",
+          "price": 2000,
+          "dischargeDate": ""
+        },
+        "cant": 1
+      }
+    ],
+    "others": [
+      {
+        "name": "Vincha",
+        "price": 500,
+        "cant": 2
+      }
+    ],
+    "note": "Gracias",
+    "dischargeDate": ""
+  },
+  {
+    "id": "ee01d6ec-1d77-4ed3-a26c-6c826d4360ed",
+    "billNumber": 6,
+    "date": "2024-09-28 09:55:51",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-23",
+    "returned": false,
+    "precioTotal": 10000,
+    "precioACuenta": 5000,
+    "precioDescuento": 0,
+    "precioSaldo": 5000,
+    "depositoTotal": 8000,
+    "depositoACuenta": 0,
+    "depositoDescuento": 4000,
+    "depositoSaldo": 4000,
+    "client": {
+      "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+      "name": "Rodrigo",
+      "surname": "Vargas",
+      "dni": 35123123,
+      "phoneNumber": 2615123123,
+      "email": "rxvargas.92@gmail.com",
+      "direction": "Ficticia 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": true,
+      "dischargeDate": "2024-02-22 21:25:59"
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
+          "name": "Bombero",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+            "dischargeDate": ""
+          },
+          "details": "asdasdas",
+          "dischargeDate": "2024-09-26 15:49:06"
+        },
+        "cant": 2
+      },
+      {
+        "costume": {
+          "id": "5171c49d-b493-4abc-ab36-837677b787c0",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+            "dischargeDate": ""
+          },
+          "details": "Lentes grandes de sol para super fiestas",
+          "price": 2000,
+          "dischargeDate": ""
+        },
+        "cant": 1
+      }
+    ],
+    "others": [
+      {
+        "name": "Vincha",
+        "price": 500,
+        "cant": 2
+      }
+    ],
+    "note": "Gracias",
+    "dischargeDate": ""
   }
 ]

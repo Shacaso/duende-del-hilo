@@ -1,3 +1,4 @@
+import { CostumeCant, Others } from "../definitions";
 import { fetchDeleteById } from "../fetching";
 
 //Funcion que concatena los mesajes de error de las validaciones
@@ -27,4 +28,20 @@ export function getDateAndHour() {
 	const [hour, b] = time.split(".");
 
 	return { date, hour };
+}
+
+export function sacarPrecioTotal(
+	costumesFound: CostumeCant[],
+	others: Others[] | null
+) {
+	let resultado = 0;
+	costumesFound.forEach(({ costume, cant }: CostumeCant) => {
+		resultado += costume.category.price * cant;
+	});
+	if (others && others.length !== 0) {
+		others.forEach(({ price, cant }: Others) => {
+			resultado += price * cant;
+		});
+	}
+	return resultado;
 }
