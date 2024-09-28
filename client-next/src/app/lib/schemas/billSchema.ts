@@ -59,24 +59,69 @@ export const billSchema = z.object({
 		})
 		.default(false),
 
-	amountTotal: z
+	precioTotal: z
 		.number({
-			invalid_type_error: "El monto total debe ser un numero mayor que 0",
-			required_error: "El monto  es requerido",
-		})
-		.positive(),
-
-	advancement: z
-		.number({
-			invalid_type_error: "El adelanto debe ser un numero mayor que 0",
-			required_error: "El adelanto es requerido",
+			invalid_type_error: "El precio total debe ser un numero mayor que 0",
+			required_error: "El precio total es requerido",
 		})
 		.nonnegative({
 			message: "El adelanto debe ser positivo",
+		}),
+
+	precioACuenta: z
+		.number({
+			invalid_type_error: "El precio a cuenta debe ser un numero mayor que 0",
+			required_error: "El precio a cuenta es requerido",
+		})
+		.nonnegative({
+			message: "El precio a cuenta debe ser positivo",
 		})
 		.optional(),
 
-	remainingBalance: z.number().optional(),
+	precioDescuento: z
+		.number({
+			invalid_type_error:
+				"El descuento al precio debe ser un numero mayor que 0",
+			required_error: "El descuento al precio es requerido",
+		})
+		.nonnegative({
+			message: "El descuento al precio debe ser positivo",
+		})
+		.optional(),
+
+	precioSaldo: z.number().optional(),
+
+	depositoTotal: z
+		.number({
+			invalid_type_error: "El deposito total debe ser un numero mayor que 0",
+			required_error: "El deposito total  es requerido",
+		})
+		.nonnegative({
+			message: "El deposito total debe ser positivo",
+		}),
+
+	depositoACuenta: z
+		.number({
+			invalid_type_error: "El deposito a cuenta debe ser un numero mayor que 0",
+			required_error: "El deposito a cuenta es requerido",
+		})
+		.nonnegative({
+			message: "El deposito a cuenta debe ser positivo",
+		})
+		.optional(),
+
+	depositoDescuento: z
+		.number({
+			invalid_type_error:
+				"El descuento del deposito debe ser un numero mayor que 0",
+			required_error: "El descuento del deposito es requerido",
+		})
+		.nonnegative({
+			message: "El descuento del deposito debe ser positivo",
+		})
+		.optional(),
+
+	depositoSaldo: z.number().optional(),
 
 	dniClient: z
 		.number({

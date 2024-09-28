@@ -35,11 +35,11 @@ export interface BillDto extends Entity {
 	retirementDate: string;
 	returned: boolean;
 	precioTotal: number;
-	precioACuenta: number;
-	precioDescuento: number;
+	precioACuenta: number | null;
+	precioDescuento: number | null;
 	precioSaldo: number;
 	depositoTotal: number;
-	depositoACuenta: number;
+	depositoACuenta: number | null;
 	depositoDescuento: number;
 	depositoSaldo: number;
 	costumes: InputArray[];
