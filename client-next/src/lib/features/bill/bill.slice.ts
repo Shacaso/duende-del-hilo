@@ -1,4 +1,4 @@
-import { Bill } from "@/app/lib/definitions";
+import { Bill, BillDto } from "@/app/lib/definitions";
 import { fetchGetAll, fetchPost, fetchPatch } from "@/app/lib/fetching";
 
 import {
@@ -6,6 +6,7 @@ import {
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 
 const path = "bills";
 
@@ -21,13 +22,18 @@ export const getAllAsync = createAsyncThunk(
 );
 export const createAsync = createAsyncThunk(
   "bill/create",
-  async (body: Bill): Promise<Bill> => {
-    return await fetchPost(body, path);
+  async (body: BillDto): Promise<Bill> => {
+    try {
+      const res = await fetchPost(body, path);
+      console.log(res);
+
+      return res;
+    } catch (error) {}
   }
 );
 export const updateAsync = createAsyncThunk(
   "bill/update",
-  async (body: Bill): Promise<Bill> => {
+  async (body: BillDto): Promise<Bill> => {
     return await fetchPatch(body.id, body, path);
   }
 );
@@ -75,7 +81,13 @@ export const billSlice = createSlice({
       const body = action.payload;
       state.bills.push(body);
       state.created = body;
-      alert("La factura se ha guardado");
+      Swal.fire({
+        title: "¡ Factura guardada !",
+        text: " ",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       state.isLoading = false;
     });
     builder.addCase(createAsync.rejected, (state, action) => {
@@ -93,7 +105,13 @@ export const billSlice = createSlice({
       const index = state.bills.findIndex((item) => item.id === id);
       state.bills[index] = updated;
       // state.updated = updated;
-      alert("La factura se ha actualizado");
+      Swal.fire({
+        title: "¡ Factura actualizada !",
+        text: " ",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       state.isLoading = false;
     });
   },

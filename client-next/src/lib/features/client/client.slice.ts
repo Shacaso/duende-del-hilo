@@ -12,6 +12,7 @@ import {
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 
 const path = "clients";
 
@@ -95,7 +96,13 @@ export const clientSlice = createSlice({
       const body = action.payload;
       state.clients.push(body);
       state.created = body;
-      alert("El cliente se ha guardado");
+      Swal.fire({
+        title: "¡ Cliente guardado !",
+        text: " ",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       state.isLoading = false;
     });
     builder.addCase(createClientAsync.rejected, (state, action) => {
@@ -123,7 +130,13 @@ export const clientSlice = createSlice({
       const index = state.clients.findIndex((item) => item.id === id);
       state.clients[index] = updated;
       state.updated = updated;
-      alert("El cliente se ha actualizado");
+      Swal.fire({
+        title: "¡ Cliente actualizado !",
+        text: " ",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       state.isLoading = false;
     });
 
@@ -136,7 +149,13 @@ export const clientSlice = createSlice({
       const { id } = deleted;
       const index = state.clients.findIndex((item) => item.id === id);
       state.clients.splice(index, 1);
-      alert("El cliente se ha eliminado");
+      Swal.fire({
+        title: "¡ Cliente eliminado !",
+        text: " ",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       state.isLoading = false;
     });
   },

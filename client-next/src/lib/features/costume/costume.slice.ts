@@ -13,6 +13,7 @@ import {
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 
 const path = "costumes";
 
@@ -47,25 +48,10 @@ export const createAsync = createAsyncThunk(
 // );
 export const updateAsync = createAsyncThunk(
   "costume/update",
-  async (body: CostumeDTO, { getState }): Promise<Costume> => {
+  async (body: CostumeDTO): Promise<Costume> => {
     try {
-      const state = getState() as RootState;
-      const categories = state.categories.categories;
-      // console.log("body", body);
-      const res: CostumeDTO = await fetchPatch(body.id, body, path);
-      // console.log("res", res);
-
-      const categoryObject = categories.find((u) => u.name === res.category);
-      // console.log("categoryObject", categoryObject);
-
-      if (!categoryObject) {
-        throw new Error(`Category with name "${res.category}" not found.`);
-      }
-
-      const data: Costume = { ...res, category: categoryObject };
-      // console.log("data", data);
-
-      return data;
+      const res = await fetchPatch(body.id, body, path);
+      return res;
     } catch (error) {
       console.error("Error updating costume:", error);
       throw error;
@@ -124,7 +110,13 @@ export const costumeSlice = createSlice({
       const body: Costume = action.payload;
       state.costumes.push(body);
       state.created = body;
-      alert("El disfraz se ha guardado");
+      Swal.fire({
+        title: "¡ Disfraz guardado !",
+        text: " ",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       state.isLoading = false;
     });
     builder.addCase(createAsync.rejected, (state, action) => {
@@ -152,7 +144,13 @@ export const costumeSlice = createSlice({
       const index = state.costumes.findIndex((item) => item.id === id);
       state.costumes[index] = updated;
       state.updated = updated;
-      alert("El disfraz se ha actualizado");
+      Swal.fire({
+        title: "¡ Disfraz actualizado !",
+        text: " ",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       state.isLoading = false;
     });
 
@@ -165,7 +163,13 @@ export const costumeSlice = createSlice({
       const { id } = deleted;
       const index = state.costumes.findIndex((item) => item.id === id);
       state.costumes.splice(index, 1);
-      alert("El disfraz se ha eliminado");
+      Swal.fire({
+        title: "¡ Disfraz eliminado !",
+        text: " ",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       state.isLoading = false;
     });
   },

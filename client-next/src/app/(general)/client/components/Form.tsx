@@ -20,15 +20,19 @@ export default function Form({ data }: Props) {
 
   const clientSchema = z.object({
     id: z.string().optional(),
-    name: z.string({
-      invalid_type_error: "El nombre debe ser un string",
-      required_error: "El nombre es requerido",
-    }),
+    name: z
+      .string({
+        invalid_type_error: "El nombre debe ser un string",
+        required_error: "El nombre es requerido",
+      })
+      .min(1),
 
-    surname: z.string({
-      invalid_type_error: "El apellido debe ser un string",
-      required_error: "El apellido es requerido",
-    }),
+    surname: z
+      .string({
+        invalid_type_error: "El apellido debe ser un string",
+        required_error: "El apellido es requerido",
+      })
+      .min(1),
 
     dni: z
       .number({
@@ -38,7 +42,7 @@ export default function Form({ data }: Props) {
       .int()
       .min(1000000)
       .max(99999999)
-      .refine((value) => !dniClients.includes(value), {
+      .refine((value) => data?.dni === value || !dniClients.includes(value), {
         message: " Dni ya esta registrado ",
       }),
     phoneNumber: z
@@ -52,13 +56,11 @@ export default function Form({ data }: Props) {
     phoneNumberAlt: z
       .number({
         invalid_type_error: "El telefono debe ser un numero de 10 digitos",
-        required_error: "El telefono es requerido",
       })
       .int()
       .min(1000000000)
       .max(9999999999)
       .optional(),
-
     email: z.string().email("Email inválido"),
 
     direction: z
@@ -151,6 +153,7 @@ export default function Form({ data }: Props) {
     <form className='grid grid-cols-2 gap-5' onSubmit={handleSubmit}>
       <Input
         validate={touched.name && errors.name ? true : false}
+        errors={errors.name || ""}
         title='Nombre'
         placeholder='Ingrese nombre'
         type='text'
@@ -160,6 +163,7 @@ export default function Form({ data }: Props) {
         onBlur={handleBlur}
       />
       <Input
+        errors={errors.surname || ""}
         validate={touched.surname && errors.surname ? true : false}
         title='Apellido'
         placeholder='Ingrese apellido'
@@ -173,6 +177,7 @@ export default function Form({ data }: Props) {
       <div className='col-span-2 grid gap-5'>
         <Input
           validate={touched.dni && errors.dni ? true : false}
+          errors={errors.dni || ""}
           title='DNI'
           placeholder='Ingrese DNI'
           type='number'
@@ -182,6 +187,7 @@ export default function Form({ data }: Props) {
           onBlur={handleBlur}
         />
         <Input
+          errors={errors.direction || ""}
           validate={touched.direction && errors.direction ? true : false}
           title='Dirección'
           placeholder='Ingrese la dirección'
@@ -208,6 +214,7 @@ export default function Form({ data }: Props) {
 
       <Input
         validate={touched.postalCode && errors.postalCode ? true : false}
+        errors={errors.postalCode || ""}
         title='Código postal'
         placeholder='Ingrese código postal'
         type='number'
@@ -219,6 +226,7 @@ export default function Form({ data }: Props) {
 
       <Input
         validate={touched.phoneNumber && errors.phoneNumber ? true : false}
+        errors={errors.phoneNumber || ""}
         title='Número de celular 1'
         placeholder='Ingrese nro de celular'
         type='number'
@@ -232,6 +240,7 @@ export default function Form({ data }: Props) {
           touched.phoneNumberAlt && errors.phoneNumberAlt ? true : false
         }
         title='Número de celular 2'
+        errors={errors.phoneNumberAlt || ""}
         placeholder='Ingrese nro de celular'
         type='number'
         name='phoneNumberAlt'
@@ -242,6 +251,7 @@ export default function Form({ data }: Props) {
       <div className='col-span-2'>
         <Input
           validate={touched.email && errors.email ? true : false}
+          errors={errors.email || ""}
           title='Correo electrónico'
           placeholder='Ingrese correo electrónico'
           type='text'

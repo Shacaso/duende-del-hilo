@@ -1,20 +1,18 @@
 "use client";
 
-import { PlusIcon } from "@/assets/svg";
-import { DataList, Search } from "@/components";
-import Button from "@/components/button-cmp/Button";
-import { Table } from "./components/Table";
-import { Filters } from "./components/Filters";
-import { useEffect, useState } from "react";
-import { fetchGetAllActives } from "@/app/lib/fetching";
 import { Costume } from "@/app/lib/definitions";
-import { SearchInputIcon } from "@/assets/svg";
-import { deleteAction } from "@/app/lib/data/funciones";
+import { PlusIcon, SearchInputIcon } from "@/assets/svg";
+import { DataList } from "@/components";
+import Button from "@/components/button-cmp/Button";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
-import FormNewCostume from "./components/FormNewCostume";
 import { useCostume } from "@/hook/useCostume";
+import { useEffect, useState } from "react";
+import { Filters } from "./components/Filters";
+import FormNewCostume from "./components/FormNewCostume";
+import { Table } from "./components/Table";
 
 export default function CostumePage() {
+  const [filters, setFilters] = useState("");
   const { getAllCostumes, costumes } = useCostume();
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
@@ -25,22 +23,20 @@ export default function CostumePage() {
     (category) => category.dischargeDate?.length === 0
   );
 
-  const result = !costumes
-    ? initial
-    : initial.filter(
-        (costume: Costume) =>
-          costume.name.toLowerCase().includes(search.toLowerCase()) ||
-          costume.category.name.toLowerCase().includes(search.toLowerCase())
-      );
+  const result = initial.filter((costume) => {
+    const matchesSearch =
+      costume.name.toLowerCase().includes(search.toLowerCase()) ||
+      costume.category.name.toLowerCase().includes(search.toLowerCase());
+
+    const matchesCategory =
+      filters === "all" ? initial : costume.category.name === filters;
+
+    return matchesSearch && matchesCategory;
+  });
 
   const handleChange = (e: { target: { value: any } }) => {
     setSearch(e.target.value);
   };
-
-  // const getCostumes = async () => {
-  //   const data: Costume[] = await fetchGetAllActives("costumes");
-  //   setCostumes(data);
-  // };
 
   useEffect(() => {
     getAllCostumes();
@@ -89,7 +85,7 @@ export default function CostumePage() {
               </div>
             </DataList.Header>
             <DataList.Filters>
-              <Filters filters={{}} />
+              <Filters setFilters={setFilters} />
             </DataList.Filters>
           </div>
         </DataList>

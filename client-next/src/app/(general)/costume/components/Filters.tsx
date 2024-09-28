@@ -2,28 +2,27 @@
 // import { useCategories, useBrands, useProviders } from "@/hooks";
 
 import { useCategory } from "@/hook/useCategory";
-import { useEffect } from "react";
+
+import { ChangeEvent, Dispatch, SetStateAction, useEffect } from "react";
 
 interface Props {
-  filters: Object;
-  setFilters?: Function;
+  // filters: Object;
+  setFilters: Dispatch<SetStateAction<string>>;
 }
 
-export function Filters({ filters, setFilters }: Props) {
+export function Filters({ setFilters }: Props) {
   const { categories, getAllCategories } = useCategory();
-  // const { brands, getAllBrands } = useBrands();
-  // const { providers, getAllProviders } = useProviders();
 
-  // const handleFilterChange = e => {
-  //   const { name, value } = e.target;
-  //   setFilters(prevFilters => ({ ...prevFilters, [name]: value }));
-  // };
+  const handleFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+
+    if (!value) return;
+    setFilters(value);
+  };
 
   useEffect(() => {
     getAllCategories();
-    // getAllBrands();
-    // getAllProviders();
-  }, []);
+  }, [getAllCategories]);
 
   return (
     <div className='flex flex-col gap-3 my-5 sm:flex-row'>
@@ -44,9 +43,9 @@ export function Filters({ filters, setFilters }: Props) {
         className='w-full h-10 text-sm lg:text-[12px] min-[1150px]:text-base bg-base-200 input input-bordered'
         name='categoria'
         // value={filters.categoria}
-        // onChange={handleFilterChange}
+        onChange={handleFilterChange}
       >
-        <option value='all'>Filtrar por Categoria</option>
+        <option value='all'>Mostrar todos los disfraces</option>
         {categories.map((category) => (
           <option key={category.id} value={category.name}>
             {category.name}

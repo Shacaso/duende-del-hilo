@@ -1,9 +1,12 @@
 import { Client } from "@/app/lib/definitions";
+import { FormikErrors } from "formik";
 import { DOMAttributes, FocusEventHandler, InputHTMLAttributes } from "react";
+import Swal from "sweetalert2";
 
 interface Props {
   validate?: boolean;
   title?: string;
+  errors: FormikErrors<string>;
   placeholder?: string;
   type?: string;
   list?: string;
@@ -24,8 +27,20 @@ interface Props {
   };
 }
 
+const handleError = (errors: FormikErrors<string>) => {
+  Swal.fire({
+    title: "Error",
+    icon: "error",
+    text: errors,
+    customClass: {
+      confirmButton: "btn btn-primary btn-wide",
+    },
+  });
+};
+
 export default function Input({
   validate,
+  errors,
   title,
   list,
   placeholder,
@@ -40,7 +55,12 @@ export default function Input({
     <div className='flex flex-col '>
       <div className='w-full flex justify-between items-center'>
         <label htmlFor={name}>{title}</label>
-        {validate && <div className='badge badge-primary badge-sm'></div>}
+        {validate && (
+          <div
+            onClick={() => handleError(errors)}
+            className='hover:cursor-pointer badge badge-primary badge-sm'
+          ></div>
+        )}
       </div>
       <input
         className={`w-full input input-bordered border ${

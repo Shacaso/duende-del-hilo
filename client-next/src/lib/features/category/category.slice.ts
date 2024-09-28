@@ -12,6 +12,7 @@ import {
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 
 const path = "categories";
 
@@ -98,7 +99,13 @@ export const categorySlice = createSlice({
       state.categories.push(body);
       state.created = body;
 
-      alert("La categoria se ha guardado");
+      Swal.fire({
+        title: "¡ Categoria guardada !",
+        text: " ",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
 
       state.isLoading = false;
     });
@@ -128,7 +135,13 @@ export const categorySlice = createSlice({
       state.categories[index] = updated;
 
       state.updated = updated;
-      alert("La categoria se ha actualizado");
+      Swal.fire({
+        title: "¡ Categoria actualizada !",
+        text: " ",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       state.isLoading = false;
     });
 
@@ -143,7 +156,13 @@ export const categorySlice = createSlice({
       const index = state.categories.findIndex((item) => item.id === id);
 
       state.categories.splice(index, 1);
-      alert("La categoria se ha eliminado");
+      Swal.fire({
+        title: "¡ Categoria eliminada !",
+        text: " ",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
 
       state.isLoading = false;
     });

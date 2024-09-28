@@ -3,10 +3,12 @@ import FormNewCostume from "@/app/(general)/costume/components/FormNewCostume";
 import { BillDto, CountCostume, Others } from "@/app/lib/definitions";
 import Input from "@/components/Input";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
+import { useBill } from "@/hook/useBill";
 import { useClient } from "@/hook/useClient";
 import { useCostume } from "@/hook/useCostume";
 import { useFormik } from "formik";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { AccessoriesInputList } from "./AccessoriesInputList";
 import { CostumeInputList } from "./CostumeInputList";
 
@@ -17,6 +19,7 @@ interface Props {
 export default function FormCreateNewBill({ data }: Props) {
   const { getAllClients, clients } = useClient();
   const { getAllCostumes, costumes: costumesList } = useCostume();
+  const { createBill, updateBill } = useBill();
 
   // const [costumeSelected, setCostumeSelected] = useState<CountCostume[]>([]);
 
@@ -32,28 +35,28 @@ export default function FormCreateNewBill({ data }: Props) {
     errors,
     touched,
     handleBlur,
-    setStatus,
+    resetForm,
   } = useFormik({
     initialValues: {
-      id: data?.id ?? "",
       billNumber: data?.billNumber ?? 0,
+      costumes: data?.costumes ?? [],
       date: data?.date ?? "",
-      others: data?.others ?? null,
-      returned: data?.returned ?? "",
-      precioTotal: data?.precioTotal ?? 0,
-      precioACuenta: data?.precioACuenta ?? 0,
-      precioSaldo: data?.precioSaldo ?? 0,
-      depositoTotal: data?.depositoTotal ?? 0,
       depositoACuenta: data?.depositoACuenta ?? 0,
-      depositoSaldo: data?.depositoSaldo ?? 0,
-      precioDescuento: data?.precioDescuento ?? 0,
       depositoDescuento: data?.depositoDescuento ?? 0,
-      costumes: data?.costumes ?? 0,
-      dniClient: data?.dniClient ?? "",
-      note: data?.note ?? "",
+      depositoSaldo: data?.depositoSaldo ?? 0,
+      depositoTotal: data?.depositoTotal ?? 0,
       dischargeDate: data?.dischargeDate ?? "",
-      returnedDate: data?.returnedDate ?? "",
+      dniClient: data?.dniClient ?? 0,
+      id: data?.id ?? "",
+      note: data?.note ?? "",
+      others: data?.others ?? null,
+      precioACuenta: data?.precioACuenta ?? 0,
+      precioDescuento: data?.precioDescuento ?? 0,
+      precioSaldo: data?.precioSaldo ?? 0,
+      precioTotal: data?.precioTotal ?? 0,
       retirementDate: data?.retirementDate ?? "",
+      returned: data?.returned ?? false,
+      returnedDate: data?.returnedDate ?? "",
     },
     // validate: (values) => {
     //   try {
@@ -76,7 +79,14 @@ export default function FormCreateNewBill({ data }: Props) {
       // values.depositoSaldo =
       //   values.depositoTotal - values.depositoACuenta;
 
-      console.log("Submit form: ", values);
+      // console.log("Submit form: ", values);
+
+      // if (!data) {
+      //   createBill(values);
+      // } else {
+      //   updateBill(values);
+      // }
+      // resetForm();
 
       // if (!data) {
       //   fetchPost(values, "bills").then((res) => {
@@ -130,7 +140,12 @@ export default function FormCreateNewBill({ data }: Props) {
       return total;
     }, 0);
 
-    setCountCostumesList(costumes);
+    const costumeList = costumes.map((c) => ({
+      cant: c.cant,
+      costumeName: c.costumeName.substring(0, c.costumeName.indexOf(" -")),
+    }));
+
+    setCountCostumesList(costumeList);
     setDemoPrecioTotalDisfraz(costumesTotal);
   };
 

@@ -160,15 +160,15 @@
   {
     "blacklist": false,
     "departament": "Guaymallén",
-    "direction": "test@gmal.com",
+    "direction": "appamorales2022@gmal.com",
     "dni": 23983476,
     "email": "test@gmail.com",
     "id": "ba3a4834-c3b6-4a68-96a1-b949e266cd10",
-    "name": "TEST",
+    "name": "Appa",
     "phoneNumber": 2613439874,
     "phoneNumberAlt": 2613746524,
     "postalCode": 2345,
-    "surname": "TEST",
+    "surname": "Morales",
     "dischargeDate": ""
   },
   {
@@ -183,6 +183,20 @@
     "phoneNumberAlt": 2613432958,
     "postalCode": 5500,
     "surname": "Morales",
+    "dischargeDate": ""
+  },
+  {
+    "blacklist": false,
+    "departament": "Malargüe",
+    "direction": "Magdallena 46",
+    "dni": 23542534,
+    "email": "freelancer@gmail.com",
+    "id": "76cdfb6d-6747-4e5f-adc7-87674f5a29ff",
+    "name": "Appa",
+    "phoneNumber": 9994949494,
+    "phoneNumberAlt": 9494949494,
+    "postalCode": 5000,
+    "surname": "Araya",
     "dischargeDate": ""
   }
 ]

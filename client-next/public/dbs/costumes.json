@@ -1,160 +1,7 @@
 [
   {
-    "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
-    "name": "Bombero",
-    "category": {
-      "name": "Adultos",
-      "price": 3000,
-      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
-      "dischargeDate": ""
-    },
-    "details": "asdasdas",
-    "dischargeDate": "2024-09-26 15:49:06"
-  },
-  {
-    "id": "5171c49d-b493-4abc-ab36-837677b787c0",
+    "id": "26c0b949-d633-408a-88e9-ca46132285d2",
     "name": "Batman",
-    "category": {
-      "name": "Adultos",
-      "price": 3000,
-      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
-      "dischargeDate": ""
-    },
-    "details": "Lentes grandes de sol para super fiestas",
-    "price": 2000,
-    "dischargeDate": ""
-  },
-  {
-    "id": "ce5eb765-2b93-4e6f-b3d3-939848a9728d",
-    "name": "Robin",
-    "category": {
-      "name": "Adultos",
-      "price": 3000,
-      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
-      "dischargeDate": ""
-    },
-    "details": "Calza, palo, sombrero",
-    "price": 2000,
-    "dischargeDate": ""
-  },
-  {
-    "id": "e9aa9bd1-caf1-4fba-a178-a3b3e3f2b3d9",
-    "name": "Antman",
-    "category": {
-      "name": "Niños",
-      "price": 5000,
-      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
-      "dischargeDate": ""
-    },
-    "details": "Casco, body.",
-    "price": 2000,
-    "dischargeDate": ""
-  },
-  {
-    "id": "57b38917-6c66-4e02-a8cf-adb2be4725d3",
-    "name": "Mulan",
-    "category": {
-      "name": "Niños",
-      "price": 5000,
-      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
-      "dischargeDate": ""
-    },
-    "details": "Vestido, espada.",
-    "price": 2000,
-    "dischargeDate": ""
-  },
-  {
-    "id": "15eec97f-0072-409e-9bb2-850963ff8ecb",
-    "name": "Matias",
-    "category": {
-      "name": "Adultos",
-      "price": 1,
-      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
-      "dischargeDate": ""
-    },
-    "details": "matias araya",
-    "price": 1,
-    "dischargeDate": "2024-09-26 15:34:04"
-  },
-  {
-    "id": "f9a4cf73-df1e-4549-a3bb-a95ed95b18a9",
-    "name": "test",
-    "category": {
-      "name": "Adultos",
-      "price": 1,
-      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
-      "dischargeDate": ""
-    },
-    "details": "test",
-    "price": 1,
-    "dischargeDate": "2024-09-26 15:49:02"
-  },
-  {
-    "id": "841aaab3-238e-4644-b5fd-f4ad400b82fe",
-    "name": "Princesa",
-    "category": "Niños",
-    "details": "Vestido largo rosado",
-    "price": 2,
-    "dischargeDate": "2024-09-27 08:53:18"
-  },
-  {
-    "id": "0ae9cf83-1d81-4a64-9317-cf59bbc9a50b",
-    "name": "Linterna verde",
-    "category": {
-      "name": "Adultos",
-      "price": 1,
-      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
-      "dischargeDate": ""
-    },
-    "details": "Linter verde",
-    "price": 1,
-    "dischargeDate": ""
-  },
-  {
-    "id": "3169e7fe-246a-48ae-b818-55e6bad6fb26",
-    "name": "what",
-    "category": {
-      "name": "Niños",
-      "price": 2,
-      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
-      "dischargeDate": ""
-    },
-    "details": "ta hell",
-    "price": 2,
-    "dischargeDate": "2024-09-26 16:35:43"
-  },
-  {
-    "id": "f8f56f01-4f41-417f-a0df-1b0a58a6ef96",
-    "name": "de nada",
-    "category": "Adultos",
-    "details": "de nada",
-    "price": 2,
-    "dischargeDate": "2024-09-26 16:35:40"
-  },
-  {
-    "id": "7088232b-ea0a-40cf-9c92-3493613fb9b1",
-    "name": "asd",
-    "category": {
-      "name": "Adultos",
-      "price": 1,
-      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
-      "dischargeDate": ""
-    },
-    "details": "asd",
-    "price": 1,
-    "dischargeDate": "2024-09-26 16:35:23"
-  },
-  {
-    "id": "77aa2c8e-65b0-4941-b78d-e11ae623eb34",
-    "name": "Pricesa",
-    "category": "Mascaras",
-    "details": "Vestido largo rosado",
-    "dischargeDate": "",
-    "price": 0
-  },
-  {
-    "id": "d9ab7bd3-d838-4c88-8c09-947679608bd9",
-    "name": "Buzz Lightyear",
     "category": {
       "name": "Adultos",
       "price": 3000,
@@ -165,15 +12,75 @@
     "dischargeDate": ""
   },
   {
-    "id": "cd9ad4f6-223e-46d7-8932-553a1b730d28",
-    "name": "asdasdasdas",
+    "id": "a3c4ef05-2e0e-4d0c-bb66-6b8e27eb7f0a",
+    "name": "Robin",
     "category": {
       "name": "Adultos",
       "price": 3000,
       "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
       "dischargeDate": ""
     },
-    "details": "adsasdasdasdas",
+    "details": "Body con baston",
+    "dischargeDate": ""
+  },
+  {
+    "id": "87ca360a-2593-4c49-b2a8-ebb61eb33b92",
+    "name": "Mulan",
+    "category": {
+      "name": "Niños",
+      "price": 5000,
+      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
+      "dischargeDate": ""
+    },
+    "details": "Vestido, colin y espada",
+    "dischargeDate": ""
+  },
+  {
+    "id": "58c25131-7cf8-4b29-bd7b-bd2c95649c71",
+    "name": "Bella durmiente",
+    "category": {
+      "name": "Niños",
+      "price": 5000,
+      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
+      "dischargeDate": ""
+    },
+    "details": "Vestido celeste",
+    "dischargeDate": ""
+  },
+  {
+    "id": "f33f3c00-c63e-4807-a4df-13e939044487",
+    "name": "Stich",
+    "category": {
+      "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
+      "name": "Cabezones",
+      "price": 15000,
+      "dischargeDate": ""
+    },
+    "details": "Body del personaje y cabezon",
+    "dischargeDate": ""
+  },
+  {
+    "id": "0c3f6a21-f98b-469d-a551-0499549f70a5",
+    "name": "Mario Bros",
+    "category": {
+      "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
+      "name": "Cabezones",
+      "price": 15000,
+      "dischargeDate": ""
+    },
+    "details": "Body, mostacho y sombrero",
+    "dischargeDate": ""
+  },
+  {
+    "id": "cbd26d2c-2346-48cb-8e65-e06e229d6b7a",
+    "name": "Jason",
+    "category": {
+      "id": "b9319011-1f5e-4b30-85dd-2a315a0844a7",
+      "name": "Mascaras",
+      "price": 8000,
+      "dischargeDate": ""
+    },
+    "details": "Body, mascara y machete",
     "dischargeDate": ""
   }
 ]

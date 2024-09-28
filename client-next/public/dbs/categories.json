@@ -12,33 +12,15 @@
     "dischargeDate": ""
   },
   {
-    "name": "Otros",
-    "price": 0,
-    "id": "79a6a12d-d09e-4920-b6b8-13d60025f0fc",
-    "dischargeDate": "2024-09-21 17:26:45"
-  },
-  {
-    "name": "Accesorios",
-    "price": 0,
-    "id": "4b438d8d-4c73-4f6b-9a04-6df4e6f76d0f",
-    "dischargeDate": "2024-09-21 17:26:48"
-  },
-  {
     "id": "b9319011-1f5e-4b30-85dd-2a315a0844a7",
     "name": "Mascaras",
-    "price": 3,
+    "price": 8000,
     "dischargeDate": ""
   },
   {
     "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
     "name": "Cabezones",
-    "price": 4,
+    "price": 15000,
     "dischargeDate": ""
-  },
-  {
-    "id": "c009a2cb-b5f1-4f83-8b51-f682a91cec0f",
-    "name": "test",
-    "price": 5,
-    "dischargeDate": "2024-09-26 09:22:30"
   }
 ]

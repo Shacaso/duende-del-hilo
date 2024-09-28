@@ -55,7 +55,6 @@ export default function FormNewCostume({ data }: Props) {
   const initialValues = {
     id: data?.id ?? "",
     name: data?.name ?? "",
-    price: data?.price ?? 0,
     category: data?.category.name ?? "",
     details: data?.details ?? "",
   };
