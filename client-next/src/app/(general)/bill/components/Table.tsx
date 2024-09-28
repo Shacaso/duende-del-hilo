@@ -1,5 +1,5 @@
 // import PropTypes from 'prop-types';
-import { Bill, Client, Costume } from "@/app/lib/definitions";
+import { Bill, Client, Costume, CostumeCant } from "@/app/lib/definitions";
 import { fetchGetById } from "@/app/lib/fetching";
 import { TrashIcon, ViewIcon } from "@/assets/svg";
 import { PDFViewer } from "@react-pdf/renderer";
@@ -37,17 +37,17 @@ export function Table({ data }: Props) {
                 ></div>
               </td>
               <td> {bill.billNumber}</td>
-              <td>{bill.date}</td>
+              <td>{bill.date.substring(0, bill.date.indexOf(" "))}</td>
               <td>{bill.client?.name + " " + bill.client?.surname}</td>
-              <td>{bill.amountTotal}</td>
+              <td>{bill.precioTotal}</td>
               <td>{bill.client?.dni}</td>
               <td>
                 {bill.costumes.map(
-                  (costume: Costume, index: number): string => {
+                  (costume: CostumeCant, index: number): string => {
                     if (index === bill.costumes.length - 1) {
-                      return costume.name;
+                      return costume.costume.name;
                     } else {
-                      return costume.name + ", ";
+                      return costume.costume.name + ", ";
                     }
                   }
                 )}

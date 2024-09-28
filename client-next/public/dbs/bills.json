@@ -419,5 +419,209 @@
     ],
     "note": "Gracias",
     "dischargeDate": ""
+  },
+  {
+    "id": "2c42a9eb-1231-48cb-a5f2-87f3185a070e",
+    "billNumber": 7,
+    "date": "2024-09-28 11:51:37",
+    "returnedDate": "2024-09-29",
+    "retirementDate": "2024-09-28",
+    "returned": false,
+    "precioTotal": 3000,
+    "precioACuenta": 3000,
+    "precioDescuento": 0,
+    "precioSaldo": 0,
+    "depositoTotal": 3000,
+    "depositoACuenta": 3000,
+    "depositoDescuento": 0,
+    "depositoSaldo": 0,
+    "client": {
+      "id": "d78f1323e-bbcc-42a2-9104-45bc97e98113",
+      "name": "Alejo",
+      "surname": "Araya",
+      "dni": 42749595,
+      "phoneNumber": 2613430975,
+      "email": "alejoaraya2000@gmail.com",
+      "direction": "Calle 7",
+      "departament": "Ciudad",
+      "postalCode": 5500,
+      "blacklist": false,
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "26c0b949-d633-408a-88e9-ca46132285d2",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
+            "dischargeDate": ""
+          },
+          "details": "Body del personaje y mascara",
+          "dischargeDate": ""
+        },
+        "cant": 1
+      }
+    ],
+    "others": [],
+    "note": "",
+    "dischargeDate": ""
+  },
+  {
+    "id": "669fe170-72a8-48aa-847a-8ccdae886c7c",
+    "billNumber": 8,
+    "date": "2024-09-28 12:40:38",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-28",
+    "returned": false,
+    "precioTotal": 10000,
+    "precioACuenta": 5000,
+    "precioDescuento": 5000,
+    "precioSaldo": 0,
+    "depositoTotal": 10000,
+    "depositoACuenta": 10000,
+    "depositoDescuento": 0,
+    "depositoSaldo": 0,
+    "client": {
+      "blacklist": false,
+      "departament": "Guaymallén",
+      "direction": "appamorales2022@gmal.com",
+      "dni": 23983476,
+      "email": "test@gmail.com",
+      "id": "ba3a4834-c3b6-4a68-96a1-b949e266cd10",
+      "name": "Appa",
+      "phoneNumber": 2613439874,
+      "phoneNumberAlt": 2613746524,
+      "postalCode": 2345,
+      "surname": "Morales",
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "58c25131-7cf8-4b29-bd7b-bd2c95649c71",
+          "name": "Bella durmiente",
+          "category": {
+            "name": "Niños",
+            "price": 5000,
+            "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
+            "dischargeDate": ""
+          },
+          "details": "Vestido celeste",
+          "dischargeDate": ""
+        },
+        "cant": 2
+      }
+    ],
+    "others": [],
+    "note": "",
+    "dischargeDate": ""
+  },
+  {
+    "id": "8128d11f-a3e7-4b86-bf2c-4c7580c1fc46",
+    "billNumber": 9,
+    "date": "2024-09-28 12:43:33",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-28",
+    "returned": false,
+    "precioTotal": 32000,
+    "precioACuenta": 0,
+    "precioDescuento": 32000,
+    "precioSaldo": 0,
+    "depositoTotal": 32000,
+    "depositoACuenta": 32000,
+    "depositoDescuento": 0,
+    "depositoSaldo": 0,
+    "client": {
+      "blacklist": false,
+      "departament": "Maipú",
+      "direction": "Magdallena 46",
+      "dni": 74932732,
+      "email": "freelancer@gmail.com",
+      "id": "80fcd1c1-3113-46b1-9c2e-8fee15c8164a",
+      "name": "Test",
+      "phoneNumber": 3123123123,
+      "phoneNumberAlt": 3123123123,
+      "postalCode": 5005,
+      "surname": "Test",
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "7cf0a321-5310-4b76-80df-8bccb87b4985",
+          "name": "Termo",
+          "category": {
+            "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
+            "name": "Cabezones",
+            "price": 15000,
+            "dischargeDate": ""
+          },
+          "details": "Calza negra, remera pegada negra y cabeza de termo",
+          "dischargeDate": ""
+        },
+        "cant": 2
+      }
+    ],
+    "others": [
+      {
+        "cant": 2,
+        "name": "Bombilla",
+        "price": 1000
+      }
+    ],
+    "note": "Se llevan las bombillas doradas.",
+    "dischargeDate": ""
+  },
+  {
+    "id": "3f34c66f-f53b-4d33-8e30-f07b4736a4e9",
+    "billNumber": 10,
+    "date": "2024-09-28 14:19:03",
+    "returnedDate": "2024-10-31",
+    "retirementDate": "2024-11-08",
+    "returned": false,
+    "precioTotal": 8000,
+    "precioACuenta": 8000,
+    "precioDescuento": 0,
+    "precioSaldo": 0,
+    "depositoTotal": 8000,
+    "depositoACuenta": 8000,
+    "depositoDescuento": 0,
+    "depositoSaldo": 0,
+    "client": {
+      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98151",
+      "name": "Emiliano",
+      "surname": "Araya",
+      "dni": 35123127,
+      "phoneNumber": 2613458343,
+      "email": "emilianoaraya2001@gmail.com",
+      "direction": "Calle falsa 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": false,
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "cbd26d2c-2346-48cb-8e65-e06e229d6b7a",
+          "name": "Jason",
+          "category": {
+            "id": "b9319011-1f5e-4b30-85dd-2a315a0844a7",
+            "name": "Mascaras",
+            "price": 8000,
+            "dischargeDate": ""
+          },
+          "details": "Body, mascara y machete",
+          "dischargeDate": ""
+        },
+        "cant": 1
+      }
+    ],
+    "others": [],
+    "note": "",
+    "dischargeDate": ""
   }
 ]

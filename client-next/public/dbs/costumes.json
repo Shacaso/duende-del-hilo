@@ -4,7 +4,7 @@
     "name": "Batman",
     "category": {
       "name": "Adultos",
-      "price": 3000,
+      "price": 1500,
       "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
       "dischargeDate": ""
     },
@@ -16,7 +16,7 @@
     "name": "Robin",
     "category": {
       "name": "Adultos",
-      "price": 3000,
+      "price": 1500,
       "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
       "dischargeDate": ""
     },
@@ -81,6 +81,18 @@
       "dischargeDate": ""
     },
     "details": "Body, mascara y machete",
+    "dischargeDate": ""
+  },
+  {
+    "id": "7cf0a321-5310-4b76-80df-8bccb87b4985",
+    "name": "Termo",
+    "category": {
+      "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
+      "name": "Cabezones",
+      "price": 15000,
+      "dischargeDate": ""
+    },
+    "details": "Calza negra, remera pegada negra y cabeza de termo",
     "dischargeDate": ""
   }
 ]

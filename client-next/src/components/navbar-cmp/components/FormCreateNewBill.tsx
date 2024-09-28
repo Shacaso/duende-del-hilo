@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AccessoriesInputList } from "./AccessoriesInputList";
 import { CostumeInputList } from "./CostumeInputList";
+import { z } from "zod";
 
 interface Props {
   data?: BillDto;
@@ -27,6 +28,130 @@ export default function FormCreateNewBill({ data }: Props) {
     useState<boolean>(false);
   const [confirmationClientModalOpen, setConfirmationClientModalOpen] =
     useState<boolean>(false);
+  const billSchema = z.object({
+    id: z.string().optional(),
+
+    billNumber: z.number().optional(),
+
+    date: z.string().optional(),
+
+    returnedDate: z.string(),
+
+    retirementDate: z.string(),
+
+    returned: z.coerce
+      .boolean({
+        invalid_type_error:
+          "El valor del atributo devuelto debe ser un booleano",
+      })
+      .default(false),
+
+    precioTotal: z
+      .number({
+        invalid_type_error: "El precio total debe ser un numero mayor que 0",
+        required_error: "El precio total es requerido",
+      })
+      .nonnegative({
+        message: "El adelanto debe ser positivo",
+      }),
+
+    precioACuenta: z
+      .number({
+        invalid_type_error: "El precio a cuenta debe ser un numero mayor que 0",
+        required_error: "El precio a cuenta es requerido",
+      })
+      .nonnegative({
+        message: "El precio a cuenta debe ser positivo",
+      })
+      .optional(),
+
+    precioDescuento: z
+      .number({
+        invalid_type_error:
+          "El descuento al precio debe ser un numero mayor que 0",
+        required_error: "El descuento al precio es requerido",
+      })
+      .nonnegative({
+        message: "El descuento al precio debe ser positivo",
+      })
+      .optional(),
+
+    precioSaldo: z.number().optional(),
+
+    depositoTotal: z
+      .number({
+        invalid_type_error: "El deposito total debe ser un numero mayor que 0",
+        required_error: "El deposito total  es requerido",
+      })
+      .nonnegative({
+        message: "El deposito total debe ser positivo",
+      }),
+
+    depositoACuenta: z
+      .number({
+        invalid_type_error:
+          "El deposito a cuenta debe ser un numero mayor que 0",
+        required_error: "El deposito a cuenta es requerido",
+      })
+      .nonnegative({
+        message: "El deposito a cuenta debe ser positivo",
+      })
+      .optional(),
+
+    depositoDescuento: z
+      .number({
+        invalid_type_error:
+          "El descuento del deposito debe ser un numero mayor que 0",
+        required_error: "El descuento del deposito es requerido",
+      })
+      .nonnegative({
+        message: "El descuento del deposito debe ser positivo",
+      })
+      .optional(),
+
+    depositoSaldo: z.number().optional(),
+
+    dniClient: z
+      .number({
+        invalid_type_error: "El dni debe ser un numero mayor que 0",
+        required_error: "El dni es requerido",
+      })
+      .refine((value) => clients.map((c) => c.dni).includes(value), {
+        message: "No se encuenta ese id de Usuario en la base de datos",
+      }),
+
+    note: z.string({
+      invalid_type_error: "La nota debe ser un string",
+      required_error: "La nota es requerido",
+    }),
+
+    costumes: z
+      .array(
+        z.object({
+          costumeName: z.string(),
+          cant: z.number().positive(),
+        })
+      )
+      .nonempty({
+        message: "La factura debe contener al menos un disfraz comprado",
+      }),
+    others: z
+      .array(
+        z.object({
+          name: z.string(),
+          price: z
+            .number({
+              invalid_type_error: "El precio debe ser un numero mayor que 0",
+              required_error: "El precio es requerido",
+            })
+            .positive(),
+        })
+      )
+      .nullable()
+      .optional(),
+
+    dischargeDate: z.string().default(""),
+  });
 
   const {
     handleSubmit,
@@ -74,19 +199,19 @@ export default function FormCreateNewBill({ data }: Props) {
         precioTotal - values.depositoACuenta - values.depositoDescuento;
       values.precioSaldo =
         precioTotal - values.precioACuenta - values.precioDescuento;
-      values.precioTotal = precioTotal - values.precioDescuento;
+      values.precioTotal = precioTotal;
       values.depositoTotal = precioTotal;
       // values.depositoSaldo =
       //   values.depositoTotal - values.depositoACuenta;
 
       // console.log("Submit form: ", values);
 
-      // if (!data) {
-      //   createBill(values);
-      // } else {
-      //   updateBill(values);
-      // }
-      // resetForm();
+      if (!data) {
+        createBill(values);
+      } else {
+        updateBill(values);
+      }
+      resetForm();
 
       // if (!data) {
       //   fetchPost(values, "bills").then((res) => {
@@ -204,6 +329,7 @@ export default function FormCreateNewBill({ data }: Props) {
         <Input
           placeholder='Ingrese notas'
           validate={touched.note && errors.note ? true : false}
+          errors={errors.note || ""}
           title='Notas'
           type='text'
           name='note'
@@ -224,6 +350,7 @@ export default function FormCreateNewBill({ data }: Props) {
                   demoPrecioTotalDisfraz -
                   values.precioDescuento
                 }
+                errors={errors.precioTotal || ""}
                 readOnly
                 placeholder='Precio total'
                 name='precioTotal'
@@ -237,6 +364,7 @@ export default function FormCreateNewBill({ data }: Props) {
               <Input
                 title='A cuenta'
                 value={values.precioACuenta}
+                errors={errors.precioACuenta || ""}
                 placeholder='A cuenta'
                 name='precioACuenta'
                 type='number'
@@ -256,6 +384,7 @@ export default function FormCreateNewBill({ data }: Props) {
                 }
                 placeholder='Saldo'
                 readOnly
+                errors={errors.precioSaldo || ""}
                 name='precioSaldo'
                 type='number'
                 onChange={handleChange}
@@ -272,6 +401,7 @@ export default function FormCreateNewBill({ data }: Props) {
               }
               title='Descuento en precio'
               type='number'
+              errors={errors.precioDescuento || ""}
               name='precioDescuento'
               value={values.precioDescuento}
               onBlur={handleBlur}
@@ -286,6 +416,7 @@ export default function FormCreateNewBill({ data }: Props) {
               <Input
                 title='Depósito total'
                 readOnly
+                errors={errors.depositoTotal || ""}
                 value={
                   demoPrecioTotalAccesorios +
                   demoPrecioTotalDisfraz -
@@ -305,6 +436,7 @@ export default function FormCreateNewBill({ data }: Props) {
                 value={values.depositoACuenta}
                 placeholder='A cuenta'
                 name='depositoACuenta'
+                errors={errors.depositoACuenta || ""}
                 type='number'
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -326,6 +458,7 @@ export default function FormCreateNewBill({ data }: Props) {
                 readOnly
                 name='depositoSaldo'
                 type='number'
+                errors={errors.depositoSaldo || ""}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 validate={
@@ -342,6 +475,7 @@ export default function FormCreateNewBill({ data }: Props) {
               }
               title='Descuento en depósito'
               type='number'
+              errors={errors.depositoDescuento || ""}
               name='depositoDescuento'
               // readOnly
               value={values.depositoDescuento}
@@ -361,6 +495,7 @@ export default function FormCreateNewBill({ data }: Props) {
                 touched.retirementDate && errors.retirementDate ? true : false
               }
               title='Fecha de retiro'
+              errors={errors.retirementDate || ""}
               type='date'
               name='retirementDate'
               value={values.retirementDate}
@@ -378,6 +513,7 @@ export default function FormCreateNewBill({ data }: Props) {
               type='date'
               name='returnedDate'
               value={values.returnedDate}
+              errors={errors.returnedDate || ""}
               onBlur={handleBlur}
               onChange={handleChange}
             />

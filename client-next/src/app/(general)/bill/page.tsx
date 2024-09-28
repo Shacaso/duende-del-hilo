@@ -25,7 +25,7 @@ export default function Bill() {
             .toString()
             .toLowerCase()
             .includes(search.toLowerCase()) ||
-          bill.amountTotal
+          bill.precioTotal
             .toString()
             .toLowerCase()
             .includes(search.toLowerCase()) ||

@@ -1,23 +1,12 @@
 "use client";
 
-import {
-  ProductIcon,
-  ProviderIcon,
-  UserIcon,
-  HistoricalIcon,
-  BellSVG,
-  IconEntrada,
-  CostumeIcon,
-  BillsIcon,
-  CategoryIcon,
-  BrandIcon,
-} from "@/assets/svg";
+import { BillsIcon, CostumeIcon, IconEntrada, UserIcon } from "@/assets/svg";
 import Link from "next/link";
-import MainMenuItem from "./MainMenuItem";
+import { useState } from "react";
 import Logo from "../Logo";
 import ConfirmationModal from "../modal-cmp/ConfirmationModal";
-import { useState } from "react";
 import FormCreateNewBill from "./components/FormCreateNewBill";
+import MainMenuItem from "./MainMenuItem";
 
 export default function Navbar() {
   const [confirmationModalOpen, setConfirmationModalOpen] =

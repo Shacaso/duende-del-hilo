@@ -7,8 +7,8 @@ export const stylesNavbar = StyleSheet.create({
     justifyContent: "space-between",
     // width: 1100,
     border: "1px solid #000",
-    paddingTop: 15,
-    paddingBottom: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 10,
   },
   header: {
     display: "flex",
@@ -45,8 +45,8 @@ export const stylesNavbar = StyleSheet.create({
     marginRight: 10,
   },
   logo: {
-    width: 60,
-    height: 100,
+    width: 80,
+    height: 80,
     // marginBottom: 25,
   },
 });
@@ -88,8 +88,6 @@ export const stylesDetail = StyleSheet.create({
   detailItem: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
-    width: 450,
     alignContent: "center",
     fontSize: 10,
     borderBottom: "0.1px solid black",

@@ -198,5 +198,19 @@
     "postalCode": 5000,
     "surname": "Araya",
     "dischargeDate": ""
+  },
+  {
+    "blacklist": false,
+    "departament": "Maipú",
+    "direction": "Magdallena 46",
+    "dni": 74932732,
+    "email": "freelancer@gmail.com",
+    "id": "80fcd1c1-3113-46b1-9c2e-8fee15c8164a",
+    "name": "Test",
+    "phoneNumber": 3123123123,
+    "phoneNumberAlt": 3123123123,
+    "postalCode": 5005,
+    "surname": "Test",
+    "dischargeDate": ""
   }
 ]

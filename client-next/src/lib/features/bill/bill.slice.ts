@@ -23,12 +23,9 @@ export const getAllAsync = createAsyncThunk(
 export const createAsync = createAsyncThunk(
   "bill/create",
   async (body: BillDto): Promise<Bill> => {
-    try {
-      const res = await fetchPost(body, path);
-      console.log(res);
-
-      return res;
-    } catch (error) {}
+    const res = await fetchPost(body, path);
+    console.log(res);
+    return res;
   }
 );
 export const updateAsync = createAsyncThunk(

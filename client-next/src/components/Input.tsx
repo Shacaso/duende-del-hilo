@@ -66,6 +66,7 @@ export default function Input({
         className={`w-full input input-bordered border ${
           validate && "border-primary border-2"
         }`}
+        min={0}
         placeholder={placeholder}
         readOnly={readOnly}
         type={type}
