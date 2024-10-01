@@ -1,6 +1,5 @@
 "use client";
 
-import { Costume } from "@/app/lib/definitions";
 import { PlusIcon, SearchInputIcon } from "@/assets/svg";
 import { DataList } from "@/components";
 import Button from "@/components/button-cmp/Button";
@@ -10,17 +9,23 @@ import { useEffect, useState } from "react";
 import { Filters } from "./components/Filters";
 import FormNewCostume from "./components/FormNewCostume";
 import { Table } from "./components/Table";
+import React from "react";
 
 export default function CostumePage() {
-  const [filters, setFilters] = useState("");
+  const [filters, setFilters] = useState({
+    category: "",
+    active: "active",
+  });
   const { getAllCostumes, costumes } = useCostume();
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
 
   const [search, setSearch] = useState("");
 
-  const initial = costumes.filter(
-    (category) => category.dischargeDate?.length === 0
+  const initial = costumes.filter((costume) =>
+    filters.active === "active"
+      ? costume.dischargeDate?.length === 0
+      : costume.dischargeDate?.length !== 0
   );
 
   const result = initial.filter((costume) => {
@@ -29,7 +34,9 @@ export default function CostumePage() {
       costume.category.name.toLowerCase().includes(search.toLowerCase());
 
     const matchesCategory =
-      filters === "all" ? initial : costume.category.name === filters;
+      filters.category === "" || filters.category === "all"
+        ? initial
+        : costume.category.name.includes(filters.category);
 
     return matchesSearch && matchesCategory;
   });

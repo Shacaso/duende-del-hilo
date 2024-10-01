@@ -5,6 +5,8 @@ import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import { useState } from "react";
 import Form from "./Form";
 import { useCategory } from "@/hook/useCategory";
+import React from "react";
+import Swal from "sweetalert2";
 
 interface Props {
   data: Category[];
@@ -18,32 +20,33 @@ export function Table({ data, type }: Props) {
   const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
   const [categories, setCategories] = useState<Category>();
 
-  // const deleteProviderAlert = (id: number) => {
-  //   swal({
-  //     title: "Desea eliminar el proveedor",
-  //     icon: "warning",
-  //     buttons: {
-  //       catch: {
-  //         text: "Cancelar",
-  //         value: null,
-  //         className: "btn btn-accent",
-  //       },
-  //       default: {
-  //         text: "Eliminar",
-  //         value: true,
-  //         className: "btn btn-primary",
-  //       },
-  //     },
-  //   }).then((valueButtoms) => {
-  //     if (valueButtoms) {
-  //       deleteProvider(id);
-  //       swal({
-  //         title: "El proveedor fue eliminado",
-  //         icon: "success",
-  //       });
-  //     }
-  //   });
-  // };
+  const handleDelete = (id: string, type: string) => {
+    Swal.fire({
+      title: `¿ Segura que quiere borrar este ${type} ?`,
+      text: "",
+      icon: "warning",
+      showCancelButton: true,
+      focusConfirm: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+      customClass: {
+        confirmButton: "btn btn-primary",
+        cancelButton: "btn btn-warning",
+      },
+    }).then((values) => {
+      if (values.isConfirmed) {
+        Swal.showLoading();
+        deleteCategory(id);
+      } else {
+        Swal.fire({
+          title: `El ${type} no fue borrado`,
+          icon: "info",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      }
+    });
+  };
 
   return (
     <>
@@ -67,7 +70,7 @@ export function Table({ data, type }: Props) {
                 <td className='flex gap-2'>
                   <button
                     className='btn btn-circle btn-ghost'
-                    onClick={() => deleteCategory(category.id)}
+                    onClick={() => handleDelete(category.id, "categoria")}
                   >
                     <TrashIcon />
                   </button>

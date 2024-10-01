@@ -4,6 +4,7 @@ import { InputDataList, Input } from "@/components";
 import { useClient } from "@/hook/useClient";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { z, ZodError } from "zod";
 
 interface Props {
@@ -126,8 +127,10 @@ export default function Form({ data }: Props) {
     },
     onSubmit: (values) => {
       if (!data) {
+        Swal.showLoading();
         createClient(values);
       } else {
+        Swal.showLoading();
         updateClient(values);
       }
       resetForm();

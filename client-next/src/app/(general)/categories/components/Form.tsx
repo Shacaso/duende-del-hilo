@@ -1,9 +1,10 @@
 import { Category } from "@/app/lib/definitions";
-import { useCategory } from "@/hook/useCategory";
-import { useFormik } from "formik";
-import { ZodError } from "zod";
 import { validateCategory } from "@/app/lib/schemas/categorySchema";
 import { Input } from "@/components";
+import { useCategory } from "@/hook/useCategory";
+import { useFormik } from "formik";
+import Swal from "sweetalert2";
+import { ZodError } from "zod";
 
 interface Props {
   data?: Category;
@@ -13,7 +14,6 @@ export default function Form({ data }: Props) {
   const { createCategory, updateCategory } = useCategory();
 
   const {
-    initialValues,
     handleSubmit,
     values,
     handleChange,
@@ -36,8 +36,10 @@ export default function Form({ data }: Props) {
     },
     onSubmit: (values) => {
       if (!data) {
+        Swal.showLoading();
         createCategory(values);
       } else {
+        Swal.showLoading();
         updateCategory(values);
       }
       resetForm();
@@ -51,6 +53,7 @@ export default function Form({ data }: Props) {
     >
       <div className='flex flex-col gap-5'>
         <Input
+          errors={errors.name || ""}
           placeholder='Ingrese nombre de categoria'
           validate={touched.name && errors.name ? true : false}
           title='Categoria'
@@ -61,6 +64,7 @@ export default function Form({ data }: Props) {
           onBlur={handleBlur}
         />
         <Input
+          errors={errors.price || ""}
           placeholder='Ingrese precio'
           validate={touched.price && errors.price ? true : false}
           title='Precio'

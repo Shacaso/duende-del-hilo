@@ -9,6 +9,7 @@ import { useCategory } from "@/hook/useCategory";
 import { useCostume } from "@/hook/useCostume";
 import Form from "../../categories/components/Form";
 import { Input, InputDataList } from "@/components";
+import Swal from "sweetalert2";
 
 interface Props {
   data?: Costume;
@@ -81,8 +82,10 @@ export default function FormNewCostume({ data }: Props) {
       // console.log("data submit:", values);
 
       if (!data) {
+        Swal.showLoading();
         createCostume(values);
       } else {
+        Swal.showLoading();
         updateCostume(values);
       }
       resetForm();

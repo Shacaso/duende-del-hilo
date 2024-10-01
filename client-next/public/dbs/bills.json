@@ -623,5 +623,61 @@
     "others": [],
     "note": "",
     "dischargeDate": ""
+  },
+  {
+    "id": "a5c10400-f7ac-41bc-a6b6-7d10fcd1fe1f",
+    "billNumber": 11,
+    "date": "2024-09-29 15:46:52",
+    "returnedDate": "2024-10-01",
+    "retirementDate": "2024-09-29",
+    "returned": false,
+    "precioTotal": 32000,
+    "precioACuenta": 16000,
+    "precioDescuento": 16000,
+    "precioSaldo": 0,
+    "depositoTotal": 32000,
+    "depositoACuenta": 32000,
+    "depositoDescuento": 0,
+    "depositoSaldo": 0,
+    "client": {
+      "blacklist": false,
+      "departament": "Guaymallén",
+      "direction": "appamorales2022@gmal.com",
+      "dni": 23983476,
+      "email": "test@gmail.com",
+      "id": "ba3a4834-c3b6-4a68-96a1-b949e266cd10",
+      "name": "Appa",
+      "phoneNumber": 2613439874,
+      "phoneNumberAlt": 2613746524,
+      "postalCode": 2345,
+      "surname": "Morales",
+      "dischargeDate": ""
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "f33f3c00-c63e-4807-a4df-13e939044487",
+          "name": "Stich",
+          "category": {
+            "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
+            "name": "Cabezones",
+            "price": 15000,
+            "dischargeDate": ""
+          },
+          "details": "Body del personaje y cabezon",
+          "dischargeDate": ""
+        },
+        "cant": 2
+      }
+    ],
+    "others": [
+      {
+        "cant": 2,
+        "name": "Correas",
+        "price": 1000
+      }
+    ],
+    "note": "Stichs para perro",
+    "dischargeDate": ""
   }
 ]

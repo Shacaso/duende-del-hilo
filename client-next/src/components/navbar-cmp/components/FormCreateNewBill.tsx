@@ -207,8 +207,10 @@ export default function FormCreateNewBill({ data }: Props) {
       // console.log("Submit form: ", values);
 
       if (!data) {
+        Swal.showLoading();
         createBill(values);
       } else {
+        Swal.showLoading();
         updateBill(values);
       }
       resetForm();

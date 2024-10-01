@@ -1,16 +1,14 @@
 "use client";
 
-import { PlusIcon } from "@/assets/svg";
-import { DataList, Search } from "@/components";
+import { PlusIcon, SearchInputIcon } from "@/assets/svg";
+import { DataList } from "@/components";
 import Button from "@/components/button-cmp/Button";
-import { useEffect, useState } from "react";
-import { Category, Departament } from "@/app/lib/definitions";
-import { SearchInputIcon } from "@/assets/svg";
-import { fetchGetAll } from "@/app/lib/fetching";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
-import { Table } from "./components/Table";
-import Form from "./components/Form";
 import { useCategory } from "@/hook/useCategory";
+import { useEffect, useState } from "react";
+import Form from "./components/Form";
+import { Table } from "./components/Table";
+import React from "react";
 
 export default function CategoriesPage() {
   const { getAllCategories, categories } = useCategory();

@@ -1,22 +1,19 @@
-// import PropTypes from 'prop-types';
-import { deleteAction } from "@/app/lib/data/funciones";
 import { Costume } from "@/app/lib/definitions";
-import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
+import { PencilAltIcon, TrashIcon, ViewIcon } from "@/assets/svg";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
+import { useCostume } from "@/hook/useCostume";
 import { useState } from "react";
 import FormNewCostume from "./FormNewCostume";
 import View from "./View";
-import { useCostume } from "@/hook/useCostume";
-// import { useProviders, useModal } from '@/hooks';
-// import { TableSkeleton } from '@/components';
-// import swal from 'sweetalert';
-// import { UpdateProvider } from './UpdateProvider';
-
+import React from "react";
+import Swal from "sweetalert2";
+import Button from "@/components/button-cmp/Button";
+import { title } from "process";
 interface Props {
   data: Costume[];
 }
 
-const headers = ["Nombre", "Categoria", "Detalles", "Acciones"];
+const headers = ["", "Nombre", "Categoria", "Detalles", "Acciones"];
 
 export function Table({ data }: Props) {
   const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
@@ -24,32 +21,33 @@ export function Table({ data }: Props) {
   const [costume, setCostume] = useState<Costume>();
   const { deleteCostume } = useCostume();
 
-  // const deleteProviderAlert = (id: number) => {
-  //   swal({
-  //     title: "Desea eliminar el proveedor",
-  //     icon: "warning",
-  //     buttons: {
-  //       catch: {
-  //         text: "Cancelar",
-  //         value: null,
-  //         className: "btn btn-accent",
-  //       },
-  //       default: {
-  //         text: "Eliminar",
-  //         value: true,
-  //         className: "btn btn-primary",
-  //       },
-  //     },
-  //   }).then((valueButtoms) => {
-  //     if (valueButtoms) {
-  //       deleteProvider(id);
-  //       swal({
-  //         title: "El proveedor fue eliminado",
-  //         icon: "success",
-  //       });
-  //     }
-  //   });
-  // };
+  const handleDelete = (id: string, type: string) => {
+    Swal.fire({
+      title: `¿ Segura que quiere borrar este ${type} ?`,
+      text: "",
+      icon: "warning",
+      showCancelButton: true,
+      focusConfirm: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+      customClass: {
+        confirmButton: "btn btn-primary",
+        cancelButton: "btn btn-warning",
+      },
+    }).then((values) => {
+      if (values.isConfirmed) {
+        Swal.showLoading();
+        deleteCostume(id);
+      } else {
+        Swal.fire({
+          title: `El ${type} no fue borrado`,
+          icon: "info",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      }
+    });
+  };
 
   return (
     <>
@@ -67,16 +65,22 @@ export function Table({ data }: Props) {
         <tbody>
           {data.map((costume: Costume) => (
             <tr key={costume.id}>
+              <td>
+                <div
+                  className={`${
+                    !costume.dischargeDate
+                      ? "badge badge-success"
+                      : "badge badge-primary"
+                  }`}
+                ></div>
+              </td>
               <td>{costume.name}</td>
               <td>{costume.category.name}</td>
               <td>{costume.details}</td>
               <td className='flex gap-2'>
                 <button
-                  className='btn btn-circle btn-ghost'
-                  onClick={() => {
-                    window.confirm("¿Seguro que desea eliminar el registro?") &&
-                      deleteCostume(costume.id);
-                  }}
+                  className='btn btn-circle btn-ghost '
+                  onClick={() => handleDelete(costume.id, "disfraz")}
                 >
                   <TrashIcon />
                 </button>
