@@ -50,14 +50,6 @@ export const costumeSchema = z.object({
 		message: "No se encuenta la categoria en la base de datos",
 	}),
 
-	price: z.coerce
-		.number({
-			invalid_type_error: "El precio debe ser un numero mayor que 0",
-			required_error: "El precio es requerido",
-		})
-		.optional()
-		.nullable(),
-
 	details: z.string({
 		invalid_type_error: "Los detalles debe ser un string",
 		required_error: "Los detalles son requeridos",
