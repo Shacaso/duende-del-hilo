@@ -46,9 +46,14 @@ export const costumeSchema = z.object({
 			}
 		),
 
-	category: z.string().refine((value) => categories.includes(value), {
-		message: "No se encuenta la categoria en la base de datos",
-	}),
+	category: z
+		.string({
+			invalid_type_error: "La categoria debe ser un string",
+			required_error: "La categoria es requerido",
+		})
+		.refine((value) => categories.includes(value), {
+			message: "No se encuenta la categoria en la base de datos",
+		}),
 
 	details: z.string({
 		invalid_type_error: "Los detalles debe ser un string",
@@ -83,9 +88,14 @@ export const costumeSchemaPartial = z.object({
 			}
 		),
 
-	category: z.string().refine((value) => categories.includes(value), {
-		message: "No se encuenta la categoria en la base de datos",
-	}),
+	category: z
+		.string({
+			invalid_type_error: "La categoria debe ser un string",
+			required_error: "La categoria es requerido",
+		})
+		.refine((value) => categories.includes(value), {
+			message: "No se encuenta la categoria en la base de datos",
+		}),
 
 	details: z.string({
 		invalid_type_error: "Los detalles debe ser un string",
