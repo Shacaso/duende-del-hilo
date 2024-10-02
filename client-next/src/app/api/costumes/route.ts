@@ -2,7 +2,10 @@ import { getAll } from "@/app/lib/data/entityRepository";
 import { Costume, CostumeDTO, CustomError } from "@/app/lib/definitions";
 import { costumesPath } from "@/app/lib/data/paths";
 import { NextResponse } from "next/server";
-import { validateCostume } from "@/app/lib/schemas/costumeSchema";
+import {
+	validateCostume,
+	validarDuplicado,
+} from "@/app/lib/schemas/costumeSchema";
 import { jsonProcess } from "@/app/lib/data/funciones";
 import { create } from "@/app/lib/data/costumeRepository";
 
@@ -15,6 +18,18 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
 	const body: CostumeDTO = await req.json();
+
+	const validacionDuplicado = await validarDuplicado(body);
+
+	if (validacionDuplicado) {
+		return NextResponse.json(
+			{
+				error: true,
+				message: "Ya existe un disfraz con ese nombre y categoría. ",
+			},
+			{ status: 400 }
+		);
+	}
 
 	const result = validateCostume(body);
 
