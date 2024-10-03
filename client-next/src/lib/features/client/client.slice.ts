@@ -46,8 +46,20 @@ export const updateClientAsync = createAsyncThunk(
 
 export const deleteClientAsync = createAsyncThunk(
   "client/delete",
-  async (id: string): Promise<Client> => {
-    return await fetchDeleteById(id, path);
+  async ({
+    id,
+    blacklist,
+    dischargeDate,
+  }: {
+    id: string;
+    blacklist: boolean;
+    dischargeDate: string;
+  }): Promise<Client> => {
+    return await fetchPatch(
+      id,
+      { id, dischargeDate, blacklist: !blacklist },
+      path
+    );
   }
 );
 
@@ -148,9 +160,9 @@ export const clientSlice = createSlice({
       const deleted: Client = action.payload;
       const { id } = deleted;
       const index = state.clients.findIndex((item) => item.id === id);
-      state.clients.splice(index, 1);
+      state.clients[index] = deleted;
       Swal.fire({
-        title: "¡ Cliente eliminado !",
+        title: "¡ Cliente agregado a la lista negra !",
         text: " ",
         icon: "success",
         showConfirmButton: false,

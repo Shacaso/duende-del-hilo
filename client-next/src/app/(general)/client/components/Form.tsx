@@ -52,15 +52,25 @@ export default function Form({ data }: Props) {
         required_error: "El telefono es requerido",
       })
       .int()
-      .min(1000000000)
-      .max(9999999999),
-    phoneNumberAlt: z
-      .number({
-        invalid_type_error: "El telefono debe ser un numero de 10 digitos",
+      .min(1000000000, {
+        message: "El telefono debe tener por lo menos 10 digitos",
       })
-      .int()
-      .min(1000000000)
-      .max(9999999999)
+      .max(9999999999, {
+        message: "El telefono no debe tenermas de  10 digitos",
+      }),
+    phoneNumberAlt: z
+      .union([
+        z
+          .number()
+          .int()
+          .min(1000000000, {
+            message: "El teléfono debe tener al menos 10 dígitos",
+          })
+          .max(9999999999, {
+            message: "El teléfono no puede tener más de 10 dígitos",
+          }),
+        z.string(),
+      ])
       .optional(),
     email: z.string().email("Email inválido"),
 
@@ -126,14 +136,16 @@ export default function Form({ data }: Props) {
       }
     },
     onSubmit: (values) => {
-      if (!data) {
-        Swal.showLoading();
-        createClient(values);
-      } else {
-        Swal.showLoading();
-        updateClient(values);
-      }
-      resetForm();
+      console.log(values);
+
+      // if (!data) {
+      //   Swal.showLoading();
+      //   createClient(values);
+      // } else {
+      //   Swal.showLoading();
+      //   updateClient(values);
+      // }
+      // resetForm();
     },
   });
 

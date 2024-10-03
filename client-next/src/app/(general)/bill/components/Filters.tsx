@@ -1,36 +1,60 @@
-export default function Filters() {
+import { useCategory } from "@/hook/useCategory";
+
+import { ChangeEvent, Dispatch, SetStateAction, useEffect } from "react";
+
+interface Props {
+  setFilters: Dispatch<
+    SetStateAction<{ active: string; start: string; end: string }>
+  >;
+}
+
+export function Filters({ setFilters }: Props) {
+  // const { categories, getAllCategories } = useCategory();
+
+  const handleFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { value, name } = e.target;
+
+    if (!value) return;
+
+    setFilters((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleDateFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+
+    if (!value) return;
+
+    setFilters((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className='flex flex-col gap-3 my-5 sm:flex-row'>
       <select
         className='w-full h-10 text-sm lg:text-[12px] min-[1150px]:text-base bg-base-200 input input-bordered'
-        name='marca'
-        // value={filters.marca}
-        // onChange={handleFilterChange}
+        name='active'
+        onChange={handleFilterChange}
       >
-        <option value='all'>Filtrar por devuleto</option>
-        <option value='true'>Devuelto</option>
-        <option value='false'>No devuelto</option>
+        <option value='active'>No devuelto</option>
+        <option value='disabled'>Devuelto</option>
       </select>
-      <select
-        className='w-full h-10 text-sm lg:text-[12px] min-[1150px]:text-base bg-base-200 input input-bordered'
-        name='categoria'
-        // value={filters.categoria}
-        // onChange={handleFilterChange}
-      >
-        <option value='all'>Filtrar por monto</option>
-        {/* {categories.map(category => (
-        <option key={category.id} value={category.name}>
-          {category.name}
-        </option>
-      ))} */}
-      </select>
+
       <input
         className='w-full h-10 text-sm lg:text-[12px] min-[1150px]:text-base bg-base-200 input input-bordered'
         type='date'
+        name='start'
+        onChange={handleDateFilterChange}
       />
       <input
         className='w-full h-10 text-sm lg:text-[12px] min-[1150px]:text-base bg-base-200 input input-bordered'
         type='date'
+        name='end'
+        onChange={handleDateFilterChange}
       />
     </div>
   );

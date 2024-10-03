@@ -4,36 +4,43 @@ import { PlusIcon } from "@/assets/svg";
 import { DataList } from "@/components";
 import Button from "@/components/button-cmp/Button";
 import { Table } from "./components/Table";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SearchInputIcon } from "@/assets/svg";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import Form from "./components/Form";
 import { useClient } from "@/hook/useClient";
 import { Client } from "@/app/lib/definitions";
+import React from "react";
+import { Filters } from "./components/Filters";
 
 export default function ClientPage() {
   const { getAllClients, clients } = useClient();
-  // const clients: Client[] = useAppSelector((state) => state.clients.clients);
 
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
 
-  // const [clients, setClients] = useState<Client[]>([]);
+  const [filters, setFilters] = useState({ active: "active" });
   const [search, setSearch] = useState("");
 
-  const initial = clients.filter(
-    (client) => client.dischargeDate?.length === 0
-  );
-  const result = !clients
-    ? initial
-    : initial.filter(
-        (client: Client) =>
-          client.name.toLowerCase().includes(search.toLowerCase()) ||
-          client.surname.toLowerCase().includes(search.toLowerCase()) ||
-          client.dni.toString().toLowerCase().includes(search.toLowerCase()) ||
-          client.departament.toLowerCase().includes(search.toLowerCase()) ||
-          client.email.toLowerCase().includes(search.toLowerCase())
-      );
+  const result = useMemo(() => {
+    if (!clients) return [];
+
+    const initialClients = clients.filter((client: Client) =>
+      filters.active === "active" ? !client.blacklist : client.blacklist
+    );
+
+    const normalizedSearch = search.toLowerCase();
+
+    return initialClients.filter((client: Client) =>
+      [
+        client.name,
+        client.surname,
+        client.dni.toString(),
+        client.departament,
+        client.email,
+      ].some((field) => field.toLowerCase().includes(normalizedSearch))
+    );
+  }, [clients, filters.active, search]);
 
   const handleChange = (e: { target: { value: any } }) => {
     setSearch(e.target.value);
@@ -89,12 +96,9 @@ export default function ClientPage() {
                 </Button>
               </div>
             </DataList.Header>
-            {/* <DataList.Filters>
-            <h1>filters group</h1>
-          </DataList.Filters> */}
-            <h1 className='mt-10 text-center'>
-              ORDENAR ALFABETICAMENTE POR COLUMNA
-            </h1>
+            <DataList.Filters>
+              <Filters setFilters={setFilters} />
+            </DataList.Filters>
           </div>
         </DataList>
         {/* {totalPages > 1 && (

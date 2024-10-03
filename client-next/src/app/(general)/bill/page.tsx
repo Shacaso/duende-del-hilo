@@ -3,21 +3,52 @@
 import { DataList } from "@/components";
 import Button from "@/components/button-cmp/Button";
 import { Table } from "./components/Table";
-import Filters from "./components/Filters";
-import { type Bill } from "@/app/lib/definitions";
+
 import { useEffect, useState } from "react";
 import { SearchInputIcon } from "@/assets/svg";
 import { useBill } from "@/hook/useBill";
+import { Filters } from "./components/Filters";
+import { type Bill } from "@/app/lib/definitions";
 
 export default function Bill() {
+  const [filters, setFilters] = useState({
+    active: "active",
+    start: "",
+    end: "",
+  });
+
   const { getAllBills, bills } = useBill();
 
   const [search, setSearch] = useState("");
 
+  const initial = bills.filter((bill) =>
+    filters.active === "active" ? bill.returned === false : bill.returned
+  );
+
+  // TODO filter for date $start and $end
+  // const parseDate = (dateStr: string) => {
+  //   const [month, day, year] = dateStr.split("/").map(Number);
+  //   return new Date(year, month - 1, day); // El mes en Date empieza en 0 (enero)
+  // };
+
+  // const filterByDateRange = (data: Bill[]) => {
+  //   const start = filters.start ? new Date(filters.start) : null;
+  //   const end = filters.end ? new Date(filters.end) : null;
+
+  //   return data.filter((item) => {
+  //     const itemDate = parseDate(item.date);
+
+  //     return (!start || itemDate >= start) && (!end || itemDate <= end);
+  //   });
+  // };
+
+  // if (filters.end !== "" || filters.start !== "") {
+  //   filterByDateRange(initial);
+  // }
   const result = !bills
-    ? bills
-    : bills.filter(
-        (bill: Bill) =>
+    ? initial
+    : initial.filter((bill: Bill) => {
+        const billsFiltered =
           bill.client.name.toLowerCase().includes(search.toLowerCase()) ||
           bill.client.surname.toLowerCase().includes(search.toLowerCase()) ||
           bill.date.toLowerCase().includes(search.toLowerCase()) ||
@@ -32,8 +63,10 @@ export default function Bill() {
           bill.client.dni
             .toString()
             .toLowerCase()
-            .includes(search.toLowerCase())
-      );
+            .includes(search.toLowerCase());
+
+        return billsFiltered;
+      });
   const handleChange = (e: { target: { value: any } }) => {
     setSearch(e.target.value);
   };
@@ -69,7 +102,7 @@ export default function Bill() {
           </DataList.Header>
           <DataList.Filters>
             <div className=''>
-              <Filters />
+              <Filters setFilters={setFilters} />
               {/* <Filters onFilterType={handleFilterType}>
                 <FilterDate onDateChange={handleDateChange} />
               </Filters> */}

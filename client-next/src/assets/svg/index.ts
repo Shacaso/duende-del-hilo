@@ -38,3 +38,5 @@ export { default as UserIcon } from "./user.svg";
 export { default as BillsIcon } from "./bills.svg";
 export { default as CostumeIcon } from "./costume.svg";
 export { default as LogoIcon } from "./logo.svg";
+export { default as BlacklistIcon } from "./blacklist.svg";
+export { default as GoodlistIcon } from "./goodList.svg";

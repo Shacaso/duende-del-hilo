@@ -11,7 +11,8 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AccessoriesInputList } from "./AccessoriesInputList";
 import { CostumeInputList } from "./CostumeInputList";
-import { z } from "zod";
+import { z, ZodError } from "zod";
+import React from "react";
 
 interface Props {
   data?: BillDto;
@@ -183,13 +184,13 @@ export default function FormCreateNewBill({ data }: Props) {
       returned: data?.returned ?? false,
       returnedDate: data?.returnedDate ?? "",
     },
-    // validate: (values) => {
-    //   try {
-    //     billSchema.parse(values);
-    //   } catch (error) {
-    //     if (error instanceof ZodError) return error.formErrors.fieldErrors;
-    //   }
-    // },
+    validate: (values) => {
+      try {
+        billSchema.parse(values);
+      } catch (error) {
+        if (error instanceof ZodError) return error.formErrors.fieldErrors;
+      }
+    },
     onSubmit: (values) => {
       const precioTotal = demoPrecioTotalAccesorios + demoPrecioTotalDisfraz;
       values.dniClient = Number(values.dniClient.toString().split(" ")[0]);
@@ -301,20 +302,25 @@ export default function FormCreateNewBill({ data }: Props) {
                 list='users'
                 name='dniClient'
                 placeholder='Buscar clientes'
-                value={values.dniClient}
+                value={values.dniClient === 0 ? "" : values.dniClient}
                 onBlur={handleBlur}
                 onChange={handleChange}
               />
             </label>
             <datalist id='users'>
-              {clients
-                .filter((item) => item.dischargeDate === "")
-                .map((item) => (
+              {clients.map((client) =>
+                client.dischargeDate === "" ? (
                   <option
-                    key={item.dni}
-                    value={`${item.dni} - ${item.name} ${item.surname}`}
-                  ></option>
-                ))}
+                    key={client.dni}
+                    value={`${client.dni} - ${client.name} ${client.surname}`}
+                  />
+                ) : (
+                  <option
+                    key={client.dni}
+                    value={`### ${client.dni} - ${client.name} ${client.surname}`}
+                  />
+                )
+              )}
             </datalist>
           </div>
         </div>

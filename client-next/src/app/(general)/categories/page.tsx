@@ -78,9 +78,6 @@ export default function CategoriesPage() {
             {/* <DataList.Filters>
           <h1>filters group</h1>
         </DataList.Filters> */}
-            <h1 className='mt-10 text-center'>
-              ORDENAR ALFABETICAMENTE POR COLUMNA
-            </h1>
           </div>
         </DataList>
         {/* {totalPages > 1 && (

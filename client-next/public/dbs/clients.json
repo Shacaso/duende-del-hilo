@@ -100,7 +100,7 @@
     "direction": "Calle 7",
     "departament": "Ciudad",
     "postalCode": 5513,
-    "blacklist": false,
+    "blacklist": true,
     "dischargeDate": "2024-02-23 20:36:51"
   },
   {
@@ -125,7 +125,7 @@
     "direction": "Calle falsa 123",
     "departament": "Capital",
     "postalCode": 5539,
-    "blacklist": false,
+    "blacklist": true,
     "id": "e79dc0eb-bd1f-4f91-bf9e-75c123640451",
     "dischargeDate": ""
   },
@@ -197,10 +197,10 @@
     "phoneNumberAlt": 9494949494,
     "postalCode": 5000,
     "surname": "Araya",
-    "dischargeDate": ""
+    "dischargeDate": "2024-10-01 14:20:02"
   },
   {
-    "blacklist": false,
+    "blacklist": true,
     "departament": "Maipú",
     "direction": "Magdallena 46",
     "dni": 74932732,
@@ -211,10 +211,10 @@
     "phoneNumberAlt": 3123123123,
     "postalCode": 5005,
     "surname": "Test",
-    "dischargeDate": ""
+    "dischargeDate": "2024-10-01 12:45:29"
   },
   {
-    "blacklist": false,
+    "blacklist": true,
     "departament": "Rivadavia",
     "direction": "afsdasdfasdasdasdf",
     "dni": 42356344,
@@ -225,6 +225,6 @@
     "phoneNumberAlt": 5234523453,
     "postalCode": 4400,
     "surname": "work?",
-    "dischargeDate": ""
+    "dischargeDate": "2024-10-01 12:43:32"
   }
 ]
