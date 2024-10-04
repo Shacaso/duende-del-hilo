@@ -1,4 +1,4 @@
-import { getById, logicDelete, update } from "@/app/lib/data/entityRepository";
+import { getById, hardDelete, update } from "@/app/lib/data/entityRepository";
 import { jsonProcess } from "@/app/lib/data/funciones";
 import { departamentsPath } from "@/app/lib/data/paths";
 import { Departament, CustomError, Entity } from "@/app/lib/definitions";
@@ -50,7 +50,7 @@ export async function PATCH(req: Request, context: { params: any }) {
 
 export async function DELETE(req: Request, context: { params: any }) {
 	const id = context.params.id;
-	const response: Departament | CustomError = await logicDelete<Departament>(
+	const response: Departament | CustomError = await hardDelete<Departament>(
 		id,
 		departamentsPath
 	);

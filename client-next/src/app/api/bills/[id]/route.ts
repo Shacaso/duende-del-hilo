@@ -1,4 +1,4 @@
-import { getById, logicDelete, update } from "@/app/lib/data/entityRepository";
+import { getById, hardDelete, update } from "@/app/lib/data/entityRepository";
 import { jsonProcess } from "@/app/lib/data/funciones";
 import { billsPath } from "@/app/lib/data/paths";
 import { Bill, CustomError } from "@/app/lib/definitions";
@@ -41,7 +41,7 @@ export async function PATCH(req: Request, context: { params: any }) {
 
 export async function DELETE(req: Request, context: { params: any }) {
 	const id = context.params.id;
-	const response: Bill | CustomError = await logicDelete<Bill>(id, billsPath);
+	const response: Bill | CustomError = await hardDelete<Bill>(id, billsPath);
 	if (response instanceof CustomError)
 		return NextResponse.json(response, { status: response.codigo });
 	return NextResponse.json(response);

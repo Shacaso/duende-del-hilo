@@ -176,8 +176,6 @@ export const billSchema = z.object({
 		)
 		.nullable()
 		.optional(),
-
-	dischargeDate: z.string().default(""),
 });
 
 export function validateBill(object: BillDto) {

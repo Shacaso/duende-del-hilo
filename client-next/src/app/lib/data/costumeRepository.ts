@@ -28,7 +28,6 @@ export const create = async (input: CostumeDTO, path: string) => {
 		name: input.name,
 		category: categoryFound,
 		details: input.details,
-		dischargeDate: "",
 	};
 
 	if (costumes.length === 0) {
@@ -92,8 +91,7 @@ export async function getCostumesByCategory(idCategory: string) {
 		}
 	});
 
-	if (costumesFound.length === 0)
-		return new CustomError(true, "No existen Disfraces en esa categoria", 404);
+	if (costumesFound.length === 0) return [];
 
 	return costumesFound;
 }
@@ -119,9 +117,6 @@ export const update = async (id: string, input: CostumeDTO) => {
 		name: input.name ? input.name : costumes[costumeIndex].name,
 		category: category,
 		details: input.details ? input.details : costumes[costumeIndex].details,
-		dischargeDate: input.dischargeDate
-			? input.dischargeDate
-			: costumes[costumeIndex].dischargeDate,
 	};
 
 	const responseSave = await saveAllEntities<Costume>(costumes, costumesPath);
