@@ -7,5 +7,10 @@ export async function GET(req: Request, context: { params: any }) {
 	const response: Costume[] | CustomError = await getCostumesByCategory(id);
 	if (response instanceof CustomError)
 		return NextResponse.json(response, { status: response.codigo });
+	if (response.length === 0)
+		return NextResponse.json(
+			new CustomError(true, "No se encuentran disfraces en esa categoria", 404),
+			{ status: 404 }
+		);
 	return NextResponse.json(response);
 }

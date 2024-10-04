@@ -9,28 +9,6 @@ export const getAll = async <T extends Entity>(path: string) => {
 	return response;
 };
 
-export const getAllActives = async <T extends Entity>(path: string) => {
-	const response = await allEntities<T>(path);
-	if (response instanceof CustomError) return response;
-
-	const activesEntities = response.filter((entity: T) => {
-		return !entity.dischargeDate;
-	});
-
-	return activesEntities;
-};
-
-export const getAllNoActives = async <T extends Entity>(path: string) => {
-	const response = await allEntities<T>(path);
-	if (response instanceof CustomError) return response;
-
-	const activesEntities = response.filter((entity: T) => {
-		return entity.dischargeDate;
-	});
-
-	return activesEntities;
-};
-
 export const getById = async <T extends Entity>(id: string, path: string) => {
 	const response = await allEntities<T>(path);
 	if (response instanceof CustomError) return response;
@@ -47,7 +25,6 @@ export const create = async <T extends Entity>(input: T, path: string) => {
 	const newEntity: T = {
 		...input,
 		id: randomUUID(),
-		dischargeDate: "",
 	};
 
 	const response = await allEntities<T>(path);
@@ -109,35 +86,6 @@ export const hardDelete = async <T extends Entity>(
 		if (responseSave instanceof CustomError) return responseSave;
 		return entityAEliminar[0];
 	}
-};
-
-export const logicDelete = async <T extends Entity>(
-	id: string,
-	path: string
-) => {
-	const response = await allEntities<T>(path);
-	if (response instanceof CustomError) return response;
-	const entities: T[] = response;
-
-	const entityIndex = entities.findIndex((entity) => entity.id === id);
-	if (entityIndex === -1) return new CustomError(true, "Id no encontrado", 404);
-
-	const [date, time] = new Date().toISOString().split("T");
-	const [a, b] = time.split(".");
-
-	const dischargeDate = {
-		dischargeDate: date + " " + a,
-	};
-
-	entities[entityIndex] = {
-		...entities[entityIndex],
-		...dischargeDate,
-	};
-
-	const responseSave = await saveAllEntities<T>(entities, path);
-	if (responseSave instanceof CustomError) return responseSave;
-
-	return entities[entityIndex];
 };
 
 export const login = async (input: UserLogin, path: string) => {

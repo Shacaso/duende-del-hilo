@@ -2,25 +2,21 @@
   {
     "name": "Adultos",
     "price": 1500,
-    "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
-    "dischargeDate": ""
+    "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
   },
   {
     "name": "Niños",
     "price": 5000,
-    "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
-    "dischargeDate": ""
+    "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d"
   },
   {
     "id": "b9319011-1f5e-4b30-85dd-2a315a0844a7",
     "name": "Mascaras",
-    "price": 8000,
-    "dischargeDate": ""
+    "price": 8000
   },
   {
     "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
     "name": "Cabezones",
-    "price": 15000,
-    "dischargeDate": ""
+    "price": 15000
   }
 ]

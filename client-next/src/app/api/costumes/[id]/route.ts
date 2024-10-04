@@ -1,5 +1,5 @@
 import { update } from "@/app/lib/data/costumeRepository";
-import { getById, logicDelete } from "@/app/lib/data/entityRepository";
+import { getById, hardDelete } from "@/app/lib/data/entityRepository";
 import { jsonProcess } from "@/app/lib/data/funciones";
 import { costumesPath } from "@/app/lib/data/paths";
 import { Costume, CostumeDTO, CustomError } from "@/app/lib/definitions";
@@ -45,7 +45,7 @@ export async function PATCH(req: Request, context: { params: any }) {
 
 export async function DELETE(req: Request, context: { params: any }) {
 	const id = context.params.id;
-	const response: Costume | CustomError = await logicDelete<Costume>(
+	const response: Costume | CustomError = await hardDelete<Costume>(
 		id,
 		costumesPath
 	);

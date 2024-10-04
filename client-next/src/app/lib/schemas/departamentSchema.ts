@@ -8,8 +8,6 @@ export const departamentSchema = z.object({
 		invalid_type_error: "El nombre del departamento debe ser un string",
 		required_error: "El nombre del departamento es requerido",
 	}),
-
-	dischargeDate: z.string().default(""),
 });
 
 export function validateDepartament(object: Departament) {
