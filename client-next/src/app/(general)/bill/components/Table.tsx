@@ -11,6 +11,10 @@ interface Props {
 }
 
 export function Table({ data }: Props) {
+  const fixDate = (date: string) => {
+    return date.substring(0, date.indexOf(" ")).split("-").reverse().join("/");
+  };
+
   return (
     <table className='table table-lg bg-base-200 [&>thead>tr]:text-lg '>
       <thead>
@@ -31,13 +35,13 @@ export function Table({ data }: Props) {
             <tr key={bill.id}>
               <td>
                 <div
-                  className={`badge badge-lg ${
+                  className={`badge  ${
                     bill.returned ? "badge-success" : "badge-primary"
                   }`}
                 ></div>
               </td>
               <td> {bill.billNumber}</td>
-              <td>{bill.date.substring(0, bill.date.indexOf(" "))}</td>
+              <td>{fixDate(bill.date)}</td>
               <td>{bill.client?.name + " " + bill.client?.surname}</td>
               <td>{bill.precioTotal}</td>
               <td>{bill.client?.dni}</td>

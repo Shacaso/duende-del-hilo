@@ -43,6 +43,7 @@ export default function InputDataList({
       </div>
       <label>
         <input
+          autoComplete='off'
           className={`input input-bordered border w-full ${
             validate && "border-primary border-2"
           }`}

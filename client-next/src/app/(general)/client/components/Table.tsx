@@ -1,5 +1,11 @@
 import type { Client } from "@/app/lib/definitions";
-import { TrashIcon, PencilAltIcon, ViewIcon } from "@/assets/svg";
+import {
+  TrashIcon,
+  PencilAltIcon,
+  ViewIcon,
+  BlacklistIcon,
+  GoodlistIcon,
+} from "@/assets/svg";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import { useState } from "react";
 import Form from "./Form";
@@ -15,20 +21,17 @@ interface Props {
 }
 
 const headers = [
-  "Nombre",
-  "Apellido",
-  // "DNI",
-  "Telefono 1",
-  "Telefono 2",
+  "",
+  "Nombre completo",
+  "Telefono/s",
   "Mail",
-  // 'Direccion',
   "Departamento",
-  // 'Codigo postal',
+
   "Acciones",
 ];
 
 export function Table({ data }: Props) {
-  const { deleteClient } = useClient();
+  const { blackListClient } = useClient();
 
   const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
   const [viewModalOpen, setViewModalOpen] = useState<boolean>(false);
@@ -39,14 +42,17 @@ export function Table({ data }: Props) {
   // const { loading, deleteProvider } = useProviders();
   // const { openModal } = useModal();
 
-  const handleDelete = (id: string, type: string) => {
+  const handleDelete = (
+    { id, dischargeDate = "", blacklist }: Client,
+    type: string
+  ) => {
     Swal.fire({
-      title: `¿ Segura que quiere borrar este ${type} ?`,
+      title: `¿ Segura que quiere poner en la lista negre a este ${type} ?`,
       text: "",
       icon: "warning",
       showCancelButton: true,
       focusConfirm: true,
-      confirmButtonText: "Eliminar",
+      confirmButtonText: "Lista negra",
       cancelButtonText: "Cancelar",
       customClass: {
         confirmButton: "btn btn-primary",
@@ -55,16 +61,24 @@ export function Table({ data }: Props) {
     }).then((values) => {
       if (values.isConfirmed) {
         Swal.showLoading();
-        deleteClient(id);
+        blackListClient({ id, dischargeDate, blacklist });
       } else {
         Swal.fire({
-          title: `El ${type} no fue borrado`,
+          title: `El ${type} no fue agregado a la lista negra`,
           icon: "info",
           timer: 1500,
           showConfirmButton: false,
         });
       }
     });
+  };
+
+  const fixEmail = (clientEmail: string) => {
+    const length = 22;
+    if (clientEmail.length > length) {
+      return clientEmail.substring(0, length) + "...";
+    }
+    return clientEmail;
   };
 
   return (
@@ -84,19 +98,37 @@ export function Table({ data }: Props) {
           <tbody>
             {data.map((client) => (
               <tr className='hover:bg-base-300 text-lg' key={client.id}>
-                <td>{client.name}</td>
-                <td>{client.surname}</td>
-                <td>{client.phoneNumber}</td>
-                <td>{client.phoneNumberAlt}</td>
-                <td>{client.email}</td>
+                <td>
+                  <div
+                    className={`${
+                      client.blacklist
+                        ? "badge badge-primary"
+                        : "badge badge-success"
+                    }`}
+                  ></div>
+                </td>
+                <td>
+                  <p>
+                    <span className='font-bold'>{client.surname}</span>,{" "}
+                    {client.name}
+                  </p>
+                </td>
+
+                <td className='flex flex-col gap-1'>
+                  <p className='font-bold'>{client.phoneNumber}</p>
+                  <p>{client.phoneNumberAlt}</p>
+                </td>
+                {/* <td></td> */}
+                <td>{fixEmail(client.email)}</td>
                 <td>{client.departament}</td>
                 <td className='flex gap-2'>
                   <button
                     className='btn btn-circle btn-ghost'
-                    onClick={() => handleDelete(client.id, "cliente")}
+                    onClick={() => handleDelete(client, "cliente")}
                   >
-                    <TrashIcon />
+                    {!client.blacklist ? <BlacklistIcon /> : <GoodlistIcon />}
                   </button>
+
                   <button
                     className='btn btn-circle btn-ghost'
                     onClick={() => {

@@ -20,8 +20,12 @@ export function useClient() {
   function getAllClients() {
     clients.length === 0 && dispatch(getAllClientsAsync());
   }
-  function deleteClient(id: string) {
-    dispatch(deleteClientAsync(id));
+  function blackListClient(body: {
+    id: string;
+    blacklist: boolean;
+    dischargeDate: string;
+  }) {
+    dispatch(deleteClientAsync(body));
   }
   //   function getOneClientById(id: string) {
   //     dispatch(getOneClientByIdAsync(id));
@@ -47,7 +51,7 @@ export function useClient() {
     error,
     getAllClients,
     // getOneClientById,
-    deleteClient,
+    blackListClient,
     createClient,
     updateClient,
     setClient,
