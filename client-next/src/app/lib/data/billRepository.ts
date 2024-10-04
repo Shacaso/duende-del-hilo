@@ -76,7 +76,6 @@ export const create = async (input: BillDto, path: string) => {
 		costumes: costumesFound,
 		others: input.others,
 		note: input.note,
-		dischargeDate: "",
 	};
 
 	if (bills) {

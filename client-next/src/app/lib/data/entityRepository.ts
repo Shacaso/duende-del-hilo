@@ -9,28 +9,6 @@ export const getAll = async <T extends Entity>(path: string) => {
 	return response;
 };
 
-export const getAllActives = async <T extends Entity>(path: string) => {
-	const response = await allEntities<T>(path);
-	if (response instanceof CustomError) return response;
-
-	const activesEntities = response.filter((entity: T) => {
-		return !entity.dischargeDate;
-	});
-
-	return activesEntities;
-};
-
-export const getAllNoActives = async <T extends Entity>(path: string) => {
-	const response = await allEntities<T>(path);
-	if (response instanceof CustomError) return response;
-
-	const activesEntities = response.filter((entity: T) => {
-		return entity.dischargeDate;
-	});
-
-	return activesEntities;
-};
-
 export const getById = async <T extends Entity>(id: string, path: string) => {
 	const response = await allEntities<T>(path);
 	if (response instanceof CustomError) return response;
