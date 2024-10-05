@@ -4,7 +4,7 @@
     "name": "Batman",
     "category": {
       "name": "Adultos",
-      "price": 1500,
+      "price": 2000,
       "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
       "dischargeDate": ""
     },
@@ -16,7 +16,7 @@
     "name": "Robin",
     "category": {
       "name": "Adultos",
-      "price": 1500,
+      "price": 2000,
       "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
       "dischargeDate": ""
     },
@@ -94,5 +94,41 @@
     },
     "details": "Calza negra, remera pegada negra y cabeza de termo",
     "dischargeDate": "2024-09-30 10:57:48"
+  },
+  {
+    "id": "c31afc78-b0e2-4023-ae9b-63a2dc2e399f",
+    "name": "Batman",
+    "category": {
+      "name": "Niños",
+      "price": 5000,
+      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
+      "dischargeDate": ""
+    },
+    "details": "Body del personaje y mascara",
+    "dischargeDate": ""
+  },
+  {
+    "id": "cc2d7e4f-ff23-4b3c-8d98-93a67e169698",
+    "name": "Appa",
+    "category": {
+      "name": "Niños",
+      "price": 5000,
+      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
+      "dischargeDate": ""
+    },
+    "details": "Body con pelo marron",
+    "dischargeDate": "2024-10-04 09:54:36"
+  },
+  {
+    "id": "25ba8bf8-f4de-4845-aff3-06b3b5ee9001",
+    "name": "Appa",
+    "category": {
+      "id": "b9319011-1f5e-4b30-85dd-2a315a0844a7",
+      "name": "Máscaras",
+      "price": 8000,
+      "dischargeDate": ""
+    },
+    "details": "asd",
+    "dischargeDate": "2024-10-04 10:04:43"
   }
 ]

@@ -31,7 +31,7 @@ export function Filters({ setFilters }: Props) {
   return (
     <div className='flex flex-col gap-3 my-5 sm:flex-row'>
       <select
-        className='w-full h-10 text-sm lg:text-[12px] min-[1150px]:text-base bg-base-200 input input-bordered'
+        className='w-full h-12 text-sm lg:text-[12px] min-[1150px]:text-base bg-base-200 input input-bordered'
         name='active'
         onChange={handleFilterChange}
       >

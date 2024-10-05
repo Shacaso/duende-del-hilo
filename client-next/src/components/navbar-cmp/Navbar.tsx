@@ -1,6 +1,12 @@
 "use client";
 
-import { BillsIcon, CostumeIcon, IconEntrada, UserIcon } from "@/assets/svg";
+import {
+  BillsIcon,
+  CategoryIcon,
+  CostumeIcon,
+  IconEntrada,
+  UserIcon,
+} from "@/assets/svg";
 import Link from "next/link";
 import { useState } from "react";
 import Logo from "../Logo";
@@ -35,8 +41,8 @@ export default function Navbar() {
       href: "/bill",
     },
     {
-      label: "Categorias",
-      Icon: UserIcon,
+      label: "Categorías",
+      Icon: CategoryIcon,
       href: "/categories",
     },
     {

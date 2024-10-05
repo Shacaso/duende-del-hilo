@@ -33,7 +33,7 @@ const handleError = (errors: FormikErrors<string>) => {
     icon: "error",
     text: errors,
     customClass: {
-      confirmButton: "btn btn-primary btn-wide",
+      confirmButton: "btn btn-primary btn-wide text-lg",
     },
   });
 };
@@ -54,7 +54,9 @@ export default function Input({
   return (
     <div className='flex flex-col '>
       <div className='w-full flex justify-between items-center'>
-        <label htmlFor={name}>{title}</label>
+        <label className='text-[1.1rem]' htmlFor={name}>
+          {title}
+        </label>
         {validate && (
           <div
             onClick={() => handleError(errors)}

@@ -48,7 +48,24 @@ export const updateCategoryAsync = createAsyncThunk(
 export const deleteCategoryAsync = createAsyncThunk(
   "category/delete",
   async (id: string): Promise<Category> => {
-    return await fetchDeleteById(id, path);
+    try {
+      const res = await fetchDeleteById(id, path);
+      console.log(res);
+
+      if (!res) throw new Error();
+      return res;
+    } catch (error) {
+      Swal.fire({
+        title: "Esta categoría no se puede eliminar",
+        text: "Ya que existen disfraces que la estan usando",
+        icon: "info",
+        confirmButtonText: "Ok",
+        customClass: {
+          confirmButton: "btn btn-wide btn-primary text-lg",
+        },
+      });
+      console.log(error);
+    }
   }
 );
 interface State {
@@ -100,11 +117,11 @@ export const categorySlice = createSlice({
       state.created = body;
 
       Swal.fire({
-        title: "¡ Categoria guardada !",
+        title: "¡Categoria guardada!",
         text: " ",
         icon: "success",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
 
       state.isLoading = false;
@@ -136,11 +153,11 @@ export const categorySlice = createSlice({
 
       state.updated = updated;
       Swal.fire({
-        title: "¡ Categoria actualizada !",
+        title: "¡Categoria actualizada!",
         text: " ",
         icon: "success",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
       state.isLoading = false;
     });
@@ -157,11 +174,11 @@ export const categorySlice = createSlice({
 
       state.categories.splice(index, 1);
       Swal.fire({
-        title: "¡ Categoria eliminada !",
+        title: "¡Categoria eliminada!",
         text: " ",
         icon: "success",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
 
       state.isLoading = false;

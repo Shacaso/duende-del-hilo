@@ -84,12 +84,12 @@ export default function ClientPage() {
                   </div>
                 </div>
                 <Button
-                  className='gap-3 lg:w-52 btn btn-primary md:w-80'
+                  className='gap-3 lg:w-72 btn btn-primary md:w-80'
                   onClick={() =>
                     setConfirmationModalOpen(!confirmationModalOpen)
                   }
                 >
-                  <div className='flex items-center gap-5'>
+                  <div className='flex items-center gap-5 text-lg'>
                     <PlusIcon />
                     Nuevo Cliente
                   </div>

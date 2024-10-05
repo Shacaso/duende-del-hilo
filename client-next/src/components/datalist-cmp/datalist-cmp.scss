@@ -1,65 +1,65 @@
-$gap: .5rem;
+// $gap: 1.5rem;
 
-.datalist-component{
-    width: 100%;
-    &-header{
-        display: flex;
-        flex-direction: column;
-        row-gap: .5rem;
+// .datalist-component{
+//     width: 100%;
+//     &-header{
+//         display: flex;
+//         flex-direction: column;
+//         row-gap: .5rem;
 
-        &-top{
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-        }
+//         &-top{
+//             display: flex;
+//             align-items: flex-end;
+//             justify-content: space-between;
+//         }
 
-        &-middle{
-            display: flex;
-            flex-direction: column;
-            gap: .5rem;
+//         &-middle{
+//             display: flex;
+//             flex-direction: column;
+//             gap: .5rem;
 
-            div, 
-            .search-component{
-                flex: 1;
-            }
-            @media (min-width:640px) {
-                flex-direction: row;
-            }
-        }
+//             div, 
+//             .search-component{
+//                 flex: 1;
+//             }
+//             @media (min-width:640px) {
+//                 flex-direction: row;
+//             }
+//         }
 
-        &-bottom{
-            input[type='checkbox']{
-                display: none;
+//         &-bottom{
+//             input[type='checkbox']{
+//                 display: none;
 
-                &:checked + .filters-container{
-                    max-height: 200px;
-                }
-            }
-            .filters-container{
-                overflow: auto;
-                max-height: 0;
-                transition: max-height .3s ease-in-out;
-            };
+//                 &:checked + .filters-container{
+//                     max-height: 200px;
+//                 }
+//             }
+//             .filters-container{
+//                 overflow: auto;
+//                 max-height: 0;
+//                 transition: max-height .3s ease-in-out;
+//             };
 
-            @media (min-width:640px) {
-                label{
-                    display: none;
-                }
-                .filters-container{
-                   overflow: auto; 
-                   max-height: 100%;
-                }
-            }
-        }
-    }
+//             @media (min-width:640px) {
+//                 label{
+//                     display: none;
+//                 }
+//                 .filters-container{
+//                    overflow: auto; 
+//                    max-height: 100%;
+//                 }
+//             }
+//         }
+//     }
 
-    &-content{
+//     &-content{
         
-        overflow-x: auto;
-        max-height: 1000px;
-        min-height: 500px;
-        box-sizing: border-box;
-        padding-top: .5rem;
-        padding-bottom: .2rem;
-    }
-}
+//         overflow-x: auto;
+//         max-height: 1000px;
+//         min-height: 500px;
+//         box-sizing: border-box;
+//         padding-top: .5rem;
+//         padding-bottom: .2rem;
+//     }
+// }

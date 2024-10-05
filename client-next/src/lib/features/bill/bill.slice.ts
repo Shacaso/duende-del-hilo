@@ -82,7 +82,7 @@ export const billSlice = createSlice({
         text: " ",
         icon: "success",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
       state.isLoading = false;
     });
@@ -106,7 +106,7 @@ export const billSlice = createSlice({
         text: " ",
         icon: "success",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
       state.isLoading = false;
     });

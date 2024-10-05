@@ -77,11 +77,19 @@ export default function Bill() {
 
   return (
     <div className='w-full px-5 mt-10'>
-      <DataList title='Facturas' element={<Table data={result} />}>
+      <DataList
+        title='Facturas'
+        element={
+          <Table
+            data={result}
+            showTotal={filters.start !== "" && filters.end !== ""}
+          />
+        }
+      >
         <div>
-          <Button className='w-full btn btn-warning my-5 btn-disabled'>
+          {/* <Button className='w-full btn btn-warning my-5 btn-disabled'>
             <h1>Generar Reporte</h1>
-          </Button>
+          </Button> */}
           <DataList.Header>
             <div className='flex items-center justify-between p-2 rounded-md  bg-base-200'>
               <form className='w-full'>

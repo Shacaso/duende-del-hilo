@@ -109,11 +109,11 @@ export const clientSlice = createSlice({
       state.clients.push(body);
       state.created = body;
       Swal.fire({
-        title: "¡ Cliente guardado !",
+        title: "¡Cliente guardado!",
         text: " ",
         icon: "success",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
       state.isLoading = false;
     });
@@ -143,11 +143,11 @@ export const clientSlice = createSlice({
       state.clients[index] = updated;
       state.updated = updated;
       Swal.fire({
-        title: "¡ Cliente actualizado !",
+        title: "¡Cliente actualizado!",
         text: " ",
         icon: "success",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
       state.isLoading = false;
     });
@@ -158,15 +158,19 @@ export const clientSlice = createSlice({
     });
     builder.addCase(deleteClientAsync.fulfilled, (state, action) => {
       const deleted: Client = action.payload;
-      const { id } = deleted;
+      const { id, blacklist } = deleted;
       const index = state.clients.findIndex((item) => item.id === id);
       state.clients[index] = deleted;
       Swal.fire({
-        title: "¡ Cliente agregado a la lista negra !",
+        title: `${
+          blacklist
+            ? "¡Cliente agregado a la lista negra!"
+            : "¡Cliente fue removido de la lista negra!"
+        }`,
         text: " ",
         icon: "success",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
       state.isLoading = false;
     });

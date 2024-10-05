@@ -13,7 +13,7 @@ interface Props {
   type: string;
 }
 
-const headers = ["Categoria", "Precio", "Acciones"];
+const headers = ["Categoría", "Precio", "Acciones"];
 
 export function Table({ data, type }: Props) {
   const { deleteCategory } = useCategory();
@@ -22,7 +22,7 @@ export function Table({ data, type }: Props) {
 
   const handleDelete = (id: string, type: string) => {
     Swal.fire({
-      title: `¿ Segura que quiere borrar este ${type} ?`,
+      title: `¿Seguro que quieres eliminar esta ${type}?`,
       text: "",
       icon: "warning",
       showCancelButton: true,
@@ -30,8 +30,8 @@ export function Table({ data, type }: Props) {
       confirmButtonText: "Eliminar",
       cancelButtonText: "Cancelar",
       customClass: {
-        confirmButton: "btn btn-primary",
-        cancelButton: "btn btn-warning",
+        confirmButton: "btn btn-primary text-lg",
+        cancelButton: "btn bg-slate-200 text-lg",
       },
     }).then((values) => {
       if (values.isConfirmed) {
@@ -39,9 +39,9 @@ export function Table({ data, type }: Props) {
         deleteCategory(id);
       } else {
         Swal.fire({
-          title: `El ${type} no fue borrado`,
+          title: `La ${type} no fue eliminada`,
           icon: "info",
-          timer: 1500,
+          timer: 2000,
           showConfirmButton: false,
         });
       }
@@ -53,45 +53,45 @@ export function Table({ data, type }: Props) {
       {/* {loading ? (
         <TableSkeleton rows={5} headers={headers} />
       ) : ( */}
-      <table className='table table-lg bg-base-200 [&>thead>tr]:text-lg '>
+      <table className='table table-fixed table-lg bg-base-200 [&>thead>tr]:text-lg '>
         <thead>
-          <tr>
+          <tr className=' border-slate-100 border-b-4 '>
             {headers.map((headerItem: string, index: number) => (
-              <th key={index}>{headerItem}</th>
+              <th className='text-xl font-bold' key={index}>
+                {headerItem}
+              </th>
             ))}
           </tr>
         </thead>
-        <tbody className='overflow-auto'>
-          {data.map((category) => {
-            return (
-              <tr key={category.id}>
-                <td>{category.name}</td>
-                <td>{category.price}</td>
-                <td className='flex gap-2'>
-                  <button
-                    className='btn btn-circle btn-ghost'
-                    onClick={() => handleDelete(category.id, "categoria")}
-                  >
-                    <TrashIcon />
-                  </button>
-                  <button
-                    className='btn btn-circle btn-ghost'
-                    onClick={() => {
-                      setCategories(category),
-                        setUpdateModalOpen(!updateModalOpen);
-                    }}
-                  >
-                    <PencilAltIcon />
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+        <tbody className='overflow-auto [&>tr>td]:text-xl'>
+          {data.map((category) => (
+            <tr className='hover:bg-base-300 text-lg' key={category.id}>
+              <td>{category.name}</td>
+              <td>{category.price}</td>
+              <td className='flex gap-2'>
+                <button
+                  className='btn btn-circle btn-ghost'
+                  onClick={() => handleDelete(category.id, "categoría")}
+                >
+                  <TrashIcon />
+                </button>
+                <button
+                  className='btn btn-circle btn-ghost'
+                  onClick={() => {
+                    setCategories(category),
+                      setUpdateModalOpen(!updateModalOpen);
+                  }}
+                >
+                  <PencilAltIcon />
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       {updateModalOpen && (
         <ConfirmationModal
-          title='UPDATE CLIENT'
+          title='ACTUALIZAR CATEGORÍA'
           isOpen={updateModalOpen}
           handleClose={() => setUpdateModalOpen(!updateModalOpen)}
         >

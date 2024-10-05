@@ -111,11 +111,11 @@ export const costumeSlice = createSlice({
       state.costumes.push(body);
       state.created = body;
       Swal.fire({
-        title: "¡ Disfraz guardado !",
+        title: "¡Disfraz guardado!",
         text: " ",
         icon: "success",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
       state.isLoading = false;
     });
@@ -145,11 +145,11 @@ export const costumeSlice = createSlice({
       state.costumes[index] = updated;
       state.updated = updated;
       Swal.fire({
-        title: "¡ Disfraz actualizado !",
+        title: "¡Disfraz actualizado!",
         text: " ",
         icon: "success",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
       state.isLoading = false;
     });
@@ -164,11 +164,11 @@ export const costumeSlice = createSlice({
       const index = state.costumes.findIndex((item) => item.id === id);
       state.costumes.splice(index, 1);
       Swal.fire({
-        title: "¡ Disfraz eliminado !",
+        title: "¡Disfraz eliminado!",
         text: " ",
         icon: "success",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
       state.isLoading = false;
     });

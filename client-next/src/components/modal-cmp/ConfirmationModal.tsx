@@ -44,7 +44,7 @@ export default function ConfirmationModal({
       md:items-center 
       `}
       >
-        <section className='max-w-[700px] w-full h-[600px] bg-white shadow-xl flex-1 rounded-t-[1rem] absolute z-50 md:rounded-[1rem]'>
+        <section className='p-8 max-w-[700px] w-full h-[600px] bg-white shadow-xl flex-1 rounded-t-[1rem] absolute z-50 md:rounded-[1rem]'>
           {title && <ModalTitle>{title}</ModalTitle>}
           <button
             className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'
@@ -52,7 +52,7 @@ export default function ConfirmationModal({
           >
             ✕
           </button>
-          <div className='p-8'>{children}</div>
+          <div>{children}</div>
         </section>
         <span
           className='backdrop-blur-sm w-full h-full bg-black/50 cursor-pointer'

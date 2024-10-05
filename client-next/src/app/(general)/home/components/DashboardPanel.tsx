@@ -1,4 +1,5 @@
 import { InfoIcon } from "@/assets/svg";
+import React from "react";
 
 interface Props {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ export function DashboardPanel({ children, title = "title", Icon }: Props) {
     <div className='dashboard-page-panel flex flex-col justify-between gap-5 p-5 h-[25rem] bg-base-200 rounded-3xl w-full'>
       <div className='flex items-center gap-5'>
         {/* <Icon className='w-5 h-5 [&>path]:fill-secondary-content' /> */}
-        <h1 className='text-lg font-bold'>{title}</h1>
+        <h1 className='text-xl font-bold'>{title}</h1>
       </div>
       {children}
     </div>

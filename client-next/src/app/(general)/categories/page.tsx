@@ -29,6 +29,7 @@ export default function CategoriesPage() {
   const handleChange = (e: { target: { value: any } }) => {
     setSearch(e.target.value);
   };
+  console.log(initial);
 
   useEffect(() => {
     getAllCategories();
@@ -36,9 +37,9 @@ export default function CategoriesPage() {
 
   return (
     <>
-      <div className='w-full px-5 mt-10'>
+      <div className='w-full px-5 mt-10 '>
         <DataList
-          title='Categoria'
+          title='Categorías'
           element={<Table data={result} type='categories' />}
         >
           <div>
@@ -50,7 +51,7 @@ export default function CategoriesPage() {
                       <input
                         autoComplete='false'
                         className='w-full flex-grow p-1 outline-none text-secondary bg-base-200 text-md'
-                        placeholder='Buscar categoria'
+                        placeholder='Buscar categoría'
                         type='text'
                         name='search'
                         value={search}
@@ -63,14 +64,14 @@ export default function CategoriesPage() {
                   </div>
                 </div>
                 <Button
-                  className='gap-3 lg:w-52 btn btn-primary md:w-80'
+                  className='gap-3 lg:w-72 btn btn-primary md:w-80'
                   onClick={() =>
                     setConfirmationModalOpen(!confirmationModalOpen)
                   }
                 >
-                  <div className='flex items-center gap-5'>
+                  <div className='flex items-center gap-5 text-lg'>
                     <PlusIcon />
-                    Nueva Categoria
+                    Nueva Categoría
                   </div>
                 </Button>
               </div>
@@ -90,7 +91,7 @@ export default function CategoriesPage() {
       </div>
       {confirmationModalOpen && (
         <ConfirmationModal
-          title='CREAR CATEGORIA'
+          title='CREAR CATEGORÍA'
           isOpen={confirmationModalOpen}
           handleClose={() => setConfirmationModalOpen(!confirmationModalOpen)}
         >

@@ -6,17 +6,18 @@ import { useBill } from "@/hook/useBill";
 import { PDFViewer } from "@react-pdf/renderer";
 import { useEffect } from "react";
 import { PDFile } from "../../../../components/pdf/PDFile";
+import React from "react";
 // import { useProducts, useModal } from '@/hooks/';
 // import { TableSkeleton } from '@/components';
 // import { ProductDetail } from './ProductDetail';
 
 export default function ProductsDashboard() {
   const { getAllBills, bills } = useBill();
-  const headers = ["N`Factura", "Nombre completo", "Total", "Ver"];
+  const headers = ["N. Factura", "Nombre completo", "Precio total", "Ver"];
 
   useEffect(() => {
     getAllBills();
-  });
+  }, [bills, getAllBills]);
 
   return (
     <>
@@ -40,7 +41,8 @@ export default function ProductsDashboard() {
                 <tr key={bill.id}>
                   <td>{bill.billNumber}</td>
                   <td>
-                    {bill.client.name} {bill.client.surname}
+                    <span className='font-bold'>{bill.client.surname}</span>,{" "}
+                    {bill.client.name}
                   </td>
                   <td>{bill.precioTotal}</td>
                   <td>

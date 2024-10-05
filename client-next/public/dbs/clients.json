@@ -226,5 +226,19 @@
     "postalCode": 4400,
     "surname": "work?",
     "dischargeDate": "2024-10-01 12:43:32"
+  },
+  {
+    "blacklist": false,
+    "departament": "General Alvear",
+    "direction": "fasdjlkñafsdjklñafsdjñklafs",
+    "dni": 52345232,
+    "email": "abril@gmail.com",
+    "id": "4df8deb7-9ef4-4b22-a959-338e551252ec",
+    "name": "Ximena",
+    "phoneNumber": 1234123412,
+    "phoneNumberAlt": 4123412343,
+    "postalCode": 5500,
+    "surname": "Panigatti",
+    "dischargeDate": ""
   }
 ]

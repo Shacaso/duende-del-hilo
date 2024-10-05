@@ -23,34 +23,34 @@ export default function View({ data }: Props) {
             <span className='font-bold'>Apellido:</span> {data?.surname}
           </p>
           <p className='text-xl'>
-            <span className='font-bold'>Dni:</span> {data?.dni}
+            <span className='font-bold'>DNI:</span> {data?.dni}
           </p>
           <p className='text-xl'>
-            <span className='font-bold'>Numero de celular 1:</span>{" "}
+            <span className='font-bold'>Número de celular 1:</span>{" "}
             {data?.phoneNumber}
           </p>
           <p className='text-xl'>
-            <span className='font-bold'>Numero de celular 2:</span>{" "}
+            <span className='font-bold'>Número de celular 2:</span>{" "}
             {data?.phoneNumberAlt}
           </p>
           <p className='text-xl'>
             <span className='font-bold'>Email:</span> {data?.email}
           </p>
           <p className='text-xl'>
-            <span className='font-bold'>Direccion:</span> {data?.direction}
+            <span className='font-bold'>Dirección:</span> {data?.direction}
           </p>
           <p className='text-xl'>
             <span className='font-bold'>Departamento:</span> {data?.departament}
           </p>
           <p className='text-xl'>
-            <span className='font-bold'>Codigo postal:</span> {data?.postalCode}
+            <span className='font-bold'>Código postal:</span> {data?.postalCode}
           </p>
           {/* <p className='text-xl'>Lista negra: {data?.blacklist}</p> */}
         </div>
-        <div className='flex p-5 gap-5 justify-end'>
+        <div className='grid grid-cols-2 gap-5 '>
           <button
             onClick={() => deleteAction(data?.id ?? "", "clients")}
-            className='btn btn-primary'
+            className='btn btn-primary  text-lg'
           >
             ELIMINAR
           </button>
@@ -58,7 +58,7 @@ export default function View({ data }: Props) {
             onClick={() => {
               setUpdateModalOpen(!updateModalOpen);
             }}
-            className='btn btn-warning'
+            className='btn btn-warning  text-lg'
           >
             ACTUALIZAR
           </button>

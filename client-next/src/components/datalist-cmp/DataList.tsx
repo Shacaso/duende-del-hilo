@@ -36,17 +36,14 @@ export function DataList({
   //   s => setViewMode ?? viewModeType.TABLE
   // );
   return (
-    <section className='datalist-component'>
-      <header className='datalist-component-header'>
-        <div className='datalist-component-header-top'>
+    <section className='flex flex-col gap-5'>
+      <header className='flex flex-col gap-5'>
+        <div className=''>
           <h1 className='text-5xl font-semibold text-secondary'>{title}</h1>
-          {/* {!element && (
-            <SwitchViewMode currentType={viewType} handleChange={setViewType} />
-          )} */}
         </div>
         {children}
       </header>
-      <div className='datalist-component-content'>{element}</div>
+      <div className=''>{element}</div>
     </section>
   );
 }

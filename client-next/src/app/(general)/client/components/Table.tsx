@@ -23,10 +23,9 @@ interface Props {
 const headers = [
   "",
   "Nombre completo",
-  "Telefono/s",
+  "Teléfono/s",
   "Mail",
   "Departamento",
-
   "Acciones",
 ];
 
@@ -47,16 +46,21 @@ export function Table({ data }: Props) {
     type: string
   ) => {
     Swal.fire({
-      title: `¿ Segura que quiere poner en la lista negre a este ${type} ?`,
+      title: `${
+        blacklist
+          ? `¿Seguro que quieres remover de la lista negra a este ${type}?`
+          : `¿Seguro que quieres guardar a este ${type} en la lista negra?`
+      }`,
+
       text: "",
       icon: "warning",
       showCancelButton: true,
       focusConfirm: true,
-      confirmButtonText: "Lista negra",
+      confirmButtonText: `${blacklist ? "Remover" : "Lista negra"}`,
       cancelButtonText: "Cancelar",
       customClass: {
-        confirmButton: "btn btn-primary",
-        cancelButton: "btn btn-warning",
+        confirmButton: "btn btn-primary text-lg",
+        cancelButton: "btn bg-slate-200 text-lg",
       },
     }).then((values) => {
       if (values.isConfirmed) {
@@ -64,9 +68,13 @@ export function Table({ data }: Props) {
         blackListClient({ id, dischargeDate, blacklist });
       } else {
         Swal.fire({
-          title: `El ${type} no fue agregado a la lista negra`,
+          title: `${
+            blacklist
+              ? `El ${type} no fue removido de la lista negra`
+              : `El ${type} no fue agregado a la lista negra`
+          }`,
           icon: "info",
-          timer: 1500,
+          timer: 2000,
           showConfirmButton: false,
         });
       }
@@ -86,75 +94,76 @@ export function Table({ data }: Props) {
       {/* {loading ? (
         <TableSkeleton rows={5} headers={headers} />
       ) : ( */}
-      <div className='overflow-x-auto '>
-        <table className='table table-lg bg-base-200 [&>thead>tr]:text-lg my-5'>
-          <thead>
-            <tr>
-              {headers.map((headerItem: string, index: number) => (
-                <th key={index}>{headerItem}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((client) => (
-              <tr className='hover:bg-base-300 text-lg' key={client.id}>
-                <td>
-                  <div
-                    className={`${
-                      client.blacklist
-                        ? "badge badge-primary"
-                        : "badge badge-success"
-                    }`}
-                  ></div>
-                </td>
-                <td>
-                  <p>
-                    <span className='font-bold'>{client.surname}</span>,{" "}
-                    {client.name}
-                  </p>
-                </td>
 
-                <td className='flex flex-col gap-1'>
-                  <p className='font-bold'>{client.phoneNumber}</p>
-                  <p>{client.phoneNumberAlt}</p>
-                </td>
-                {/* <td></td> */}
-                <td>{fixEmail(client.email)}</td>
-                <td>{client.departament}</td>
-                <td className='flex gap-2'>
-                  <button
-                    className='btn btn-circle btn-ghost'
-                    onClick={() => handleDelete(client, "cliente")}
-                  >
-                    {!client.blacklist ? <BlacklistIcon /> : <GoodlistIcon />}
-                  </button>
-
-                  <button
-                    className='btn btn-circle btn-ghost'
-                    onClick={() => {
-                      setClient(client), setUpdateModalOpen(!updateModalOpen);
-                    }}
-                  >
-                    <PencilAltIcon />
-                  </button>
-                  <button
-                    className='btn btn-circle btn-ghost'
-                    onClick={() => {
-                      setClient(client), setViewModalOpen(!viewModalOpen);
-                    }}
-                  >
-                    <ViewIcon />
-                  </button>
-                </td>
-              </tr>
+      <table className='table table-lg bg-base-200 [&>thead>tr]:text-lg mb-5'>
+        <thead>
+          <tr className=' border-slate-100 border-b-4 '>
+            {headers.map((headerItem: string, index: number) => (
+              <th className='text-xl font-bold' key={index}>
+                {headerItem}
+              </th>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </tr>
+        </thead>
+        <tbody className='overflow-auto [&>tr>td]:text-xl'>
+          {data.map((client) => (
+            <tr className='hover:bg-base-300 text-lg' key={client.id}>
+              <td>
+                <div
+                  className={`${
+                    client.blacklist
+                      ? "badge badge-primary"
+                      : "badge badge-success"
+                  }`}
+                ></div>
+              </td>
+              <td>
+                <p>
+                  <span className='font-bold'>{client.surname}</span>,{" "}
+                  {client.name}
+                </p>
+              </td>
+
+              <td className='flex flex-col gap-1'>
+                <p className='font-bold'>{client.phoneNumber}</p>
+                <p>{client.phoneNumberAlt}</p>
+              </td>
+              {/* <td></td> */}
+              <td>{fixEmail(client.email)}</td>
+              <td>{client.departament}</td>
+              <td className='flex gap-2'>
+                <button
+                  className='btn btn-circle btn-ghost'
+                  onClick={() => handleDelete(client, "cliente")}
+                >
+                  {!client.blacklist ? <BlacklistIcon /> : <GoodlistIcon />}
+                </button>
+
+                <button
+                  className='btn btn-circle btn-ghost'
+                  onClick={() => {
+                    setClient(client), setUpdateModalOpen(!updateModalOpen);
+                  }}
+                >
+                  <PencilAltIcon />
+                </button>
+                <button
+                  className='btn btn-circle btn-ghost'
+                  onClick={() => {
+                    setClient(client), setViewModalOpen(!viewModalOpen);
+                  }}
+                >
+                  <ViewIcon />
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
       {updateModalOpen && (
         <ConfirmationModal
-          title='UPDATE CLIENT'
+          title='ACTUALIZAR CLIENTE'
           isOpen={updateModalOpen}
           handleClose={() => setUpdateModalOpen(!updateModalOpen)}
         >

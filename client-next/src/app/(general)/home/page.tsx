@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useState } from "react";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import FormCreateNewBill from "@/components/navbar-cmp/components/FormCreateNewBill";
+import React from "react";
 
 export default function Dashboard() {
   const [confirmationModalOpen, setConfirmationModalOpen] =
@@ -29,7 +30,7 @@ export default function Dashboard() {
             Icon={IconEntrada}
             url={"/product"}
           />
-          <Stat title='Categorias' Icon={CategoryIcon} url={"/categories"} />
+          <Stat title='Categorías' Icon={CategoryIcon} url={"/categories"} />
           <Stat title='Facturas' Icon={BillsIcon} url={"/bill"} />
         </div>
 
@@ -43,7 +44,10 @@ export default function Dashboard() {
               <ProductsDashboard />
             </DashboardPanel.Content>
             <DashboardPanel.Footer>
-              <Link href={"/bill"} className='w-full mt-5 btn btn-primary'>
+              <Link
+                href={"/bill"}
+                className='w-full text-xl  mt-5 btn btn-primary'
+              >
                 Ver más facturas
               </Link>
             </DashboardPanel.Footer>

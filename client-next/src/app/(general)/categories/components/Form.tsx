@@ -48,15 +48,15 @@ export default function Form({ data }: Props) {
 
   return (
     <form
-      className='flex flex-col justify-between gap-5 w-full h-full p-5'
+      className='flex flex-col justify-between gap-5 w-full h-full '
       onSubmit={handleSubmit}
     >
       <div className='flex flex-col gap-5'>
         <Input
           errors={errors.name || ""}
-          placeholder='Ingrese nombre de categoria'
+          placeholder='Ingrese nombre de categoría'
           validate={touched.name && errors.name ? true : false}
-          title='Categoria'
+          title='Categoría'
           type='text'
           name='name'
           value={values.name}
@@ -76,7 +76,7 @@ export default function Form({ data }: Props) {
         />
       </div>
 
-      <button className='btn btn-primary' type='submit'>
+      <button className='btn btn-primary text-lg' type='submit'>
         GUARDAR
       </button>
     </form>

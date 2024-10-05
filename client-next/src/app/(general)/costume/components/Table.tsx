@@ -13,7 +13,7 @@ interface Props {
   data: Costume[];
 }
 
-const headers = ["", "Nombre", "Categoria", "Detalles", "Acciones"];
+const headers = ["", "Nombre", "Categoría", "Detalles", "Acciones"];
 
 export function Table({ data }: Props) {
   const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
@@ -23,7 +23,7 @@ export function Table({ data }: Props) {
 
   const handleDelete = (id: string, type: string) => {
     Swal.fire({
-      title: `¿ Segura que quiere borrar este ${type} ?`,
+      title: `¿Seguro que quieres eliminar este ${type}?`,
       text: "",
       icon: "warning",
       showCancelButton: true,
@@ -31,8 +31,8 @@ export function Table({ data }: Props) {
       confirmButtonText: "Eliminar",
       cancelButtonText: "Cancelar",
       customClass: {
-        confirmButton: "btn btn-primary",
-        cancelButton: "btn btn-warning",
+        confirmButton: "btn btn-primary text-lg",
+        cancelButton: "btn bg-slate-200 text-lg",
       },
     }).then((values) => {
       if (values.isConfirmed) {
@@ -40,9 +40,9 @@ export function Table({ data }: Props) {
         deleteCostume(id);
       } else {
         Swal.fire({
-          title: `El ${type} no fue borrado`,
+          title: `El ${type} no fue eliminado`,
           icon: "info",
-          timer: 1500,
+          timer: 2000,
           showConfirmButton: false,
         });
       }
@@ -56,15 +56,17 @@ export function Table({ data }: Props) {
       ) : ( */}
       <table className='table table-lg bg-base-200 [&>thead>tr]:text-lg '>
         <thead>
-          <tr>
+          <tr className=' border-slate-100 border-b-4 '>
             {headers.map((headerItem: string, index: number) => (
-              <th key={index}>{headerItem}</th>
+              <th className='text-xl font-bold' key={index}>
+                {headerItem}
+              </th>
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className='overflow-auto [&>tr>td]:text-xl'>
           {data.map((costume: Costume) => (
-            <tr key={costume.id}>
+            <tr className='hover:bg-base-300 text-lg' key={costume.id}>
               <td>
                 <div
                   className={`${

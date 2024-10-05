@@ -27,30 +27,23 @@ export default function FormNewCostume({ data }: Props) {
   });
 
   const costumeSchema = z.object({
-    name: z.string({
-      invalid_type_error: "El nombre debe ser un string",
-      required_error: "El nombre es requerido",
-    }),
-
-    price: z.coerce
-      .number({
-        invalid_type_error: "El precio debe ser un numero mayor que 0",
-        required_error: "El precio es requerido",
+    name: z
+      .string({
+        invalid_type_error: "El nombre debe ser un string",
+        required_error: "El nombre es requerido",
       })
-      .positive({
-        message: "El precio debe ser mayor que 0",
+      .min(1, { message: "Tiene que tener por lo menos una letra" }),
+    category: z
+      .string({ required_error: "La categoría es requerida" })
+      .refine((value) => nameCategories.includes(value), {
+        message: "No se encuentra la categoría en la base de datos",
       }),
-
-    category: z.string().refine((value) => nameCategories.includes(value), {
-      message: "No se encuenta la categoria en la base de datos",
-    }),
-
-    details: z.string({
-      invalid_type_error: "Los detalles debe ser un string",
-      required_error: "Los detalles son requeridos",
-    }),
-
-    dischargeDate: z.string().default(""),
+    details: z
+      .string({
+        invalid_type_error: "Los detalles debe ser un string",
+        required_error: "Los detalles son requeridos",
+      })
+      .min(1, { message: "Tiene que tener por lo menos una letra" }),
   });
 
   const initialValues = {
@@ -70,11 +63,11 @@ export default function FormNewCostume({ data }: Props) {
   } = useFormik({
     initialValues,
     validate: (values) => {
-      // try {
-      //   costumeSchema.parse(values);
-      // } catch (error) {
-      //   if (error instanceof ZodError) return error.formErrors.fieldErrors;
-      // }
+      try {
+        costumeSchema.parse(values);
+      } catch (error) {
+        if (error instanceof ZodError) return error.formErrors.fieldErrors;
+      }
     },
     onSubmit: (values) => {
       // values.category = categories.find(u => u.name === values.category.name)
@@ -121,6 +114,7 @@ export default function FormNewCostume({ data }: Props) {
       >
         <div className='flex flex-col gap-5 w-full'>
           <Input
+            errors={errors.name || ""}
             placeholder='Ingrese disfraz'
             validate={touched.name && errors.name ? true : false}
             title='Nombre del disfraz'
@@ -135,8 +129,8 @@ export default function FormNewCostume({ data }: Props) {
             data={categories}
             list='categories'
             validate={touched.category && errors.category ? true : false}
-            title='Categoria'
-            placeholder='Buscar categorias'
+            title='Categoría'
+            placeholder='Buscar categorías'
             type='text'
             name='category'
             value={values.category}
@@ -145,6 +139,7 @@ export default function FormNewCostume({ data }: Props) {
           />
 
           <Input
+            errors={errors.details || ""}
             placeholder='Ingrese detalles'
             validate={touched.details && errors.details ? true : false}
             title='Detalles'
@@ -155,7 +150,7 @@ export default function FormNewCostume({ data }: Props) {
             onChange={handleChange}
           />
         </div>
-        <button className='btn btn-primary' type='submit'>
+        <button className='btn btn-primary text-lg' type='submit'>
           GUARDAR
         </button>
       </form>

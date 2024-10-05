@@ -44,7 +44,7 @@ export function Filters({ setFilters }: Props) {
         ))}
       </select> */}
       <select
-        className='w-full h-10 text-sm lg:text-[12px] min-[1150px]:text-base bg-base-200 input input-bordered'
+        className='w-full h-12 text-sm lg:text-[12px] min-[1150px]:text-base bg-base-200 input input-bordered'
         name='category'
         // value={filters.categoria}
         onChange={handleFilterChange}
@@ -56,14 +56,14 @@ export function Filters({ setFilters }: Props) {
           </option>
         ))}
       </select>
-      <select
+      {/* <select
         className='w-full h-10 text-sm lg:text-[12px] min-[1150px]:text-base bg-base-200 input input-bordered'
         name='active'
         onChange={handleFilterChange}
       >
         <option value='active'>Activados</option>
         <option value='disabled'>Desactivados</option>
-      </select>
+      </select> */}
       {/* <select
         className='w-full h-10 text-sm lg:text-[12px] min-[1150px]:text-base bg-base-200 input input-bordered'
         name='proveedor'
