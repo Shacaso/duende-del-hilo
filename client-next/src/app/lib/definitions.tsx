@@ -1,6 +1,5 @@
 export interface Entity {
 	id: string;
-	dischargeDate?: string;
 }
 
 export interface Costume extends Entity {

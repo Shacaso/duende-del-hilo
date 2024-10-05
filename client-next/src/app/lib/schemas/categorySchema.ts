@@ -17,8 +17,6 @@ const categorySchema = z.object({
 		.nonnegative({
 			message: "El precio debe ser positivo",
 		}),
-
-	dischargeDate: z.string().default(""),
 });
 
 export function validateCategory(object: Category) {

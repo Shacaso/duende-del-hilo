@@ -106,8 +106,6 @@ const clientSchema = z.object({
 			required_error: "El blacklist es requerido",
 		})
 		.default(false),
-
-	dischargeDate: z.string().default(""),
 });
 
 const clientSchemaPartial = z.object({
@@ -182,8 +180,6 @@ const clientSchemaPartial = z.object({
 			required_error: "El blacklist es requerido",
 		})
 		.default(false),
-
-	dischargeDate: z.string().default(""),
 });
 
 export function validateClient(object: Client) {

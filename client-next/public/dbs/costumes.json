@@ -4,24 +4,20 @@
     "name": "Batman",
     "category": {
       "name": "Adultos",
-      "price": 2000,
-      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
-      "dischargeDate": ""
+      "price": 1500,
+      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
     },
-    "details": "Body del personaje y mascara",
-    "dischargeDate": ""
+    "details": "Body del personaje y mascara"
   },
   {
     "id": "a3c4ef05-2e0e-4d0c-bb66-6b8e27eb7f0a",
     "name": "Robin",
     "category": {
       "name": "Adultos",
-      "price": 2000,
-      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732",
-      "dischargeDate": ""
+      "price": 1500,
+      "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
     },
-    "details": "Body con baston",
-    "dischargeDate": ""
+    "details": "Body con baston"
   },
   {
     "id": "87ca360a-2593-4c49-b2a8-ebb61eb33b92",
@@ -29,11 +25,9 @@
     "category": {
       "name": "Niños",
       "price": 5000,
-      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
-      "dischargeDate": ""
+      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d"
     },
-    "details": "Vestido, colin y espada",
-    "dischargeDate": "2024-09-30 11:30:44"
+    "details": "Vestido, colin y espada"
   },
   {
     "id": "58c25131-7cf8-4b29-bd7b-bd2c95649c71",
@@ -41,11 +35,9 @@
     "category": {
       "name": "Niños",
       "price": 5000,
-      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
-      "dischargeDate": ""
+      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d"
     },
-    "details": "Vestido celeste",
-    "dischargeDate": ""
+    "details": "Vestido celeste"
   },
   {
     "id": "f33f3c00-c63e-4807-a4df-13e939044487",
@@ -53,11 +45,9 @@
     "category": {
       "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
       "name": "Cabezones",
-      "price": 15000,
-      "dischargeDate": ""
+      "price": 15000
     },
-    "details": "Body del personaje y cabezon",
-    "dischargeDate": ""
+    "details": "Body del personaje y cabezon"
   },
   {
     "id": "0c3f6a21-f98b-469d-a551-0499549f70a5",
@@ -65,11 +55,9 @@
     "category": {
       "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
       "name": "Cabezones",
-      "price": 15000,
-      "dischargeDate": ""
+      "price": 15000
     },
-    "details": "Body, mostacho y sombrero",
-    "dischargeDate": "2024-09-30 10:46:00"
+    "details": "Body, mostacho y sombrero"
   },
   {
     "id": "cbd26d2c-2346-48cb-8e65-e06e229d6b7a",
@@ -77,11 +65,9 @@
     "category": {
       "id": "b9319011-1f5e-4b30-85dd-2a315a0844a7",
       "name": "Mascaras",
-      "price": 8000,
-      "dischargeDate": ""
+      "price": 8000
     },
-    "details": "Body, mascara y machete",
-    "dischargeDate": ""
+    "details": "Body, mascara y machete"
   },
   {
     "id": "7cf0a321-5310-4b76-80df-8bccb87b4985",
@@ -89,46 +75,8 @@
     "category": {
       "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
       "name": "Cabezones",
-      "price": 15000,
-      "dischargeDate": ""
+      "price": 15000
     },
-    "details": "Calza negra, remera pegada negra y cabeza de termo",
-    "dischargeDate": "2024-09-30 10:57:48"
-  },
-  {
-    "id": "c31afc78-b0e2-4023-ae9b-63a2dc2e399f",
-    "name": "Batman",
-    "category": {
-      "name": "Niños",
-      "price": 5000,
-      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
-      "dischargeDate": ""
-    },
-    "details": "Body del personaje y mascara",
-    "dischargeDate": ""
-  },
-  {
-    "id": "cc2d7e4f-ff23-4b3c-8d98-93a67e169698",
-    "name": "Appa",
-    "category": {
-      "name": "Niños",
-      "price": 5000,
-      "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d",
-      "dischargeDate": ""
-    },
-    "details": "Body con pelo marron",
-    "dischargeDate": "2024-10-04 09:54:36"
-  },
-  {
-    "id": "25ba8bf8-f4de-4845-aff3-06b3b5ee9001",
-    "name": "Appa",
-    "category": {
-      "id": "b9319011-1f5e-4b30-85dd-2a315a0844a7",
-      "name": "Máscaras",
-      "price": 8000,
-      "dischargeDate": ""
-    },
-    "details": "asd",
-    "dischargeDate": "2024-10-04 10:04:43"
+    "details": "Calza negra, remera pegada negra y cabeza de termo"
   }
 ]

@@ -47,7 +47,7 @@ export async function getCategoryByName(
 	return categoryFound;
 }
 
-export const logicDelete = async (id: string) => {
+export const deleteCategory = async (id: string) => {
 	const response = await allEntities<Category>(categoriesPath);
 	if (response instanceof CustomError) return response;
 	const categories: Category[] = response;
@@ -58,7 +58,8 @@ export const logicDelete = async (id: string) => {
 
 	const cantCostumeByCategory: Costume[] | CustomError =
 		await getCostumesByCategory(categories[categoryIndex].id);
-	if (cantCostumeByCategory instanceof CustomError) return response;
+	if (cantCostumeByCategory instanceof CustomError)
+		return cantCostumeByCategory;
 	if (cantCostumeByCategory.length !== 0)
 		return new CustomError(
 			true,
@@ -66,23 +67,18 @@ export const logicDelete = async (id: string) => {
 			409
 		);
 
-	const [date, time] = new Date().toISOString().split("T");
-	const [a, b] = time.split(".");
-
-	const dischargeDate = {
-		dischargeDate: date + " " + a,
-	};
-
-	categories[categoryIndex] = {
-		...categories[categoryIndex],
-		...dischargeDate,
-	};
-
-	const responseSave = await saveAllEntities<Category>(
-		categories,
-		categoriesPath
+	const updatedCategories = categories.filter(
+		(_, index) => index !== categoryIndex
 	);
-	if (responseSave instanceof CustomError) return responseSave;
 
-	return categories[categoryIndex];
+	if (categories.length > updatedCategories.length) {
+		const responseSave = await saveAllEntities<Category>(
+			updatedCategories,
+			categoriesPath
+		);
+		if (responseSave instanceof CustomError) return responseSave;
+		return categories[categoryIndex];
+	} else {
+		return new CustomError(true, "No se pudo eliminar la categoria", 409);
+	}
 };

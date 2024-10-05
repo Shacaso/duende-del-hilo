@@ -40,8 +40,6 @@ export const costumeSchema = z.object({
 		invalid_type_error: "Los detalles debe ser un string",
 		required_error: "Los detalles son requeridos",
 	}),
-
-	dischargeDate: z.string().default(""),
 });
 
 export const costumeSchemaPartial = z.object({
@@ -65,8 +63,6 @@ export const costumeSchemaPartial = z.object({
 		invalid_type_error: "Los detalles debe ser un string",
 		required_error: "Los detalles son requeridos",
 	}),
-
-	dischargeDate: z.string().default(""),
 });
 
 export function validateCostume(object: CostumeDTO) {

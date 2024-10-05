@@ -9,8 +9,7 @@
     "direction": "Ficticia 123",
     "departament": "Ciudad",
     "postalCode": 5539,
-    "blacklist": true,
-    "dischargeDate": "2024-02-22 21:25:59"
+    "blacklist": true
   },
   {
     "id": "cc20444d-f6e8-40ab-9d55-38042429fe11",
@@ -22,8 +21,7 @@
     "direction": "Calle falsa 123",
     "departament": "Ciudad",
     "postalCode": 5539,
-    "blacklist": true,
-    "dischargeDate": "2024-05-01 21:37:56"
+    "blacklist": true
   },
   {
     "id": "d78fc04e-bbcc-42a2-9104-45bc97e98149",
@@ -35,8 +33,7 @@
     "direction": "Calle falsa 123",
     "departament": "Ciudad",
     "postalCode": 5539,
-    "blacklist": false,
-    "dischargeDate": ""
+    "blacklist": false
   },
   {
     "id": "d78fc04e-bbcc-42a2-9104-45bc97e98110",
@@ -48,8 +45,7 @@
     "direction": "Calle falsa 123",
     "departament": "Ciudad",
     "postalCode": 5539,
-    "blacklist": false,
-    "dischargeDate": "2024-02-23 14:51:29"
+    "blacklist": false
   },
   {
     "id": "d78fc04e-bbcc-42a2-9104-45bc97e98111",
@@ -61,8 +57,7 @@
     "direction": "Calle falsa 123",
     "departament": "Ciudad",
     "postalCode": 5539,
-    "blacklist": false,
-    "dischargeDate": ""
+    "blacklist": false
   },
   {
     "id": "d78fc04e-bbcc-42a2-9104-45bc97e98151",
@@ -74,8 +69,7 @@
     "direction": "Calle falsa 123",
     "departament": "Ciudad",
     "postalCode": 5539,
-    "blacklist": false,
-    "dischargeDate": ""
+    "blacklist": false
   },
   {
     "id": "d78fc04e-bbcc-42a2-9104-45bc97e98112",
@@ -87,8 +81,7 @@
     "direction": "Ficticia 123",
     "departament": "Ciudad",
     "postalCode": 5539,
-    "blacklist": false,
-    "dischargeDate": "2024-02-23 19:47:50"
+    "blacklist": false
   },
   {
     "id": "d78fc04e-bbcc-42a2-9104-45bc97e98113",
@@ -100,8 +93,7 @@
     "direction": "Calle 7",
     "departament": "Ciudad",
     "postalCode": 5513,
-    "blacklist": true,
-    "dischargeDate": "2024-02-23 20:36:51"
+    "blacklist": false
   },
   {
     "id": "d78f1323e-bbcc-42a2-9104-45bc97e98113",
@@ -113,8 +105,7 @@
     "direction": "Calle 7",
     "departament": "Ciudad",
     "postalCode": 5500,
-    "blacklist": false,
-    "dischargeDate": ""
+    "blacklist": false
   },
   {
     "name": "lablala",
@@ -125,9 +116,8 @@
     "direction": "Calle falsa 123",
     "departament": "Capital",
     "postalCode": 5539,
-    "blacklist": true,
-    "id": "e79dc0eb-bd1f-4f91-bf9e-75c123640451",
-    "dischargeDate": ""
+    "blacklist": false,
+    "id": "e79dc0eb-bd1f-4f91-bf9e-75c123640451"
   },
   {
     "name": "lablala",
@@ -140,8 +130,7 @@
     "departament": "Capital",
     "postalCode": 5539,
     "blacklist": false,
-    "id": "7696360c-0ecc-4bd5-b3aa-6ee1799ffd42",
-    "dischargeDate": ""
+    "id": "7696360c-0ecc-4bd5-b3aa-6ee1799ffd42"
   },
   {
     "blacklist": false,
@@ -154,8 +143,7 @@
     "phoneNumber": 3933491544,
     "phoneNumberAlt": 2613430543,
     "postalCode": 4402,
-    "surname": "Araya",
-    "dischargeDate": ""
+    "surname": "Araya"
   },
   {
     "blacklist": false,
@@ -168,8 +156,7 @@
     "phoneNumber": 2613439874,
     "phoneNumberAlt": 2613746524,
     "postalCode": 2345,
-    "surname": "Morales",
-    "dischargeDate": ""
+    "surname": "Morales"
   },
   {
     "blacklist": false,
@@ -182,8 +169,7 @@
     "phoneNumber": 2613459864,
     "phoneNumberAlt": 2613432958,
     "postalCode": 5500,
-    "surname": "Morales",
-    "dischargeDate": ""
+    "surname": "Morales"
   },
   {
     "blacklist": false,
@@ -196,11 +182,10 @@
     "phoneNumber": 9994949494,
     "phoneNumberAlt": 9494949494,
     "postalCode": 5000,
-    "surname": "Araya",
-    "dischargeDate": "2024-10-01 14:20:02"
+    "surname": "Araya"
   },
   {
-    "blacklist": true,
+    "blacklist": false,
     "departament": "Maipú",
     "direction": "Magdallena 46",
     "dni": 74932732,
@@ -210,11 +195,10 @@
     "phoneNumber": 3123123123,
     "phoneNumberAlt": 3123123123,
     "postalCode": 5005,
-    "surname": "Test",
-    "dischargeDate": "2024-10-01 12:45:29"
+    "surname": "Test"
   },
   {
-    "blacklist": true,
+    "blacklist": false,
     "departament": "Rivadavia",
     "direction": "afsdasdfasdasdasdf",
     "dni": 42356344,
@@ -224,21 +208,6 @@
     "phoneNumber": 4254523452,
     "phoneNumberAlt": 5234523453,
     "postalCode": 4400,
-    "surname": "work?",
-    "dischargeDate": "2024-10-01 12:43:32"
-  },
-  {
-    "blacklist": false,
-    "departament": "General Alvear",
-    "direction": "fasdjlkñafsdjklñafsdjñklafs",
-    "dni": 52345232,
-    "email": "abril@gmail.com",
-    "id": "4df8deb7-9ef4-4b22-a959-338e551252ec",
-    "name": "Ximena",
-    "phoneNumber": 1234123412,
-    "phoneNumberAlt": 4123412343,
-    "postalCode": 5500,
-    "surname": "Panigatti",
-    "dischargeDate": ""
+    "surname": "work?"
   }
 ]

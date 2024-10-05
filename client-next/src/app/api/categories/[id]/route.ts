@@ -1,4 +1,4 @@
-import { logicDelete, update } from "@/app/lib/data/categoriesRepository";
+import { deleteCategory, update } from "@/app/lib/data/categoriesRepository";
 import { getById } from "@/app/lib/data/entityRepository";
 import { jsonProcess } from "@/app/lib/data/funciones";
 import { categoriesPath } from "@/app/lib/data/paths";
@@ -45,7 +45,7 @@ export async function PATCH(req: Request, context: { params: any }) {
 
 export async function DELETE(req: Request, context: { params: any }) {
 	const id = context.params.id;
-	const response: Category | CustomError = await logicDelete(id);
+	const response: Category | CustomError = await deleteCategory(id);
 	if (response instanceof CustomError)
 		return NextResponse.json(response, { status: response.codigo });
 	return NextResponse.json(response);

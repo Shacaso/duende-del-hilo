@@ -6,7 +6,7 @@ export const getBlacklistClient = async () => {
 	const response = await allEntities<Client>(clientsPath);
 	if (response instanceof CustomError) return response;
 	const blacklistClient = response.filter((client: Client) => {
-		return !client.dischargeDate && client.blacklist === true;
+		return client.blacklist === true;
 	});
 
 	return blacklistClient;
@@ -17,7 +17,7 @@ export const getAllNoBlacklistClient = async () => {
 	if (response instanceof CustomError) return response;
 
 	const blacklistClient = response.filter((client: Client) => {
-		return !client.dischargeDate && !client.blacklist;
+		return !client.blacklist;
 	});
 
 	return blacklistClient;
