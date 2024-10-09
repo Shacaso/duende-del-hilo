@@ -5,8 +5,6 @@ import React from "react";
 interface Props {
   title?: string;
   onClick?: Function;
-  stat?: number;
-  loading?: boolean;
   Icon?: Element;
   url?: string;
 }
@@ -14,15 +12,13 @@ interface Props {
 export function Stat({
   title = "",
   onClick,
-  stat = 0,
-  loading = false,
   Icon = InfoIcon,
   url = "#",
 }: Props) {
   return (
     <>
       {onClick ? (
-        <div onClick={onClick} className='box-border bock flex-2 p'>
+        <div onClick={onClick} className='box-border bock flex-2 '>
           <div className='flex [&>div]:flex-1 items-center pl-[3rem] relative '>
             <div className='absolute left-[0px] bg-accent rounded-3xl w-[5rem] h-[5rem] p-[1.2rem] flex items-center justify-center'>
               <Icon className='[&>path]:fill-accent-content w-full h-full' />
@@ -31,9 +27,6 @@ export function Stat({
               <div className='font-bold text-[1.4rem] stat-title text-secundary'>
                 {title}
               </div>
-              {/* <div className='stat-value text-primary'>
-            {loading ? <Preload /> : stat}
-          </div> */}
             </div>
           </div>
         </div>
@@ -47,9 +40,6 @@ export function Stat({
               <div className='font-bold text-[1.4rem] stat-title text-secundary'>
                 {title}
               </div>
-              {/* <div className='stat-value text-primary'>
-            {loading ? <Preload /> : stat}
-          </div> */}
             </div>
           </div>
         </Link>

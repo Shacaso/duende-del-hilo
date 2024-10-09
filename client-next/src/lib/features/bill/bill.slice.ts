@@ -23,7 +23,7 @@ export const createAsync = createAsyncThunk(
   "bill/create",
   async (body: BillDto): Promise<Bill> => {
     const res = await fetchPost(body, path);
-    console.log(res);
+    // console.log(res);
     return res;
   }
 );
@@ -31,6 +31,19 @@ export const updateAsync = createAsyncThunk(
   "bill/update",
   async (body: BillDto): Promise<Bill> => {
     return await fetchPatch(body.id, body, path);
+  }
+);
+
+export const changeReturnedAsync = createAsyncThunk(
+  "bill/update",
+  async ({
+    id,
+    returned,
+  }: {
+    id: string;
+    returned: boolean;
+  }): Promise<Bill> => {
+    return await fetchPatch(id, { id, returned: !returned }, path);
   }
 );
 interface State {
@@ -78,7 +91,7 @@ export const billSlice = createSlice({
       state.bills.push(body);
       state.created = body;
       Swal.fire({
-        title: "¡ Factura guardada !",
+        title: "¡Factura guardada!",
         text: " ",
         icon: "success",
         showConfirmButton: false,
@@ -102,7 +115,7 @@ export const billSlice = createSlice({
       state.bills[index] = updated;
       // state.updated = updated;
       Swal.fire({
-        title: "¡ Factura actualizada !",
+        title: "¡Okay, devuelto!",
         text: " ",
         icon: "success",
         showConfirmButton: false,

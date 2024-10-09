@@ -49,17 +49,11 @@ export const deleteClientAsync = createAsyncThunk(
   async ({
     id,
     blacklist,
-    dischargeDate,
   }: {
     id: string;
     blacklist: boolean;
-    dischargeDate: string;
   }): Promise<Client> => {
-    return await fetchPatch(
-      id,
-      { id, dischargeDate, blacklist: !blacklist },
-      path
-    );
+    return await fetchPatch(id, { id, blacklist: !blacklist }, path);
   }
 );
 

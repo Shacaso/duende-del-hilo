@@ -113,11 +113,9 @@ export const CostumeInputList = ({
           />
         </label>
         <datalist id='costumes'>
-          {costumes
-            .filter((item) => item.dischargeDate === "")
-            .map(({ id, name, category }: Costume) => (
-              <option key={id} value={`${name} - ${category.name}`}></option>
-            ))}
+          {costumes.map(({ id, name, category }: Costume) => (
+            <option key={id} value={`${name} - ${category.name}`}></option>
+          ))}
         </datalist>
       </div>
       <div className='w-full rounded-lg bg-neutral p-2 gap-2 flex flex-col'>

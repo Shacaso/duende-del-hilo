@@ -13,7 +13,7 @@ interface Props {
   data: Costume[];
 }
 
-const headers = ["", "Nombre", "Categoría", "Detalles", "Acciones"];
+const headers = ["Nombre", "Categoría", "Detalles", "Acciones"];
 
 export function Table({ data }: Props) {
   const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
@@ -54,59 +54,52 @@ export function Table({ data }: Props) {
       {/* {loading ? (
         <TableSkeleton rows={5} headers={headers} />
       ) : ( */}
-      <table className='table table-lg bg-base-200 [&>thead>tr]:text-lg '>
-        <thead>
-          <tr className=' border-slate-100 border-b-4 '>
-            {headers.map((headerItem: string, index: number) => (
-              <th className='text-xl font-bold' key={index}>
-                {headerItem}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className='overflow-auto [&>tr>td]:text-xl'>
-          {data.map((costume: Costume) => (
-            <tr className='hover:bg-base-300 text-lg' key={costume.id}>
-              <td>
-                <div
-                  className={`${
-                    !costume.dischargeDate
-                      ? "badge badge-success"
-                      : "badge badge-primary"
-                  }`}
-                ></div>
-              </td>
-              <td>{costume.name}</td>
-              <td>{costume.category.name}</td>
-              <td>{costume.details}</td>
-              <td className='flex gap-2'>
-                <button
-                  className='btn btn-circle btn-ghost '
-                  onClick={() => handleDelete(costume.id, "disfraz")}
-                >
-                  <TrashIcon />
-                </button>
-                <button
-                  className='btn btn-circle btn-ghost'
-                  onClick={() => {
-                    setCostume(costume), setUpdateModalOpen(!updateModalOpen);
-                  }}
-                >
-                  <PencilAltIcon />
-                </button>
-                <button
-                  className='btn btn-circle btn-ghost'
-                  onClick={() => {
-                    setCostume(costume), setViewModalOpen(!viewModalOpen);
-                  }}
-                >
-                  <ViewIcon />
-                </button>
-              </td>
+      <div className='overflow-x-auto'>
+        <table className='table table-lg bg-base-200 [&>thead>tr]:text-lg '>
+          <thead>
+            <tr className=' border-slate-100 border-b-4 '>
+              {headers.map((headerItem: string, index: number) => (
+                <th className='text-xl font-bold' key={index}>
+                  {headerItem}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className='overflow-auto [&>tr>td]:text-xl'>
+            {data.map((costume: Costume) => (
+              <tr className='hover:bg-base-300 text-lg' key={costume.id}>
+                <td>{costume.name}</td>
+                <td>{costume.category.name}</td>
+                <td>{costume.details}</td>
+                <td className='flex gap-2'>
+                  <button
+                    className='btn btn-circle btn-ghost '
+                    onClick={() => handleDelete(costume.id, "disfraz")}
+                  >
+                    <TrashIcon />
+                  </button>
+                  <button
+                    className='btn btn-circle btn-ghost'
+                    onClick={() => {
+                      setCostume(costume), setUpdateModalOpen(!updateModalOpen);
+                    }}
+                  >
+                    <PencilAltIcon />
+                  </button>
+                  <button
+                    className='btn btn-circle btn-ghost'
+                    onClick={() => {
+                      setCostume(costume), setViewModalOpen(!viewModalOpen);
+                    }}
+                  >
+                    <ViewIcon />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {updateModalOpen && (
         <ConfirmationModal
           title='ACTUALIZAR DISFRAZ'

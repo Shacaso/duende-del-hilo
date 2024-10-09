@@ -12,6 +12,7 @@ import { useClient } from "@/hook/useClient";
 import { Client } from "@/app/lib/definitions";
 import React from "react";
 import { Filters } from "./components/Filters";
+import { Paginated } from "@/components/ui/component/Paginated";
 
 export default function ClientPage() {
   const { getAllClients, clients } = useClient();
@@ -46,9 +47,14 @@ export default function ClientPage() {
     setSearch(e.target.value);
   };
 
+  const [currentPage, setCurrentPage] = useState(0);
+
   useEffect(() => {
     getAllClients();
   });
+
+  // console.log(result);
+  // console.log(Math.floor(result.length / 5));
 
   return (
     <>
@@ -56,35 +62,28 @@ export default function ClientPage() {
         <DataList
           title='Cliente'
           // setViewMode={viewModeType.TABLE}
-          element={<Table data={result} />}
+          element={<Table data={result.splice(currentPage * 5, 5)} />}
         >
           <div>
             <DataList.Header>
-              <div className='flex gap-5 my-2'>
-                <div className='flex-1'>
-                  {/* <Search
-                  placeholder='Buscar cliente'
-                  onNewValue={handleFilters}
-                /> */}
-                  <div className='flex items-center justify-between p-2 rounded-md  bg-base-200'>
-                    <form className='w-full'>
-                      <input
-                        autoComplete='false'
-                        className='w-full flex-grow p-1 outline-none text-secondary bg-base-200 text-md'
-                        placeholder='Buscar cliente'
-                        type='text'
-                        name='search'
-                        value={search}
-                        onChange={handleChange}
-                      />
-                    </form>
-                    <span>
-                      <SearchInputIcon className='w-6 h-6 cursor-pointer [&>path]:hover:stroke-primary-focus ' />
-                    </span>
-                  </div>
-                </div>
+              <div className='  grid grid-cols-[1fr_288px]  gap-5 my-2'>
+                <form className=' flex items-center justify-between p-2 rounded-md  bg-base-200'>
+                  <input
+                    autoComplete='false'
+                    className='w-full flex-grow p-1 outline-none text-secondary bg-base-200 text-md'
+                    placeholder='Buscar cliente'
+                    type='text'
+                    name='search'
+                    value={search}
+                    onChange={handleChange}
+                  />
+                  <span>
+                    <SearchInputIcon className='w-6 h-6 cursor-pointer [&>path]:hover:stroke-primary-focus ' />
+                  </span>
+                </form>
+
                 <Button
-                  className='gap-3 lg:w-72 btn btn-primary md:w-80'
+                  className='gap-3 w-72 btn btn-primary '
                   onClick={() =>
                     setConfirmationModalOpen(!confirmationModalOpen)
                   }
@@ -101,13 +100,13 @@ export default function ClientPage() {
             </DataList.Filters>
           </div>
         </DataList>
-        {/* {totalPages > 1 && (
-        <Paginated
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
-      )} */}
+        <div className='flex m-5 justify-end '>
+          <Paginated
+            currentPage={currentPage}
+            totalPages={Math.floor(clients.length / 5)}
+            onPageChange={setCurrentPage}
+          />
+        </div>
       </div>
       {confirmationModalOpen && (
         <ConfirmationModal

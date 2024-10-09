@@ -114,8 +114,15 @@ export default function FormCreateNewBill({ data }: Props) {
 
     dniClient: z
       .number({
-        invalid_type_error: "El dni debe ser un numero mayor que 0",
-        required_error: "El dni es requerido",
+        invalid_type_error: "El DNI debe ser un número de 10 dígitos",
+        required_error: "El DNI es obligatorio",
+      })
+      .int()
+      .min(10000000, {
+        message: "El DNI debe tener al menos 8 dígitos",
+      })
+      .max(99999999, {
+        message: "El DNI no puede tener más de 8 dígitos",
       })
       .refine((value) => clients.map((c) => c.dni).includes(value), {
         message: "No se encuenta ese id de Usuario en la base de datos",
@@ -171,7 +178,7 @@ export default function FormCreateNewBill({ data }: Props) {
       depositoDescuento: data?.depositoDescuento ?? 0,
       depositoSaldo: data?.depositoSaldo ?? 0,
       depositoTotal: data?.depositoTotal ?? 0,
-      dischargeDate: data?.dischargeDate ?? "",
+      // dischargeDate: data?.dischargeDate ?? "",
       dniClient: data?.dniClient ?? 0,
       id: data?.id ?? "",
       note: data?.note ?? "",
@@ -215,20 +222,6 @@ export default function FormCreateNewBill({ data }: Props) {
         updateBill(values);
       }
       resetForm();
-
-      // if (!data) {
-      //   fetchPost(values, "bills").then((res) => {
-      //     if (res) {
-      //       alert("La factura se ha guardado");
-      //     }
-      //   });
-      // } else {
-      //   fetchPatch(data.id, values, "bills").then((res) => {
-      //     if (res) {
-      //       alert("La factura se ha actualizado");
-      //     }
-      //   });
-      // }
     },
   });
 
@@ -280,7 +273,7 @@ export default function FormCreateNewBill({ data }: Props) {
   return (
     <>
       <form className='flex flex-col gap-5 w-full px-2' onSubmit={handleSubmit}>
-        {touched.dniClient && errors.dniClient && <p>{errors.dniClient}</p>}
+        {/* {touched.dniClient && errors.dniClient && <p>{errors.dniClient}</p>} */}
         <div className='flex gap-5 flex-col bg-slate-200 p-2 rounded-lg'>
           <div className='flex justify-between'>
             <h6 className='font-bold'>Cliente</h6>
@@ -309,7 +302,7 @@ export default function FormCreateNewBill({ data }: Props) {
             </label>
             <datalist id='users'>
               {clients.map((client) =>
-                client.dischargeDate === "" ? (
+                !client.blacklist ? (
                   <option
                     key={client.dni}
                     value={`${client.dni} - ${client.name} ${client.surname}`}
@@ -325,7 +318,7 @@ export default function FormCreateNewBill({ data }: Props) {
           </div>
         </div>
 
-        <div className='w-full h-1 bg-primary rounded-lg'></div>
+        <div className='divider divider-primary my-1'></div>
 
         <CostumeInputList
           handleChangeCostume={handleChangeCostume}
@@ -346,7 +339,7 @@ export default function FormCreateNewBill({ data }: Props) {
           onChange={handleChange}
         />
 
-        <div className='w-full h-1 bg-primary rounded-lg'></div>
+        <div className='divider divider-primary my-1'></div>
         <div className='grid grid-cols-3 bg-slate-200 p-4 rounded-lg '>
           <div className='flex gap-2 flex-col  col-span-3'>
             {/* <h1>Precio</h1> */}
@@ -493,7 +486,7 @@ export default function FormCreateNewBill({ data }: Props) {
           </div>
         </div>
 
-        <div className='w-full h-1 bg-primary rounded-lg'></div>
+        <div className='divider divider-primary my-1'></div>
 
         <div className='flex flex-row gap-5'>
           <div className='flex flex-col gap-3 w-full'>

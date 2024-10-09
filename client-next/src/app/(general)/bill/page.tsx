@@ -9,6 +9,7 @@ import { SearchInputIcon } from "@/assets/svg";
 import { useBill } from "@/hook/useBill";
 import { Filters } from "./components/Filters";
 import { type Bill } from "@/app/lib/definitions";
+import { Paginated } from "@/components/ui/component/Paginated";
 
 export default function Bill() {
   const [filters, setFilters] = useState({
@@ -21,52 +22,69 @@ export default function Bill() {
 
   const [search, setSearch] = useState("");
 
-  const initial = bills.filter((bill) =>
-    filters.active === "active" ? bill.returned === false : bill.returned
-  );
+  // Helper para parsear las fechas
+  const parseDate = (item: Bill) => {
+    const [yearRetirementDate, monthRetirementDate, dayRetirementDate] =
+      item.retirementDate.split("-").map(Number);
 
-  // TODO filter for date $start and $end
-  // const parseDate = (dateStr: string) => {
-  //   const [month, day, year] = dateStr.split("/").map(Number);
-  //   return new Date(year, month - 1, day); // El mes en Date empieza en 0 (enero)
-  // };
+    const [yearReturnedDate, monthReturnedDate, dayReturnedDate] =
+      item.returnedDate.split("-").map(Number);
 
-  // const filterByDateRange = (data: Bill[]) => {
-  //   const start = filters.start ? new Date(filters.start) : null;
-  //   const end = filters.end ? new Date(filters.end) : null;
+    return [
+      new Date(yearRetirementDate, monthRetirementDate - 1, dayRetirementDate),
+      new Date(yearReturnedDate, monthReturnedDate - 1, dayReturnedDate),
+    ];
+  };
 
-  //   return data.filter((item) => {
-  //     const itemDate = parseDate(item.date);
+  // Filtro por estado
+  const filterByState = (bill: Bill) => {
+    switch (filters.active) {
+      case "active":
+        return !bill.returned;
+      case "disabled":
+        return bill.returned;
+      case "filed":
+        return bill.returned;
+      default:
+        return true; // Sin filtro si no hay estado activo
+    }
+  };
 
-  //     return (!start || itemDate >= start) && (!end || itemDate <= end);
-  //   });
-  // };
+  // Filtro por rango de fechas
+  const filterByDateRange = (bill: Bill) => {
+    const start = filters.start ? new Date(filters.start) : null;
+    const end = filters.end ? new Date(filters.end) : null;
 
-  // if (filters.end !== "" || filters.start !== "") {
-  //   filterByDateRange(initial);
-  // }
-  const result = !bills
-    ? initial
-    : initial.filter((bill: Bill) => {
-        const billsFiltered =
-          bill.client.name.toLowerCase().includes(search.toLowerCase()) ||
-          bill.client.surname.toLowerCase().includes(search.toLowerCase()) ||
-          bill.date.toLowerCase().includes(search.toLowerCase()) ||
-          bill.billNumber
-            .toString()
-            .toLowerCase()
-            .includes(search.toLowerCase()) ||
-          bill.precioTotal
-            .toString()
-            .toLowerCase()
-            .includes(search.toLowerCase()) ||
-          bill.client.dni
-            .toString()
-            .toLowerCase()
-            .includes(search.toLowerCase());
+    const [retirementDate, returnedDate] = parseDate(bill);
 
-        return billsFiltered;
-      });
+    return (!start || retirementDate >= start) && (!end || returnedDate <= end);
+  };
+
+  const [currentPage, setCurrentPage] = useState(0);
+  // Filtro por búsqueda de texto
+  const filterBySearch = (bill: Bill) => {
+    const searchLower = search.toLowerCase();
+    return (
+      bill.client.name.toLowerCase().includes(searchLower) ||
+      bill.client.surname.toLowerCase().includes(searchLower) ||
+      bill.date.toLowerCase().includes(searchLower) ||
+      bill.billNumber.toString().toLowerCase().includes(searchLower) ||
+      bill.precioTotal.toString().toLowerCase().includes(searchLower) ||
+      bill.client.dni.toString().toLowerCase().includes(searchLower)
+    );
+  };
+
+  // Aplicación de todos los filtros
+  const filteredBills = bills.filter((bill: Bill) => {
+    return (
+      filterByState(bill) && filterByDateRange(bill) && filterBySearch(bill)
+    );
+  });
+
+  // console.log(filters);
+  // console.log(filters.start);
+  // console.log(filters.end);
+
   const handleChange = (e: { target: { value: any } }) => {
     setSearch(e.target.value);
   };
@@ -81,7 +99,7 @@ export default function Bill() {
         title='Facturas'
         element={
           <Table
-            data={result}
+            data={filteredBills.splice(currentPage * 5, 5)}
             showTotal={filters.start !== "" && filters.end !== ""}
           />
         }
@@ -118,6 +136,13 @@ export default function Bill() {
           </DataList.Filters>
         </div>
       </DataList>
+      <div className='flex m-5 justify-end '>
+        <Paginated
+          currentPage={currentPage}
+          totalPages={Math.floor(bills.length / 5)}
+          onPageChange={setCurrentPage}
+        />
+      </div>
     </div>
   );
 }

@@ -53,42 +53,44 @@ export function Table({ data, type }: Props) {
       {/* {loading ? (
         <TableSkeleton rows={5} headers={headers} />
       ) : ( */}
-      <table className='table table-fixed table-lg bg-base-200 [&>thead>tr]:text-lg '>
-        <thead>
-          <tr className=' border-slate-100 border-b-4 '>
-            {headers.map((headerItem: string, index: number) => (
-              <th className='text-xl font-bold' key={index}>
-                {headerItem}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className='overflow-auto [&>tr>td]:text-xl'>
-          {data.map((category) => (
-            <tr className='hover:bg-base-300 text-lg' key={category.id}>
-              <td>{category.name}</td>
-              <td>{category.price}</td>
-              <td className='flex gap-2'>
-                <button
-                  className='btn btn-circle btn-ghost'
-                  onClick={() => handleDelete(category.id, "categoría")}
-                >
-                  <TrashIcon />
-                </button>
-                <button
-                  className='btn btn-circle btn-ghost'
-                  onClick={() => {
-                    setCategories(category),
-                      setUpdateModalOpen(!updateModalOpen);
-                  }}
-                >
-                  <PencilAltIcon />
-                </button>
-              </td>
+      <div className='overflow-x-auto'>
+        <table className='table  table-lg bg-base-200 [&>thead>tr]:text-lg '>
+          <thead>
+            <tr className=' border-slate-100 border-b-4 '>
+              {headers.map((headerItem: string, index: number) => (
+                <th className='text-xl font-bold' key={index}>
+                  {headerItem}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className='overflow-auto [&>tr>td]:text-xl'>
+            {data.map((category) => (
+              <tr className='hover:bg-base-300 text-lg' key={category.id}>
+                <td>{category.name}</td>
+                <td>{category.price}</td>
+                <td className='flex gap-2'>
+                  <button
+                    className='btn btn-circle btn-ghost'
+                    onClick={() => handleDelete(category.id, "categoría")}
+                  >
+                    <TrashIcon />
+                  </button>
+                  <button
+                    className='btn btn-circle btn-ghost'
+                    onClick={() => {
+                      setCategories(category),
+                        setUpdateModalOpen(!updateModalOpen);
+                    }}
+                  >
+                    <PencilAltIcon />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {updateModalOpen && (
         <ConfirmationModal
           title='ACTUALIZAR CATEGORÍA'

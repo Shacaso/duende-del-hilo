@@ -22,20 +22,14 @@ export default function CostumePage() {
 
   const [search, setSearch] = useState("");
 
-  const initial = costumes.filter((costume) =>
-    filters.active === "active"
-      ? costume.dischargeDate?.length === 0
-      : costume.dischargeDate?.length !== 0
-  );
-
-  const result = initial.filter((costume) => {
+  const result = costumes.filter((costume) => {
     const matchesSearch =
       costume.name.toLowerCase().includes(search.toLowerCase()) ||
       costume.category.name.toLowerCase().includes(search.toLowerCase());
 
     const matchesCategory =
       filters.category === "" || filters.category === "all"
-        ? initial
+        ? costumes
         : costume.category.name.includes(filters.category);
 
     return matchesSearch && matchesCategory;
@@ -59,27 +53,24 @@ export default function CostumePage() {
         >
           <div>
             <DataList.Header>
-              <div className='flex gap-5 my-2'>
-                <div className='flex-1'>
-                  <div className='flex items-center justify-between p-2 rounded-md  bg-base-200'>
-                    <form className='w-full'>
-                      <input
-                        autoComplete='false'
-                        className='w-full flex-grow p-1 outline-none text-secondary bg-base-200 text-md'
-                        placeholder='Buscar disfraz'
-                        type='text'
-                        name='search'
-                        value={search}
-                        onChange={handleChange}
-                      />
-                    </form>
-                    <span>
-                      <SearchInputIcon className='w-6 h-6 cursor-pointer [&>path]:hover:stroke-primary-focus ' />
-                    </span>
-                  </div>
-                </div>
+              <div className='  grid grid-cols-[1fr_288px]  gap-5 my-2'>
+                <form className=' flex items-center justify-between p-2 rounded-md  bg-base-200'>
+                  <input
+                    autoComplete='false'
+                    className='w-full flex-grow p-1 outline-none text-secondary bg-base-200 text-md'
+                    placeholder='Buscar disfraz'
+                    type='text'
+                    name='search'
+                    value={search}
+                    onChange={handleChange}
+                  />
+                  <span>
+                    <SearchInputIcon className='w-6 h-6 cursor-pointer [&>path]:hover:stroke-primary-focus ' />
+                  </span>
+                </form>
+
                 <Button
-                  className='gap-3 lg:w-72 btn btn-primary md:w-80'
+                  className='gap-3 w-72 btn btn-primary '
                   onClick={() =>
                     setConfirmationModalOpen(!confirmationModalOpen)
                   }

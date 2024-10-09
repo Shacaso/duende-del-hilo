@@ -41,10 +41,7 @@ export function Table({ data }: Props) {
   // const { loading, deleteProvider } = useProviders();
   // const { openModal } = useModal();
 
-  const handleDelete = (
-    { id, dischargeDate = "", blacklist }: Client,
-    type: string
-  ) => {
+  const handleDelete = ({ id, blacklist }: Client, type: string) => {
     Swal.fire({
       title: `${
         blacklist
@@ -65,7 +62,7 @@ export function Table({ data }: Props) {
     }).then((values) => {
       if (values.isConfirmed) {
         Swal.showLoading();
-        blackListClient({ id, dischargeDate, blacklist });
+        blackListClient({ id, blacklist });
       } else {
         Swal.fire({
           title: `${
@@ -95,71 +92,73 @@ export function Table({ data }: Props) {
         <TableSkeleton rows={5} headers={headers} />
       ) : ( */}
 
-      <table className='table table-lg bg-base-200 [&>thead>tr]:text-lg mb-5'>
-        <thead>
-          <tr className=' border-slate-100 border-b-4 '>
-            {headers.map((headerItem: string, index: number) => (
-              <th className='text-xl font-bold' key={index}>
-                {headerItem}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className='overflow-auto [&>tr>td]:text-xl'>
-          {data.map((client) => (
-            <tr className='hover:bg-base-300 text-lg' key={client.id}>
-              <td>
-                <div
-                  className={`${
-                    client.blacklist
-                      ? "badge badge-primary"
-                      : "badge badge-success"
-                  }`}
-                ></div>
-              </td>
-              <td>
-                <p>
-                  <span className='font-bold'>{client.surname}</span>,{" "}
-                  {client.name}
-                </p>
-              </td>
-
-              <td className='flex flex-col gap-1'>
-                <p className='font-bold'>{client.phoneNumber}</p>
-                <p>{client.phoneNumberAlt}</p>
-              </td>
-              {/* <td></td> */}
-              <td>{fixEmail(client.email)}</td>
-              <td>{client.departament}</td>
-              <td className='flex gap-2'>
-                <button
-                  className='btn btn-circle btn-ghost'
-                  onClick={() => handleDelete(client, "cliente")}
-                >
-                  {!client.blacklist ? <BlacklistIcon /> : <GoodlistIcon />}
-                </button>
-
-                <button
-                  className='btn btn-circle btn-ghost'
-                  onClick={() => {
-                    setClient(client), setUpdateModalOpen(!updateModalOpen);
-                  }}
-                >
-                  <PencilAltIcon />
-                </button>
-                <button
-                  className='btn btn-circle btn-ghost'
-                  onClick={() => {
-                    setClient(client), setViewModalOpen(!viewModalOpen);
-                  }}
-                >
-                  <ViewIcon />
-                </button>
-              </td>
+      <div className='overflow-x-auto'>
+        <table className='table table-lg bg-base-200 [&>thead>tr]:text-lg '>
+          <thead>
+            <tr className=' border-slate-100 border-b-4 '>
+              {headers.map((headerItem: string, index: number) => (
+                <th className='text-xl font-bold' key={index}>
+                  {headerItem}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className='overflow-auto [&>tr>td]:text-xl'>
+            {data.map((client) => (
+              <tr className='hover:bg-base-300 text-lg' key={client.id}>
+                <td>
+                  <div
+                    className={`${
+                      client.blacklist
+                        ? "badge badge-primary"
+                        : "badge badge-success"
+                    }`}
+                  ></div>
+                </td>
+                <td>
+                  <p>
+                    <span className='font-bold'>{client.surname}</span>,{" "}
+                    {client.name}
+                  </p>
+                </td>
+
+                <td className='flex flex-col gap-1'>
+                  <p className='font-bold'>{client.phoneNumber}</p>
+                  <p>{client.phoneNumberAlt}</p>
+                </td>
+                {/* <td></td> */}
+                <td>{fixEmail(client.email)}</td>
+                <td>{client.departament}</td>
+                <td className='flex gap-2'>
+                  <button
+                    className='btn btn-circle btn-ghost'
+                    onClick={() => handleDelete(client, "cliente")}
+                  >
+                    {!client.blacklist ? <BlacklistIcon /> : <GoodlistIcon />}
+                  </button>
+
+                  <button
+                    className='btn btn-circle btn-ghost'
+                    onClick={() => {
+                      setClient(client), setUpdateModalOpen(!updateModalOpen);
+                    }}
+                  >
+                    <PencilAltIcon />
+                  </button>
+                  <button
+                    className='btn btn-circle btn-ghost'
+                    onClick={() => {
+                      setClient(client), setViewModalOpen(!viewModalOpen);
+                    }}
+                  >
+                    <ViewIcon />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {updateModalOpen && (
         <ConfirmationModal

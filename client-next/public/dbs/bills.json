@@ -1,628 +1,670 @@
 [
-	{
-		"id": "cf46483f-e634-4608-9823-d383511c61cc",
-		"billNumber": 1,
-		"date": "2024-09-23 20:51:20",
-		"returnedDate": "2024-09-30",
-		"retirementDate": "2024-09-23",
-		"returned": false,
-		"amountTotal": 8500,
-		"advancement": 0,
-		"remainingBalance": 8500,
-		"client": {
-			"id": "d78f1323e-bbcc-42a2-9104-45bc97e98113",
-			"name": "Alejo",
-			"surname": "Araya",
-			"dni": 42749595,
-			"phoneNumber": 2613430975,
-			"email": "alejoaraya2000@gmail.com",
-			"direction": "Calle 7",
-			"departament": "Ciudad",
-			"postalCode": 5500,
-			"blacklist": false
-		},
-		"costumes": [
-			{
-				"costume": {
-					"id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
-					"name": "Bombero",
-					"category": {
-						"name": "Adulto",
-						"price": 2500,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "asdasdas",
-					"price": 2500
-				},
-				"cant": 2
-			},
-			{
-				"costume": {
-					"id": "81400c51-c82e-4e7b-8350-a752340b9e2d",
-					"name": "Doctor",
-					"category": {
-						"name": "Adulto",
-						"price": 2500,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "asdasdas",
-					"price": 2500
-				},
-				"cant": 1
-			}
-		],
-		"others": [
-			{
-				"name": "Vincha",
-				"price": 500,
-				"cant": 2
-			}
-		],
-		"note": "Gracias"
-	},
-	{
-		"id": "230608e4-bc5a-4e62-9d9e-f01693331a40",
-		"billNumber": 2,
-		"date": "2024-09-28 09:20:20",
-		"returnedDate": "2024-09-30",
-		"retirementDate": "2024-09-23",
-		"returned": false,
-		"precioTotal": 8000,
-		"precioACuenta": 8000,
-		"precioDescuento": 8000,
-		"precioSaldo": -8000,
-		"depositoTotal": 8000,
-		"depositoACuenta": 8000,
-		"depositoDescuento": 8000,
-		"depositoSaldo": -8000,
-		"client": {
-			"id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
-			"name": "Rodrigo",
-			"surname": "Vargas",
-			"dni": 35123123,
-			"phoneNumber": 2615123123,
-			"email": "rxvargas.92@gmail.com",
-			"direction": "Ficticia 123",
-			"departament": "Ciudad",
-			"postalCode": 5539,
-			"blacklist": true
-		},
-		"costumes": [
-			{
-				"costume": {
-					"id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
-					"name": "Bombero",
-					"category": {
-						"name": "Adultos",
-						"price": 3000,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "asdasdas"
-				},
-				"cant": 2
-			},
-			{
-				"costume": {
-					"id": "5171c49d-b493-4abc-ab36-837677b787c0",
-					"name": "Batman",
-					"category": {
-						"name": "Adultos",
-						"price": 3000,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "Lentes grandes de sol para super fiestas",
-					"price": 2000
-				},
-				"cant": 1
-			}
-		],
-		"others": [
-			{
-				"name": "Vincha",
-				"price": 500,
-				"cant": 2
-			}
-		],
-		"note": "Gracias"
-	},
-	{
-		"id": "21fd359d-1471-4c3e-baea-2b363024983c",
-		"billNumber": 3,
-		"date": "2024-09-28 09:20:47",
-		"returnedDate": "2024-09-30",
-		"retirementDate": "2024-09-23",
-		"returned": false,
-		"precioTotal": 8000,
-		"precioACuenta": 8000,
-		"precioSaldo": null,
-		"depositoTotal": 8000,
-		"depositoACuenta": 8000,
-		"depositoDescuento": 8000,
-		"depositoSaldo": -8000,
-		"client": {
-			"id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
-			"name": "Rodrigo",
-			"surname": "Vargas",
-			"dni": 35123123,
-			"phoneNumber": 2615123123,
-			"email": "rxvargas.92@gmail.com",
-			"direction": "Ficticia 123",
-			"departament": "Ciudad",
-			"postalCode": 5539,
-			"blacklist": true
-		},
-		"costumes": [
-			{
-				"costume": {
-					"id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
-					"name": "Bombero",
-					"category": {
-						"name": "Adultos",
-						"price": 3000,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "asdasdas"
-				},
-				"cant": 2
-			},
-			{
-				"costume": {
-					"id": "5171c49d-b493-4abc-ab36-837677b787c0",
-					"name": "Batman",
-					"category": {
-						"name": "Adultos",
-						"price": 3000,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "Lentes grandes de sol para super fiestas",
-					"price": 2000
-				},
-				"cant": 1
-			}
-		],
-		"others": [
-			{
-				"name": "Vincha",
-				"price": 500,
-				"cant": 2
-			}
-		],
-		"note": "Gracias"
-	},
-	{
-		"id": "f15d01b9-a649-4ed0-814a-a1a4b099ec94",
-		"billNumber": 4,
-		"date": "2024-09-28 09:36:46",
-		"returnedDate": "2024-09-30",
-		"retirementDate": "2024-09-23",
-		"returned": false,
-		"precioTotal": 8000,
-		"precioACuenta": 8000,
-		"precioDescuento": 0,
-		"precioSaldo": 0,
-		"depositoTotal": 8000,
-		"depositoACuenta": 0,
-		"depositoDescuento": 8000,
-		"depositoSaldo": 0,
-		"client": {
-			"id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
-			"name": "Rodrigo",
-			"surname": "Vargas",
-			"dni": 35123123,
-			"phoneNumber": 2615123123,
-			"email": "rxvargas.92@gmail.com",
-			"direction": "Ficticia 123",
-			"departament": "Ciudad",
-			"postalCode": 5539,
-			"blacklist": true
-		},
-		"costumes": [
-			{
-				"costume": {
-					"id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
-					"name": "Bombero",
-					"category": {
-						"name": "Adultos",
-						"price": 3000,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "asdasdas"
-				},
-				"cant": 2
-			},
-			{
-				"costume": {
-					"id": "5171c49d-b493-4abc-ab36-837677b787c0",
-					"name": "Batman",
-					"category": {
-						"name": "Adultos",
-						"price": 3000,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "Lentes grandes de sol para super fiestas",
-					"price": 2000
-				},
-				"cant": 1
-			}
-		],
-		"others": [
-			{
-				"name": "Vincha",
-				"price": 500,
-				"cant": 2
-			}
-		],
-		"note": "Gracias"
-	},
-	{
-		"id": "347358d7-90d2-439a-8c7c-59b6e1c4ff83",
-		"billNumber": 5,
-		"date": "2024-09-28 09:38:42",
-		"returnedDate": "2024-09-30",
-		"retirementDate": "2024-09-23",
-		"returned": false,
-		"precioTotal": 8000,
-		"precioACuenta": 5000,
-		"precioDescuento": 0,
-		"precioSaldo": 3000,
-		"depositoTotal": 8000,
-		"depositoACuenta": 0,
-		"depositoDescuento": 4000,
-		"depositoSaldo": 4000,
-		"client": {
-			"id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
-			"name": "Rodrigo",
-			"surname": "Vargas",
-			"dni": 35123123,
-			"phoneNumber": 2615123123,
-			"email": "rxvargas.92@gmail.com",
-			"direction": "Ficticia 123",
-			"departament": "Ciudad",
-			"postalCode": 5539,
-			"blacklist": true
-		},
-		"costumes": [
-			{
-				"costume": {
-					"id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
-					"name": "Bombero",
-					"category": {
-						"name": "Adultos",
-						"price": 3000,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "asdasdas"
-				},
-				"cant": 2
-			},
-			{
-				"costume": {
-					"id": "5171c49d-b493-4abc-ab36-837677b787c0",
-					"name": "Batman",
-					"category": {
-						"name": "Adultos",
-						"price": 3000,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "Lentes grandes de sol para super fiestas",
-					"price": 2000
-				},
-				"cant": 1
-			}
-		],
-		"others": [
-			{
-				"name": "Vincha",
-				"price": 500,
-				"cant": 2
-			}
-		],
-		"note": "Gracias"
-	},
-	{
-		"id": "ee01d6ec-1d77-4ed3-a26c-6c826d4360ed",
-		"billNumber": 6,
-		"date": "2024-09-28 09:55:51",
-		"returnedDate": "2024-09-30",
-		"retirementDate": "2024-09-23",
-		"returned": false,
-		"precioTotal": 10000,
-		"precioACuenta": 5000,
-		"precioDescuento": 0,
-		"precioSaldo": 5000,
-		"depositoTotal": 8000,
-		"depositoACuenta": 0,
-		"depositoDescuento": 4000,
-		"depositoSaldo": 4000,
-		"client": {
-			"id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
-			"name": "Rodrigo",
-			"surname": "Vargas",
-			"dni": 35123123,
-			"phoneNumber": 2615123123,
-			"email": "rxvargas.92@gmail.com",
-			"direction": "Ficticia 123",
-			"departament": "Ciudad",
-			"postalCode": 5539,
-			"blacklist": true
-		},
-		"costumes": [
-			{
-				"costume": {
-					"id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
-					"name": "Bombero",
-					"category": {
-						"name": "Adultos",
-						"price": 3000,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "asdasdas"
-				},
-				"cant": 2
-			},
-			{
-				"costume": {
-					"id": "5171c49d-b493-4abc-ab36-837677b787c0",
-					"name": "Batman",
-					"category": {
-						"name": "Adultos",
-						"price": 3000,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "Lentes grandes de sol para super fiestas",
-					"price": 2000
-				},
-				"cant": 1
-			}
-		],
-		"others": [
-			{
-				"name": "Vincha",
-				"price": 500,
-				"cant": 2
-			}
-		],
-		"note": "Gracias"
-	},
-	{
-		"id": "2c42a9eb-1231-48cb-a5f2-87f3185a070e",
-		"billNumber": 7,
-		"date": "2024-09-28 11:51:37",
-		"returnedDate": "2024-09-29",
-		"retirementDate": "2024-09-28",
-		"returned": false,
-		"precioTotal": 3000,
-		"precioACuenta": 3000,
-		"precioDescuento": 0,
-		"precioSaldo": 0,
-		"depositoTotal": 3000,
-		"depositoACuenta": 3000,
-		"depositoDescuento": 0,
-		"depositoSaldo": 0,
-		"client": {
-			"id": "d78f1323e-bbcc-42a2-9104-45bc97e98113",
-			"name": "Alejo",
-			"surname": "Araya",
-			"dni": 42749595,
-			"phoneNumber": 2613430975,
-			"email": "alejoaraya2000@gmail.com",
-			"direction": "Calle 7",
-			"departament": "Ciudad",
-			"postalCode": 5500,
-			"blacklist": false
-		},
-		"costumes": [
-			{
-				"costume": {
-					"id": "26c0b949-d633-408a-88e9-ca46132285d2",
-					"name": "Batman",
-					"category": {
-						"name": "Adultos",
-						"price": 3000,
-						"id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
-					},
-					"details": "Body del personaje y mascara"
-				},
-				"cant": 1
-			}
-		],
-		"others": [],
-		"note": ""
-	},
-	{
-		"id": "669fe170-72a8-48aa-847a-8ccdae886c7c",
-		"billNumber": 8,
-		"date": "2024-09-28 12:40:38",
-		"returnedDate": "2024-09-30",
-		"retirementDate": "2024-09-28",
-		"returned": false,
-		"precioTotal": 10000,
-		"precioACuenta": 5000,
-		"precioDescuento": 5000,
-		"precioSaldo": 0,
-		"depositoTotal": 10000,
-		"depositoACuenta": 10000,
-		"depositoDescuento": 0,
-		"depositoSaldo": 0,
-		"client": {
-			"blacklist": false,
-			"departament": "Guaymallén",
-			"direction": "appamorales2022@gmal.com",
-			"dni": 23983476,
-			"email": "test@gmail.com",
-			"id": "ba3a4834-c3b6-4a68-96a1-b949e266cd10",
-			"name": "Appa",
-			"phoneNumber": 2613439874,
-			"phoneNumberAlt": 2613746524,
-			"postalCode": 2345,
-			"surname": "Morales"
-		},
-		"costumes": [
-			{
-				"costume": {
-					"id": "58c25131-7cf8-4b29-bd7b-bd2c95649c71",
-					"name": "Bella durmiente",
-					"category": {
-						"name": "Niños",
-						"price": 5000,
-						"id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d"
-					},
-					"details": "Vestido celeste"
-				},
-				"cant": 2
-			}
-		],
-		"others": [],
-		"note": ""
-	},
-	{
-		"id": "8128d11f-a3e7-4b86-bf2c-4c7580c1fc46",
-		"billNumber": 9,
-		"date": "2024-09-28 12:43:33",
-		"returnedDate": "2024-09-30",
-		"retirementDate": "2024-09-28",
-		"returned": false,
-		"precioTotal": 32000,
-		"precioACuenta": 0,
-		"precioDescuento": 32000,
-		"precioSaldo": 0,
-		"depositoTotal": 32000,
-		"depositoACuenta": 32000,
-		"depositoDescuento": 0,
-		"depositoSaldo": 0,
-		"client": {
-			"blacklist": false,
-			"departament": "Maipú",
-			"direction": "Magdallena 46",
-			"dni": 74932732,
-			"email": "freelancer@gmail.com",
-			"id": "80fcd1c1-3113-46b1-9c2e-8fee15c8164a",
-			"name": "Test",
-			"phoneNumber": 3123123123,
-			"phoneNumberAlt": 3123123123,
-			"postalCode": 5005,
-			"surname": "Test"
-		},
-		"costumes": [
-			{
-				"costume": {
-					"id": "7cf0a321-5310-4b76-80df-8bccb87b4985",
-					"name": "Termo",
-					"category": {
-						"id": "97add260-4817-4fa8-bb61-5735c2d0d931",
-						"name": "Cabezones",
-						"price": 15000
-					},
-					"details": "Calza negra, remera pegada negra y cabeza de termo"
-				},
-				"cant": 2
-			}
-		],
-		"others": [
-			{
-				"cant": 2,
-				"name": "Bombilla",
-				"price": 1000
-			}
-		],
-		"note": "Se llevan las bombillas doradas."
-	},
-	{
-		"id": "3f34c66f-f53b-4d33-8e30-f07b4736a4e9",
-		"billNumber": 10,
-		"date": "2024-09-28 14:19:03",
-		"returnedDate": "2024-10-31",
-		"retirementDate": "2024-11-08",
-		"returned": false,
-		"precioTotal": 8000,
-		"precioACuenta": 8000,
-		"precioDescuento": 0,
-		"precioSaldo": 0,
-		"depositoTotal": 8000,
-		"depositoACuenta": 8000,
-		"depositoDescuento": 0,
-		"depositoSaldo": 0,
-		"client": {
-			"id": "d78fc04e-bbcc-42a2-9104-45bc97e98151",
-			"name": "Emiliano",
-			"surname": "Araya",
-			"dni": 35123127,
-			"phoneNumber": 2613458343,
-			"email": "emilianoaraya2001@gmail.com",
-			"direction": "Calle falsa 123",
-			"departament": "Ciudad",
-			"postalCode": 5539,
-			"blacklist": false
-		},
-		"costumes": [
-			{
-				"costume": {
-					"id": "cbd26d2c-2346-48cb-8e65-e06e229d6b7a",
-					"name": "Jason",
-					"category": {
-						"id": "b9319011-1f5e-4b30-85dd-2a315a0844a7",
-						"name": "Mascaras",
-						"price": 8000
-					},
-					"details": "Body, mascara y machete"
-				},
-				"cant": 1
-			}
-		],
-		"others": [],
-		"note": ""
-	},
-	{
-		"id": "a5c10400-f7ac-41bc-a6b6-7d10fcd1fe1f",
-		"billNumber": 11,
-		"date": "2024-09-29 15:46:52",
-		"returnedDate": "2024-10-01",
-		"retirementDate": "2024-09-29",
-		"returned": false,
-		"precioTotal": 32000,
-		"precioACuenta": 16000,
-		"precioDescuento": 16000,
-		"precioSaldo": 0,
-		"depositoTotal": 32000,
-		"depositoACuenta": 32000,
-		"depositoDescuento": 0,
-		"depositoSaldo": 0,
-		"client": {
-			"blacklist": false,
-			"departament": "Guaymallén",
-			"direction": "appamorales2022@gmal.com",
-			"dni": 23983476,
-			"email": "test@gmail.com",
-			"id": "ba3a4834-c3b6-4a68-96a1-b949e266cd10",
-			"name": "Appa",
-			"phoneNumber": 2613439874,
-			"phoneNumberAlt": 2613746524,
-			"postalCode": 2345,
-			"surname": "Morales"
-		},
-		"costumes": [
-			{
-				"costume": {
-					"id": "f33f3c00-c63e-4807-a4df-13e939044487",
-					"name": "Stich",
-					"category": {
-						"id": "97add260-4817-4fa8-bb61-5735c2d0d931",
-						"name": "Cabezones",
-						"price": 15000
-					},
-					"details": "Body del personaje y cabezon"
-				},
-				"cant": 2
-			}
-		],
-		"others": [
-			{
-				"cant": 2,
-				"name": "Correas",
-				"price": 1000
-			}
-		],
-		"note": "Stichs para perro"
-	}
-
+  {
+    "id": "230608e4-bc5a-4e62-9d9e-f01693331a40",
+    "billNumber": 2,
+    "date": "2024-09-28 09:20:20",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-23",
+    "returned": false,
+    "precioTotal": 8000,
+    "precioACuenta": 8000,
+    "precioDescuento": 8000,
+    "precioSaldo": -8000,
+    "depositoTotal": 8000,
+    "depositoACuenta": 8000,
+    "depositoDescuento": 8000,
+    "depositoSaldo": -8000,
+    "client": {
+      "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+      "name": "Rodrigo",
+      "surname": "Vargas",
+      "dni": 35123123,
+      "phoneNumber": 2615123123,
+      "email": "rxvargas.92@gmail.com",
+      "direction": "Ficticia 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": true
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
+          "name": "Bombero",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "asdasdas"
+        },
+        "cant": 2
+      },
+      {
+        "costume": {
+          "id": "5171c49d-b493-4abc-ab36-837677b787c0",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "Lentes grandes de sol para super fiestas",
+          "price": 2000
+        },
+        "cant": 1
+      }
+    ],
+    "others": [
+      {
+        "name": "Vincha",
+        "price": 500,
+        "cant": 2
+      }
+    ],
+    "note": "Gracias"
+  },
+  {
+    "id": "21fd359d-1471-4c3e-baea-2b363024983c",
+    "billNumber": 3,
+    "date": "2024-09-28 09:20:47",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-23",
+    "returned": false,
+    "precioTotal": 8000,
+    "precioACuenta": 8000,
+    "precioSaldo": null,
+    "depositoTotal": 8000,
+    "depositoACuenta": 8000,
+    "depositoDescuento": 8000,
+    "depositoSaldo": -8000,
+    "client": {
+      "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+      "name": "Rodrigo",
+      "surname": "Vargas",
+      "dni": 35123123,
+      "phoneNumber": 2615123123,
+      "email": "rxvargas.92@gmail.com",
+      "direction": "Ficticia 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": true
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
+          "name": "Bombero",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "asdasdas"
+        },
+        "cant": 2
+      },
+      {
+        "costume": {
+          "id": "5171c49d-b493-4abc-ab36-837677b787c0",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "Lentes grandes de sol para super fiestas",
+          "price": 2000
+        },
+        "cant": 1
+      }
+    ],
+    "others": [
+      {
+        "name": "Vincha",
+        "price": 500,
+        "cant": 2
+      }
+    ],
+    "note": "Gracias"
+  },
+  {
+    "id": "f15d01b9-a649-4ed0-814a-a1a4b099ec94",
+    "billNumber": 4,
+    "date": "2024-09-28 09:36:46",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-23",
+    "returned": false,
+    "precioTotal": 8000,
+    "precioACuenta": 8000,
+    "precioDescuento": 0,
+    "precioSaldo": 0,
+    "depositoTotal": 8000,
+    "depositoACuenta": 0,
+    "depositoDescuento": 8000,
+    "depositoSaldo": 0,
+    "client": {
+      "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+      "name": "Rodrigo",
+      "surname": "Vargas",
+      "dni": 35123123,
+      "phoneNumber": 2615123123,
+      "email": "rxvargas.92@gmail.com",
+      "direction": "Ficticia 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": true
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
+          "name": "Bombero",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "asdasdas"
+        },
+        "cant": 2
+      },
+      {
+        "costume": {
+          "id": "5171c49d-b493-4abc-ab36-837677b787c0",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "Lentes grandes de sol para super fiestas",
+          "price": 2000
+        },
+        "cant": 1
+      }
+    ],
+    "others": [
+      {
+        "name": "Vincha",
+        "price": 500,
+        "cant": 2
+      }
+    ],
+    "note": "Gracias"
+  },
+  {
+    "id": "347358d7-90d2-439a-8c7c-59b6e1c4ff83",
+    "billNumber": 5,
+    "date": "2024-09-28 09:38:42",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-23",
+    "returned": false,
+    "precioTotal": 8000,
+    "precioACuenta": 5000,
+    "precioDescuento": 0,
+    "precioSaldo": 3000,
+    "depositoTotal": 8000,
+    "depositoACuenta": 0,
+    "depositoDescuento": 4000,
+    "depositoSaldo": 4000,
+    "client": {
+      "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+      "name": "Rodrigo",
+      "surname": "Vargas",
+      "dni": 35123123,
+      "phoneNumber": 2615123123,
+      "email": "rxvargas.92@gmail.com",
+      "direction": "Ficticia 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": true
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
+          "name": "Bombero",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "asdasdas"
+        },
+        "cant": 2
+      },
+      {
+        "costume": {
+          "id": "5171c49d-b493-4abc-ab36-837677b787c0",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "Lentes grandes de sol para super fiestas",
+          "price": 2000
+        },
+        "cant": 1
+      }
+    ],
+    "others": [
+      {
+        "name": "Vincha",
+        "price": 500,
+        "cant": 2
+      }
+    ],
+    "note": "Gracias"
+  },
+  {
+    "id": "ee01d6ec-1d77-4ed3-a26c-6c826d4360ed",
+    "billNumber": 6,
+    "date": "2024-09-28 09:55:51",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-23",
+    "returned": false,
+    "precioTotal": 10000,
+    "precioACuenta": 5000,
+    "precioDescuento": 0,
+    "precioSaldo": 5000,
+    "depositoTotal": 8000,
+    "depositoACuenta": 0,
+    "depositoDescuento": 4000,
+    "depositoSaldo": 4000,
+    "client": {
+      "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+      "name": "Rodrigo",
+      "surname": "Vargas",
+      "dni": 35123123,
+      "phoneNumber": 2615123123,
+      "email": "rxvargas.92@gmail.com",
+      "direction": "Ficticia 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": true
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "42bcc9f1-e008-461c-aba0-dd0828ed8a41",
+          "name": "Bombero",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "asdasdas"
+        },
+        "cant": 2
+      },
+      {
+        "costume": {
+          "id": "5171c49d-b493-4abc-ab36-837677b787c0",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "Lentes grandes de sol para super fiestas",
+          "price": 2000
+        },
+        "cant": 1
+      }
+    ],
+    "others": [
+      {
+        "name": "Vincha",
+        "price": 500,
+        "cant": 2
+      }
+    ],
+    "note": "Gracias"
+  },
+  {
+    "id": "2c42a9eb-1231-48cb-a5f2-87f3185a070e",
+    "billNumber": 7,
+    "date": "2024-09-28 11:51:37",
+    "returnedDate": "2024-09-29",
+    "retirementDate": "2024-09-28",
+    "returned": false,
+    "precioTotal": 3000,
+    "precioACuenta": 3000,
+    "precioDescuento": 0,
+    "precioSaldo": 0,
+    "depositoTotal": 3000,
+    "depositoACuenta": 3000,
+    "depositoDescuento": 0,
+    "depositoSaldo": 0,
+    "client": {
+      "id": "d78f1323e-bbcc-42a2-9104-45bc97e98113",
+      "name": "Alejo",
+      "surname": "Araya",
+      "dni": 42749595,
+      "phoneNumber": 2613430975,
+      "email": "alejoaraya2000@gmail.com",
+      "direction": "Calle 7",
+      "departament": "Ciudad",
+      "postalCode": 5500,
+      "blacklist": false
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "26c0b949-d633-408a-88e9-ca46132285d2",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 3000,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "Body del personaje y mascara"
+        },
+        "cant": 1
+      }
+    ],
+    "others": [],
+    "note": ""
+  },
+  {
+    "id": "669fe170-72a8-48aa-847a-8ccdae886c7c",
+    "billNumber": 8,
+    "date": "2024-09-28 12:40:38",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-28",
+    "returned": false,
+    "precioTotal": 10000,
+    "precioACuenta": 5000,
+    "precioDescuento": 5000,
+    "precioSaldo": 0,
+    "depositoTotal": 10000,
+    "depositoACuenta": 10000,
+    "depositoDescuento": 0,
+    "depositoSaldo": 0,
+    "client": {
+      "blacklist": false,
+      "departament": "Guaymallén",
+      "direction": "appamorales2022@gmal.com",
+      "dni": 23983476,
+      "email": "test@gmail.com",
+      "id": "ba3a4834-c3b6-4a68-96a1-b949e266cd10",
+      "name": "Appa",
+      "phoneNumber": 2613439874,
+      "phoneNumberAlt": 2613746524,
+      "postalCode": 2345,
+      "surname": "Morales"
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "58c25131-7cf8-4b29-bd7b-bd2c95649c71",
+          "name": "Bella durmiente",
+          "category": {
+            "name": "Niños",
+            "price": 5000,
+            "id": "bb3e7130-837d-49f1-bb4b-ea140f87cb1d"
+          },
+          "details": "Vestido celeste"
+        },
+        "cant": 2
+      }
+    ],
+    "others": [],
+    "note": ""
+  },
+  {
+    "id": "8128d11f-a3e7-4b86-bf2c-4c7580c1fc46",
+    "billNumber": 9,
+    "date": "2024-09-28 12:43:33",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-28",
+    "returned": true,
+    "precioTotal": 32000,
+    "precioACuenta": 0,
+    "precioDescuento": 32000,
+    "precioSaldo": 0,
+    "depositoTotal": 32000,
+    "depositoACuenta": 32000,
+    "depositoDescuento": 0,
+    "depositoSaldo": 0,
+    "client": {
+      "blacklist": false,
+      "departament": "Maipú",
+      "direction": "Magdallena 46",
+      "dni": 74932732,
+      "email": "freelancer@gmail.com",
+      "id": "80fcd1c1-3113-46b1-9c2e-8fee15c8164a",
+      "name": "Test",
+      "phoneNumber": 3123123123,
+      "phoneNumberAlt": 3123123123,
+      "postalCode": 5005,
+      "surname": "Test"
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "7cf0a321-5310-4b76-80df-8bccb87b4985",
+          "name": "Termo",
+          "category": {
+            "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
+            "name": "Cabezones",
+            "price": 15000
+          },
+          "details": "Calza negra, remera pegada negra y cabeza de termo"
+        },
+        "cant": 2
+      }
+    ],
+    "others": [
+      {
+        "cant": 2,
+        "name": "Bombilla",
+        "price": 1000
+      }
+    ],
+    "note": "Se llevan las bombillas doradas."
+  },
+  {
+    "id": "3f34c66f-f53b-4d33-8e30-f07b4736a4e9",
+    "billNumber": 10,
+    "date": "2024-09-28 14:19:03",
+    "returnedDate": "2024-10-31",
+    "retirementDate": "2024-11-08",
+    "returned": true,
+    "precioTotal": 8000,
+    "precioACuenta": 8000,
+    "precioDescuento": 0,
+    "precioSaldo": 0,
+    "depositoTotal": 8000,
+    "depositoACuenta": 8000,
+    "depositoDescuento": 0,
+    "depositoSaldo": 0,
+    "client": {
+      "id": "d78fc04e-bbcc-42a2-9104-45bc97e98151",
+      "name": "Emiliano",
+      "surname": "Araya",
+      "dni": 35123127,
+      "phoneNumber": 2613458343,
+      "email": "emilianoaraya2001@gmail.com",
+      "direction": "Calle falsa 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": false
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "cbd26d2c-2346-48cb-8e65-e06e229d6b7a",
+          "name": "Jason",
+          "category": {
+            "id": "b9319011-1f5e-4b30-85dd-2a315a0844a7",
+            "name": "Mascaras",
+            "price": 8000
+          },
+          "details": "Body, mascara y machete"
+        },
+        "cant": 1
+      }
+    ],
+    "others": [],
+    "note": ""
+  },
+  {
+    "id": "a5c10400-f7ac-41bc-a6b6-7d10fcd1fe1f",
+    "billNumber": 11,
+    "date": "2024-09-29 15:46:52",
+    "returnedDate": "2024-10-01",
+    "retirementDate": "2024-09-29",
+    "returned": true,
+    "precioTotal": 32000,
+    "precioACuenta": 16000,
+    "precioDescuento": 16000,
+    "precioSaldo": 0,
+    "depositoTotal": 32000,
+    "depositoACuenta": 32000,
+    "depositoDescuento": 0,
+    "depositoSaldo": 0,
+    "client": {
+      "blacklist": false,
+      "departament": "Guaymallén",
+      "direction": "appamorales2022@gmal.com",
+      "dni": 23983476,
+      "email": "test@gmail.com",
+      "id": "ba3a4834-c3b6-4a68-96a1-b949e266cd10",
+      "name": "Appa",
+      "phoneNumber": 2613439874,
+      "phoneNumberAlt": 2613746524,
+      "postalCode": 2345,
+      "surname": "Morales"
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "f33f3c00-c63e-4807-a4df-13e939044487",
+          "name": "Stich",
+          "category": {
+            "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
+            "name": "Cabezones",
+            "price": 15000
+          },
+          "details": "Body del personaje y cabezon"
+        },
+        "cant": 2
+      }
+    ],
+    "others": [
+      {
+        "cant": 2,
+        "name": "Correas",
+        "price": 1000
+      }
+    ],
+    "note": "Stichs para perro"
+  },
+  {
+    "id": "4b75cd66-4e5c-4a98-be12-2f141b2e2742",
+    "billNumber": 12,
+    "date": "2024-10-05 08:52:21",
+    "returnedDate": "2024-10-06",
+    "retirementDate": "2024-10-05",
+    "returned": false,
+    "precioTotal": 54750,
+    "precioACuenta": 54750,
+    "precioDescuento": 0,
+    "precioSaldo": 0,
+    "depositoTotal": 54750,
+    "depositoACuenta": 54750,
+    "depositoDescuento": 0,
+    "depositoSaldo": 0,
+    "client": {
+      "blacklist": false,
+      "departament": "Malargüe",
+      "direction": "Magdallena 46",
+      "dni": 23542534,
+      "email": "freelancer@gmail.com",
+      "id": "76cdfb6d-6747-4e5f-adc7-87674f5a29ff",
+      "name": "Appa",
+      "phoneNumber": 9994949494,
+      "phoneNumberAlt": 9494949494,
+      "postalCode": 5000,
+      "surname": "Araya"
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "f33f3c00-c63e-4807-a4df-13e939044487",
+          "name": "Stich",
+          "category": {
+            "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
+            "name": "Cabezones",
+            "price": 15000
+          },
+          "details": "Body del personaje y cabezon"
+        },
+        "cant": 1
+      },
+      {
+        "costume": {
+          "id": "a3c4ef05-2e0e-4d0c-bb66-6b8e27eb7f0a",
+          "name": "Robin",
+          "category": {
+            "name": "Adultos",
+            "price": 1500,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "Body con baston"
+        },
+        "cant": 1
+      },
+      {
+        "costume": {
+          "id": "0c3f6a21-f98b-469d-a551-0499549f70a5",
+          "name": "Mario Bros",
+          "category": {
+            "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
+            "name": "Cabezones",
+            "price": 15000
+          },
+          "details": "Body, mostacho y sombrero"
+        },
+        "cant": 1
+      },
+      {
+        "costume": {
+          "id": "cbd26d2c-2346-48cb-8e65-e06e229d6b7a",
+          "name": "Jason",
+          "category": {
+            "id": "b9319011-1f5e-4b30-85dd-2a315a0844a7",
+            "name": "Mascaras",
+            "price": 8000
+          },
+          "details": "Body, mascara y machete"
+        },
+        "cant": 1
+      },
+      {
+        "costume": {
+          "id": "7cf0a321-5310-4b76-80df-8bccb87b4985",
+          "name": "Termo",
+          "category": {
+            "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
+            "name": "Cabezones",
+            "price": 15000
+          },
+          "details": "Calza negra, remera pegada negra y cabeza de termo"
+        },
+        "cant": 1
+      }
+    ],
+    "others": [
+      {
+        "cant": 1,
+        "name": "Vincha",
+        "price": 250
+      }
+    ],
+    "note": "Cosas a tener en cuenta para esta factura"
+  }
 ]

@@ -20,11 +20,7 @@ export function useClient() {
   function getAllClients() {
     clients.length === 0 && dispatch(getAllClientsAsync());
   }
-  function blackListClient(body: {
-    id: string;
-    blacklist: boolean;
-    dischargeDate: string;
-  }) {
+  function blackListClient(body: { id: string; blacklist: boolean }) {
     dispatch(deleteClientAsync(body));
   }
   //   function getOneClientById(id: string) {

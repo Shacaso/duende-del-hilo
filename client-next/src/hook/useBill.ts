@@ -6,6 +6,7 @@ import {
   updateAsync,
   setBillSync,
   cleanCreatedBillSync,
+  changeReturnedAsync,
 } from "@/lib/features/bill/bill.slice";
 import { Bill, BillDto } from "@/app/lib/definitions";
 
@@ -21,6 +22,10 @@ export function useBill() {
 
   function createBill(body: BillDto) {
     dispatch(createAsync(body));
+  }
+
+  function changeReturnedBill(body: { id: string; returned: boolean }) {
+    dispatch(changeReturnedAsync(body));
   }
 
   function updateBill(body: BillDto) {
@@ -39,6 +44,7 @@ export function useBill() {
     bills,
     isLoading,
     bill,
+    changeReturnedBill,
     created,
     error,
     getAllBills,

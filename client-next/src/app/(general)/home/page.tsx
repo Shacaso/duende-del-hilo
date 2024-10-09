@@ -21,9 +21,10 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className='w-full px-5 mt-5'>
+      <div className='m-5 grid grid-cols-1 auto-rows-auto '>
         <Welcome />
-        <div className='flex flex-col cursor-pointer justify-center  gap-5 mb-5 md:flex-row md:flex-wrap py-5'>
+
+        <div className='grid grid-cols-1 xl:grid-cols-3  gap-5 mb-5 cursor-pointer justify-center py-5'>
           <Stat
             title='Nueva factura'
             onClick={() => setConfirmationModalOpen(!confirmationModalOpen)}
@@ -34,7 +35,7 @@ export default function Dashboard() {
           <Stat title='Facturas' Icon={BillsIcon} url={"/bill"} />
         </div>
 
-        <div className=' flex gap-5'>
+        <div className=' grid grid-cols-1 lg:grid-cols-2  gap-5 '>
           <DashboardPanel
             title={"Últimas facturas registradas"}
             Icon={UserIcon}
@@ -58,10 +59,6 @@ export default function Dashboard() {
             Icon={BellSVG}
             isProduct={false}
           >
-            {/* <DashboardPanel.Content>
-            <NotificationDash />
-          </DashboardPanel.Content> */}
-
             <DashboardPanel.Footer>
               <div className='flex flex-col gap-3 mt-5'>
                 <Link
