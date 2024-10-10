@@ -666,5 +666,56 @@
       }
     ],
     "note": "Cosas a tener en cuenta para esta factura"
+  },
+  {
+    "id": "ecb6450f-a0e8-476a-b3af-5451d342af97",
+    "billNumber": 13,
+    "date": "2024-10-09 21:06:57",
+    "returnedDate": "2024-09-30",
+    "retirementDate": "2024-09-23",
+    "returned": "active",
+    "precioTotal": 2500,
+    "precioACuenta": 5000,
+    "precioDescuento": 0,
+    "precioSaldo": -2500,
+    "depositoTotal": 8000,
+    "depositoACuenta": 0,
+    "depositoDescuento": 4000,
+    "depositoSaldo": 4000,
+    "client": {
+      "id": "8fdc87ed-e670-45dd-ab50-b8cdd62ff4e2",
+      "name": "Rodrigo",
+      "surname": "Vargas",
+      "dni": 35123123,
+      "phoneNumber": 2615123123,
+      "email": "rxvargas.92@gmail.com",
+      "direction": "Ficticia 123",
+      "departament": "Ciudad",
+      "postalCode": 5539,
+      "blacklist": true
+    },
+    "costumes": [
+      {
+        "costume": {
+          "id": "26c0b949-d633-408a-88e9-ca46132285d2",
+          "name": "Batman",
+          "category": {
+            "name": "Adultos",
+            "price": 1500,
+            "id": "9d6ec1d1-874d-4bdd-8cf7-0fc4b560c732"
+          },
+          "details": "Body del personaje y mascara"
+        },
+        "cant": 1
+      }
+    ],
+    "others": [
+      {
+        "name": "Vincha",
+        "price": 500,
+        "cant": 2
+      }
+    ],
+    "note": "Gracias"
   }
 ]
