@@ -8,6 +8,7 @@ import {
 	Costume,
 	CustomError,
 	CostumeCant,
+	RETURNTYPES,
 } from "../definitions";
 
 const allUsers = async () => {
@@ -53,11 +54,26 @@ export const billSchema = z.object({
 
 	retirementDate: z.string(),
 
-	returned: z.coerce
-		.boolean({
-			invalid_type_error: "El valor del atributo devuelto debe ser un booleano",
-		})
-		.default(false),
+	returned: z.nativeEnum(RETURNTYPES, {
+		errorMap(issue, ctx) {
+			switch (issue.code) {
+				case "invalid_type": {
+					if (ctx.data === undefined)
+						return { message: "El valor de devolucion es requerido" };
+					return {
+						message: "El valor de devolucion debe ser un Enum String valido",
+					};
+				}
+
+				case "invalid_enum_value":
+					return {
+						message:
+							"El valor de returned no es válido, debe proporcionarse active, disabled o filed",
+					};
+			}
+			return { message: ctx.defaultError };
+		},
+	}),
 
 	precioTotal: z
 		.number({

@@ -32,7 +32,7 @@ export interface BillDto extends Entity {
 	date: string;
 	returnedDate: string;
 	retirementDate: string;
-	returned: boolean;
+	returned: RETURNTYPES;
 	precioTotal: number;
 	precioACuenta: number | null;
 	precioDescuento: number | null;
@@ -52,7 +52,7 @@ export interface Bill extends Entity {
 	date: string;
 	returnedDate: string;
 	retirementDate: string;
-	returned: boolean;
+	returned: RETURNTYPES;
 	precioTotal: number;
 	precioACuenta: number;
 	precioDescuento: number;
@@ -116,4 +116,10 @@ export class CustomError {
 		this.message = message;
 		this.codigo = codigo;
 	}
+}
+
+export enum RETURNTYPES {
+	ACTIVE = "active",
+	DISABLED = "disabled",
+	FILED = "filed",
 }
