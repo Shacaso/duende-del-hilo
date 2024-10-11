@@ -55,7 +55,7 @@ export default function ConfirmationModal({
           <div>{children}</div>
         </section>
         <span
-          className='backdrop-blur-sm w-full h-full bg-black/50 cursor-pointer'
+          className='backdrop-blur-sm w-full h-full  cursor-pointer'
           onClick={handleClose}
         ></span>
       </div>

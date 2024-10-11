@@ -198,7 +198,7 @@
     "surname": "Test"
   },
   {
-    "blacklist": false,
+    "blacklist": true,
     "departament": "Rivadavia",
     "direction": "afsdasdfasdasdasdf",
     "dni": 42356344,

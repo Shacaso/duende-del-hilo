@@ -68,15 +68,5 @@
       "price": 8000
     },
     "details": "Body, mascara y machete"
-  },
-  {
-    "id": "7cf0a321-5310-4b76-80df-8bccb87b4985",
-    "name": "Termo",
-    "category": {
-      "id": "97add260-4817-4fa8-bb61-5735c2d0d931",
-      "name": "Cabezones",
-      "price": 15000
-    },
-    "details": "Calza negra, remera pegada negra y cabeza de termo"
   }
 ]

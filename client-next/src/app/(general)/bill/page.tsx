@@ -1,15 +1,13 @@
 "use client";
 
 import { DataList } from "@/components";
-import Button from "@/components/button-cmp/Button";
 import { Table } from "./components/Table";
 
-import { useEffect, useState } from "react";
 import { SearchInputIcon } from "@/assets/svg";
-import { useBill } from "@/hook/useBill";
-import { Filters } from "./components/Filters";
-import { type Bill } from "@/app/lib/definitions";
 import { Paginated } from "@/components/ui/component/Paginated";
+import { useBill } from "@/hook/useBill";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Filters } from "./components/Filters";
 
 export default function Bill() {
   const [filters, setFilters] = useState({
@@ -18,76 +16,90 @@ export default function Bill() {
     end: "",
   });
 
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    rowsPerPage: 5,
+    totalPage: 0,
+  });
+
   const { getAllBills, bills } = useBill();
 
   const [search, setSearch] = useState("");
 
-  // Helper para parsear las fechas
-  const parseDate = (item: Bill) => {
-    const [yearRetirementDate, monthRetirementDate, dayRetirementDate] =
-      item.retirementDate.split("-").map(Number);
+  // const parseDate = (item: Bill) => {
+  //   const [yearRetirementDate, monthRetirementDate, dayRetirementDate] =
+  //     item.retirementDate.split("-").map(Number);
 
-    const [yearReturnedDate, monthReturnedDate, dayReturnedDate] =
-      item.returnedDate.split("-").map(Number);
+  //   const [yearReturnedDate, monthReturnedDate, dayReturnedDate] =
+  //     item.returnedDate.split("-").map(Number);
 
-    return [
-      new Date(yearRetirementDate, monthRetirementDate - 1, dayRetirementDate),
-      new Date(yearReturnedDate, monthReturnedDate - 1, dayReturnedDate),
-    ];
-  };
+  //   return [
+  //     new Date(yearRetirementDate, monthRetirementDate - 1, dayRetirementDate),
+  //     new Date(yearReturnedDate, monthReturnedDate - 1, dayReturnedDate),
+  //   ];
+  // };
 
-  // Filtro por estado
-  const filterByState = (bill: Bill) => {
-    switch (filters.active) {
-      case "active":
-        return !bill.returned;
-      case "disabled":
-        return bill.returned;
-      case "filed":
-        return bill.returned;
-      default:
-        return true; // Sin filtro si no hay estado activo
-    }
-  };
+  // const filterByDateRange = (bill: Bill) => {
+  //   const start = filters.start ? new Date(filters.start) : null;
+  //   const end = filters.end ? new Date(filters.end) : null;
 
-  // Filtro por rango de fechas
-  const filterByDateRange = (bill: Bill) => {
-    const start = filters.start ? new Date(filters.start) : null;
-    const end = filters.end ? new Date(filters.end) : null;
+  //   const [retirementDate, returnedDate] = parseDate(bill);
 
-    const [retirementDate, returnedDate] = parseDate(bill);
+  //   return (!start || retirementDate >= start) && (!end || returnedDate <= end);
+  // };
 
-    return (!start || retirementDate >= start) && (!end || returnedDate <= end);
-  };
+  const filteredBills = useMemo(() => {
+    if (!bills) return [];
 
-  const [currentPage, setCurrentPage] = useState(0);
-  // Filtro por búsqueda de texto
-  const filterBySearch = (bill: Bill) => {
-    const searchLower = search.toLowerCase();
-    return (
-      bill.client.name.toLowerCase().includes(searchLower) ||
-      bill.client.surname.toLowerCase().includes(searchLower) ||
-      bill.date.toLowerCase().includes(searchLower) ||
-      bill.billNumber.toString().toLowerCase().includes(searchLower) ||
-      bill.precioTotal.toString().toLowerCase().includes(searchLower) ||
-      bill.client.dni.toString().toLowerCase().includes(searchLower)
+    const filtered = bills
+      .filter((bill) => {
+        switch (filters.active) {
+          case "active":
+            return !bill.returned;
+          case "disabled":
+            return bill.returned;
+          case "filed":
+            return bill.returned;
+          default:
+            return true;
+        }
+      })
+      .filter((bill) =>
+        [
+          bill.client.name,
+          bill.client.surname,
+          bill.date,
+          bill.billNumber.toString(),
+          bill.precioTotal.toString(),
+          bill.client.dni.toString(),
+        ].some((field) => field.toLowerCase().includes(search.toLowerCase()))
+      );
+    // .filter((bill) => filterByDateRange(bill));
+
+    setPagination((prev) => ({
+      ...prev,
+      totalPage: Math.ceil(filtered.length / pagination.rowsPerPage),
+    }));
+    const startIndex = (pagination.currentPage - 1) * pagination.rowsPerPage;
+    const paginated = filtered.slice(
+      startIndex,
+      startIndex + pagination.rowsPerPage
     );
-  };
+    // console.log(paginated);
 
-  // Aplicación de todos los filtros
-  const filteredBills = bills.filter((bill: Bill) => {
-    return (
-      filterByState(bill) && filterByDateRange(bill) && filterBySearch(bill)
-    );
-  });
+    return paginated;
+  }, [
+    bills,
+    filters.active,
+    pagination.currentPage,
+    pagination.rowsPerPage,
+    search,
+  ]);
 
-  // console.log(filters);
-  // console.log(filters.start);
-  // console.log(filters.end);
-
-  const handleChange = (e: { target: { value: any } }) => {
+  const handleChange = useCallback((e: { target: { value: any } }) => {
+    setPagination((prev) => ({ ...prev, currentPage: 1 }));
     setSearch(e.target.value);
-  };
+  }, []);
 
   useEffect(() => {
     getAllBills();
@@ -99,7 +111,7 @@ export default function Bill() {
         title='Facturas'
         element={
           <Table
-            data={filteredBills.splice(currentPage * 5, 5)}
+            data={filteredBills}
             showTotal={filters.start !== "" && filters.end !== ""}
           />
         }
@@ -129,18 +141,15 @@ export default function Bill() {
           <DataList.Filters>
             <div className=''>
               <Filters setFilters={setFilters} />
-              {/* <Filters onFilterType={handleFilterType}>
-                <FilterDate onDateChange={handleDateChange} />
-              </Filters> */}
             </div>
           </DataList.Filters>
         </div>
       </DataList>
       <div className='flex m-5 justify-end '>
         <Paginated
-          currentPage={currentPage}
-          totalPages={Math.floor(bills.length / 5)}
-          onPageChange={setCurrentPage}
+          currentPage={pagination.currentPage}
+          totalPages={pagination.totalPage}
+          onPageChange={setPagination}
         />
       </div>
     </div>

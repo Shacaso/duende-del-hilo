@@ -4,8 +4,9 @@ import { Bill } from "@/app/lib/definitions";
 import { ViewIcon } from "@/assets/svg";
 import { useBill } from "@/hook/useBill";
 import { PDFViewer } from "@react-pdf/renderer";
-import { useEffect } from "react";
-import { PDFile } from "../../../../components/pdf/PDFile";
+import { lazy, useEffect } from "react";
+import { PDFile } from "@/components/pdf/PDFile";
+
 import React from "react";
 // import { useProducts, useModal } from '@/hooks/';
 // import { TableSkeleton } from '@/components';

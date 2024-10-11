@@ -302,3 +302,5 @@ export const PDFile = ({ data }: Props) => {
     </Document>
   );
 };
+
+// export default PDFile;

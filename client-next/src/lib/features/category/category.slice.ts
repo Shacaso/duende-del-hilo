@@ -47,7 +47,7 @@ export const updateCategoryAsync = createAsyncThunk(
 
 export const deleteCategoryAsync = createAsyncThunk(
   "category/delete",
-  async (id: string): Promise<Category> => {
+  async (id: string) => {
     try {
       const res = await fetchDeleteById(id, path);
       console.log(res);
@@ -64,10 +64,10 @@ export const deleteCategoryAsync = createAsyncThunk(
           confirmButton: "btn btn-wide btn-primary text-lg",
         },
       });
-      console.log(error);
     }
   }
 );
+
 interface State {
   categories: Category[];
   isLoading: boolean;

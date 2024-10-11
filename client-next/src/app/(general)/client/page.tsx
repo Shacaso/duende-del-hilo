@@ -4,7 +4,7 @@ import { PlusIcon } from "@/assets/svg";
 import { DataList } from "@/components";
 import Button from "@/components/button-cmp/Button";
 import { Table } from "./components/Table";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { SearchInputIcon } from "@/assets/svg";
 import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
 import Form from "./components/Form";
@@ -21,40 +21,60 @@ export default function ClientPage() {
     useState<boolean>(false);
 
   const [filters, setFilters] = useState({ active: "active" });
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    rowsPerPage: 5,
+    totalPage: 0,
+  });
   const [search, setSearch] = useState("");
 
-  const result = useMemo(() => {
+  const filterdClients = useMemo(() => {
     if (!clients) return [];
+    // console.log("clients", clients);
 
-    const initialClients = clients.filter((client: Client) =>
-      filters.active === "active" ? !client.blacklist : client.blacklist
+    const filtered = clients
+      .filter((client: Client) =>
+        filters.active === "active" ? !client.blacklist : client.blacklist
+      )
+      .filter((client: Client) =>
+        [
+          client.name,
+          client.surname,
+          client.dni.toString(),
+          client.departament,
+          client.email,
+        ].some((field) => field.toLowerCase().includes(search.toLowerCase()))
+      );
+
+    // console.log(filtered);
+    setPagination((prev) => ({
+      ...prev,
+      totalPage: Math.ceil(filtered.length / pagination.rowsPerPage),
+    }));
+    const startIndex = (pagination.currentPage - 1) * pagination.rowsPerPage;
+    const paginated = filtered.slice(
+      startIndex,
+      startIndex + pagination.rowsPerPage
     );
+    // console.log(paginated);
 
-    const normalizedSearch = search.toLowerCase();
+    return paginated;
+  }, [
+    clients,
+    filters.active,
+    pagination.currentPage,
+    pagination.rowsPerPage,
+    search,
+  ]);
 
-    return initialClients.filter((client: Client) =>
-      [
-        client.name,
-        client.surname,
-        client.dni.toString(),
-        client.departament,
-        client.email,
-      ].some((field) => field.toLowerCase().includes(normalizedSearch))
-    );
-  }, [clients, filters.active, search]);
-
-  const handleChange = (e: { target: { value: any } }) => {
+  const handleChange = useCallback((e: { target: { value: any } }) => {
+    setPagination((prev) => ({ ...prev, currentPage: 1 }));
     setSearch(e.target.value);
-  };
-
-  const [currentPage, setCurrentPage] = useState(0);
+  }, []);
 
   useEffect(() => {
     getAllClients();
   });
-
-  // console.log(result);
-  // console.log(Math.floor(result.length / 5));
 
   return (
     <>
@@ -62,7 +82,7 @@ export default function ClientPage() {
         <DataList
           title='Cliente'
           // setViewMode={viewModeType.TABLE}
-          element={<Table data={result.splice(currentPage * 5, 5)} />}
+          element={<Table data={filterdClients} />}
         >
           <div>
             <DataList.Header>
@@ -96,15 +116,15 @@ export default function ClientPage() {
               </div>
             </DataList.Header>
             <DataList.Filters>
-              <Filters setFilters={setFilters} />
+              <Filters setFilters={setFilters} onPageChange={setPagination} />
             </DataList.Filters>
           </div>
         </DataList>
         <div className='flex m-5 justify-end '>
           <Paginated
-            currentPage={currentPage}
-            totalPages={Math.floor(clients.length / 5)}
-            onPageChange={setCurrentPage}
+            currentPage={pagination.currentPage}
+            totalPages={pagination.totalPage}
+            onPageChange={setPagination}
           />
         </div>
       </div>

@@ -3,30 +3,41 @@
 
 import { useCategory } from "@/hook/useCategory";
 
-import { ChangeEvent, Dispatch, SetStateAction, useEffect } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+} from "react";
 
 interface Props {
   // filters: Object;
   setFilters: Dispatch<SetStateAction<{ active: string }>>;
+  onPageChange: Dispatch<
+    SetStateAction<{
+      currentPage: number;
+      rowsPerPage: number;
+      totalPage: number;
+    }>
+  >;
 }
 
-export function Filters({ setFilters }: Props) {
-  const { categories, getAllCategories } = useCategory();
+export function Filters({ setFilters, onPageChange }: Props) {
+  const handleFilterChange = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      const { value, name } = e.target;
 
-  const handleFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const { value, name } = e.target;
+      if (!value) return;
 
-    if (!value) return;
-
-    setFilters((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  useEffect(() => {
-    getAllCategories();
-  }, [getAllCategories]);
+      setFilters((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+      onPageChange((prev) => ({ ...prev, currentPage: 1 }));
+    },
+    [onPageChange, setFilters]
+  );
 
   return (
     <div className='flex flex-col gap-3 my-5 sm:flex-row'>

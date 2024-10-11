@@ -1,15 +1,14 @@
 // import PropTypes from 'prop-types';
-import { Bill, Client, Costume, CostumeCant } from "@/app/lib/definitions";
-import { fetchGetById } from "@/app/lib/fetching";
-import { PrintIcon, TrashIcon, ViewIcon } from "@/assets/svg";
+import { Bill, CostumeCant } from "@/app/lib/definitions";
+import { PrintIcon, ViewIcon } from "@/assets/svg";
 import { PDFViewer } from "@react-pdf/renderer";
-import { PDFile } from "@/components/pdf/PDFile";
-import { useAppDispatch } from "@/lib/store";
+
 import { useBill } from "@/hook/useBill";
+import { lazy, Suspense, useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { useEffect, useMemo, useState } from "react";
-import { useReactToPrint } from "react-to-print";
-// import swal from 'sweetalert';
+import ConfirmationModal from "@/components/modal-cmp/ConfirmationModal";
+import { PDFile } from "@/components/pdf/PDFile";
+// const PDFile = lazy(() => import("../../../../components/pdf/PDFile"));
 
 interface Props {
   data: Bill[];
@@ -17,6 +16,8 @@ interface Props {
 }
 
 export function Table({ data, showTotal }: Props) {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const { changeReturnedBill } = useBill();
 
   const fixDate = (date: string) => {
@@ -135,26 +136,26 @@ export function Table({ data, showTotal }: Props) {
                 <td>
                   <button
                     className='btn btn-circle'
-                    onClick={() => {
-                      document.getElementById(bill.id).showModal();
-                    }}
+                    onClick={() => setIsModalOpen((prev) => !prev)}
                   >
                     <ViewIcon />
                   </button>
-                  <dialog id={bill.id} className='modal'>
-                    <div className='modal-box w-11/12 max-w-5xl'>
-                      <form method='dialog'>
-                        <button className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'>
-                          ✕
-                        </button>
-                      </form>
-                      <div className='p-4'>
-                        <PDFViewer style={{ width: "100%", height: "100vh" }}>
-                          <PDFile data={bill} />
-                        </PDFViewer>
+                  {isModalOpen && (
+                    <ConfirmationModal
+                      title='VER FACTURA'
+                      isOpen={isModalOpen}
+                      handleClose={() => setIsModalOpen((prev) => !prev)}
+                    >
+                      <div className='overflow-auto h-[462px]'>
+                        <Suspense fallback={<div>Cargando PDF...</div>}>
+                          <PDFViewer style={{ width: "100%", height: "100vh" }}>
+                            <PDFile data={bill} />
+                          </PDFViewer>
+                        </Suspense>
                       </div>
-                    </div>
-                  </dialog>
+                    </ConfirmationModal>
+                  )}
+
                   <button onClick={handlePrint} className='btn btn-circle'>
                     <PrintIcon />
                   </button>

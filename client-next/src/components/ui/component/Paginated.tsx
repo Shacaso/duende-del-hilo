@@ -1,42 +1,40 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useCallback } from "react";
 
 interface Props {
   currentPage: number;
   totalPages: number;
-  onPageChange: Dispatch<SetStateAction<number>>;
+  onPageChange: Dispatch<
+    SetStateAction<{
+      currentPage: number;
+      rowsPerPage: number;
+      totalPage: number;
+    }>
+  >;
 }
 
 export const Paginated = ({ currentPage, totalPages, onPageChange }: Props) => {
+  // Cambia de página usando -1 o +1 para anterior/siguiente
   const handlePageChange = (value: number) => {
     const newCurrentPage = currentPage + value;
-    if (newCurrentPage < 0 || newCurrentPage > totalPages) return;
-    onPageChange(newCurrentPage);
+    // Asegurarse de no ir más allá de las páginas disponibles
+    if (newCurrentPage < 1 || newCurrentPage > totalPages) return;
+    onPageChange((prevState) => ({
+      ...prevState,
+      currentPage: newCurrentPage,
+    }));
   };
 
-  const handleDirectClick = (page: number) => {
-    if (page < 0 || page > totalPages) return;
-    onPageChange(page);
-  };
-
-  const getVisiblePages = () => {
-    const pages = [];
-    const maxVisible = 5;
-
-    let startPage = Math.max(currentPage - Math.floor(maxVisible / 2), 1);
-    let endPage = startPage + maxVisible - 1;
-
-    if (endPage > totalPages) {
-      endPage = totalPages;
-      startPage = Math.max(endPage - maxVisible + 1, 1);
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      pages.push(i);
-    }
-    return pages;
-  };
-
-  const visiblePages = getVisiblePages();
+  // Cambiar directamente a una página específica
+  const handleDirectClick = useCallback(
+    (page: number) => {
+      if (page < 1 || page > totalPages) return;
+      onPageChange((prevState) => ({
+        ...prevState,
+        currentPage: page, // Cambiamos la página, no rowsPerPage
+      }));
+    },
+    [onPageChange, totalPages]
+  );
 
   return (
     <div className='join'>
@@ -44,29 +42,31 @@ export const Paginated = ({ currentPage, totalPages, onPageChange }: Props) => {
       <button
         onClick={() => handlePageChange(-1)}
         className='join-item btn'
-        disabled={currentPage + 1 === 1}
+        disabled={currentPage === 1}
       >
         «
       </button>
 
-      {/* Renderizar solo las páginas visibles */}
-      {visiblePages.map((page) => (
-        <button
-          onClick={() => handleDirectClick(page - 1)}
-          key={page}
-          className={`join-item btn ${
-            currentPage + 1 === page ? "btn-primary btn-active" : ""
-          }`}
-        >
-          {page}
-        </button>
-      ))}
+      {/* Renderizar botones de páginas */}
+      {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+        (page) => (
+          <button
+            onClick={() => handleDirectClick(page)}
+            key={page}
+            className={`join-item btn ${
+              currentPage === page ? "btn-primary btn-active" : ""
+            }`}
+          >
+            {page}
+          </button>
+        )
+      )}
 
       {/* Botón de siguiente, desactivado si es la última página */}
       <button
         onClick={() => handlePageChange(1)}
         className='join-item btn'
-        disabled={currentPage + 1 === totalPages}
+        disabled={currentPage === totalPages}
       >
         »
       </button>
